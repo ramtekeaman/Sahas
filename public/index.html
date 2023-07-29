@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -24,7 +24,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>GYMSTER - Gym HTML Template</title>
+    <title>Achievers Badminton Club</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -49,7 +49,15 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-  </head>
+
+
+    <!-- U Listing CSS -->
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap&subset=latin-ext,vietnamese" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+  
+</head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
@@ -76,6 +84,32 @@
      <script src="lib/owlcarousel/owl.carousel.min.js"></script>
  
      <!-- Template Javascript -->
-     <script src="js/main.js"></script>
+     <script src="js/main.js"></script> 
+
+     <!-- U-Listing JS -->
+     <script src="scripts/jquery-3.4.1.min.js"></script> 
+        <script src="scripts/chosen.min.js"></script> 
+        <script src="scripts/perfect-scrollbar.min.js"></script>
+        <script src="scripts/slick.min.js"></script> 
+        <script src="scripts/rangeslider.min.js"></script> 
+        <script src="scripts/magnific-popup.min.js"></script> 
+        <script src="scripts/jquery-ui.min.js"></script> 
+        <script src="scripts/mmenu.js"></script>
+        <script src="scripts/tooltips.min.js"></script> 
+        <script src="scripts/color_switcher.js"></script>
+        <script src="scripts/jquery_custom.js"></script>
+        <script>
+        (function($) {
+        try {
+          var jscr1 = $('.js-scrollbar');
+          if (jscr1[0]) {
+            const ps1 = new PerfectScrollbar('.js-scrollbar');
+
+          }
+            } catch (error) {
+                console.log(error);
+            }
+        })(jQuery);
+        </script>
   </body>
 </html>

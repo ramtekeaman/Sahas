@@ -1,16 +1,20 @@
 import React from 'react'
-
+import {
+    Link
+  } from "react-router-dom";
+  import logo from "./images/logo.png"
 export default function Header() {
   return (
     <>
+    
         <div class="container-fluid bg-dark px-0">
         <div class="row gx-0">
-            <div class="col-lg-3 bg-dark d-none d-lg-block">
-                <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                    <h1 class="m-0 display-7 text-primary text-uppercase"><center>Achievers<br></br>Badminton Club</center></h1>
-                </a>
+            <div class="col-lg-2 bg-dark d-none d-lg-block">
+            <Link  to="/" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                    <h1 class="m-0 display-7 text-primary text-uppercase"><img src={logo} width='150px' style={{marginTop:'-10px', marginLeft:'-10px'}}></img></h1>
+                </Link>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-10">
                 <div class="row gx-0 bg-secondary d-none d-lg-flex">
                     <div class="col-lg-7 px-5 text-start">
                         <div class="h-100 d-inline-flex align-items-center py-2 me-4">
@@ -51,21 +55,29 @@ export default function Header() {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="class.html" class="nav-item nav-link">Classes</a>
-                            <a href="team.html" class="nav-item nav-link">Trainers</a>
+                        <Link  to="/"><a href="index.html" class="nav-item nav-link active">Home</a></Link>
+                            <a  class="nav-item nav-link">About</a>
+                        <Link  to="/Dashboard"><a href="class.html" class="nav-item nav-link">Dashboard</a></Link>
+                            <a class="nav-item nav-link">Trainers</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                                    <a href="detail.html" class="dropdown-item">Blog Detail</a>
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a  class="dropdown-item">Blog Grid</a> 
+                                    <a class="dropdown-item">Blog Detail</a>
+                                    <a class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a  class="nav-item nav-link">Contact</a>
                         </div>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Register</a>
+                      
+                            <div class="nav-item dropdown">
+                                <a class="btn btn-primary py-md-3 nav-link dropdown-toggle px-md-5 d-none d-lg-block" data-bs-toggle="dropdown">Register</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                <Link  to="/RegisterCoaching"><a href="blog.html" class="dropdown-item">Coaching</a></Link>
+                                <Link  to="/RegisterRecretional"><a href="detail.html" class="dropdown-item">Recretional</a></Link>
+                                <Link  to="/RegisterCoach"><a href="testimonial.html" class="dropdown-item">Coach</a></Link>
+                                </div>
+                            </div>
                     </div>
                 </nav>
             </div>
