@@ -11,7 +11,7 @@ export default function Footer() {
                         <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
                         <div class="d-flex mb-2">
                             <i class="bi bi-geo-alt text-primary me-2"></i>
-                            <p class="mb-0">Dadaji Nagar, Near Podar Inetrnational School, <br></br> Kh No. 179, Mouza Welhari, Besa, Nagpur - 440027 </p>
+                            <p class="mb-0">Dadaji Nagar, Near Podar International School, <br></br> Kh No. 179, Mouza Welhari, Besa, Nagpur - 440027 </p>
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-envelope-open text-primary me-2"></i>
