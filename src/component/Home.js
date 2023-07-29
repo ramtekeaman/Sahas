@@ -17,7 +17,7 @@ export default function Home() {
                             <h5 class="text-white text-uppercase">Best Badminton Club</h5>
                             <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Achievers Badminton Club!</h1>
                             <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact U</a>
+                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
                         </div>
                     </div>
                 </div>
