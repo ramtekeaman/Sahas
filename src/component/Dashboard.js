@@ -43,37 +43,37 @@ export default function Dashboard({}) {
                     <div class="row g-5">
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count1">123</h5>
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count1">-</h5>
                                 <h4 class="text-uppercase display-7 text-primary">Total</h4>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count2">87</h5>
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count2">-</h5>
                                 <h4 class="text-uppercase display-7 text-primary">Coaching</h4>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count3">45</h5>   
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count3">-</h5>   
                                 <h4 class="text-uppercase display-7 text-primary">Beginner</h4>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count4">24</h5>
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count4">-</h5>
                                 <h4 class="text-uppercase display-7 text-primary">Professional</h4>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count5">55</h5>
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count5">-</h5>
                                 <h4 class="text-uppercase display-7 text-primary">Recretional</h4>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="bg-dark rounded text-center py-4 px-3">
-                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count6">11</h5>
+                                <h5 class="text-white mb-0" style={{fontSize:'30px'}} data-toggle="counter-up" id="count6">-</h5>
                                 <h4 class="text-uppercase display-7 text-primary">Coach</h4>
                             </div>
                         </div>

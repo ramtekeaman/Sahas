@@ -11,7 +11,7 @@ export default function Header() {
         <div class="row gx-0">
             <div class="col-lg-2 bg-dark d-none d-lg-block">
             <Link  to="/" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                    <h1 class="m-0 display-7 text-primary text-uppercase"><img src={logo} width='150px' style={{marginTop:'-10px', marginLeft:'-10px'}}></img></h1>
+                    <Link to="/" class="m-0 display-7 text-primary text-uppercase"><img src={logo} width='150px' style={{marginTop:'-10px', marginLeft:'-10px'}}></img></Link>
                 </Link>
             </div>
             <div class="col-lg-10">
@@ -48,7 +48,7 @@ export default function Header() {
                 </div>
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0 px-lg-5">
                     <a href="index.html" class="navbar-brand d-block d-lg-none">
-                        <h1 class="m-0 display-4 text-primary text-uppercase"><img src={logo} width='80px' style={{marginTop:'-10px', marginLeft:'10px'}}></img></h1>
+                        <Link to="/" class="m-0 display-4 text-primary text-uppercase"><img src={logo} width='80px' style={{marginTop:'-10px', marginLeft:'10px'}}></img></Link>
                     </a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
