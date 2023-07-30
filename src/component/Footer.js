@@ -60,7 +60,7 @@ export default function Footer() {
                     <form action="">
                         <div class="input-group">
                             <input type="text" class="form-control border-white p-3" placeholder="Your Email"/>
-                            <button class="btn btn-dark">Sign Up</button>
+                            <button class="btn btn-dark">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -71,12 +71,12 @@ export default function Footer() {
         <div class="row gx-5">
             <div class="col-lg-8">
                 <div class="py-lg-4 text-center">
-                    <p class="text-secondary mb-0">&copy; <a class=" fw-bold" href="#">Achievers Badminton Club</a>. All Rights Reserved.</p>
+                    <p class="text-dark mb-0">&copy; Achievers Badminton Club. All Rights Reserved.</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="py-lg-4 text-center credit">
-                    <p class="text-light mb-0">Designed by <a class="text-light fw-bold" href="">Royals Webtech Pvt. Ltd.</a></p>
+                    <p class="text-dark mb-0">Designed by <a class="text-dark fw-bold" href="">Royals Webtech Pvt. Ltd.</a></p>
                 </div>
             </div>
         </div>
