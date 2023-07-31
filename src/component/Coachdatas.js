@@ -4,18 +4,18 @@ import  {useState, useEffect} from 'react';
 import {
     Link
   } from "react-router-dom";
-export default function Coachdata({}) {
+export default function Coachdata({dbpath}) {
 
-    const [user, setUser] = useState([]);
-    const loadUser = async () => {
-        const result = await axios.get("http://localhost/test/viewcoach.php");
-        setUser(result.data.phpresult);
+    const [user, setUser] = useState([]);   
+    const loadUser = async () => {  
+        console.log(dbpath); 
+        const result = await axios.get(dbpath+"viewcoach.php"); 
+        setUser(result.data.phpresult); 
         console.log(result.data.phpresult); 
     }
     useEffect(() => {
-        loadUser();
+        loadUser(); 
     }, []);     
-
 
     return (    
     <>
@@ -36,16 +36,16 @@ export default function Coachdata({}) {
         <div className='table-responsiv'>
         <table class="table">
             <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Contact No.</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Experience</th>
-                  <th scope="col">Joining Date</th>
-                  <th scope="col">Timestamp</th>
-                </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact No.</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Joining Date</th>
+                        <th scope="col">Timestamp</th>
+                    </tr>
             </thead>
             <tbody>
                 {user.map((res)=>

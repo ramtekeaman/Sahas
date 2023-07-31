@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Footer() {
+export default function Footer({dbpath}) {
   return (
     <>
         <div class="container-fluid bg-dark text-secondary px-5 mt-5">

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CSS/Register.css';
 
-export default function RegisterCoaching() {
+export default function RegisterCoaching({dbpath}) {
   const containerStyle = {
     width: '60%',
     marginLeft: '20%',
@@ -22,19 +22,19 @@ export default function RegisterCoaching() {
   const [rid, setRid] = useState([]);
 
   const loadUser = async () => {
-    const result = await axios.get('http://localhost/test/getid.php');
+    const result = await axios.get(dbpath+'getid.php');
     setUser(result.data.phpresult);
     console.log(result.data.phpresult);
     setId(result.data.phpresult[0]['id']);  
   };
 
   const loadCoach = async () => {
-    const result = await axios.get('http://localhost/test/viewcoach.php');
+    const result = await axios.get(dbpath+'viewcoach.php');
     setCoach(result.data.phpresult);
     console.log(result.data.phpresult);
   };
   const loadRid = async () => {
-    const result = await axios.get('http://localhost/test/getidreceipt.php');
+    const result = await axios.get(dbpath+'getidreceipt.php');
     setRid(result.data.phpresult[0]['id']);
     console.log(result.data.phpresult);
   };
@@ -59,7 +59,7 @@ export default function RegisterCoaching() {
   const [coachs, setCoachs] = useState([]);
 
   const setReceipt = () => {
-    const url = 'http://localhost/test/setReceipt.php';
+    const url = dbpath+'setReceipt.php';
     let fData = new FormData(); 
     fData.append('rid', rid);
     fData.append('id', id);

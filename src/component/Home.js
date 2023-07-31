@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Home() {
+export default function Home({dbpath}) {
   return (
     <>
-         
-
+    
+    
 
     {/* <!-- Carousel Start --> */}
     <div class="container-fluid p-0 mb-5">
@@ -18,11 +18,8 @@ export default function Home() {
                             <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Achievers Badminton Club!</h1>
                             <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
                             <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
-                        
                         </div>
-                       
-                    </div>
-                   
+                    </div>         
                 </div>
                 {/* <div class="carousel-item">
                     <img class="w-100" src="img/carousel-2.jpg" alt="Image" />

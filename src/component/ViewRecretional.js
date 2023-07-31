@@ -4,11 +4,11 @@ import  {useState, useEffect} from 'react';
 import {
     Link
   } from "react-router-dom";
-export default function ViewRecretional({}) {
+export default function ViewRecretional({dbpath}) {
 
     const [user, setUser] = useState([]);
     const loadUser = async () => {
-        const result = await axios.get("http://localhost/test/viewrecretional.php");
+        const result = await axios.get(dbpath+"viewrecretional.php");
         setUser(result.data.phpresult);
         console.log(result.data.phpresult); 
     }

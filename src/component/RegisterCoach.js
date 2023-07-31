@@ -4,7 +4,7 @@ import axios from 'axios';
 import './CSS/Register.css';
 import { set } from 'react-hook-form';
 
-export default function RegisterCoach() {
+export default function RegisterCoach({dbpath}) {
   const containerStyle = {
     width: '60%',
     marginLeft: '20%',
@@ -19,7 +19,7 @@ export default function RegisterCoach() {
   const [user, setUser] = useState([]);
 
   const loadUser = async () => {
-    const result = await axios.get('http://localhost/test/getidc.php');
+    const result = await axios.get(dbpath+'getidc.php');
     setUser(result.data.phpresult);
     console.log(result.data.phpresult);
   };
@@ -61,7 +61,7 @@ export default function RegisterCoach() {
     } else {
       alert('Coach Registration Successful');
 
-      const url = 'http://localhost/test/cregister.php';
+      const url = dbpath+'cregister.php';
       let fData = new FormData();
       fData.append('name', name);
       fData.append('joiningdate', joiningDate)

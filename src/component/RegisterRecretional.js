@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CSS/Register.css';
 
-export default function RegisterRecretional() {
+export default function RegisterRecretional({dbpath}) {
   const containerStyle = {
     width: '60%',
     marginLeft: '20%',
@@ -17,14 +17,14 @@ export default function RegisterRecretional() {
   }
 
   const loadRid = async () => {
-    const result = await axios.get('http://localhost/test/getidreceipt.php');
+    const result = await axios.get(dbpath+'getidreceipt.php');
     setRid(result.data.phpresult[0]['id']);
     console.log(result.data.phpresult);
   };
 
   const [user, setUser] = useState([]);
   const loadUser = async () => {
-    const result = await axios.get('http://localhost/test/getidr.php');
+    const result = await axios.get(dbpath+'getidr.php');
     setUser(result.data.phpresult);
     setid(result.data.phpresult[0]['id']);
     console.log(result.data.phpresult);
@@ -33,7 +33,7 @@ export default function RegisterRecretional() {
   };
 
   const setReceipt = () => {
-    const url = 'http://localhost/test/setReceipt.php';
+    const url = dbpath+'setReceipt.php';
     let fData = new FormData(); 
     fData.append('rid', rid);
     fData.append('id', id);
@@ -87,7 +87,7 @@ export default function RegisterRecretional() {
       alert('Timing has been left blank!');
     } else {
 
-      const url = 'http://localhost/test/rregister.php';
+      const url = dbpath+'rregister.php';
       let fData = new FormData();
       fData.append('name', name);
       fData.append('fname', fname);

@@ -3,12 +3,12 @@ import axios from 'axios';
 import  {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function Receipt() {
+export default function Receipt({dbpath}) {
   
     const [user, setUser] = useState([]);
     
     const loadUser = async () => {
-        const result = await axios.get('http://localhost/test/getr.php'); 
+        const result = await axios.get(dbpath+'getr.php'); 
         setUser(result.data.phpresult);
         console.log(result.data.phpresult); 
         document.getElementById("iid").innerHTML = result.data.phpresult[0]['id']; 

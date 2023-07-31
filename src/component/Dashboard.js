@@ -4,11 +4,11 @@ import  {useState, useEffect} from 'react';
 import {
     Link
   } from "react-router-dom";
-export default function Dashboard({}) {
+export default function Dashboard({dbpath}) {
 
     const [user, setUser] = useState([]);
     const loadUser = async () => {
-        const result = await axios.get("http://localhost/test/getcounts.php");
+        const result = await axios.get(dbpath+"getcounts.php");
         
         document.getElementById("count1").innerHTML = parseInt(result.data.phpresult[0]['count(id)'])+parseInt(result.data.phpresult[2]['count(id)']); 
         document.getElementById("count2").innerHTML = result.data.phpresult[0]['count(id)']; 

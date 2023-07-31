@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './component/Header';
 import Footer from './component/Footer';
@@ -12,6 +13,7 @@ import Receipt from './component/Receipt';
 import Receiptr from './component/Receiptr';
 import ViewRecretional from './component/ViewRecretional';
 import ViewCoaching from './component/viewCoaching';
+
 import {  
   BrowserRouter as Router,
   Routes,
@@ -21,6 +23,9 @@ import {
 
 
 function App() {
+
+  const [dbpath, setdbpath] = useState('http://test.royalswebtech.com/test/');
+
   return (
     <>    
       <Router>
@@ -29,43 +34,42 @@ function App() {
         <Routes>
           <Route exact path="/" element={
               <>
-                <Home/>
+                <Home dbpath={dbpath}/>
               </>
           }>
-         
           </Route>
           <Route exact path="/RegisterCoaching" element={
-              <RegisterCoaching />
+              <RegisterCoaching dbpath={dbpath}/>
           }>
           </Route> 
           <Route exact path="/RegisterRecretional" element={
-              <RegisterRecretional />
+              <RegisterRecretional dbpath={dbpath}/>
           }>
           </Route> 
           <Route exact path="/RegisterCoach" element={
-              <RegisterCoach />
+              <RegisterCoach dbpath={dbpath}/>
           }>
           </Route> 
           <Route exact path="/Dashboard" element={
-              <Dashboard />
+              <Dashboard dbpath={dbpath}/>
           }>
             </Route> 
           <Route exact path="/ViewRecretional" element={
-              <ViewRecretional />
+              <ViewRecretional dbpath={dbpath}/>
           }></Route>
            <Route exact path="/ViewCoaching" element={
-              <ViewCoaching />
+              <ViewCoaching dbpath={dbpath}/>
           }></Route>
           
           <Route exact path="/Receipt" element={
-              <Receipt />
+              <Receipt dbpath={dbpath}/>
           }></Route>
           <Route exact path="/Receiptr" element={
-              <Receiptr />
+              <Receiptr dbpath={dbpath}/>
           }></Route>
          
           <Route exact path="/CoachData" element={
-              <CoachData />
+              <CoachData dbpath={dbpath} />
           }></Route>
         </Routes>
         <Footer />

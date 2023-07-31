@@ -5,11 +5,11 @@ import {
     Link
   } from "react-router-dom";
 import Coachdata from './Coachdatas';
-export default function ViewCoaching({}) {
+export default function ViewCoaching({dbpath}) {
 
     const [user, setUser] = useState([]);
     const loadUser = async () => {
-        const result = await axios.get("http://localhost/test/view.php");
+        const result = await axios.get(dbpath+"view.php");
         setUser(result.data.phpresult);
         console.log(result.data.phpresult); 
     }
