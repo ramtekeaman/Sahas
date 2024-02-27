@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import './CSS/Register.css';
 
@@ -7,12 +8,13 @@ export default function RegisterCoaching({dbpath}) {
   const containerStyle = {
     width: '60%',
     marginLeft: '20%',
+    backgroundColor: 'white'
   };
   
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate('/Receipt');
+    navigate('/Dashboard');
   }
 
 
@@ -33,17 +35,29 @@ export default function RegisterCoaching({dbpath}) {
     setCoach(result.data.phpresult);
     console.log(result.data.phpresult);
   };
+  
   const loadRid = async () => {
     const result = await axios.get(dbpath+'getidreceipt.php');
     setRid(result.data.phpresult[0]['id']);
     console.log(result.data.phpresult);
   };
 
-  useEffect(() => {
-    loadUser();
-    loadCoach();
-   loadRid(); 
-  }, []);
+ 
+    const isUserLoggedIn = Cookies.get('userLoggedIn');
+
+    useEffect(() => {
+        if (isUserLoggedIn !== 'true') {
+            navigate('/AdminLogin');
+        }
+        else
+        {
+          loadUser();
+          loadCoach();
+         loadRid(); 
+        }
+
+        
+    }, [isUserLoggedIn]);    
 
   const [name, setName] = useState('');
   const [fname, setFname] = useState('');
@@ -51,14 +65,24 @@ export default function RegisterCoaching({dbpath}) {
   const [address, setAddress] = useState('');
   const [rphno, setRphno] = useState('');
   const [dob, setDOB] = useState('');
+  // New code below
+  const [vca, setVca] = useState('');
+  const [Gage, setGage] = useState('');
+  const [validtill, setValidTill] = useState('');
+
+
+  //new code AR
   const [clg, setClg] = useState('');
   const [sport, setSport] = useState('');
   const [time, setTime] = useState('');
   const [joiningDate, setJoiningdate] = useState('');
   const [status , setStatus] = useState('');
+  const [email , setEmail] = useState('');
   const [coachs, setCoachs] = useState([]);
+  const [feestatus, setfeestatus] = useState(''); // Updated initial state to an empty string
 
-  const setReceipt = () => {
+
+ /*  const setReceipt = () => {
     const url = dbpath+'setReceipt.php';
     let fData = new FormData(); 
     fData.append('rid', rid);
@@ -74,7 +98,7 @@ export default function RegisterCoaching({dbpath}) {
       .catch((error) => {
         console.log(error.toJSON());
       });   
-  }
+  } */
 
 
     const onRegister = ()=>{
@@ -92,50 +116,67 @@ export default function RegisterCoaching({dbpath}) {
       alert('Address has been left blank!');
     } else if (mobile.length === 0) {
       alert('Mobile number has been left blank!');
+    }else if (email.length === 0) {
+      alert('Email ID has been left blank!');
     } else if (dob.length === 0) {
       alert('Date of birth has been left blank!');
-    } else if (sport.length === 0) {
+    // New code
+  } else if (Gage.length === 0) {
+    alert('Age Group  has been left blank!'); 
+  
+  } else if (vca.length === 0) {
+    alert('VCA Id  has been left blank!'); 
+    // New code
+  }else if (sport.length === 0) {
       alert('Sports/Game has been left blank!');
     } else if (time.length === 0) {
       alert('Timing has been left blank!');
     } else if (coachs.length === 0) {
       alert('Select coach has left blank!');
     }else {
-    /*   alert('Registration Successful'); */
+      
 
-      const url = 'http://localhost/test/formsubmit.php';
-      let fData = new FormData();
+      const url = dbpath + 'formsubmit.php';
+    let fData = new FormData();
+
+      fData.append('vca', vca);
       fData.append('name', name);
       fData.append('fname', fname);
       fData.append('mobile', mobile);
+      fData.append('email', email);
       fData.append('address', address);
       fData.append('rphno', rphno);
       fData.append('dob', dob);
+      fData.append('Gage', Gage);  //New Line Code
+      fData.append('validtill', validtill); // Updated state variable name
+
       fData.append('clg', clg);
       fData.append('sport', sport);
       fData.append('timing', time);
       fData.append('joiningDate', joiningDate);
       fData.append('coachs', coachs);
       fData.append('status', status);
+
+      fData.append('feestatus', feestatus);
       axios
         .post(url, fData)
         .then((response) => alert(response.data))
         .catch((error) => {
           console.log(error.toJSON());
       });
-       setReceipt(); 
+      /*  setReceipt();  */
       handleClick();
     }
   };
 
   return (
     <>
-    <div style={{backgroundColor: " "}}>
+    <div style={{backgroundColor:'#222429'}}>
       <br />
       <br />
       <br />
       <br />
-      <div className="container shadow-lg p-5 mb-5 bg-body-tertiary rounded" style={containerStyle}>
+      <div className="container shadow-lg p-5 bg-body-tertiary rounded" style={containerStyle}>
         <center>
           <h3 className="sp1">Register (Coaching)</h3>
         </center>
@@ -166,7 +207,13 @@ export default function RegisterCoaching({dbpath}) {
             {user.map((res) => (
               <input key={res.id} type="number" className="form-control" id="trno" value={res.id} disabled />
             ))}
+          </div> 
+          {/* //New code VCA */}
+          <div className="mb-3">
+            <label className="form-label">VCA ID<span style={{color:'red'}}>*</span></label>
+            <input type="text" className="form-control" id="vca" onChange={(e) => setVca(e.target.value)} />
           </div>
+          {/* //New code VCA above */}
           <div className="mb-3">
             <label className="form-label">Applicant's Name<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="tname" onChange={(e) => setName(e.target.value)} />
@@ -188,13 +235,37 @@ export default function RegisterCoaching({dbpath}) {
             <input type="number" className="form-control" id="tmno" onChange={(e) => setMno(e.target.value)} />
           </div>
           <div className="mb-3">
+            <label className="form-label">Email ID<span style={{color:'red'}}>*</span></label>
+            <input type="email" className="form-control" id="temail" onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="mb-3">
             <label className="form-label">Date of Birth<span style={{color:'red'}}>*</span></label>
             <input type="date" className="form-control" id="tdob" onChange={(e) => setDOB(e.target.value)} />
           </div>
+          {/* NEw Code of Age Group  */}
           <div className="mb-3">
+            <label className="form-label">Age Group<span style={{color:'red'}}>*</span></label>
+            <div className="input-group mb-3">
+              <select className="form-select" id="inputGroupSelect01" value={Gage} onChange={(e) => setGage(e.target.value)}>
+                <option value="">Choose...</option>
+                <option value="Under 19">Under 19</option>
+                <option value="Under 17">Under 17</option>
+                <option value="Under 15">Under 15</option>
+                <option value="Under 13">Under 13</option>
+                
+              </select>
+            </div>
+          </div>
+          {/* New Code above */}
+          <div className="mb-3">
+          <label className="form-label">Valid Till<span style={{color:'red'}}>*</span></label>
+        <input type="date" className="form-control" id="tvt" onChange={(e) => setValidTill(e.target.value)} />
+      </div>
+          
+          {/* <div className="mb-3">
             <label className="form-label">School/College (if any)</label>
             <input type="text" className="form-control" id="tclg" onChange={(e) => setClg(e.target.value)} />
-          </div>
+          </div> */}
           <div className="mb-3">
             <label className="form-label">Sport/Game Opted<span style={{color:'red'}}>*</span></label>
             <div className="input-group mb-3">
@@ -232,6 +303,7 @@ export default function RegisterCoaching({dbpath}) {
               </div>
             </div>
           </div>
+          
           <div className="mb-3">
             <label className="form-label">Select Coach<span style={{color:'red'}}>*</span></label>
             <div className="input-group mb-3">
@@ -243,16 +315,35 @@ export default function RegisterCoaching({dbpath}) {
               </select>
             </div>
           </div>
+          <div className="mb-3">
+            <label className="form-label">Payment Status<span style={{color:'red'}}>*</span></label>
+            <div className="input-group mb-3">
+              <select className="form-select" id="inputGroupSelect01" value={feestatus} onChange={(e) => setfeestatus(e.target.value)}>
+                <option value="">Choose...</option>
+                <option value="Paid">Completed</option>
+                <option value="UnPaid">Incomplete</option>
+                {/* <option value="Under 15">Under 15</option> */}
+                {/* <option value="Under 13">Under 13</option> */}
+                
+              </select>
+            </div>
+          </div>
+          
           <br />
           <center>
             <button type="button" className="btn btn-primary" onClick={onRegister}>
               Submit
             </button>
+            &nbsp;&nbsp;&nbsp;
+            <Link to="/dashboard"><button type="button" className="btn btn-primary">
+              Dashboard
+            </button></Link>
           </center>
         </form>
       </div>
+      <br/><br/><br/><br/><br/>
       </div>
-      <br/>
+      
     </>
   );
 }

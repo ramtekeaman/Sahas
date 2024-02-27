@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import  {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , Link} from 'react-router-dom';
 
 export default function Receipt({dbpath}) {
   
@@ -21,7 +21,7 @@ export default function Receipt({dbpath}) {
     useEffect(() => {   
         loadUser();
     }, []);  
-    
+
     function printDiv() {
         var divContents = document.getElementById("receipt_div").innerHTML;
         var a = window.open('', '', 'height=800, width=800');
@@ -36,8 +36,9 @@ export default function Receipt({dbpath}) {
     }
   return (
     <>
-   
+
    <br></br><br></br>
+   <center><span style={{color:'red'}}>* If the updated receipt does not print, refresh the page</span></center>
       <div id="receipt_div" > 
       <div className='receipt_div shadow-lg mb-5 bg-body-tertiary rounded' style={{border:'solid 1px black', width:'800px', margin:'0 auto'}} >
         <div className='col-12 ' style={{height: '5px', backgroundColor: 'black', width: '100%'}}>
@@ -53,7 +54,7 @@ export default function Receipt({dbpath}) {
         <div st >
           <div style={{display:'flex'}}>
             <div style={{marginLeft:'10%'}} >
-                <span><b>Name of the student : </b></span> <span id="name">Om Kharche</span> <br></br>
+                <span><b>Name of the student : </b></span> <span id="name">Loading..</span> <br></br>
                 <span><b>Time  :</b></span>  <span id="time">5 to 6</span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Adm No : </b> ~</span><br></br>
                 <span><b>For</b></span> : <span id="for">Badminton Coaching</span>
             </div>
@@ -179,7 +180,9 @@ export default function Receipt({dbpath}) {
                 </div>    
                 
              </div>
-        <center><button type="button" class="btn btn-primary" onClick={printDiv}>Print</button></center>
+        <center><button type="button" class="btn btn-primary" onClick={printDiv}>Print</button> &nbsp; &nbsp; &nbsp;    
+            <Link to="/Dashboard"><button type="button" class="btn btn-primary">Dashboard</button> </Link></center>
+        <br></br><br></br>
     </>
   )
 }

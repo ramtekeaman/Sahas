@@ -1,10 +1,10 @@
 import axios from 'axios';
 import "./CSS/Dashboard.css"
 import  {useState, useEffect} from 'react';
-import {
-    Link
-  } from "react-router-dom";
-export default function Dashboard({dbpath}) {
+import { Link, useNavigate } from 'react-router-dom';
+  import Cookies from 'js-cookie';
+
+export default function Dashboard({dbpath,setBtnstatus}) {
 
     const [user, setUser] = useState([]);
     const loadUser = async () => {
@@ -20,25 +20,110 @@ export default function Dashboard({dbpath}) {
         console.log(result.data.phpresult); 
 
     }
-    useEffect(() => {
-        loadUser();
-    }, []);     
+   
+    const navigate = useNavigate();
 
+    function onLogout()
+    {
+        Cookies.set('userLoggedIn', 'false');
+        setBtnstatus('Admin Login');
+        navigate('/');
+    }
+
+    const isUserLoggedIn = Cookies.get('userLoggedIn');
+
+        useEffect(() => {
+            if (isUserLoggedIn !== 'true') {
+                navigate('/AdminLogin');
+            }
+            else
+            {
+                loadUser();
+            }
+        }, [isUserLoggedIn]);    
+       
 
     return (    
     <>
         <br></br><br></br>
+        <div id="loginverify">
         <p className='sp1' >Dashboard</p>
         <br></br>
-        <div className='button-adjust'>
-        <Link className="nav-link" to="/Dashboard"><button type="button" class="btn btn-outline-primary">Dashboard</button></Link>
-             <Link className="nav-link" to="/ViewCoaching"><button type="button" class="btn btn-outline-primary">Coaching</button></Link>
-            <Link className="nav-link" to="/ViewRecretional"><button type="button" class="btn btn-outline-primary">Recreatioal</button></Link>
-            <Link className="nav-link" to="/CoachData"><button type="button" class="btn btn-outline-primary">Coach</button></Link>
-        </div>
+        
+        
+        <div class="tab-content" style={{padding:'10px', display: 'flex', justifyContent: 'space-around',}}>
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="" style={{display:'flex'}}>
+                        {/* <div class="" >
+                            <Link className="nav-link" to="/Dashboard" ><button type="button" class="btn btn-outline-primary">Dashboard</button></Link>
+                        </div> */}
+                        <div class="" >
+                        <Link className="nav-link" to="/ViewCoaching" ><button type="button" class="btn btn-outline-primary">Coaching</button></Link>
+                        </div>
+                        <div class="" >
+                        <Link className="nav-link" to="/ViewRecretional" ><button type="button" class="btn btn-outline-primary">Recreatioal</button></Link>
+                        </div>
+                        <div class="" >
+                        <Link className="nav-link" to="/CoachData" ><button type="button" class="btn btn-outline-primary">Coach</button></Link>
+                        </div>
+                        <div class="" style={{marginLeft:'0px',marginRight:'0px', marginTop:'0px'}} >
+                            <div class="nav-link dropdown">
+                                <a class="btn  nav-link dropdown-toggle btn-outline-primary  d-lg-block" style={{width:'100px'}} data-bs-toggle="dropdown">Register</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <Link  to="/RegisterCoach"><a href="testimonial.html" class="dropdown-item">Coach</a></Link>
+                                    <Link  to="/RegisterCoaching"><a href="blog.html" class="dropdown-item">Coaching</a></Link>
+                                    <Link  to="/RegisterRecretional"><a href="detail.html" class="dropdown-item">Recretional</a></Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" >
+                        <Link className="nav-link" to="/GenerateReciept" ><button type="button" class="btn btn-outline-primary">Genrate Receipt</button></Link>
+                        </div>
+                        <div class="" >
+                        <Link className="nav-link" to="/Reports" ><button type="button" class="btn btn-outline-primary">Reports</button></Link>
+                        </div>
+                        <div class="" >
+                        <Link className="nav-link" to="/Search" ><button type="button" class="btn btn-outline-primary">Search</button></Link>
+                        </div>
+                        {/* <div class="" >
+                        <Link className="nav-link" to="/Attendance" ><button type="button" class="btn btn-outline-primary">Attendance</button></Link>
+                        </div> */}
+
+                        <div class="" >
+                        <Link className="nav-link" to="/Coaching" ><button type="button" class="btn btn-outline-primary">Attendances</button></Link>
+                        </div>
+
+                        <div class="Ar">
+                            
+
+                        {/* <div class="" >
+                        <Link className="nav-link" to="/Remark" ><button type="button" class="btn btn-outline-primary">Remark</button></Link>
+                        </div> */}
+                        {/* <div class="" >
+                        <Link className="nav-link" to="/Rcoaching" ><button type="button" class="btn btn-outline-primary">Remark</button></Link>
+                        </div> */}
+                        <div class="" style={{marginLeft:'0px',marginRight:'0px', marginTop:'0px'}} >
+                            <div class="nav-link dropdown">
+                                <a class="btn  nav-link dropdown-toggle btn-outline-primary  d-lg-block" style={{width:'100px'}} data-bs-toggle="dropdown">Remark</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item"> Remark</a></Link>
+                                    <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact us</a></Link>
+                                    <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join us</a></Link>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="" >
+                            <button type="nav-item button" style={{marginLeft:'20px', marginTop:'5px'}} class="btn btn-outline-primary" onClick={onLogout}>Logout</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        
         <br></br><br></br>
        
-        <div class="tab-content" style={{padding:'20px'}}>
+        <div class="tab-content" style={{padding:'20px', overflow: 'hidden'}}>
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-5">
                         <div class="col-lg-2 col-md-4 col-sm-6">
@@ -77,14 +162,13 @@ export default function Dashboard({dbpath}) {
                                 <h4 class="text-uppercase display-7 text-primary">Coach</h4>
                             </div>
                         </div>
-                       
                     </div>
                 </div>
-                
+                <br></br><br></br>
+            </div>  
             </div>
-
-       
-      
+           
+            
     </>
   )
 }

@@ -1,9 +1,51 @@
-import React from 'react'
-import {
-    Link
-  } from "react-router-dom";
-  import logo from "./images/logo.png"
-export default function Header({dbpath}) {
+import React, { useContext, useState } from 'react'
+import { useEffect } from 'react';
+import {Link, NavLink, useNavigate} from "react-router-dom";
+
+import logo from "./images/Sahas_logo-removebg-preview.png"
+import Navigate_Context from '../Context/Navigate_Context';
+
+
+
+export default function Header({dbpath, btnStatus}) {    
+  const navigate = useNavigate()
+    const{handalaboutclick, setAbout, about,navi, navabout,ids, setIds} = useContext(Navigate_Context);
+
+    const doabout = () => {
+        handalaboutclick();
+        setIds("aboutid");
+    }
+    const doTrainers = () => {
+        handalaboutclick();
+        setIds("coaches");
+    }
+    const doGallery = () => {
+        handalaboutclick();
+        setIds("gallery");
+    }
+
+
+    const [checked, setIsChecked] = useState(false);
+
+
+
+
+useEffect(()=> {
+   
+    if(navi){
+        navigate("/")
+        setAbout(true);
+    }
+},[navi])
+
+
+    const [active, setActive] = useState(false);
+
+    const handleActive = (isActive) => {
+        setActive(isActive);
+      };
+
+
   return (
     <>
     
@@ -19,28 +61,30 @@ export default function Header({dbpath}) {
                     <div class="col-lg-7 px-5 text-start">
                         <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                             <i class="fa fa-envelope text-primary me-2"></i>
-                            <h6 class="mb-0">swamisamarthsports@gmail.com</h6>
+                            <h6 class="mb-0">sahascricketclub@gmail.com</h6>
                         </div>
                         <div class="h-100 d-inline-flex align-items-center py-2">
+                            <a href="tel:8451968111" target='_blank' style={{display:'flex', alignItems:'center'}}>
                             <i class="fa fa-phone-alt text-primary me-2"></i>
-                            <h6 class="mb-0"> 7058445936, 8767664270</h6>
+                            <h6 class="mb-0"> +91 8451968111</h6>
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-5 px-5 text-end">
                         <div class="d-inline-flex align-items-center py-2">
-                            <a class="btn btn-light btn-square rounded-circle me-2" href="">
+                            <a class="btn btn-light btn-square rounded-circle me-2" href="https://facebook.com" target='_blank'>
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a class="btn btn-light btn-square rounded-circle me-2" href="">
+                            <a class="btn btn-light btn-square rounded-circle me-2" href="https://twitter.com/i/flow/login?redirect_after_login=%2FSahasCricket" target='_blank'>
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a class="btn btn-light btn-square rounded-circle me-2" href="">
+                            {/* <a class="btn btn-light btn-square rounded-circle me-2" href="">
                                 <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="btn btn-light btn-square rounded-circle me-2" href="">
+                            </a> */}
+                            <a class="btn btn-light btn-square rounded-circle me-2" href="https://www.instagram.com/sahas_cricket_club/?hl=en" target='_blank'>
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a class="btn btn-light btn-square rounded-circle" href="">
+                            <a class="btn btn-light btn-square rounded-circle" href="https://www.youtube.com/@sahascricketclub" target='_blank'>
                                 <i class="fab fa-youtube"></i>
                             </a>
                         </div>
@@ -55,29 +99,16 @@ export default function Header({dbpath}) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                        <Link  to="/"><a href="index.html" class="nav-item nav-link active">Home</a></Link>
-                            <a  class="nav-item nav-link">About</a>
-                        <Link  to="/Dashboard"><a href="class.html" class="nav-item nav-link">Dashboard</a></Link>
-                            <a class="nav-item nav-link">Trainers</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                <a  class="dropdown-item">Blog Grid</a> 
-                                    <a class="dropdown-item">Blog Detail</a>
-                                    <a class="dropdown-item">Testimonial</a>
-                                </div>
-                            </div>
-                            <a  class="nav-item nav-link">Contact</a>
+                            <NavLink to={'/'} className={`nav-item nav-link `} activeClassName="active" >Home</NavLink>
+                            <NavLink to={'/AboutUs'} className={`nav-item nav-link `} activeClassName="active" >About</NavLink>
+                            <Link className="nav-item nav-link" onClick={doTrainers} >Trainers</Link>
+                            <NavLink to={'/Gallery'} className={`nav-item nav-link `} activeClassName="active" >Gallery</NavLink>
+                            <NavLink to={'/ContactUs'} className="nav-item nav-link" activeClassName="active" >Contact</NavLink>
                         </div>
-                      
-                            <div class="nav-item dropdown">
-                                <a class="btn btn-primary py-md-3 nav-link dropdown-toggle px-md-5 d-none d-lg-block" data-bs-toggle="dropdown">Register</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                <Link  to="/RegisterCoaching"><a href="blog.html" class="dropdown-item">Coaching</a></Link>
-                                <Link  to="/RegisterRecretional"><a href="detail.html" class="dropdown-item">Recretional</a></Link>
-                                <Link  to="/RegisterCoach"><a href="testimonial.html" class="dropdown-item">Coach</a></Link>
-                                </div>
-                            </div>
+                        <div style={{display:'flex', gap:'10px'}}>
+                            
+                        
+                        </div>
                     </div>
                 </nav>
             </div>

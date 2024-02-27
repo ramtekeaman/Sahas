@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import './CSS/Register.css';
 import { set } from 'react-hook-form';
@@ -8,12 +9,13 @@ export default function RegisterCoach({dbpath}) {
   const containerStyle = {
     width: '60%',
     marginLeft: '20%',
+    backgroundColor: 'white'
   };
 
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate('/');
+    navigate('/Dashboard');
   }
 
   const [user, setUser] = useState([]);
@@ -23,11 +25,20 @@ export default function RegisterCoach({dbpath}) {
     setUser(result.data.phpresult);
     console.log(result.data.phpresult);
   };
-  useEffect(() => {
-    loadUser();
-    
-  }, []);
 
+    const isUserLoggedIn = Cookies.get('userLoggedIn');
+
+    useEffect(() => {
+        if (isUserLoggedIn !== 'true') {
+            navigate('/AdminLogin');
+        }
+        else
+        {
+            loadUser();
+        }
+
+        
+    }, [isUserLoggedIn]);    
   const [name, setName] = useState('');
   const [mobile, setMno] = useState('');
   const [email, setEmail] = useState('');
@@ -39,6 +50,7 @@ export default function RegisterCoach({dbpath}) {
   const [shift, setShift] = useState('');
   const [joiningDate, setJoiningdate] = useState('');
   const [status , setStatus] = useState('');
+  const [tournaments , setTournaments] = useState('');
 
 
     const onRegister = ()=>{
@@ -54,12 +66,14 @@ export default function RegisterCoach({dbpath}) {
       alert('Address has been left blank!');
     } else if (dob.length === 0) {
       alert('Date of birth has been left blank!');
+    } else if (tournaments.length === 0) {
+      alert('Tournaments option has been left blank!');
     } else if (exp.length === 0) {
-      alert('Registration option has been left blank!');
+      alert('Experience option has been left blank!');
     }   else if (shift.length === 0) {
       alert('Timing has been left blank!');
     } else {
-      alert('Coach Registration Successful');
+     
 
       const url = dbpath+'cregister.php';
       let fData = new FormData();
@@ -71,26 +85,25 @@ export default function RegisterCoach({dbpath}) {
       fData.append('dob', dob);
       fData.append('exp', exp);
       fData.append('shift', shift);
+      fData.append('tournaments', tournaments);
       axios
         .post(url, fData)
         .then((response) => alert(response.data))
         .catch((error) => {
           console.log(error.toJSON());
         });
-
-    
       handleClick();
     }
   };
 
   return (
-    <>
-    <div className='main_div'>
+    <>z
+    <div className='main_div' style={{backgroundColor:'#222429'}}>
       <br />
       <br />
       <br />
       <br />
-      <div className="container shadow-lg p-5 mb-5 bg-body-tertiary rounded" style={containerStyle}>
+      <div className="container shadow-lg p-5 bg-body-tertiary rounded" style={containerStyle}>
         <center>
           <h3 className="sp1">Register (Coach)</h3>
         </center>
@@ -129,6 +142,20 @@ export default function RegisterCoach({dbpath}) {
             <input type="date" className="form-control" id="tdob" onChange={(e) => setDOB(e.target.value)} />
           </div>
           <div className="mb-3">
+            <label className="form-label">Tournaments<span style={{color:'red'}}>*</span></label>
+            <div className="input-group mb-3">
+              <select className="form-select" id="inputGroupSelect01" value={tournaments} onChange={(e) => setTournaments(e.target.value)}>
+                <option value="">Choose...</option>
+                <option value="None">None</option>
+                <option value="State Level">State Level</option>
+                <option value="Central Level">Central Level</option>
+                <option value="National Level">National Level</option>
+                <option value="International Level">International Level</option>
+                <option value="etc.">etc.</option>
+              </select>
+            </div>
+          </div>
+          <div className="mb-3">
             <label className="form-label">Experience<span style={{color:'red'}}>*</span></label>
             <div className="input-group mb-3">
               <select className="form-select" id="inputGroupSelect01" value={exp} onChange={(e) => setExp(e.target.value)}>
@@ -159,12 +186,16 @@ export default function RegisterCoach({dbpath}) {
           <center>
             <button type="button" className="btn btn-primary" onClick={onRegister}>
               Submit
-            </button>
+            </button> &nbsp;&nbsp;&nbsp;
+            <Link to="/dashboard"><button type="button" className="btn btn-primary">
+              Dashboard
+            </button></Link>
           </center>
         </form>
+      
       </div>
-      <br></br>
-      <br></br>
+      
+      <br/><br/><br/><br/><br/>
       </div>
     </>
   );

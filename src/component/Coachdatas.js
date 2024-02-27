@@ -1,9 +1,9 @@
 import axios from 'axios';
 import "./CSS/Dashboard.css"
 import  {useState, useEffect} from 'react';
-import {
-    Link
-  } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 export default function Coachdata({dbpath}) {
 
     const [user, setUser] = useState([]);   
@@ -13,9 +13,34 @@ export default function Coachdata({dbpath}) {
         setUser(result.data.phpresult); 
         console.log(result.data.phpresult); 
     }
+    const navigate = useNavigate();
+    const isUserLoggedIn = Cookies.get('userLoggedIn');
+
     useEffect(() => {
-        loadUser(); 
-    }, []);     
+        if (isUserLoggedIn !== 'true') {
+            navigate('/AdminLogin');
+        }
+        else
+        {
+            loadUser();
+        }
+
+        
+    }, [isUserLoggedIn]);    
+    const onDelete = async (id) => {
+        try {
+            const confirmDelete = window.confirm('Do you want to delete the data?');
+
+            if (confirmDelete) {
+                // Perform the deletion logic using axios.delete instead of axios.post
+                await axios.delete(dbpath + `deletecoach.php?id=${id}`);
+
+                loadUser();
+            }
+        } catch (error) {
+            console.error('Error deleting data:', error);
+        }
+    };  
 
     return (    
     <>
@@ -45,6 +70,8 @@ export default function Coachdata({dbpath}) {
                         <th scope="col">Experience</th>
                         <th scope="col">Joining Date</th>
                         <th scope="col">Timestamp</th>
+                        <th scope="col">Actions </th>
+
                     </tr>
             </thead>
             <tbody>
@@ -58,7 +85,11 @@ export default function Coachdata({dbpath}) {
                         <td>{res.address}</td>
                         <td>{res.exp}</td>    
                         <td>{res.joiningdate}</td>
-                        <td>{res.timestamp}</td>              
+                        <td>{res.timestamp}</td>   
+                        <td><button className='btn btn' onClick={() => onDelete(res.id)}>
+                                <i className="fas fa-trash-alt"></i> 
+                            </button>
+                        </td>             
                     </tr>
 
                 )}
