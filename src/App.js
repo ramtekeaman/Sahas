@@ -203,7 +203,16 @@ import AdminLogin from './component/AdminLogin';
 import GenerateReciept from './component/GenerateReciept';
 import Reports from './component/Reports';
 import Search from './component/Search';
-import Attendance from './component/Attendance'; // Corrected import
+// import Attendance from './component/Attendance'; // Corrected import
+import Attendances from './component/Attendances';
+import Coaching from './component/Coaching';
+import Coach from './component/Coach';
+import Recreational from './component/Recreational';
+import Remark from './component/Remark'; // Corrected import
+import Rcoaching from './component/Rcoaching'; // Importing Rcoaching component
+import RRecreational from './component/RRecreational';
+import Ccontact from './component/Ccontact';
+import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {  
@@ -259,6 +268,46 @@ function App() {
               <RegisterCoach dbpath={dbpath}/>
           }>
           </Route> 
+          <Route exact path="/Attendances" element={
+            <Attendances dbpath={dbpath} />
+          }></Route>
+          {/* <Route exact path="/Attendance" element={
+            <Attendance dbpath={dbpath}/> // Corrected component usage
+          }></Route> */}
+          <Route exact path="/Remark" element={
+            <Remark dbpath={dbpath} />
+          }></Route>
+
+          <Route exact path="/coaching" element={
+            <Coaching dbpath={dbpath} />
+          }></Route>
+          <Route exact path="/coach" element={
+            <Coach dbpath={dbpath} />
+          }></Route>
+                    <Route exact path="/recreational" element={
+            <Recreational dbpath={dbpath} />
+          }></Route>
+
+{/* //Remark */}
+<Route exact path="/Rcoaching" element={
+            <Rcoaching dbpath={dbpath} />
+          }></Route>
+          <Route exact path="/RRecreational" element={
+            <RRecreational dbpath={dbpath} />
+          }></Route>
+          <Route exact path="/Rcoach" element={
+            <Rcoach dbpath={dbpath} />
+          }></Route>
+          <Route exact path="/Ccontact" element={
+            <Ccontact dbpath={dbpath} />
+          }></Route>
+
+<Route exact path="/Jjoin" element={
+            <Jjoin dbpath={dbpath} />
+          }></Route>
+
+
+
           <Route exact path="/Dashboard" element={
               <Dashboard dbpath={dbpath} setBtnstatus={setBtnstatus} />
           }>
