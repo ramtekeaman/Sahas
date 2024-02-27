@@ -203,7 +203,7 @@ import AdminLogin from './component/AdminLogin';
 import GenerateReciept from './component/GenerateReciept';
 import Reports from './component/Reports';
 import Search from './component/Search';
-// import Attendance from './component/Attendance'; // Corrected import
+import Attendance from './component/Attendance'; // Corrected import
 import Attendances from './component/Attendances';
 import Coaching from './component/Coaching';
 import Coach from './component/Coach';
@@ -226,6 +226,7 @@ import ShowFooter_Context from './component/ShowFooter_Context';
 import Gallery from './component/Gallery';
 import AboutUs from './component/AboutUs';
 
+import Rcoach from './component/Rcoach';
 
 function App() {
 
