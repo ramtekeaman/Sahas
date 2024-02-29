@@ -227,6 +227,7 @@ import Gallery from './component/Gallery';
 import AboutUs from './component/AboutUs';
 
 import Rcoach from './component/Rcoach';
+import Schedule from './component/Schedule';
 
 function App() {
 
@@ -362,6 +363,10 @@ function App() {
           
           <Route exact path="/AboutUs" element={
               <AboutUs />
+          }>
+          </Route>
+          <Route exact path="/Schedule" element={
+              <Schedule />
           }>
           </Route>
 
