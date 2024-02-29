@@ -24,6 +24,13 @@ import slide3 from './images/Slides/club_carosel1.jpeg'
 import slide4 from './images/Slides/womes_cricket.png'
 
 
+
+
+import Coach1 from './images/CoachesAndMentors/DBarde.jpg'
+import Coach2 from './images/CoachesAndMentors/KSalve.jpg'
+import Coach3 from './images/CoachesAndMentors/PYadav.jpg'
+
+
 // import Loader from 'react-loader-spinner';
 // import { Loader } from 'react-loader-spinner';
 
@@ -119,28 +126,49 @@ export default function Home({dbpath}) {
   ];
 
   const atEndOfList = currentOffset <= (paginationFactor * -1) * (items.length - windowSize);
-  const atHeadOfList = currentOffset === 0;
+const atHeadOfList = currentOffset === 0;
 
-  const moveCarousel = (direction) => {
-    if (direction === 1 && !atEndOfList) {
+const moveCarousel = (direction) => {
+  if (direction === 1 && !atEndOfList) {
+    setCurrentOffset(prevOffset => prevOffset - paginationFactor);
+  } else if (direction === -1 && !atHeadOfList) {
+    setCurrentOffset(prevOffset => prevOffset + paginationFactor);
+  }
+};
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    if (!atEndOfList) {
       setCurrentOffset(prevOffset => prevOffset - paginationFactor);
-    } else if (direction === -1 && !atHeadOfList) {
-      setCurrentOffset(prevOffset => prevOffset + paginationFactor);
+    } else {
+      // If at end, move back to the beginning smoothly
+      setCurrentOffset(0);
     }
-  };
+  }, 3000);
 
-  
+  return () => clearInterval(interval);
+}, [currentOffset, atEndOfList]); // Include atEndOfList in the dependency array
+
+
+
+  const [text, setText] = useState('');
+  const initialText = "J0oin Sahas Cricket Club!";
+  const typingSpeed = 100; // Adjust typing speed here
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!atEndOfList) {
-        setCurrentOffset(prevOffset => prevOffset - paginationFactor);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < initialText.length) {
+        setText(prevText => prevText + initialText.charAt(index));
+        index++;
       } else {
-        setCurrentOffset(0);
+        clearInterval(timer);
       }
-    }, 2000);
+    }, typingSpeed);
 
-    return () => clearInterval(interval);
-  }, [currentOffset]);
+    return () => clearInterval(timer);
+  }, []);
+
 
   return (
     <>     
@@ -172,7 +200,10 @@ export default function Home({dbpath}) {
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
                         <div class="p-3" style={{maxWidth: '900px'}}>
                            {/*  <h5 class="text-white text-uppercase">Best Badminton Club</h5> */}
-                            <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Sahas Cricket Club!</h1>
+                            {/* <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Sahas Cricket Club!</h1> */}
+                            <h1 className="display-2 text-white text-uppercase mb-md-4">
+                              <span className="typing-animation">Beyond Limits : {text}</span>
+                            </h1>
                             <Link to={'/JoinUs'} class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
                             <Link to={'/ContactUs'} class="btn btn-light py-md-3 px-md-5">Contact Us</Link>
                         </div>
@@ -332,19 +363,11 @@ export default function Home({dbpath}) {
                     </div>
                 </div>
             </div>
-           {/*  <div class="col-lg-12 col-md-6 text-center">
-                <h1 class="text-uppercase text-light mb-4">30% Discount For This Summer</h1>
-                <a href="" class="btn btn-primary py-3 px-5">Become A Member</a>
-            </div> */}
         </div>
     </div>
 
-
-  {/*   <!-- Programe Start -->
-    <!-- Class Timetable Start --> */}
     <div class="container-fluid p-5" id='coaches'>
         <div class="text-center" >
-{/*             <h5 class="text-primary text-uppercase">Class Schedule</h5> */}
             <h1 class="text-black display-5 text-uppercase mb-0">Our Coaches / Trainers</h1>
         </div>
 
@@ -359,7 +382,7 @@ export default function Home({dbpath}) {
             <div className="container" >
               <div className="cards" style={{boxShadow:'9px 10px 14px -8px rgba(0,0,0,0.4)'}}>
                 <div className="card-img">
-                  <img src="img/mentor.png" alt="Salman Khan" />
+                  <img src={Coach1} alt="Salman Khan" />
                 </div>
                 <div className="card-body">
                   <h5>DHANANJAY BARDE</h5>
@@ -367,16 +390,13 @@ export default function Home({dbpath}) {
                   EX- VCA PLAYER <br /> ( VCA ACADEMY )
                   </p>
                 </div>
-                {/* <!-- <div class="card-footer">
-                  <button>Read More</button>
-                </div> --> */}
               </div>
             </div>
 
             <div className="container">
               <div className="cards" style={{boxShadow:'9px 10px 14px -8px rgba(0,0,0,0.4)'}}>
                 <div className="card-img">
-                  <img src="img/mentor.png" alt="Salman Khan" />
+                  <img src={Coach2} alt="Salman Khan" />
                 </div>
                 <div className="card-body">
                   <h5>KULDEEP SALVE</h5>
@@ -384,16 +404,13 @@ export default function Home({dbpath}) {
                   EX- VCA PLAYER <br /> ( OMAN A TEAM )
                   </p>
                 </div>
-                {/* <div className="card-footer">
-                  <button>Read More</button>
-                </div> */}
               </div>
             </div>
 
             <div className="container" >
               <div className="cards" style={{boxShadow:'9px 10px 14px -8px rgba(0,0,0,0.4)'}}>
-                <div className="card-img">
-                  <img src="img/mentor.png" alt="Salman Khan" />
+                <div className="card-img" >
+                  <img src={Coach3} alt="Salman Khan" />
                 </div>
                 <div className="card-body">
                   <h5>PRADEEP KUMAR YADAV</h5>
@@ -401,9 +418,6 @@ export default function Home({dbpath}) {
                   ICC LEVEL 1 <br />( COACH )
                   </p>
                 </div>
-                {/* <div className="card-footer">
-                  <button>Read More</button>
-                </div> */}
               </div>
             </div>
           </div>
@@ -778,10 +792,12 @@ export default function Home({dbpath}) {
                     <br />
                     <br />
                         {/* <h5 class="text-primary text-uppercase">Class Schedule</h5> */}
-                        <GalleryHead style={{width:'250px'}}><h1 class="display-5  mb-0">Our <span style={{color:'#fb5b21'}}>Gallery</span></h1>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                        <GalleryHead style={{width:'250px',}}><h1 class="display-5  mb-0">Our <span style={{color:'#fb5b21'}}>Gallery</span></h1>
                             <div></div>
                             
                         </GalleryHead>
+                        </div>
                         
                     </div>
                         {/* <div>
@@ -913,15 +929,56 @@ export default function Home({dbpath}) {
                         
 
 
-                        {/* <Gallery_Container>
-                            <div class="grid-container">
-                                <div class="item1"><img src={img2} alt="" style={{width: '100%', height: '300px'}}/></div>
-                                <div class="item2">Menu</div>
-                                <div class="item3">Main</div>  
-                                <div class="item4">Right</div>
-                                <div class="item5">Footer</div>
+                        <Gallery_Container>
+                        <div>
+                            <div className="grid-container">
+                                <div>
+                                <img className='grid-item grid-item-1' src={img1} alt='' />
+                                {/* <p>"I'm so happy today!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-2' src={img2} alt='' />
+                                {/* <p>"I see those nugs."</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-3' src={img3} alt='' />
+                                {/* <p>"I love you so much!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-4' src={img4} alt='' />
+                                {/* <p>"I'm the baby of the house!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-5' src={img5} alt='' />
+                                {/* <p>"Are you gunna throw the ball?"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-6' src={img6} alt='' />
+                                {/* <p>"C'mon friend!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-7' src={img7} alt='' />
+                                {/* <p>"A rose for mommy!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-8' src={img8} alt='' />
+                                {/* <p>"You gunna finish that?"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-9' src={img9} alt='' />
+                                {/* <p>"We can't afford a cat!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-10' src={img11} alt='' />
+                                {/* <p>"Dis my fren!"</p> */}
+                                </div>
+                                <div>
+                                <img className='grid-item grid-item-10' src={img12} alt='' />
+                                {/* <p>"Dis my fren!"</p> */}
+                                </div>
                             </div>
-                        </Gallery_Container> */}
+                            </div>
+                        </Gallery_Container>
 
 
   {/*   <!-- Class Timetable Start -->
@@ -1158,7 +1215,7 @@ export default function Home({dbpath}) {
                         </section> */}
 
 
-                        <Slide_show>
+                        {/* <Slide_show>
 
                             
 
@@ -1191,12 +1248,7 @@ export default function Home({dbpath}) {
                                         {items.map((item, index) => (
                                             <div className="card-carousel--card" key={index}>
                                             <img src={img2} alt="placeholder" />
-                                            {/* <div className="card-carousel--card--footer">
-                                                <p>{item.name}</p>
-                                                {item.tag.map((tag, tagIndex) => (
-                                                <p className={tagIndex > 0 ? 'tag secondary' : 'tag'} key={tagIndex}>{tag}</p>
-                                                ))}
-                                            </div> */}
+                                            
                                             </div>
                                         ))}
                                         </div>
@@ -1205,7 +1257,7 @@ export default function Home({dbpath}) {
                                 </div>
                                 </div>
 
-                        </Slide_show>
+                        </Slide_show> */}
     <br></br><br></br>
 
 
@@ -1218,119 +1270,55 @@ export default function Home({dbpath}) {
 
 
 const Gallery_Container = styled.div `
-
-.gallery {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 200px;
-    grid-auto-flow: dense;
-    max-width: 1200px;
-    margin: 10px auto;
-    padding: 0 10px;
-  }
-  
-  .gallery__item {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .gallery__item > img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-    filter: brightness(50%);
-    transition: 0.2s ease-in-out;
-  } 
-  
-  .gallery__item > img:hover{
-    transform: scale(1.05);
-    filter: brightness(100%);
-    transition: 0.2s ease-in-out;
-  }
-  
-
-  .gallery__item--hor {
-    grid-column: span 2;
-  }
-  
-  .gallery__item--vert {
-    grid-row: span 2;
-  }
-  
-  .gallery__item--lg {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-
-/* 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+h1 {
+    text-align: center;
+  color: coral;
+  margin-bottom: 20px;
+}
 .grid-container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'menu main main main right right'
-    'menu footer footer footer footer footer';
-  gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+  columns: 5 200px;
+  column-gap: 1.5rem;
+  width: 90%;
+  margin: 0 auto;
+  div {
+    width: 150px;
+    margin: 0 1.5rem 1.5rem 0;
+    display: inline-block;
+    width: 100%;
+    border: solid 2px black;
+    padding: 5px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    transition: all .25s ease-in-out;
+    &:hover img {
+      filter: grayscale(0);
+    }
+    &:hover {
+      border-color: coral;
+    }
+    img {
+      width: 100%;
+      filter: grayscale(100%);
+      border-radius: 5px;
+      transition: all .25s ease-in-out;
+    }
+    p {
+      margin: 5px 0;
+      padding: 0;
+      text-align: center;
+      font-style: italic;
+    }
+  }
 }
 
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
-} */
-/* 
-img {
-    border-radius: 5px;
-  }
 
-  ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-    grid-auto-rows: 129px;
-    grid-gap: 3px;
-    grid-auto-flow: row dense;
-  }
-
-  li {
-    list-style: none;
-    text-decoration: none;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-
-  li:nth-child(2),
-  li:nth-child(6),
-  li:nth-child(13) {
-    grid-column: span 2;
-  }
-
-  li:nth-child(3),
-  li:nth-child(4),
-  li:nth-child(7) {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  li:nth-child(4),
-  li:nth-child(7) {
-    grid-row: span 2;
-  }
-
-  @media screen and (min-width: 500px) {
-    margin: 30px auto;
-    width: 80vw;
-  }
-
-  @media screen and (min-width: 1000px) {
-    margin: 30px auto;
-    width: 50vw;
-  } */
 `;
 
 const Initiatives_section = styled.div `
@@ -1349,6 +1337,8 @@ font-family: 'open sans', sans-serif;
 display: flex;
 justify-content: center;
 align-items: center;
+
+margin-top: 25px;
 
 .parent {
   display: flex;
@@ -1372,8 +1362,14 @@ align-items: center;
   transition: 0.2s;
 }
 
+.card-img{
+    height: 400px;
+}
+
 .card-img img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -1399,6 +1395,11 @@ align-items: center;
     width: calc(100% - 20px); /* Full width with gap */
     margin: 10px;
   }
+
+  .card-img{
+    height: 270px;
+  }
+
 }
 
 
@@ -1433,94 +1434,7 @@ align-items: center;
  
 `;
 
-const Loader_Spinner = styled.div `
-.newtons-cradle {
- --uib-size: 50px;
- --uib-speed: 1.2s;
- --uib-color: #474554;
- position: relative;
- display: flex;
- align-items: center;
- justify-content: center;
- width: var(--uib-size);
- height: var(--uib-size);
-}
 
-.newtons-cradle__dot {
- position: relative;
- display: flex;
- align-items: center;
- height: 100%;
- width: 25%;
- transform-origin: center top;
-}
-
-.newtons-cradle__dot::after {
- content: '';
- display: block;
- width: 100%;
- height: 25%;
- border-radius: 50%;
- background-color: var(--uib-color);
-}
-
-.newtons-cradle__dot:first-child {
- animation: swing var(--uib-speed) linear infinite;
-}
-
-.newtons-cradle__dot:last-child {
- animation: swing2 var(--uib-speed) linear infinite;
-}
-
-@keyframes swing {
- 0% {
-  transform: rotate(0deg);
-  animation-timing-function: ease-out;
- }
-
- 25% {
-  transform: rotate(70deg);
-  animation-timing-function: ease-in;
- }
-
- 50% {
-  transform: rotate(0deg);
-  animation-timing-function: linear;
- }
-}
-
-@keyframes swing2 {
- 0% {
-  transform: rotate(0deg);
-  animation-timing-function: linear;
- }
-
- 50% {
-  transform: rotate(0deg);
-  animation-timing-function: ease-out;
- }
-
- 75% {
-  transform: rotate(-70deg);
-  animation-timing-function: ease-in;
- }
-}
-/* 
-
-.loader {
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-} */
-`;
 
 
 const Slide_show= styled.div `

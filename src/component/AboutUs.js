@@ -5,6 +5,9 @@ import styled from "styled-components";
 import backgroundImage from "./images/abc.jpg"; // Import the image
 import img5 from './Gallery Images/gallery_grp.png'
 
+import mentor1 from './images/CoachesAndMentors/AChaurasia.jpg'
+import mentor2 from './images/CoachesAndMentors/STalmale.jpg'
+
 
 const AboutUs = () => {
 
@@ -14,6 +17,11 @@ const AboutUs = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+      };
+      const optionStyle = {
+        height: '50px', // Set the height of options
+        overflowY: 'scroll', // Add vertical scrollbar
+        // You can add more styles here as needed
       };
 
 
@@ -56,7 +64,7 @@ const AboutUs = () => {
     <div class="row gx-5">
         <div class="col-lg-7">
             <div class="mb-4">
-                <h5 class="text-primary text-uppercase" style={{fontFamily:' "Reenie Beanie", cursive'}}>About Us</h5>
+                <h5 class="text-primary text-uppercase">About Us</h5>
                 <h1 class="display-6 text-uppercase mb-0">Welcome to Sahas Cricket Club</h1>
             </div>
             <h4 class="text-body mb-4"></h4>
@@ -141,7 +149,7 @@ const AboutUs = () => {
         <div className="card">
           <div className="card-info">
             <div className="card-avatar">
-            <img src='img/mentor.png' alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
+            <img src={mentor1} alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
             </div>
             <div className="card-title">Abhishek Chaurasia</div>
             <div className="card-subtitle text-center">Ranji Player <br /> Owner Masterstroke sports</div>
@@ -150,7 +158,7 @@ const AboutUs = () => {
         <div className="card">
           <div className="card-info">
             <div className="card-avatar">
-            <img src='img/mentor.png' alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
+            <img src={mentor2} alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
             </div>
             <div className="card-title">Bhushan Talmale</div>
             <div className="card-subtitle text-center">Ex VCA Player, <br /> Represented VCA in all age groups</div>
@@ -372,7 +380,7 @@ margin: 30px 0;
 }
 
 .card-avatar {
-  --size: 130px;
+  --size: 150px;
   background: linear-gradient(to top, #f1e1c1 0%, #fcbc97 100%);
   width: var(--size);
   height: var(--size);
