@@ -165,7 +165,7 @@ export default function Coaching({ dbpath }) {
     <>
       <br />
 
-      <p className='sp1'>Coaching Attendance</p>
+      <center><p className='sp1'>Attendance</p></center>
       <form style={{ display: 'flex' }}>
 
 
