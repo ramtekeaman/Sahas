@@ -21,6 +21,7 @@ const AboutUs = () => {
     <>
       <Abc>
         <div id="aboutid">
+        {/* hitesh */}
           <section
             className="hero-wrap hero-wrap-2"
             style={{ backgroundImage: `url(${backgroundImage})` }}
