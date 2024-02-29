@@ -55,7 +55,7 @@ export default function Search({dbpath}) {
             day = day < 10 ? '0' + day : day;
 
             return `${year}-${month}-${day}`;
-    }
+  } 
     const onSearch = () => {
       var todayDate = new Date().toISOString().slice(0, 10);
       console.log(todayDate);

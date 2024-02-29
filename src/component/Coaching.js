@@ -4,6 +4,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export default function Coaching({ dbpath }) {
+  const [type1, setType1] = useState([]);
+  const [type2, setType2] = useState([]);
+  const [type3, setType3] = useState([]);
+  const [filter1, setFilter1] = useState([]);
+  const [Gage, setGage] = useState('');   //new code;
   const [formErrors, setFormErrors] = useState({});
   const [user, setUser] = useState([]);
   const [remarkText, setRemarkText] = useState(() => {
@@ -11,27 +16,32 @@ export default function Coaching({ dbpath }) {
     return storedData ? JSON.parse(storedData) : {};
   });
   const [attendanceOptions, setAttendanceOptions] = useState({});
-  const [matchesPlayed, setMatchesPlayed] = useState({}); // Corrected the state variable name
+  const [matchesPlayed, setMatchesPlayed] = useState({});
 
-  const loadUser = async () => {
-    try {
-      const result = await axios.get(`${dbpath}view.php`);
+  const loadUser = async (query) => {
+    try{    //---new code---//
+      const result = await axios.get(dbpath+"dynamicQuery.php?query="+query);
       setUser(result.data.phpresult);
-    } catch (error) {
-      console.error("Error loading user ", error);
-    }
-  };
-
+      console.log(result.data.phpresult); 
+    }   //----new code;----//
+    catch (error) {   //new code;
+      console.error("Error loading user data", error);    //new code;
+    }   //new code;
+  }
   const navigate = useNavigate();
   const isUserLoggedIn = Cookies.get('userLoggedIn');
 
   useEffect(() => {
-    if (isUserLoggedIn !== 'true') {
-      navigate('/AdminLogin');
-    } else {
-      loadUser();
-    }
-  }, [isUserLoggedIn, navigate]);
+      if (isUserLoggedIn !== 'true') {
+          navigate('/AdminLogin');
+      }
+      else
+      {
+          //loadUser();
+      }
+
+      
+  }, [isUserLoggedIn]);      
 
   const handleRemarkChange = (rowId, field, value) => {
     setRemarkText((prevRemarkText) => ({
@@ -42,7 +52,6 @@ export default function Coaching({ dbpath }) {
       },
     }));
 
-    // Set the state for matchesPlayed
     setMatchesPlayed((prevMatchesPlayed) => ({
       ...prevMatchesPlayed,
       [rowId]: field === 'matchesPlayed' ? parseInt(value) : prevMatchesPlayed[rowId],
@@ -64,30 +73,12 @@ export default function Coaching({ dbpath }) {
     return isValid;
   };
 
-  // async function handleSubmit() {
-  //   const dataToSend = {
-  //       attendanceOptions: attendanceOptions,
-  //       matchesPlayed: matchesPlayed,
-  //       remark: remarkText,
-  //   };
-
-  //   try {
-  //       const response = await axios.post('http://localhost/test/remark.php', [dataToSend]);
-
-  //       console.log('Server Response:', response.data);
-
-  //       if (response.data.includes('Successful')) {
-  //           alert('Attendance Submitted');
-  //       } else {
-  //           alert('Failed to submit attendance. Error: ' + response.data);
-  //       }
-  //   } catch (error) {
-  //       console.error('Error submitting attendance:', error);
-  //       alert('Failed to submit attendance. Please try again.');
-  //   }
-
-  // }
   async function handleSubmit() {
+    if (!validateForm()) {
+      alert('Please fill in all details.');
+      return;
+    }
+
     const dataToSend = {
       attendanceOptions: attendanceOptions,
       matchesPlayed: matchesPlayed,
@@ -99,70 +90,145 @@ export default function Coaching({ dbpath }) {
         coach: res.coach,
       })),
     };
-  
+
     try {
       const response = await axios.post('http://localhost/test/remark.php', dataToSend);
-  
+
       console.log('Server Response:', response.data);
-  
+
       if (response.data.includes('Successful')) {
         alert('Attendance Submitted');
       } else {
-        alert('Failed to submit attendance Please fill the Attendance Option');
+        alert('Failed to submit attendance. Please try again.');
       }
     } catch (error) {
-      console.error('Failed to submit attendance Please fill the Attendance Option');
-      // alert('Failed to submit attendance. Please try again.');
+      console.error('Error submitting attendance:', error);
+      alert('Failed to submit attendance. Please try again.');
     }
-  
-  //   try {
-  //     const response = await axios.post('http://localhost/test/remark.php', dataToSend);
-  
-  //     console.log('Server Response:', response.data);
-  
-  //     if (response.data.includes('Successful')) {
-  //       alert('Attendance Submitted');
-  //     } else {
-  //       alert('Failed to submit attendance. Error: ' + response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting attendance:', error);
-  //     alert('Failed to submit attendance. Please try again.');
-  //   }
-  // 
-}
+  }
 
+  function nextWeekDateFunc(validTill) {
+    const date = new Date(validTill);
+
+    date.setDate(date.getDate() + 7);
+
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    return `${year}-${month}-${day}`;
+  }
+  const onSearch = () => {
+    var todayDate = new Date().toISOString().slice(0, 10);
+    console.log(todayDate);
+    var nextWeekDate = nextWeekDateFunc(todayDate);
+    var query = '';
+
+    if (Gage === "Under-19") {
+      query += ` AND ageGroup = "${Gage}"`;
+    }
+
+    function nextProcess(query) {
+      loadUser(query);
+    }
+
+    if (type1 === '1' && type2 === '1') {
+      query = 'SELECT * FROM `tregister` WHERE `timing`="Morning"; ';
+      nextProcess(query);
+    } else  if (type1 === '1' && type2 === '2') {
+      query = 'SELECT * FROM `rregister` WHERE `timing`="Morning"; ';
+      nextProcess(query);
+    } else   if (type1 === '2' && type2 === '1') {
+      query = 'SELECT * FROM `tregister` WHERE `timing`="Afternoon"; ';
+      nextProcess(query);
+    } else  if (type1 === '2' && type2 === '2') {
+      query = 'SELECT * FROM `rregister` WHERE `timing`="Afternoon"; ';
+      nextProcess(query);
+    }else   if (type1 === '3' && type2 === '1') {
+      query = 'SELECT * FROM `tregister` WHERE `timing`="Evening"; ';
+      nextProcess(query);
+    } else  if (type1 === '3' && type2 === '2') {
+      query = 'SELECT * FROM `rregister` WHERE `timing`="Evening"; ';
+      nextProcess(query);
+    }
+    
+    
+    else {
+      alert("Please select the proper action");
+    }
+    
+  }
   return (
     <>
       <br />
-      <br />
+
       <p className='sp1'>Coaching Attendance</p>
-      <div
-        className='tab-content'
-        style={{ padding: '20px', display: 'flex', justifyContent: 'space-around' }}
-      >
-        <div id='tab-1' className='tab-pane fade show p-0 active'>
-          <div className='' style={{ display: 'flex' }}>
-            <Link className='nav-link' to='/Recreational'>
-              <button type='button' className='btn btn-outline-primary'>
-                Recreational
-              </button>
-            </Link>
-            <Link className='nav-link' to='/Coach'>
-              <button type='button' className='btn btn-outline-primary'>
-              
-                Coach
-              </button>
-            </Link>
-            <Link className='nav-link' to='/dashboard'>
-              <button type='button' className='btn btn-outline-primary'>
-                Dashboard
-              </button>
-            </Link>
+      <form style={{ display: 'flex' }}>
+
+
+        <div className="mb-3" style={{ marginLeft: '27%', display: 'flex' }} >
+
+        <div className="input-group mb-3" style={{ overflowY: 'auto', maxHeight: '150px', marginBottom: '10px' }}>
+
+            <select className="form-select" id="inputGroupSelect01" value={type1} onChange={(e) => setType1(e.target.value)}  >
+              <option value="" hidden>Search by...</option>
+              {/* <option value="0"> 5 am to 6 am</option> */}
+              <option value="1"> Morning</option>
+              <option value="2"> Afternoon</option>
+              <option value="3"> Evening</option>
+              {/* <option value="3"> 9 am to 10 am</option>
+              <option value="4"> 10 am to 11 am</option>
+              <option value="5"> 11 am to 12 am</option>
+              <option value="6"> 12 pm to 1 pm</option>
+              <option value="7"> 1 pm to 2 pm</option>
+              <option value="8"> 2 pm to 3 pm</option>
+              <option value="9"> 3 pm to 4 pm</option>
+              <option value="10"> 4 pm to 5 pm</option>
+              <option value="11"> 5 pm to 6 pm</option>
+              <option value="12"> 6 pm to 7 pm</option>
+              <option value="13"> 7 pm to 8 pm</option> */}
+              {/* <option value="14"> 8 pm to 9 pm</option> */}
+
+            </select>
           </div>
-          
+
+
+
+          &nbsp;&nbsp;&nbsp;
+          <div className="input-group mb-3" >
+            <select className="form-select" id="inputGroupSelect01" value={type2} onChange={(e) => setType2(e.target.value)} >
+              <option value="">from...</option>
+              <option value="1">Coaching</option>
+              <option value="2">Recreational</option>
+            </select>
+          </div>
+          &nbsp;&nbsp;&nbsp;
+
         </div>
-      </div>
+
+
+        <br />
+        <br />
+        <center>
+          {/* &nbsp;&nbsp;&nbsp;
+            <button type="button" className="btn btn-primary"  onClick={onSearch} >
+              Search
+            </button> &nbsp;&nbsp;&nbsp; */}
+          &nbsp;&nbsp;&nbsp;
+          <button type="button" className="btn btn-primary" onClick={onSearch} >
+            Search
+          </button> &nbsp;&nbsp;&nbsp;
+          <Link to="/dashboard"><button type="button" className="btn btn-primary">
+            Dashboard
+          </button></Link>
+        </center>
+      </form>
+
+
+
 
       <br />
       <br />
@@ -173,20 +239,20 @@ export default function Coaching({ dbpath }) {
               <th scope='col'>ID&nbsp;</th>
               <th scope='col'>Name</th>
               <th scope='col'>Timing</th>
-              <th scope='col'>Coach</th>
+              {/* <th scope='col'>Coach</th> */}
               <th scope='col'>Present / Absent</th>
               <th scope='col'>Matches Played</th>
               <th scope='col'>Remark</th>
             </tr>
           </thead>
           <tbody>
-            
+
             {user.map((res) => (
               <tr key={res.id}>
                 <td>{res.id}</td>
                 <td>{res.name}</td>
                 <td>{res.timing}</td>
-                <td>{res.coach}</td>
+                {/* <td>{res.coach}</td> */}
                 <td>
                   <label style={{ color: attendanceOptions[res.id] === 'Present' ? 'blue' : 'black' }}>
                     <input
@@ -251,5 +317,5 @@ export default function Coaching({ dbpath }) {
       <br />
     </>
   );
- }
-  
+}
+
