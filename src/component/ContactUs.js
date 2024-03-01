@@ -70,9 +70,10 @@ const ContactUs = () => {
       });
   
       console.log('Server Response:', response.data);
-      handlepopup();
+      
 
       if (response.data.includes('Thank You')) {
+        handlepopup();
         // alert('Thank You for Contacting with Us!');
       } else {
         alert('Failed to submit message. Please try again.');
