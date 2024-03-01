@@ -33,11 +33,13 @@ const JoinUs = () => {
         });
   
         console.log('Server Response:', response.data);
-        handlepopup();
+        
 
   
         if (response.data.includes('Thank You')) {
           // Reset form fields after successful submission
+          handlepopup();
+
           setName('');
           setEmail('');
           setmobile('');

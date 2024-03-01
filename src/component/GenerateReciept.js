@@ -12,6 +12,8 @@ export default function GenerateInvoice({ dbpath }) {
     const [name, setName] = useState([]);
     const [vca, setvca] = useState([]);
 
+    const [admId, setAdmId] = useState(false);
+
     const [time, setTime] = useState([]);
     const [for1, setFor1] = useState([]);
     const [ProspectusFee, setProspectusFee] = useState(['0']);
@@ -65,8 +67,9 @@ export default function GenerateInvoice({ dbpath }) {
             // New code here
             // document.getElementById("vca").innerHTML = result.data.phpresult[0]['vca'];
             // setvca(result.data.phpresult[0]['vca']);
-            document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
+            // document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
             setvca(result.data.phpresult[0]['id']);
+            setAdmId(!admId);
     
             document.getElementById("jdate").innerHTML = result.data.phpresult[0]['joiningdate'];
             setJoiningDte(result.data.phpresult[0]['joiningdate']);
@@ -109,8 +112,9 @@ export default function GenerateInvoice({ dbpath }) {
             document.getElementById("timestamp").innerHTML = result.data.phpresult[0]['timestamp'];
             document.getElementById("jdate").innerHTML = result.data.phpresult[0]['joiningdate'];
             //New Code here
-            document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
+            // document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
             setvca(result.data.phpresult[0]['id']);
+            setAdmId(!admId);
 
 
 
@@ -125,7 +129,7 @@ export default function GenerateInvoice({ dbpath }) {
             document.getElementById("timep").innerHTML = result.data.phpresult[0]['timing'];
             document.getElementById("timestampp").innerHTML = result.data.phpresult[0]['timestamp'];
             // document.getElementById("iid").innerHTML = result.data.phpresult[0]['id'];
-            document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
+            // document.getElementById("id").innerHTML = result.data.phpresult[0]['id'];
             document.getElementById("jdatep").innerHTML = result.data.phpresult[0]['joiningdate'];
 
             setJoiningDte(result.data.phpresult[0]['joiningdate']);
@@ -141,8 +145,16 @@ export default function GenerateInvoice({ dbpath }) {
     useEffect(() => {
         loadRid();
     }, []);
+    
+    
+    useEffect(() => {
+        setAdmId(false);
+    }, [type]);
+    useEffect(() => {
+        setAdmId(false);
+    }, [id]);
 
-
+console.log(admId)
 
     const calcValidTill = (joiningDate, validTill) => {
 
@@ -186,9 +198,12 @@ export default function GenerateInvoice({ dbpath }) {
     }
 
     const calcTotal = () => {
-        setFeeTotal(parseInt(OtherFee) + parseInt(SportFee) + parseInt(UniformFee) + parseInt(ActiviyFee) + parseInt(MaintanenceFee) + parseInt(RecreatioalFee) + parseInt(CoachingFee) + parseInt(RegistrationFee) + parseInt(ProspectusFee) + parseInt(OtherFee) - parseInt(Alreadypaid));
+        setFeeTotal(parseInt(OtherFee) + parseInt(SportFee) + parseInt(UniformFee) + parseInt(ActiviyFee) + parseInt(MaintanenceFee) + parseInt(RecreatioalFee) + parseInt(CoachingFee) + parseInt(RegistrationFee) + parseInt(ProspectusFee) - parseInt(Alreadypaid));
+
         document.getElementById('feeTotal').innerHTML = parseInt(OtherFee) + parseInt(SportFee) + parseInt(UniformFee) + parseInt(ActiviyFee) + parseInt(MaintanenceFee) + parseInt(RecreatioalFee) + parseInt(CoachingFee) + parseInt(RegistrationFee) + parseInt(ProspectusFee) - parseInt(Alreadypaid);
+
         document.getElementById('feetotalp').innerHTML = parseInt(OtherFee) + parseInt(SportFee) + parseInt(UniformFee) + parseInt(ActiviyFee) + parseInt(MaintanenceFee) + parseInt(RecreatioalFee) + parseInt(CoachingFee) + parseInt(RegistrationFee) + parseInt(ProspectusFee) - parseInt(Alreadypaid);
+
         const newStatus = feeTotal === 0 ? 'Incomplete' : 'Paid';
         setstatus(newStatus);
     }
@@ -323,7 +338,7 @@ export default function GenerateInvoice({ dbpath }) {
                         <div style={{ display: 'flex' }}>
                             <div style={{ marginLeft: '10%' }} >
                                 <span><b>Name of the student : </b></span> <span id="name">Loading..</span> <br></br>
-                                <span><b>Time  :</b></span>  <span id="time">Loading..  </span> &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Admission ID: </b></span> <span id="id">Loading..</span> &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Joining Date  :</b></span>  <span id="jdate">Loading..</span><br></br>
+                                <span><b>Time  :</b></span>  <span id="time">Loading..  </span> &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Admission ID: </b></span> {admId ? id : <span id="id">Loading..</span>} &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Joining Date  :</b></span>  <span id="jdate">Loading..</span><br></br>
                                 <span><b>For : </b></span><span id="for">Loading..</span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Valid Till : </b></span><input style={{ width: '110px', marginTop: '5px' }} id='vtill' type='date' onChange={(e) => setUpValidTill(e.target.value)} />
                                 &nbsp;&nbsp;&nbsp;&nbsp; <b>
 
@@ -523,7 +538,7 @@ export default function GenerateInvoice({ dbpath }) {
                         <div style={{ display: 'flex' }}>
                             <div style={{ marginLeft: '10%' }} >
                                 <span><b>Name of the student : </b></span> <span id="namep">Loading..</span> <br></br>
-                                <span><b>Time  :</b></span>  <span id="timep">Loading..  </span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Admission No : </b> </span><span id="id">Loading..</span> &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Joining Date  :</b></span>  <span id="jdatep">Loading..</span><br></br>
+                                <span><b>Time  :</b></span>  <span id="timep">Loading..  </span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Admission No : </b> </span>{admId ? id : <span id="id">Loading..</span>} &nbsp;&nbsp;&nbsp;&nbsp;  <span><b>Joining Date  :</b></span>  <span id="jdatep">Loading..</span><br></br>
                                 <span><b>For</b></span> : <span id="forp">Loading..</span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Valid Till</b></span> : <span style={{ width: '110px', marginTop: '5px' }} id='vtillp'>Loading..</span> &nbsp;&nbsp;&nbsp;&nbsp; <span><b>Payment Mode</b></span> : <span style={{ width: '110px', marginTop: '5px' }} id='pmodep'>Loading..</span>
                             </div>
                         </div>
