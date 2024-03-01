@@ -234,7 +234,11 @@ export default function RegisterRecretional({dbpath}) {
             <div className="timeflex">
               <div className="input-group mb-3">
                 <select className="form-select" id="inputGroupSelect01" value={time} onChange={(e) => setTime(e.target.value)}>
-                  <option value="">Choose...</option>
+                <option value="" hidden>Choose...</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Afternoon">Afternoon</option>
+                  <option value="Evening">Evening</option>
+                  {/* <option value="">Choose...</option>
                   <option value="5 to 6 am">5 to 6 am</option>
                   <option value="6 to 7 am">6 to 7 am</option>
                   <option value="7 to 8 am">7 to 8 am</option>
@@ -250,7 +254,7 @@ export default function RegisterRecretional({dbpath}) {
                   <option value="5 to 6 pm">5 to 6 pm</option>
                   <option value="6 to 7 pm">6 to 7 pm</option>
                   <option value="7 to 8 pm">7 to 8 pm</option>
-                  <option value="8 to 9 pm">8 to 9 pm</option>
+                  <option value="8 to 9 pm">8 to 9 pm</option> */}
                 </select>
               </div>
             </div>
