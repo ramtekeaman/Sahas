@@ -315,10 +315,10 @@ export default function RRecreational({ dbpath }) {
     printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
     printWindow.document.write('<h1 style="text-align: center;">Recreational Remark</h1>');
     printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
-    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Present / Absent</th><th>Matches Played</th><th>Remark</th></tr></thead><tbody>');
+    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Timing</th><th>Present / Absent</th><th>Matches Played</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
 
     user.forEach(res => {
-      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td></tr>`);
+      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.type2}</td><td>${res.timing}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
     });
 
     printWindow.document.write('</tbody></table>');
@@ -335,7 +335,7 @@ export default function RRecreational({ dbpath }) {
         <div id="tab-1" className="tab-pane fade show p-0 active">
           <div className="" style={{ display: 'flex' }}>
             <Link className="nav-link" to="/Rcoaching"><button type="button" className="btn btn-outline-primary">Coaching</button></Link>
-            <Link className="nav-link" to="/RCoach"><button type="button" className="btn btn-outline-primary">Coach</button></Link>
+            <Link className="nav-link" to="/RRecreational"><button type="button" className="btn btn-outline-primary">Recreational</button></Link>
             <Link className="nav-link" to="/dashboard"><button type="button" className="btn btn-outline-primary">Dashboard</button></Link>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px', gap: '20px' }}>
               <button className="btn btn-primary" onClick={onPrint} style={{ height: '40px' }}>Print</button>
@@ -351,6 +351,8 @@ export default function RRecreational({ dbpath }) {
             <tr>
               <th scope="col">ID&nbsp;</th>
               <th scope="col">Name</th>
+              <th scope="col">Type</th>
+
               <th scope="col">Present / Absent</th>
               <th scope="col">Matches Played</th>
               <th scope="col">Remark</th>
@@ -363,6 +365,8 @@ export default function RRecreational({ dbpath }) {
               <tr key={res.id}>
                 <td>{res.id}</td>
                 <td>{res.name}</td>
+                <td>{res.type2}</td>
+
                 <td>{res.attendanceOption}</td>
                 <td>{res.matchesPlayed}</td>
                 <td>{res.remark}</td>

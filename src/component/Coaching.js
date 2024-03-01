@@ -86,6 +86,8 @@ export default function Coaching({ dbpath }) {
       users: user.map(res => ({
         id: res.id,
         name: res.name,
+        type2: type2,
+
         timing: res.timing,
         coach: res.coach,
       })),
@@ -135,22 +137,22 @@ export default function Coaching({ dbpath }) {
       loadUser(query);
     }
 
-    if (type1 === '1' && type2 === '1') {
+    if (type1 === '1' && type2 === 'Coaching') {
       query = 'SELECT * FROM `tregister` WHERE `timing`="Morning"; ';
       nextProcess(query);
-    } else  if (type1 === '1' && type2 === '2') {
+    } else  if (type1 === '1' && type2 === 'Recreational') {
       query = 'SELECT * FROM `rregister` WHERE `timing`="Morning"; ';
       nextProcess(query);
-    } else   if (type1 === '2' && type2 === '1') {
+    } else   if (type1 === '2' && type2 === 'Coaching') {
       query = 'SELECT * FROM `tregister` WHERE `timing`="Afternoon"; ';
       nextProcess(query);
-    } else  if (type1 === '2' && type2 === '2') {
+    } else  if (type1 === '2' && type2 === 'Recreational') {
       query = 'SELECT * FROM `rregister` WHERE `timing`="Afternoon"; ';
       nextProcess(query);
-    }else   if (type1 === '3' && type2 === '1') {
+    }else   if (type1 === '3' && type2 === 'Coaching') {
       query = 'SELECT * FROM `tregister` WHERE `timing`="Evening"; ';
       nextProcess(query);
-    } else  if (type1 === '3' && type2 === '2') {
+    } else  if (type1 === '3' && type2 === 'Recreational') {
       query = 'SELECT * FROM `rregister` WHERE `timing`="Evening"; ';
       nextProcess(query);
     }
@@ -201,8 +203,8 @@ export default function Coaching({ dbpath }) {
           <div className="input-group mb-3" >
             <select className="form-select" id="inputGroupSelect01" value={type2} onChange={(e) => setType2(e.target.value)} >
               <option value="">from...</option>
-              <option value="1">Coaching</option>
-              <option value="2">Recreational</option>
+              <option value="Coaching">Coaching</option>
+              <option value="Recreational">Recreational</option>
             </select>
           </div>
           &nbsp;&nbsp;&nbsp;
@@ -238,6 +240,8 @@ export default function Coaching({ dbpath }) {
             <tr>
               <th scope='col'>ID&nbsp;</th>
               <th scope='col'>Name</th>
+              <th scope='col'>Type</th>
+
               <th scope='col'>Timing</th>
               {/* <th scope='col'>Coach</th> */}
               <th scope='col'>Present / Absent</th>
@@ -251,6 +255,8 @@ export default function Coaching({ dbpath }) {
               <tr key={res.id}>
                 <td>{res.id}</td>
                 <td>{res.name}</td>
+                <td>{type2}</td>
+
                 <td>{res.timing}</td>
                 {/* <td>{res.coach}</td> */}
                 <td>
