@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
@@ -15,20 +14,12 @@
 
 //   const loadUser = async () => {
 //     try {
-//       const result = await axios.get(`${dbpath}rcoaching.php`);
+//       const result = await axios.get(`${dbpath}view.php`);
 //       setUser(result.data.phpresult);
 //     } catch (error) {
 //       console.error("Error loading user data:", error);
 //     }
 //   };
-//   // const loadcoaching = async () => {
-//   //   try {
-//   //     const result = await axios.get(`${dbpath}view.php`);
-//   //     setUser(result.data.phpresult);
-//   //   } catch (error) {
-//   //     console.error("Error loading user data:", error);
-//   //   }
-//   // };
 
 //   const navigate = useNavigate();
 //   const isUserLoggedIn = Cookies.get('userLoggedIn');
@@ -37,10 +28,7 @@
 //     if (isUserLoggedIn !== 'true') {
 //       navigate('/AdminLogin');
 //     } else {
-      
 //       loadUser();
-//       // loadcoaching();
-
 //     }
 //   }, [isUserLoggedIn, navigate]);
 
@@ -70,21 +58,7 @@
 //   };
 
 //   const onPrint = () => {
-//     const printWindow = window.open('', '_blank');
-//     printWindow.document.write('<html><head><title>Print</title>');
-//     printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
-//     printWindow.document.write('<h1 style="text-align: center;">Coaching Remark</h1>');
-//     printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
-//     printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Present / Absent</th><th>Matches Played</th><th>Remark</th></tr></thead><tbody>');
-
-//     user.forEach(res => {
-//       printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td></tr>`);
-//     });
-
-//     printWindow.document.write('</tbody></table>');
-//     printWindow.document.write('</body></html>');
-//     printWindow.document.close();
-//     printWindow.print();
+//     window.print(); // This triggers the browser's print functionality
 //   };
 
 //   return (
@@ -114,8 +88,6 @@
 //               <th scope="col">Present / Absent</th>
 //               <th scope="col">Matches Played</th>
 //               <th scope="col">Remark</th>
-//               <th scope="col">Date : Time</th>
-
 //             </tr>
 //           </thead>
 //           <tbody>
@@ -126,10 +98,32 @@
 //                 <td>{res.attendanceOption}</td>
 //                 <td>{res.matchesPlayed}</td>
 //                 <td>{res.remark}</td>
-//                 <td>{res.timestamp}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
 
-
-
+//       {/* Hidden structure for printing */}
+//       <div id="print-content" style={{ display: 'none' }}>
+//         <table>
+//           <thead>
+//             <tr>
+//               <th>ID</th>
+//               <th>Name</th>
+//               <th>Present / Absent</th>
+//               <th>Matches Played</th>
+//               <th>Remark</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {user.map(res => (
+//               <tr key={res.id}>
+//                 <td>{res.id}</td>
+//                 <td>{res.name}</td>
+//                 <td>{res.attendanceOption}</td>
+//                 <td>{res.matchesPlayed}</td>
+//                 <td>{res.remark}</td>
 //               </tr>
 //             ))}
 //           </tbody>
@@ -139,63 +133,60 @@
 //     </>
 //   );
 // }
+
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export default function Coaching({ dbpath }) {
-  const [type1, setType1] = useState([]);
-  const [type2, setType2] = useState([]);
-  const [type3, setType3] = useState([]);
-  const [filter1, setFilter1] = useState([]);
-  const [Gage, setGage] = useState('');   //new code;
   const [formErrors, setFormErrors] = useState({});
   const [user, setUser] = useState([]);
   const [remarkText, setRemarkText] = useState(() => {
     const storedData = localStorage.getItem('remarkText');
     return storedData ? JSON.parse(storedData) : {};
   });
-  const [attendanceOptions, setAttendanceOptions] = useState({});
-  const [matchesPlayed, setMatchesPlayed] = useState({});
+  const [attendanceOption, setAttendanceOption] = useState({});
 
-  const loadUser = async (query) => {
-    try{    //---new code---//
-      const result = await axios.get(dbpath+"dynamicQuery.php?query="+query);
+  const loadUser = async () => {
+    try {
+      const result = await axios.get(`${dbpath}rcoaching.php`);
       setUser(result.data.phpresult);
-      console.log(result.data.phpresult); 
-    }   //----new code;----//
-    catch (error) {   //new code;
-      console.error("Error loading user data", error);    //new code;
-    }   //new code;
-  }
+    } catch (error) {
+      console.error("Error loading user data:", error);
+    }
+  };
+  // const loadcoaching = async () => {
+  //   try {
+  //     const result = await axios.get(`${dbpath}view.php`);
+  //     setUser(result.data.phpresult);
+  //   } catch (error) {
+  //     console.error("Error loading user data:", error);
+  //   }
+  // };
+
   const navigate = useNavigate();
   const isUserLoggedIn = Cookies.get('userLoggedIn');
 
   useEffect(() => {
-      if (isUserLoggedIn !== 'true') {
-          navigate('/AdminLogin');
-      }
-      else
-      {
-          //loadUser();
-      }
-
+    if (isUserLoggedIn !== 'true') {
+      navigate('/AdminLogin');
+    } else {
       
-  }, [isUserLoggedIn]);      
+      loadUser();
+      // loadcoaching();
+
+    }
+  }, [isUserLoggedIn, navigate]);
 
   const handleRemarkChange = (rowId, field, value) => {
-    setRemarkText((prevRemarkText) => ({
+    setRemarkText(prevRemarkText => ({
       ...prevRemarkText,
       [rowId]: {
         ...prevRemarkText[rowId],
-        [field]: value,
-      },
-    }));
-
-    setMatchesPlayed((prevMatchesPlayed) => ({
-      ...prevMatchesPlayed,
-      [rowId]: field === 'matchesPlayed' ? parseInt(value) : prevMatchesPlayed[rowId],
+        [field]: value
+      }
     }));
   };
 
@@ -203,8 +194,8 @@ export default function Coaching({ dbpath }) {
     const errors = {};
     let isValid = true;
 
-    user.forEach((res) => {
-      if (!attendanceOptions[res.id] || !matchesPlayed[res.id] || matchesPlayed[res.id] <= 0) {
+    user.forEach(res => {
+      if (!attendanceOption[res.id]) {
         errors[res.id] = 'Please fill in the detail';
         isValid = false;
       }
@@ -214,249 +205,78 @@ export default function Coaching({ dbpath }) {
     return isValid;
   };
 
-  async function handleSubmit() {
-    if (!validateForm()) {
-      alert('Please fill in all details.');
-      return;
-    }
+  const onPrint = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
+    printWindow.document.write('<h1 style="text-align: center;">Coaching Remark</h1>');
+    printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
+    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Timing</th><th>Present / Absent</th><th>Matches Played</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
 
-    const dataToSend = {
-      attendanceOptions: attendanceOptions,
-      matchesPlayed: matchesPlayed,
-      remark: remarkText,
-      users: user.map(res => ({
-        id: res.id,
-        name: res.name,
-        timing: res.timing,
-        coach: res.coach,
-      })),
-    };
+    user.forEach(res => {
+      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.type2}</td><td>${res.timing}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
+    });
 
-    try {
-      const response = await axios.post('http://localhost/test/remark.php', dataToSend);
+    printWindow.document.write('</tbody></table>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+  };
 
-      console.log('Server Response:', response.data);
-
-      if (response.data.includes('Successful')) {
-        alert('Attendance Submitted');
-      } else {
-        alert('Failed to submit attendance. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting attendance:', error);
-      alert('Failed to submit attendance. Please try again.');
-    }
-  }
-
-  function nextWeekDateFunc(validTill) {
-    const date = new Date(validTill);
-
-    date.setDate(date.getDate() + 7);
-
-    const year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    month = month < 10 ? '0' + month : month;
-    day = day < 10 ? '0' + day : day;
-
-    return `${year}-${month}-${day}`;
-  }
-  const onSearch = () => {
-    var todayDate = new Date().toISOString().slice(0, 10);
-    console.log(todayDate);
-    var nextWeekDate = nextWeekDateFunc(todayDate);
-    var query = '';
-
-    if (Gage === "Under-19") {
-      query += ` AND ageGroup = "${Gage}"`;
-    }
-
-    function nextProcess(query) {
-      loadUser(query);
-    }
-
-    if (type1 === '1' && type2 === '1') {
-      query = 'SELECT * FROM `tregister` WHERE `timing`="Morning"; ';
-      nextProcess(query);
-    } else  if (type1 === '1' && type2 === '2') {
-      query = 'SELECT * FROM `rregister` WHERE `timing`="Morning"; ';
-      nextProcess(query);
-    } else   if (type1 === '2' && type2 === '1') {
-      query = 'SELECT * FROM `tregister` WHERE `timing`="Afternoon"; ';
-      nextProcess(query);
-    } else  if (type1 === '2' && type2 === '2') {
-      query = 'SELECT * FROM `rregister` WHERE `timing`="Afternoon"; ';
-      nextProcess(query);
-    }else   if (type1 === '3' && type2 === '1') {
-      query = 'SELECT * FROM `tregister` WHERE `timing`="Evening"; ';
-      nextProcess(query);
-    } else  if (type1 === '3' && type2 === '2') {
-      query = 'SELECT * FROM `rregister` WHERE `timing`="Evening"; ';
-      nextProcess(query);
-    }
-    
-    
-    else {
-      alert("Please select the proper action");
-    }
-    
-  }
   return (
     <>
-      <br />
-
-      <center><p className='sp1'>Attendance</p></center>
-      <form style={{ display: 'flex' }}>
-
-
-        <div className="mb-3" style={{ marginLeft: '27%', display: 'flex' }} >
-
-        <div className="input-group mb-3" style={{ overflowY: 'auto', maxHeight: '150px', marginBottom: '10px' }}>
-
-            <select className="form-select" id="inputGroupSelect01" value={type1} onChange={(e) => setType1(e.target.value)}  >
-              <option value="" hidden>Search by...</option>
-              {/* <option value="0"> 5 am to 6 am</option> */}
-              <option value="1"> Morning</option>
-              <option value="2"> Afternoon</option>
-              <option value="3"> Evening</option>
-              {/* <option value="3"> 9 am to 10 am</option>
-              <option value="4"> 10 am to 11 am</option>
-              <option value="5"> 11 am to 12 am</option>
-              <option value="6"> 12 pm to 1 pm</option>
-              <option value="7"> 1 pm to 2 pm</option>
-              <option value="8"> 2 pm to 3 pm</option>
-              <option value="9"> 3 pm to 4 pm</option>
-              <option value="10"> 4 pm to 5 pm</option>
-              <option value="11"> 5 pm to 6 pm</option>
-              <option value="12"> 6 pm to 7 pm</option>
-              <option value="13"> 7 pm to 8 pm</option> */}
-              {/* <option value="14"> 8 pm to 9 pm</option> */}
-
-            </select>
+      <br /><br />
+      <p className='sp1'>Coaching Remark</p>
+      <div className="tab-content" style={{ padding: '20px', display: 'flex', justifyContent: 'space-around' }}>
+        <div id="tab-1" className="tab-pane fade show p-0 active">
+          <div className="" style={{ display: 'flex' }}>
+            <Link className="nav-link" to="/Rcoaching"><button type="button" className="btn btn-outline-primary">Coaching</button></Link>
+            <Link className="nav-link" to="/RRecreational"><button type="button" className="btn btn-outline-primary">Recreational</button></Link>
+            <Link className="nav-link" to="/dashboard"><button type="button" className="btn btn-outline-primary">Dashboard</button></Link>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px', gap: '20px' }}>
+              <button className="btn btn-primary" onClick={onPrint} style={{ height: '40px' }}>Print</button>
+            </div>
           </div>
-
-
-
-          &nbsp;&nbsp;&nbsp;
-          <div className="input-group mb-3" >
-            <select className="form-select" id="inputGroupSelect01" value={type2} onChange={(e) => setType2(e.target.value)} >
-              <option value="">from...</option>
-              <option value="1">Coaching</option>
-              <option value="2">Recreational</option>
-            </select>
-          </div>
-          &nbsp;&nbsp;&nbsp;
-
         </div>
+      </div>
 
-
-        <br />
-        <br />
-        <center>
-          {/* &nbsp;&nbsp;&nbsp;
-            <button type="button" className="btn btn-primary"  onClick={onSearch} >
-              Search
-            </button> &nbsp;&nbsp;&nbsp; */}
-          &nbsp;&nbsp;&nbsp;
-          <button type="button" className="btn btn-primary" onClick={onSearch} >
-            Search
-          </button> &nbsp;&nbsp;&nbsp;
-          <Link to="/dashboard"><button type="button" className="btn btn-primary">
-            Dashboard
-          </button></Link>
-        </center>
-      </form>
-
-
-
-
-      <br />
-      <br />
-      <div id='tablediv'>
-        <table className='table'>
+      <br /><br />
+      <div id="tablediv">
+        <table className="table">
           <thead>
             <tr>
-              <th scope='col'>ID&nbsp;</th>
-              <th scope='col'>Name</th>
-              <th scope='col'>Timing</th>
-              {/* <th scope='col'>Coach</th> */}
-              <th scope='col'>Present / Absent</th>
-              <th scope='col'>Matches Played</th>
-              <th scope='col'>Remark</th>
+              <th scope="col">ID&nbsp;</th>
+              <th scope="col">Name</th>
+              <th scope="col">Type&nbsp;</th>
+              <th scope="col">Timing&nbsp;</th>
+              <th scope="col">Status</th>
+              <th scope="col">Matches Played</th>
+              <th scope="col">Remark</th>
+              <th scope="col">Date : Time</th>
+
             </tr>
           </thead>
           <tbody>
-
-            {user.map((res) => (
+            {user.map(res => (
               <tr key={res.id}>
                 <td>{res.id}</td>
                 <td>{res.name}</td>
+                <td>{res.type2}</td>
+
                 <td>{res.timing}</td>
-                {/* <td>{res.coach}</td> */}
-                <td>
-                  <label style={{ color: attendanceOptions[res.id] === 'Present' ? 'blue' : 'black' }}>
-                    <input
-                      type='radio'
-                      name={`attendance-${res.id}`}
-                      value='Present'
-                      onChange={() =>
-                        setAttendanceOptions((prevOptions) => ({ ...prevOptions, [res.id]: 'Present' }))
-                      }
-                    />
-                    Present
-                  </label>
-                  &nbsp;&nbsp;&nbsp;
-                  <label style={{ color: attendanceOptions[res.id] === 'Absent' ? 'red' : 'black' }}>
-                    <input
-                      type='radio'
-                      name={`attendance-${res.id}`}
-                      value='Absent'
-                      onChange={() =>
-                        setAttendanceOptions((prevOptions) => ({ ...prevOptions, [res.id]: 'Absent' }))
-                      }
-                    />
-                    Absent
-                  </label>
-                  {formErrors[res.id] && (
-                    <div className='error' style={{ color: 'red' }}>
-                      {formErrors[res.id]}
-                    </div>
-                  )}
-                </td>
-                <td>
-                  <input
-                    type='number'
-                    min={0}
-                    value={remarkText[res.id]?.matchesPlayed || ''}
-                    style={{ width: '70px' }}
-                    onChange={(e) =>
-                      handleRemarkChange(res.id, 'matchesPlayed', parseInt(e.target.value))
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type='text'
-                    value={remarkText[res.id]?.remark || ''}
-                    onChange={(e) => handleRemarkChange(res.id, 'remark', e.target.value)}
-                  />
-                </td>
+                <td>{res.attendanceOption}</td>
+                <td>{res.matchesPlayed}</td>
+                <td>{res.remark}</td>
+                <td>{res.timestamp}</td>
+
+
+
               </tr>
             ))}
           </tbody>
         </table>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', gap: '20px' }}>
-          <button className='btn btn-outline-primary' onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
+      <br /><br /><br /><br />
     </>
   );
 }
-
