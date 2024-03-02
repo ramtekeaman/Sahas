@@ -92,7 +92,7 @@ export default function Join({ dbpath }) {
               <th scope="col">Mobile No.</th>
               <th scope="col">Age</th>
               <th scope="col">Gender</th>
-              <th scope="col">Date : Time</th>
+              {/* <th scope="col">Date : Time</th> */}
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -105,7 +105,7 @@ export default function Join({ dbpath }) {
                 <td>{joinItem.mobile}</td>
                 <td>{joinItem.age}</td>
                 <td>{joinItem.gender}</td>
-                <td>{joinItem.timestamp}</td>
+                {/* <td>{joinItem.timestamp}</td> */}
                 <td><button className='btn btn-outline-primary' onClick={() => onDelete(joinItem.id)}>Delete</button></td>
               </tr>
             ))}
