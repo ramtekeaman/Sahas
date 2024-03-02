@@ -115,18 +115,18 @@ export default function Search({dbpath}) {
       else if (type1 === '4') {
         // coaching
         if (type2 === '1' && type3 === 'Under-19' ) {
-          query = 'select * from tregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 19";';
+          query = 'select * from tregister where Gage = "Under 19";';
           nextProcess(query);
         } 
         else if (type2 === '1' &&  type3 === 'Under-17' ) {
-          query = 'select * from tregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 17";';
+          query = 'select * from tregister where Gage = "Under 17";';
           nextProcess(query);
         }else if (type2 === '1' &&  type3 === 'Under-15' ) {
-          query = 'select * from tregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 15";';
+          query = 'select * from tregister where Gage = "Under 15";';
           nextProcess(query);
         }
         else if (type2 === '1' &&  type3 === 'Under-13' ) {
-          query = 'select * from tregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 13";';
+          query = 'select * from tregister where Gage = "Under 13";';
           nextProcess(query);
         } 
 
@@ -134,21 +134,21 @@ export default function Search({dbpath}) {
 
         else if (type2 === '2' &&  type3 === 'Under-19') {
           // handle other cases if needed
-          query = 'select * from rregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 19";';
+          query = 'select * from rregister where Gage = "Under 19";';
           nextProcess(query);
         }else if (type2 === '2' &&  type3 === 'Under-17') {
           // handle other cases if needed
-          query = 'select * from rregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 17";';
+          query = 'select * from rregister where Gage = "Under 17";';
           nextProcess(query);
         }
         else if (type2 === '2' &&  type3 === 'Under-15') {
           // handle other cases if needed
-          query = 'select * from rregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 15";';
+          query = 'select * from rregister where Gage = "Under 15";';
           nextProcess(query);
         }
         else if (type2 === '2' &&  type3 === 'Under-13') {
           // handle other cases if needed
-          query = 'select * from rregister where Gage LIKE "%' + filter1 + '%" AND Gage < "Under 13";';
+          query = 'select * from rregister where Gage = "Under 13";';
           nextProcess(query);
         }
 
