@@ -93,8 +93,8 @@ export default function Footer({ dbpath }) {
                             <Link to={'/AboutUs'} class="text-secondary mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</Link>
                             <Link to={'/ContactUs'} class="text-secondary mb-2"  ><i class="bi bi-arrow-right text-primary me-2"></i>Contact us</Link>
                             <Link to={'/Gallery'} class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Gallery</Link>
-                            {/* <a class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a> */}
-                            <Link class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i>Schedule</Link>
+                            {/* <a class="text-secondary mbSchedule-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a> */}
+                            <Link to={'/Schedule'} class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i></Link>
                         </div>
                     </div>
                     {/* <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
