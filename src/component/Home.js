@@ -674,7 +674,7 @@ export default function Home({ dbpath }) {
                       style={{ width: "95%", height: "300px" }}
                     />
                   </div>
-                  <div className="card-body" style={{ height: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" }}>
                     <h5 className="card-title">Men's Cricket Team</h5>
                     <p className="card-text">
                       Our men's cricket team is a powerhouse of talent and
@@ -710,7 +710,7 @@ export default function Home({ dbpath }) {
                       style={{ width: "95%", height: "300px" }}
                     />
                   </div>
-                  <div className="card-body" style={{ height: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" }}>
                     <h5 className="card-title">Women's Cricket Team</h5>
                     <p className="card-text">
                       {" "}
@@ -747,7 +747,7 @@ export default function Home({ dbpath }) {
                       style={{ width: "95%", height: "300px" }}
                     />
                   </div>
-                  <div className="card-body" style={{ height: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" }}>
                     <h5 className="card-title">
                       Support Physically Disabled Student
                     </h5>
@@ -910,6 +910,7 @@ position: fixed;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
 
+  padding: 0 1%;
 
 
 .imgContain{
