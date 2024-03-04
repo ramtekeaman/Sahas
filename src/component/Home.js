@@ -27,6 +27,10 @@ import Coach1 from "./images/CoachesAndMentors/DBarde.jpg";
 import Coach2 from "./images/CoachesAndMentors/KSalve.jpg";
 import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
 
+
+// import { createPortal } from "react-dom";
+// import { Modal } from "./components/Modal";
+
 // import Loader from 'react-loader-spinner';
 // import { Loader } from 'react-loader-spinner';
 
@@ -59,13 +63,13 @@ export default function Home({ dbpath }) {
     setActiveItem(index === activeItem ? null : index);
   };
 
-  // useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //     setOpen(true);
-  //     }, 2000);
+  useEffect(() => {
+      const timer = setTimeout(() => {
+      setOpen(true);
+      }, 2000);
 
-  //     return () => clearTimeout(timer);
-  // }, []); // Empty dependency array ensures this effect runs only once after initial render
+      return () => clearTimeout(timer);
+  }, []); // Empty dependency array ensures this effect runs only once after initial render
 
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered1, setIsHovered1] = useState(false);
@@ -159,6 +163,14 @@ export default function Home({ dbpath }) {
     return () => clearInterval(timer);
   }, []);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleButtonClick = (value) => {
+    setModalOpen(false);
+    setMessage(value);
+  };
+
   return (
     <>
       <div>
@@ -173,9 +185,15 @@ export default function Home({ dbpath }) {
         
         {!loading && <div> */}
 
-        {/* {open && <ModalContainer style={{position:'absolute', zIndex:'22', top:'0', left:'50%', height:'200px', width:'200px',border:'5px solid red'}}>
-        
-    </ModalContainer>} */}
+        {open && <ModalContainer>
+            <div>
+                <div className="imgContain">
+                    <button onClick={handleClose}>Close</button>
+                    <img src={img2} alt="popUp Img" />
+                </div>
+                
+            </div>
+    </ModalContainer>}
 
         {/* <!-- Carousel Start --> */}
         <div class="container-fluid p-0 mb-5" id="default">
@@ -879,7 +897,50 @@ const Initiatives_section = styled.div`
   }
 `;
 
-const ModalContainer = styled.div``;
+const ModalContainer = styled.div`
+
+position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+
+
+.imgContain{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+    button{
+        align-self: flex-end;
+        background-color: #d9534f;
+        margin: 2px;
+        color: white;
+        border: none;
+        outline: none;
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        align-items: right;
+    } :hover{
+        color: #d9534f;
+        background-color: white;
+    }
+}
+
+`;
 
 const Ys = styled.div`
   font-family: "open sans", sans-serif;
