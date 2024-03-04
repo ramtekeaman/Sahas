@@ -228,6 +228,9 @@ import AboutUs from './component/AboutUs';
 
 import Rcoach from './component/Rcoach';
 import Schedule from './component/Schedule';
+import Products from './component/Products';
+import Coaches from './component/Coaches';
+
 
 function App() {
 
@@ -367,6 +370,16 @@ function App() {
           </Route>
           <Route exact path="/Schedule" element={
               <Schedule />
+          }>
+          </Route>
+          
+          <Route exact path="/Products" element={
+              <Products />
+          }>
+          </Route>
+          
+          <Route exact path="/Coaches" element={
+              <Coaches />
           }>
           </Route>
 

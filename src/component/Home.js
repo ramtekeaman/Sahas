@@ -23,9 +23,6 @@ import slide2 from "./images/Slides/gallery_grp1.png";
 import slide3 from "./images/Slides/club_carosel1.jpeg";
 import slide4 from "./images/Slides/womes_cricket.png";
 
-import Coach1 from "./images/CoachesAndMentors/DBarde.jpg";
-import Coach2 from "./images/CoachesAndMentors/KSalve.jpg";
-import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
 
 
 // import { createPortal } from "react-dom";
@@ -68,8 +65,10 @@ export default function Home({ dbpath }) {
       setOpen(true);
       }, 2000);
 
+      
       return () => clearTimeout(timer);
   }, []); // Empty dependency array ensures this effect runs only once after initial render
+
 
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered1, setIsHovered1] = useState(false);
@@ -171,6 +170,8 @@ export default function Home({ dbpath }) {
     setMessage(value);
   };
 
+  
+
   return (
     <>
       <div>
@@ -196,48 +197,41 @@ export default function Home({ dbpath }) {
     </ModalContainer>}
 
         {/* <!-- Carousel Start --> */}
+        <MainCarousel>
         <div class="container-fluid p-0 mb-5" id="default">
-          <div
-            id="header-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
-          >
+          <div id="header-carousel" class="carousel slide " data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="false">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  class="w-100 h-100"
-                  src="img/club_carosel1.png"
-                  alt="Image"
-                />
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
-                  <div class="p-3" style={{ maxWidth: "900px" }}>
-                    {/*  <h5 class="text-white text-uppercase">Best Badminton Club</h5> */}
-                    {/* <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Sahas Cricket Club!</h1> */}
-                    <h1 className="display-2 text-white text-uppercase mb-md-4">
-                      <span className="typing-animation">
-                        Beyond Limits : {text}
-                      </span>
-                    </h1>
-                    <Link
-                      to={"/JoinUs"}
-                      class="btn btn-primary py-md-3 px-md-5 me-3"
-                    >
-                      Join Us
-                    </Link>
-                    <Link
-                      to={"/ContactUs"}
-                      class="btn btn-light py-md-3 px-md-5"
-                    >
-                      Contact Us
-                    </Link>
-                  </div>
-                </div>
+              {/* First Carousel Item */}
+              <div class="carousel-item active" style={{background:'#696969'}}>
+                <img class="w-100 h-100" src="img/club_carosel1.png" alt="Image"/>
+              </div>
+
+              {/* Second Carousel Item */}
+              <div class="carousel-item " style={{objectFit:'cover', background:'#696969'}}>
+                <img class="w-100 h-100" src={slide1} alt="Image" style={{maxHeight:'758px'}}/>
+              </div>
+
+              {/* Third Carousel Item */}
+              <div class="carousel-item " style={{objectFit:'cover', background:'#696969'}}>
+                <img class="w-100 h-100" src={slide2} alt="Image" style={{maxHeight:'758px'}}/>
               </div>
             </div>
+            
+            {/* Carousel Caption - Content outside carousel-items */}
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
+              <div class="p-3" style={{ maxWidth: "900px" }}>
+                <h1 className="display-2 text-white text-uppercase mb-md-4">
+                  <span className="typing-animation">Beyond Limits : {text}</span>
+                </h1>
+                <Link to={"/JoinUs"} class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
+                <Link to={"/ContactUs"} class="btn btn-light py-md-3 px-md-5">Contact Us</Link>
+              </div>
+            </div>
+
           </div>
-        </div>
-        {/*     <!-- Carousel End -->
-
-
-    <!-- About Start --> */}
+  </div>
+</MainCarousel>
+      
         <div
           class="container-fluid p-3"
           style={{
@@ -310,7 +304,7 @@ export default function Home({ dbpath }) {
 
         <div
           class="container-fluid programe position-relative px-5 mt-5"
-          style={{ marginBottom: "135px" }}
+          style={{ marginBottom: "135px", display:'flex', justifyContent:'center' }}
           id="achievements"
         >
           <div
@@ -546,92 +540,7 @@ export default function Home({ dbpath }) {
           </div>
         </div>
 
-        <div class="container-fluid p-5" id="coaches">
-          <div class="text-center">
-            <h1 class="text-black display-5 text-uppercase mb-0">
-              Our Coaches / Trainers
-            </h1>
-          </div>
-
-          <div class="tab-class text-center">
-            {/* new */}
-            <Ys>
-              <div>
-                {/* <!-- <h1>CARDS</h1> --> */}
-                <div className="parent">
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach1} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>DHANANJAY BARDE</h5>
-                        <p>
-                          EX- VCA PLAYER <br /> ( VCA ACADEMY )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach2} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>KULDEEP SALVE</h5>
-                        <p>
-                          EX- VCA PLAYER <br /> ( OMAN A TEAM )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach3} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>PRADEEP KUMAR YADAV</h5>
-                        <p
-                          className="text-primar card-text"
-                          style={{ color: " rgb(80 80 80)" }}
-                        >
-                          ICC LEVEL 1 <br />( COACH )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Ys>
-
-            <div class="tab-content">
-              <div id="tab-1" class="tab-pane fade show p-0 active">
-                <div
-                  class="row g-3"
-                  style={{ display: "flex", justifyContent: "center" }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         <Initiatives_section
           style={{
@@ -943,75 +852,6 @@ position: fixed;
 
 `;
 
-const Ys = styled.div`
-  font-family: "open sans", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 25px;
-
-  .parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 26px;
-    height: 600px;
-  }
-
-  .container {
-    display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
-    justify-content: center;
-  }
-
-  .cards {
-    width: 300px;
-    margin: 0 10px;
-    background-color: white;
-    border-radius: 15px;
-    transition: 0.2s;
-  }
-
-  .card-img {
-    height: 400px;
-  }
-
-  .card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0px 0px;
-  }
-
-  .card-body h5,
-  .card-body p {
-    text-align: center;
-    margin: 0; /* Remove default margins */
-  }
-
-  @media screen and (max-width: 768px) {
-    .parent {
-      flex-direction: column; /* Stack cards vertically */
-      height: auto; /* Reset height */
-    }
-
-    .container {
-      width: 100%; /* Full width */
-      justify-content: center; /* Center align cards */
-      align-items: center; /* Center align cards */
-    }
-
-    .cards {
-      width: calc(100% - 20px); /* Full width with gap */
-      margin: 10px;
-    }
-
-    .card-img {
-      height: 270px;
-    }
-  }
-`;
 
 const Slide_show = styled.div`
   margin: 0 20px 50px 20px;
@@ -1244,4 +1084,18 @@ const Card = styled.div`
   .card-back {
     transform: rotateY(180deg);
   }
+`;
+
+const MainCarousel = styled.div `
+.carousel-item {
+  width: 100%;
+  height: auto; /* Set initial height to auto */
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    height: 300px; /* Set height for smaller screens */
+  }
+}
+
 `;
