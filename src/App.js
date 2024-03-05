@@ -230,6 +230,7 @@ import Rcoach from './component/Rcoach';
 import Schedule from './component/Schedule';
 import Products from './component/Products';
 import Coaches from './component/Coaches';
+import PopUp_Context from './Context/PopUp_Context';
 
 
 function App() {
@@ -239,9 +240,18 @@ function App() {
   const [btnStatus, setBtnstatus] = useState('Admin Login');
 
 
+  const{showPopUp, setShowPopUp} = useContext(PopUp_Context);
 
   const{showFooter, setShowFooter} = useContext(ShowFooter_Context);
   console.log(showFooter);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopUp(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>    

@@ -93,7 +93,8 @@ const Coaches = () => {
     //         </div>
     //       </div>
     //     </div>
-    <Ys>
+    <>
+        <Ys>
         <div class="container text-center py-5">
         <h3 >Meet Our Expert Coaches</h3>
         <br />
@@ -148,6 +149,7 @@ const Coaches = () => {
           </div>
     </div>
     </Ys>
+    </>
   )
 }
 
