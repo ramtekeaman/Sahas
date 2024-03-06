@@ -15,7 +15,8 @@ import img11 from "./Gallery Images/gallery_img15.png";
 import img13 from "./images/PavyaAndSiddhi.png";
 import { Link } from "react-router-dom";
 import Navigate_Context from "../Context/Navigate_Context";
-
+import 'aos/dist/aos.css'
+import AOS from 'aos'
 import arrow from "./images/arrow.png";
 
 import slide1 from "./images/Slides/gallery_grp.png";
@@ -24,6 +25,7 @@ import slide3 from "./images/Slides/club_carosel1.jpeg";
 import slide4 from "./images/Slides/womes_cricket.png";
 import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
+import PlayerSwipper from "./PlayerSwipper";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -87,6 +89,13 @@ const players = [
 
 
 export default function Home({ dbpath }) {
+
+  AOS.init({
+    duration: 650,
+    once: true
+  });
+
+  const [loader, setLoader] = useState(true)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setShowPopUp(false);
@@ -214,22 +223,20 @@ export default function Home({ dbpath }) {
   };
 
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoader(false);
+    }, 3000);
+
+    // return () => clearInterval(interval);
+  }, []);
   
   
 
   return (
     <>
       <div>
-        {/* {loading && <Loader_Spinner type="Puff" color="#00BFFF" height={100} width={100}> */}
-        {/* <div class="newtons-cradle">
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
-        </div> */}
-        {/* </Loader_Spinner>} 
         
-        {!loading && <div> */}
 
         {showPopUp && (
           <ModalContainer>
@@ -244,7 +251,7 @@ export default function Home({ dbpath }) {
 
         {/* <!-- Carousel Start --> */}
         <MainCarousel>
-          <div class="container-fluid p-0 mb-5" id="default">
+          <div class="container-fluid p-0 mb-5" id="default" data-aos="fade-down">
             <div
               id="header-carousel"
               class="carousel slide "
@@ -331,6 +338,7 @@ export default function Home({ dbpath }) {
               <div
                 className="position-relative"
                 style={{ width: "100%", height: "100%" }}
+                data-aos="fade-right"
               >
                 <img
                   className="position-absolute w-100 h-100 rounded img-fluid"
@@ -341,7 +349,7 @@ export default function Home({ dbpath }) {
               </div>
             </div>
 
-            <div class="col-lg-7" style={{ padding: "25px" }}>
+            <div class="col-lg-7" style={{ padding: "25px" }} data-aos="fade-left">
               <div class="mb-4">
                 {/* <h5 class="text-primary text-uppercase">About Us</h5> */}
                 <h1 class="display-6 text-uppercase mb-0">
@@ -961,6 +969,7 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                data-aos="fade-right"
               >
                 <div className="card">
                   <div
@@ -997,6 +1006,7 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered1(true)}
                 onMouseLeave={() => setIsHovered1(false)}
+                data-aos="fade-down"
               >
                 <div className="card">
                   <div
@@ -1034,6 +1044,7 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered2(true)}
                 onMouseLeave={() => setIsHovered2(false)}
+                data-aos="fade-left"
               >
                 <div className="card">
                   <div
@@ -1091,47 +1102,58 @@ export default function Home({ dbpath }) {
         <Gallery_Container>
           <div>
             <div className="grid-container">
-              <div>
+              <div data-aos="fade-up"
+     data-aos-duration="2000">
                 <img className="grid-item grid-item-1" src={img1} alt="" />
                 {/* <p>"I'm so happy today!"</p> */}
               </div>
-              <div>
+              <div data-aos="fade-up"
+     data-aos-duration="2000">
                 <img className="grid-item grid-item-2" src={img2} alt="" />
                 {/* <p>"I see those nugs."</p> */}
               </div>
-              <div>
+              <div data-aos="fade-up"
+     data-aos-duration="2000">
                 <img className="grid-item grid-item-3" src={img3} alt="" />
                 {/* <p>"I love you so much!"</p> */}
               </div>
-              <div>
+              <div data-aos="fade-up"
+     data-aos-duration="2000">
                 <img className="grid-item grid-item-4" src={img4} alt="" />
                 {/* <p>"I'm the baby of the house!"</p> */}
               </div>
-              <div>
+              <div data-aos="fade-up"
+     data-aos-duration="2000">
                 <img className="grid-item grid-item-5" src={img5} alt="" />
                 {/* <p>"Are you gunna throw the ball?"</p> */}
               </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-6" src={img6} alt="" />
                   {/* <p>"C'mon friend!"</p> */}
                 </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-7" src={img7} alt="" />
                   {/* <p>"A rose for mommy!"</p> */}
                 </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-8" src={img8} alt="" />
                   {/* <p>"You gunna finish that?"</p> */}
                 </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-9" src={img9} alt="" />
                   {/* <p>"We can't afford a cat!"</p> */}
                 </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-10" src={img11} alt="" />
                   {/* <p>"Dis my fren!"</p> */}
                 </div>
-                <div>
+                <div data-aos="fade-up"
+     data-aos-duration="2000">
                   <img className="grid-item grid-item-10" src={img12} alt="" />
                   {/* <p>"Dis my fren!"</p> */}
                 </div>
@@ -1145,6 +1167,7 @@ export default function Home({ dbpath }) {
         <br></br>
         <br></br>
 
+        <PlayerSwipper/>
         {/* <PlayerCarousel>
           <div className="carousel-container">
             <div id="playerCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -1172,7 +1195,6 @@ export default function Home({ dbpath }) {
             </div>
           </div>
         </PlayerCarousel> */}
-
       </div>
     </>
   );
@@ -1543,3 +1565,4 @@ const PlayerCarousel = styled.div `
 }
 
 `;
+
