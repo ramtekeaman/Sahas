@@ -101,9 +101,10 @@ useEffect(()=> {
                         <div class="navbar-nav mr-auto py-0">
                             <NavLink to={'/'} className={`nav-item nav-link `} activeClassName="active" >Home</NavLink>
                             <NavLink to={'/AboutUs'} className={`nav-item nav-link `} activeClassName="active" >About</NavLink>
-                            <Link className="nav-item nav-link" onClick={doTrainers} >Trainers</Link>
+                            <NavLink to={'/Coaches'} className="nav-item nav-link" activeClassName="active">Trainers</NavLink>
                             <NavLink to={'/Gallery'} className={`nav-item nav-link `} activeClassName="active" >Gallery</NavLink>
                             <NavLink to={'/ContactUs'} className="nav-item nav-link" activeClassName="active" >Contact</NavLink>
+                            <NavLink to={'/Products'} className="nav-item nav-link" activeClassName="active" >Products</NavLink>
                         </div>
                         <div style={{display:'flex', gap:'10px'}}>
                             

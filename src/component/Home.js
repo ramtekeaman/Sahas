@@ -22,11 +22,8 @@ import slide1 from "./images/Slides/gallery_grp.png";
 import slide2 from "./images/Slides/gallery_grp1.png";
 import slide3 from "./images/Slides/club_carosel1.jpeg";
 import slide4 from "./images/Slides/womes_cricket.png";
-
-import Coach1 from "./images/CoachesAndMentors/DBarde.jpg";
-import Coach2 from "./images/CoachesAndMentors/KSalve.jpg";
-import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
-
+import PlayerCard from "./PlayerCard";
+import PopUp_Context from "../Context/PopUp_Context";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -48,27 +45,72 @@ const style = {
   p: 4,
 };
 
+const players = [
+  {
+    id: 1,
+    image: "/img/disha_player2 (2).png",
+    name: "Disha Kasat",
+    description: "Disha Kasat, a right-handed batter from Amravati, Maharashtra, has etched her name in cricket's annals with her remarkable consistency. Her journey is a testament to perseverance and talent, highlighted by two impressive half-centuries for India A Women in the Senior Women's One Day Challenger Trophy 2021. Disha's century for Vidarbha Women in Visakhapatnam was not only a display of skill but also a match-winning performance. Selected for the Central Zone team in the Senior Women Inter-Zonal T20 and by the Royal Challengers Bangalore in the WPL, Disha's rise is a testament to her potential. She symbolizes the power of dedication and hard work in achieving one's dreams."
+  },
+  {
+    id: 2,
+    image: "/img/player1.jpg",
+    name: "Lokesh Marghade",
+    description: "The Vidarbha captain, who was born with a twisted ankle, has demonstrated consistency in every competition he participates in recent days. In December 2021, Marghade also led the Challenger Trophy in runs scored. He had played four games in Chandigarh and scored 169 runs, including two fifties. 'I think the advice I'm getting from my elders at Sahas Cricket Club is really beneficial to me. 'My goal is to improve myself so that I can make a strong return to the Indian team,' he stated."
+  },
+  {
+    id: 3,
+    image: "/img/SiddhiAndAroohi.png",
+    name: "Siddhi & Arohi",
+    description: "Siddhi and Arohi, your achievements are truly remarkable! Your hard work, dedication, and perseverance have paid off, bringing immense pride to your family and community. It's been a privilege to witness your growth and progress, fueled by countless hours of practice and determination. Your humility and respect towards your coaches, the game, and the learning process are admirable qualities that set you apart as not only exceptional athletes but also as admirable individuals. Earning a spot in the U-19 women’s camp organized by @bcciofficial.in @bcci.women is a testament to your talent and commitment. As you continue on your journey, we extend our heartfelt wishes for success and good fortune. May you continue to push yourselves to new heights and achieve your dreams, including representing at the national level."
+  },
+  {
+    id: 4,
+    image: "/img/player4.jpg",
+    name: "Pavya and Siddhi",
+    description: "Pavya and Siddhi's selection for the VCA U-19 women’s team is a true reflection of their unwavering dedication, exceptional talent, and relentless hard work. Their journey to this point has been paved with countless sacrifices, hours of intense practice, and an unyielding commitment to excellence. Their achievement serves as a beacon of inspiration for aspiring athletes everywhere, showcasing the power of resilience and determination in the pursuit of one's dreams. As they step onto this new stage in their athletic careers, we stand in awe of their accomplishments and offer our sincerest congratulations. May their success continue to fuel their passion and drive as they navigate the challenges and triumphs that lie ahead. We are proud to celebrate their achievements and eagerly anticipate the remarkable feats they will undoubtedly accomplish in the future. Here's to Pavya and Siddhi, two shining examples of perseverance and triumph in the world of sports."
+  },
+  {
+    id: 3,
+    image: "/img/SiddhiAndAroohi.png",
+    name: "Siddhi & Arohi",
+    description: "Siddhi and Arohi, your achievements are truly remarkable! Your hard work, dedication, and perseverance have paid off, bringing immense pride to your family and community. It's been a privilege to witness your growth and progress, fueled by countless hours of practice and determination. Your humility and respect towards your coaches, the game, and the learning process are admirable qualities that set you apart as not only exceptional athletes but also as admirable individuals. Earning a spot in the U-19 women’s camp organized by @bcciofficial.in @bcci.women is a testament to your talent and commitment. As you continue on your journey, we extend our heartfelt wishes for success and good fortune. May you continue to push yourselves to new heights and achieve your dreams, including representing at the national level."
+  },
+  {
+    id: 2,
+    image: "/img/player1.jpg",
+    name: "Lokesh Marghade",
+    description: "The Vidarbha captain, who was born with a twisted ankle, has demonstrated consistency in every competition he participates in recent days. In December 2021, Marghade also led the Challenger Trophy in runs scored. He had played four games in Chandigarh and scored 169 runs, including two fifties. 'I think the advice I'm getting from my elders at Sahas Cricket Club is really beneficial to me. 'My goal is to improve myself so that I can make a strong return to the Indian team,' he stated."
+  },
+  // Add more players here if needed
+];
+
+
 export default function Home({ dbpath }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setShowPopUp(false);
 
   const [activeItem, setActiveItem] = useState(null);
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
+  const [show5, setShow5] = useState(false);
 
   const handleItemClick = (index) => {
     setActiveItem(index === activeItem ? null : index);
   };
 
+  
+  const{showPopUp, setShowPopUp} = useContext(PopUp_Context);
   useEffect(() => {
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setOpen(true);
-      }, 2000);
+    }, 2000);
 
-      return () => clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, []); // Empty dependency array ensures this effect runs only once after initial render
 
   const [isHovered, setIsHovered] = useState(false);
@@ -171,6 +213,10 @@ export default function Home({ dbpath }) {
     setMessage(value);
   };
 
+
+  
+  
+
   return (
     <>
       <div>
@@ -185,59 +231,90 @@ export default function Home({ dbpath }) {
         
         {!loading && <div> */}
 
-        {open && <ModalContainer>
+        {showPopUp && (
+          <ModalContainer>
             <div>
-                <div className="imgContain">
-                    <button onClick={handleClose}>Close</button>
-                    <img src={img2} alt="popUp Img" />
-                </div>
-                
+              <div className="imgContain">
+                <button onClick={handleClose}>Close</button>
+                <img src={img2} alt="popUp Img" />
+              </div>
             </div>
-    </ModalContainer>}
+          </ModalContainer>
+        )}
 
         {/* <!-- Carousel Start --> */}
-        <div class="container-fluid p-0 mb-5" id="default">
-          <div
-            id="header-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  class="w-100 h-100"
-                  src="img/club_carosel1.png"
-                  alt="Image"
-                />
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
-                  <div class="p-3" style={{ maxWidth: "900px" }}>
-                    {/*  <h5 class="text-white text-uppercase">Best Badminton Club</h5> */}
-                    {/* <h1 class="display-2 text-white text-uppercase mb-md-4">Beyond Limits : Join Sahas Cricket Club!</h1> */}
-                    <h1 className="display-2 text-white text-uppercase mb-md-4">
-                      <span className="typing-animation">
-                        Beyond Limits : {text}
-                      </span>
-                    </h1>
-                    <Link
-                      to={"/JoinUs"}
-                      class="btn btn-primary py-md-3 px-md-5 me-3"
-                    >
-                      Join Us
-                    </Link>
-                    <Link
-                      to={"/ContactUs"}
-                      class="btn btn-light py-md-3 px-md-5"
-                    >
-                      Contact Us
-                    </Link>
-                  </div>
+        <MainCarousel>
+          <div class="container-fluid p-0 mb-5" id="default">
+            <div
+              id="header-carousel"
+              class="carousel slide "
+              data-bs-ride="carousel"
+              data-bs-interval="4000"
+              data-bs-pause="false"
+            >
+              <div class="carousel-inner">
+                {/* First Carousel Item */}
+                <div
+                  class="carousel-item active"
+                  style={{ background: "#696969" }}
+                >
+                  <img
+                    class="w-100 h-100"
+                    src="img/club_carosel1.png"
+                    alt="Image"
+                  />
+                </div>
+
+                {/* Second Carousel Item */}
+                <div
+                  class="carousel-item "
+                  style={{ objectFit: "cover", background: "#696969" }}
+                >
+                  <img
+                    class="w-100 h-100"
+                    src={slide1}
+                    alt="Image"
+                    style={{ maxHeight: "770px" }}
+                  />
+                </div>
+
+                {/* Third Carousel Item */}
+                <div
+                  class="carousel-item "
+                  style={{ objectFit: "cover", background: "#696969" }}
+                >
+                  <img
+                    class="w-100 h-100"
+                    src={slide2}
+                    alt="Image"
+                    style={{ maxHeight: "770px" }}
+                  />
+                </div>
+              </div>
+
+              {/* Carousel Caption - Content outside carousel-items */}
+              <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
+                <div class="p-3" style={{ maxWidth: "900px" }}>
+                  <h1 className="display-2 text-white text-uppercase mb-md-4">
+                    <span className="typing-animation">
+                      Beyond Limits : {text}
+                    </span>
+                  </h1>
+                  <Link
+                    to={"/JoinUs"}
+                    class="btn btn-primary py-md-3 px-md-5 me-3"
+                  >
+                    Join Us
+                  </Link>
+                  <Link to={"/ContactUs"} class="btn btn-light py-md-3 px-md-5">
+                    Contact Us
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/*     <!-- Carousel End -->
+        </MainCarousel>
 
-
-    <!-- About Start --> */}
         <div
           class="container-fluid p-3"
           style={{
@@ -304,13 +381,327 @@ export default function Home({ dbpath }) {
 
         <br />
         <br />
+        <br />
         <center>
           <h1 class="display-5 text-uppercase mb-0">Top Player Glories</h1>
         </center>
 
-        <div
+        <div class="container-fluid programe position-relative px-5 mt-5" style={{ marginBottom: "135px", display: "flex", justifyContent: "center" , flexDirection:'column'}} id="achievements">
+    {/* <!-- First subsection with first three players --> */}
+    <div class="row g-5 gb-5" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap:'30px' }}>
+        {/* <!-- Player 1 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 1 Content --> */}
+              <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow1(true);
+                }}
+                onMouseLeave={() => {
+                  setShow1(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img
+                    class="img-fluid w-100"
+                    src="/img/disha_player2 (2).png"
+                    alt=""
+                    style={{ height: "340px" }}
+                  />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{
+                    background: "rgba(34, 36, 41, 0.96)",
+                    width: "100%",
+                  }}
+                >
+                  <h5 class="text-uppercase text-light">Disha Kasat</h5>
+                  {show1 && (
+                    <p
+                      style={{
+                        maxHeight: "244px",
+                        width: "100%",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      "Disha Kasat, a right-handed batter from Amravati,
+                      Maharashtra, has etched her name in cricket's annals with
+                      her remarkable consistency. Her journey is a testament to
+                      perseverance and talent, highlighted by two impressive
+                      half-centuries for India A Women in the Senior Women's One
+                      Day Challenger Trophy 2021. Disha's century for Vidarbha
+                      Women in Visakhapatnam was not only a display of skill but
+                      also a match-winning performance. Selected for the Central
+                      Zone team in the Senior Women Inter-Zonal T20 and by the
+                      Royal Challengers Bangalore in the WPL, Disha's rise is a
+                      testament to her potential. She symbolizes the power of
+                      dedication and hard work in achieving one's dreams."
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+        {/* <!-- Player 2 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 2 Content --> */}
+            <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow(true);
+                }}
+                onMouseLeave={() => {
+                  setShow(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img class="img-fluid w-100" src="img/player1.jpg " alt="" />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                >
+                  <h5 class="text-uppercase text-light">Lokesh Marghade</h5>
+                  {show && (
+                    <p style={{ color: "#989898", fontSize: "12.5px" }}>
+                      "The Vidarbha captain, who was born with a twisted ankle,
+                      has demonstrated consistency in every competition he
+                      participates in recent days. In December 2021, Marghade
+                      also led the Challenger Trophy in runs scored. He had
+                      played four games in Chandigarh and scored 169 runs,
+                      including two fifties. "I think the advice I'm getting
+                      from my elders at Sahas Cricket Club is really beneficial
+                      to me. "My goal is to improve myself so that I can make a
+                      strong return to the Indian team," he stated."
+                    </p>
+                  )}
+                </div>
+              </div>
+        </div>
+
+        {/* <!-- Player 3 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 3 Content --> */}
+            <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow2(true);
+                }}
+                onMouseLeave={() => {
+                  setShow2(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img
+                    class="img-fluid w-100"
+                    src="/img/SiddhiAndAroohi.png"
+                    alt=""
+                    style={{ height: "340px" }}
+                  />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                >
+                  <h5 class="text-uppercase text-light">Siddhi & AArohi</h5>
+                  {show2 && (
+                    <div
+                      style={{
+                        maxHeight: "260px",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      <p style={{ color: "#989898", fontSize: "12.5px" }}>
+                        "Siddhi and Arohi, your achievements are truly
+                        remarkable! Your hard work, dedication, and perseverance
+                        have paid off, bringing immense pride to your family and
+                        community. It's been a privilege to witness your growth
+                        and progress, fueled by countless hours of practice and
+                        determination. Your humility and respect towards your
+                        coaches, the game, and the learning process are
+                        admirable qualities that set you apart as not only
+                        exceptional athletes but also as admirable individuals.
+                        Earning a spot in the U-19 women’s camp organized by
+                        @bcciofficial.in @bcci.women is a testament to your
+                        talent and commitment. As you continue on your journey,
+                        we extend our heartfelt wishes for success and good
+                        fortune. May you continue to push yourselves to new
+                        heights and achieve your dreams, including representing
+                        at the national level."
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+        </div>
+    </div>
+
+    {/* <!-- Second subsection with next three players --> */}
+    <div class="row g-5 gb-5" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "50px", gap:'30px' }}>
+        {/* <!-- Player 4 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 4 Content --> */}
+            <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow3(true);
+                }}
+                onMouseLeave={() => {
+                  setShow3(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img
+                    class="img-fluid w-100"
+                    src={img13}
+                    alt=""
+                    style={{ height: "340px" }}
+                  />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                >
+                  <h5 class="text-uppercase text-light">Pavya and Siddhi</h5>
+                  {show3 && (
+                    <div
+                      style={{
+                        maxHeight: "260px",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#989898",
+                          fontSize: "12.5px",
+                          overflow: "auto",
+                          scrollbarWidth: "none",
+                        }}
+                      >
+                        "Pavya and Siddhi's selection for the VCA U-19 women’s
+                        team is a true reflection of their unwavering
+                        dedication, exceptional talent, and relentless hard
+                        work. Their journey to this point has been paved with
+                        countless sacrifices, hours of intense practice, and an
+                        unyielding commitment to excellence. Their achievement
+                        serves as a beacon of inspiration for aspiring athletes
+                        everywhere, showcasing the power of resilience and
+                        determination in the pursuit of one's dreams. As they
+                        step onto this new stage in their athletic careers, we
+                        stand in awe of their accomplishments and offer our
+                        sincerest congratulations. May their success continue to
+                        fuel their passion and drive as they navigate the
+                        challenges and triumphs that lie ahead. We are proud to
+                        celebrate their achievements and eagerly anticipate the
+                        remarkable feats they will undoubtedly accomplish in the
+                        future. Here's to Pavya and Siddhi, two shining examples
+                        of perseverance and triumph in the world of sports."
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+        </div>
+
+        {/* <!-- Player 5 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 5 Content --> */}
+            <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow4(true);
+                }}
+                onMouseLeave={() => {
+                  setShow4(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img class="img-fluid w-100" src="img/SanketK_player.jpg " alt="" />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                >
+                  <h5 class="text-uppercase text-light">Sanket khedkar</h5>
+                  {show4 && (
+                    <div
+                      style={{
+                        minHeight: "272px",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      <p style={{ color: "#989898", fontSize: "14px" }}>
+                        "Sanket khedkar played for Vidarbha cricket association for u-14 ,16,19 age group part of BCCI Central zone camp,  Currently Performance Analyst for Indian PD cricket team, And Freelance Analyst for Star sports in ICC cricket World Cup 2023, Ipl 2024 and T-20 world cup 2024."
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+        </div>
+
+        {/* <!-- Player 6 --> */}
+        <div class="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }}>
+            {/* <!-- Player 6 Content --> */}
+            <div
+                class="team-item position-relative"
+                style={{ transition: "0.2s ease-in-out" }}
+                onMouseEnter={() => {
+                  setShow5(true);
+                }}
+                onMouseLeave={() => {
+                  setShow5(false);
+                }}
+              >
+                <div class="position-relative overflow-hidden rounded">
+                  <img
+                    class="img-fluid w-100"
+                    src="/img/VijayK_player.jpg"
+                    alt=""
+                    style={{ height: "340px" }}
+                  />
+                </div>
+                <div
+                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                >
+                  <h5 class="text-uppercase text-light">Viraj kadbe</h5>
+                  {show5 && (
+                    <div
+                      style={{
+                        minHeight: "260px",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                    >
+                      <p style={{ color: "#989898", fontSize: "14px" }}>
+                        "Viraj Kadbe made history as the first player to represent Vidarbha in the Ranji Trophy and later debuted in the IPL, showcasing talent from the region on a national platform. His journey exemplifies the rise of cricket in Vidarbha, inspiring aspiring cricketers to aim for higher achievements in the sport."
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+        {/* <div
           class="container-fluid programe position-relative px-5 mt-5"
-          style={{ marginBottom: "135px" }}
+          style={{
+            marginBottom: "135px",
+            display: "flex",
+            justifyContent: "center",
+          }}
           id="achievements"
         >
           <div
@@ -544,94 +935,7 @@ export default function Home({ dbpath }) {
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="container-fluid p-5" id="coaches">
-          <div class="text-center">
-            <h1 class="text-black display-5 text-uppercase mb-0">
-              Our Coaches / Trainers
-            </h1>
-          </div>
-
-          <div class="tab-class text-center">
-            {/* new */}
-            <Ys>
-              <div>
-                {/* <!-- <h1>CARDS</h1> --> */}
-                <div className="parent">
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach1} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>DHANANJAY BARDE</h5>
-                        <p>
-                          EX- VCA PLAYER <br /> ( VCA ACADEMY )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach2} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>KULDEEP SALVE</h5>
-                        <p>
-                          EX- VCA PLAYER <br /> ( OMAN A TEAM )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="container">
-                    <div
-                      className="cards"
-                      style={{
-                        boxShadow: "9px 10px 14px -8px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      <div className="card-img">
-                        <img src={Coach3} alt="Salman Khan" />
-                      </div>
-                      <div className="card-body">
-                        <h5>PRADEEP KUMAR YADAV</h5>
-                        <p
-                          className="text-primar card-text"
-                          style={{ color: " rgb(80 80 80)" }}
-                        >
-                          ICC LEVEL 1 <br />( COACH )
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Ys>
-
-            <div class="tab-content">
-              <div id="tab-1" class="tab-pane fade show p-0 active">
-                <div
-                  class="row g-3"
-                  style={{ display: "flex", justifyContent: "center" }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> */}
 
         <Initiatives_section
           style={{
@@ -807,35 +1111,68 @@ export default function Home({ dbpath }) {
                 <img className="grid-item grid-item-5" src={img5} alt="" />
                 {/* <p>"Are you gunna throw the ball?"</p> */}
               </div>
-              <div>
-                <img className="grid-item grid-item-6" src={img6} alt="" />
-                {/* <p>"C'mon friend!"</p> */}
-              </div>
-              <div>
-                <img className="grid-item grid-item-7" src={img7} alt="" />
-                {/* <p>"A rose for mommy!"</p> */}
-              </div>
-              <div>
-                <img className="grid-item grid-item-8" src={img8} alt="" />
-                {/* <p>"You gunna finish that?"</p> */}
-              </div>
-              <div>
-                <img className="grid-item grid-item-9" src={img9} alt="" />
-                {/* <p>"We can't afford a cat!"</p> */}
-              </div>
-              <div>
-                <img className="grid-item grid-item-10" src={img11} alt="" />
-                {/* <p>"Dis my fren!"</p> */}
-              </div>
-              <div>
-                <img className="grid-item grid-item-10" src={img12} alt="" />
-                {/* <p>"Dis my fren!"</p> */}
-              </div>
+                <div>
+                  <img className="grid-item grid-item-6" src={img6} alt="" />
+                  {/* <p>"C'mon friend!"</p> */}
+                </div>
+                <div>
+                  <img className="grid-item grid-item-7" src={img7} alt="" />
+                  {/* <p>"A rose for mommy!"</p> */}
+                </div>
+                <div>
+                  <img className="grid-item grid-item-8" src={img8} alt="" />
+                  {/* <p>"You gunna finish that?"</p> */}
+                </div>
+                <div>
+                  <img className="grid-item grid-item-9" src={img9} alt="" />
+                  {/* <p>"We can't afford a cat!"</p> */}
+                </div>
+                <div>
+                  <img className="grid-item grid-item-10" src={img11} alt="" />
+                  {/* <p>"Dis my fren!"</p> */}
+                </div>
+                <div>
+                  <img className="grid-item grid-item-10" src={img12} alt="" />
+                  {/* <p>"Dis my fren!"</p> */}
+                </div>
             </div>
+          
+          <div className="container" style={{display:'flex', justifyContent:'center', }}>
+                    <Link to={'/Gallery'}><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+          </div>
           </div>
         </Gallery_Container>
         <br></br>
         <br></br>
+
+        {/* <PlayerCarousel>
+          <div className="carousel-container">
+            <div id="playerCarousel" className="carousel slide" data-bs-ride="carousel">
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <div className="container-fluid programe position-relative px-5 mt-5" style={{ marginBottom: "135px", display: "flex", justifyContent: "center", }}>
+                    <div className="row g-5 gb-5" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: '30px' }}>
+                      {players.map(player => (
+                        <div className="col-lg-4 col-md-6" style={{ width: "20rem", height: "22rem" }} key={player.id}>
+                          <PlayerCard image={player.image} name={player.name} description={player.description} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#playerCarousel" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#playerCarousel" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </PlayerCarousel> */}
+
       </div>
     </>
   );
@@ -898,8 +1235,7 @@ const Initiatives_section = styled.div`
 `;
 
 const ModalContainer = styled.div`
-
-position: fixed;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 9999;
@@ -912,103 +1248,32 @@ position: fixed;
 
   padding: 0 1%;
 
-
-.imgContain{
+  .imgContain {
     width: 100%;
     height: 500px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    img{
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
     }
-    button{
-        align-self: flex-end;
-        background-color: #d9534f;
-        margin: 2px;
-        color: white;
-        border: none;
-        outline: none;
-        width: 50px;
-        height: 30px;
-        border-radius: 5px;
-        align-items: right;
-    } :hover{
-        color: #d9534f;
-        background-color: white;
+    button {
+      align-self: flex-end;
+      background-color: #d9534f;
+      margin: 2px;
+      color: white;
+      border: none;
+      outline: none;
+      width: 50px;
+      height: 30px;
+      border-radius: 5px;
+      align-items: right;
     }
-}
-
-`;
-
-const Ys = styled.div`
-  font-family: "open sans", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 25px;
-
-  .parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 26px;
-    height: 600px;
-  }
-
-  .container {
-    display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
-    justify-content: center;
-  }
-
-  .cards {
-    width: 300px;
-    margin: 0 10px;
-    background-color: white;
-    border-radius: 15px;
-    transition: 0.2s;
-  }
-
-  .card-img {
-    height: 400px;
-  }
-
-  .card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0px 0px;
-  }
-
-  .card-body h5,
-  .card-body p {
-    text-align: center;
-    margin: 0; /* Remove default margins */
-  }
-
-  @media screen and (max-width: 768px) {
-    .parent {
-      flex-direction: column; /* Stack cards vertically */
-      height: auto; /* Reset height */
-    }
-
-    .container {
-      width: 100%; /* Full width */
-      justify-content: center; /* Center align cards */
-      align-items: center; /* Center align cards */
-    }
-
-    .cards {
-      width: calc(100% - 20px); /* Full width with gap */
-      margin: 10px;
-    }
-
-    .card-img {
-      height: 270px;
+    :hover {
+      color: #d9534f;
+      background-color: white;
     }
   }
 `;
@@ -1244,4 +1509,37 @@ const Card = styled.div`
   .card-back {
     transform: rotateY(180deg);
   }
+`;
+
+const MainCarousel = styled.div`
+  .carousel-item {
+    width: 100%;
+    height: auto; /* Set initial height to auto */
+  }
+  .carousel-inner{
+    height: 770px;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-item {
+      height: 300px; /* Set height for smaller screens */
+    }
+    .carousel-inner {
+      height: 300px; /* Set height for smaller screens */
+    }
+  }
+`;
+
+const PlayerCarousel = styled.div `
+@media (max-width: 768px) {
+  /* .carousel-inner {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .carousel-inner .carousel-item {
+    display: inline-block;
+    vertical-align: top;
+  } */
+}
+
 `;
