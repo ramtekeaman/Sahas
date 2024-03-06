@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import axios from 'axios';
-import './CSS/Register.css';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import axios from "axios";
+import "./CSS/Register.css";
 
-export default function RegisterCoaching({dbpath}) {
+export default function RegisterCoaching({ dbpath }) {
   const containerStyle = {
-    width: '60%',
-    marginLeft: '20%',
-    backgroundColor: 'white'
+    width: "60%",
+    marginLeft: "20%",
+    backgroundColor: "white",
   };
-  
+
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate('/Dashboard');
+    navigate("/Dashboard");
   }
-
 
   const [user, setUser] = useState([]);
   const [id, setId] = useState([]);
@@ -24,65 +23,59 @@ export default function RegisterCoaching({dbpath}) {
   const [rid, setRid] = useState([]);
 
   const loadUser = async () => {
-    const result = await axios.get(dbpath+'getid.php');
+    const result = await axios.get(dbpath + "getid.php");
     setUser(result.data.phpresult);
     console.log(result.data.phpresult);
-    setId(result.data.phpresult[0]['id']);  
+    setId(result.data.phpresult[0]["id"]);
   };
 
   const loadCoach = async () => {
-    const result = await axios.get(dbpath+'viewcoach.php');
+    const result = await axios.get(dbpath + "viewcoach.php");
     setCoach(result.data.phpresult);
     console.log(result.data.phpresult);
   };
-  
+
   const loadRid = async () => {
-    const result = await axios.get(dbpath+'getidreceipt.php');
-    setRid(result.data.phpresult[0]['id']);
+    const result = await axios.get(dbpath + "getidreceipt.php");
+    setRid(result.data.phpresult[0]["id"]);
     console.log(result.data.phpresult);
   };
 
- 
-    const isUserLoggedIn = Cookies.get('userLoggedIn');
+  const isUserLoggedIn = Cookies.get("userLoggedIn");
 
-    useEffect(() => {
-        if (isUserLoggedIn !== 'true') {
-            navigate('/AdminLogin');
-        }
-        else
-        {
-          loadUser();
-          loadCoach();
-         loadRid(); 
-        }
+  useEffect(() => {
+    if (isUserLoggedIn !== "true") {
+      navigate("/AdminLogin");
+    } else {
+      loadUser();
+      loadCoach();
+      loadRid();
+    }
+  }, [isUserLoggedIn]);
 
-        
-    }, [isUserLoggedIn]);    
-
-  const [name, setName] = useState('');
-  const [fname, setFname] = useState('');
-  const [mobile, setMno] = useState('');
-  const [address, setAddress] = useState('');
-  const [rphno, setRphno] = useState('');
-  const [dob, setDOB] = useState('');
+  const [name, setName] = useState("");
+  const [fname, setFname] = useState("");
+  const [mobile, setMno] = useState("");
+  const [address, setAddress] = useState("");
+  const [rphno, setRphno] = useState("");
+  const [dob, setDOB] = useState("");
   // New code below
-  const [vca, setVca] = useState('');
-  const [Gage, setGage] = useState('');
-  const [validtill, setValidTill] = useState('');
-
+  const [role, setrole] = useState("");
+  const [vca, setVca] = useState("");
+  const [Gage, setGage] = useState("");
+  const [validtill, setValidTill] = useState("");
 
   //new code AR
-  const [clg, setClg] = useState('');
-  const [sport, setSport] = useState('');
-  const [time, setTime] = useState('');
-  const [joiningDate, setJoiningdate] = useState('');
-  const [status , setStatus] = useState('');
-  const [email , setEmail] = useState('');
+  const [clg, setClg] = useState("");
+  const [sport, setSport] = useState("");
+  const [time, setTime] = useState("");
+  const [joiningDate, setJoiningdate] = useState("");
+  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState("");
   const [coachs, setCoachs] = useState([]);
-  const [feestatus, setfeestatus] = useState(''); // Updated initial state to an empty string
+  const [feestatus, setfeestatus] = useState(""); // Updated initial state to an empty string
 
-
- /*  const setReceipt = () => {
+  /*  const setReceipt = () => {
     const url = dbpath+'setReceipt.php';
     let fData = new FormData(); 
     fData.append('rid', rid);
@@ -100,70 +93,67 @@ export default function RegisterCoaching({dbpath}) {
       });   
   } */
 
+  const onRegister = () => {
+    /*  alert("Register 😍 Coaching "); */
 
-    const onRegister = ()=>{
-   /*  alert("Register 😍 Coaching "); */
-
-    if(status.length === 0 ) {
+    if (status.length === 0) {
       alert("Please select your Experiance Level!");
-    } else if(joiningDate.length === 0 ) {
+    } else if (joiningDate.length === 0) {
       alert("Joining Date has left Blank!");
-    } else if(name.length === 0 ) {
+    } else if (name.length === 0) {
       alert("Name has left Blank!");
     } else if (fname.length === 0) {
       alert("Son/Daughter's name has been left blank!");
     } else if (address.length === 0) {
-      alert('Address has been left blank!');
+      alert("Address has been left blank!");
     } else if (mobile.length === 0) {
-      alert('Mobile number has been left blank!');
-    }else if (email.length === 0) {
-      alert('Email ID has been left blank!');
+      alert("Mobile number has been left blank!");
+    } else if (email.length === 0) {
+      alert("Email ID has been left blank!");
     } else if (dob.length === 0) {
-      alert('Date of birth has been left blank!');
-    // New code
-  } else if (Gage.length === 0) {
-    alert('Age Group  has been left blank!'); 
-  
-  } else if (vca.length === 0) {
-    alert('VCA Id  has been left blank!'); 
-    // New code
-  }else if (sport.length === 0) {
-      alert('Sports/Game has been left blank!');
+      alert("Date of birth has been left blank!");
+      // New code
+    } else if (Gage.length === 0) {
+      alert("Age Group  has been left blank!");
+    } else if (vca.length === 0) {
+      alert("VCA Id  has been left blank!");
+      // New code
+    } else if (role.length === 0) {
+      alert("role has been left blank!");
     } else if (time.length === 0) {
-      alert('Timing has been left blank!');
+      alert("Timing has been left blank!");
     } else if (coachs.length === 0) {
-      alert('Select coach has left blank!');
-    }else {
-      
+      alert("Select coach has left blank!");
+    } else {
+      const url = dbpath + "formsubmit.php";
+      let fData = new FormData();
 
-      const url = dbpath + 'formsubmit.php';
-    let fData = new FormData();
+      fData.append("vca", vca);
+      fData.append("name", name);
+      fData.append("fname", fname);
+      fData.append("mobile", mobile);
+      fData.append("email", email);
+      fData.append("address", address);
+      fData.append("rphno", rphno);
+      fData.append("dob", dob);
+      fData.append("Gage", Gage); //New Line Code
+      fData.append("validtill", validtill); // Updated state variable name
 
-      fData.append('vca', vca);
-      fData.append('name', name);
-      fData.append('fname', fname);
-      fData.append('mobile', mobile);
-      fData.append('email', email);
-      fData.append('address', address);
-      fData.append('rphno', rphno);
-      fData.append('dob', dob);
-      fData.append('Gage', Gage);  //New Line Code
-      fData.append('validtill', validtill); // Updated state variable name
+      fData.append("clg", clg);
+      fData.append("sport", sport);
+      fData.append("timing", time);
+      fData.append("role", role);
+      fData.append("joiningDate", joiningDate);
+      fData.append("coachs", coachs);
+      fData.append("status", status);
 
-      fData.append('clg', clg);
-      fData.append('sport', sport);
-      fData.append('timing', time);
-      fData.append('joiningDate', joiningDate);
-      fData.append('coachs', coachs);
-      fData.append('status', status);
-
-      fData.append('feestatus', feestatus);
+      fData.append("feestatus", feestatus);
       axios
         .post(url, fData)
         .then((response) => alert(response.data))
         .catch((error) => {
           console.log(error.toJSON());
-      });
+        });
       /*  setReceipt();  */
       handleClick();
     }
@@ -171,122 +161,237 @@ export default function RegisterCoaching({dbpath}) {
 
   return (
     <>
-    <div style={{backgroundColor:'#222429'}}>
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="container shadow-lg p-5 bg-body-tertiary rounded" style={containerStyle}>
-        <center>
-          <h3 className="sp1">Register (Coaching)</h3>
-        </center>
+      <div style={{ backgroundColor: "#222429" }}>
         <br />
-      <br />
-        <form>
-          <div className="mb-3" style={{ display: 'flex' }}>
-            <label className="form-check-label me-5">Experience Level:<span style={{color:'red'}}>*</span></label>
-            <div className="form-check me-5">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setStatus('Begineer')} />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Beginner
+        <br />
+        <br />
+        <br />
+        <div
+          className="container shadow-lg p-5 bg-body-tertiary rounded"
+          style={containerStyle}
+        >
+          <center>
+            <h3 className="sp1">Register (Coaching)</h3>
+          </center>
+          <br />
+          <br />
+          <form>
+            <div className="mb-3" style={{ display: "flex" }}>
+              <label className="form-check-label me-5">
+                Experience Level:<span style={{ color: "red" }}>*</span>
               </label>
+              <div className="form-check me-5">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  onChange={(e) => setStatus("Begineer")}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Beginner
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  onChange={(e) => setStatus("Professional")}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                  Professional
+                </label>
+              </div>
             </div>
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={(e) => setStatus('Professional')} />
-              <label className="form-check-label" htmlFor="flexRadioDefault2">
-                Professional
+            <div className="mb-3">
+              <label className="form-label">
+                Date of Joining<span style={{ color: "red" }}>*</span>
               </label>
+              <input
+                type="date"
+                className="form-control"
+                id="tdoj"
+                onChange={(e) => setJoiningdate(e.target.value)}
+              />
             </div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Date of Joining<span style={{color:'red'}}>*</span></label>
-            <input type="date" className="form-control" id="tdoj" onChange={(e) => setJoiningdate(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Registration Number<span style={{color:'red'}}>*</span></label>
-            {user.map((res) => (
-              <input key={res.id} type="number" className="form-control" id="trno" value={res.id} disabled />
-            ))}
-          </div> 
-          {/* //New code VCA */}
-          <div className="mb-3">
-            <label className="form-label">VCA ID<span style={{color:'red'}}>*</span></label>
-            <input type="text" className="form-control" id="vca" onChange={(e) => setVca(e.target.value)} />
-          </div>
-          {/* //New code VCA above */}
-          <div className="mb-3">
-            <label className="form-label">Applicant's Name<span style={{color:'red'}}>*</span></label>
-            <input type="text" className="form-control" id="tname" onChange={(e) => setName(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Son/Daughter of<span style={{color:'red'}}>*</span></label>
-            <input type="text" className="form-control" id="tfname" onChange={(e) => setFname(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Local Address<span style={{color:'red'}}>*</span></label>
-            <input type="text" className="form-control" id="taddress" onChange={(e) => setAddress(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Residential Phone No.</label>
-            <input type="number" className="form-control" id="tphno" onChange={(e) => setRphno(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Mobile Number<span style={{color:'red'}}>*</span></label>
-            <input type="number" className="form-control" id="tmno" onChange={(e) => setMno(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Email ID<span style={{color:'red'}}>*</span></label>
-            <input type="email" className="form-control" id="temail" onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Date of Birth<span style={{color:'red'}}>*</span></label>
-            <input type="date" className="form-control" id="tdob" onChange={(e) => setDOB(e.target.value)} />
-          </div>
-          {/* NEw Code of Age Group  */}
-          <div className="mb-3">
-            <label className="form-label">Age Group<span style={{color:'red'}}>*</span></label>
-            <div className="input-group mb-3">
-              <select className="form-select" id="inputGroupSelect01" value={Gage} onChange={(e) => setGage(e.target.value)}>
-                <option value="">Choose...</option>
-                <option value="Under 19">Under 19</option>
-                <option value="Under 17">Under 17</option>
-                <option value="Under 15">Under 15</option>
-                <option value="Under 13">Under 13</option>
-                
-              </select>
+            <div className="mb-3">
+              <label className="form-label">
+                Registration Number<span style={{ color: "red" }}>*</span>
+              </label>
+              {user.map((res) => (
+                <input
+                  key={res.id}
+                  type="number"
+                  className="form-control"
+                  id="trno"
+                  value={res.id}
+                  disabled
+                />
+              ))}
             </div>
-          </div>
-          {/* New Code above */}
-          <div className="mb-3">
-          <label className="form-label">Valid Till<span style={{color:'red'}}>*</span></label>
-        <input type="date" className="form-control" id="tvt" onChange={(e) => setValidTill(e.target.value)} />
-      </div>
-          
-          {/* <div className="mb-3">
+            {/* //New code VCA */}
+            <div className="mb-3">
+              <label className="form-label">
+                VCA ID<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="vca"
+                onChange={(e) => setVca(e.target.value)}
+              />
+            </div>
+            {/* //New code VCA above */}
+            <div className="mb-3">
+              <label className="form-label">
+                Applicant's Name<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="tname"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">
+                Son/Daughter of<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="tfname"
+                onChange={(e) => setFname(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">
+                Local Address<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="taddress"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Residential Phone No.</label>
+              <input
+                type="number"
+                className="form-control"
+                id="tphno"
+                onChange={(e) => setRphno(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">
+                Mobile Number<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="tmno"
+                onChange={(e) => setMno(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">
+                Email ID<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="temail"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">
+                Date of Birth<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                id="tdob"
+                onChange={(e) => setDOB(e.target.value)}
+              />
+            </div>
+            {/* NEw Code of Age Group  */}
+            <div className="mb-3">
+              <label className="form-label">
+                Age Group<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="input-group mb-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={Gage}
+                  onChange={(e) => setGage(e.target.value)}
+                >
+                  <option value="">Choose...</option>
+                  <option value="Under 19">Under 19</option>
+                  <option value="Under 17">Under 17</option>
+                  <option value="Under 15">Under 15</option>
+                  <option value="Under 13">Under 13</option>
+                </select>
+              </div>
+            </div>
+            {/* New Code above */}
+            <div className="mb-3">
+              <label className="form-label">
+                Valid Till<span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                id="tvt"
+                onChange={(e) => setValidTill(e.target.value)}
+              />
+            </div>
+            {/* <div className="mb-3">
             <label className="form-label">School/College (if any)</label>
             <input type="text" className="form-control" id="tclg" onChange={(e) => setClg(e.target.value)} />
           </div> */}
-          <div className="mb-3">
-            <label className="form-label">Sport/Game Opted<span style={{color:'red'}}>*</span></label>
-            <div className="input-group mb-3">
-              <select className="form-select" id="inputGroupSelect01" value={sport} onChange={(e) => setSport(e.target.value)}>
-                <option value="">Choose...</option>
-                <option value="Badminton">Badminton</option>
-                <option value="Sketing">Skating</option>
-                <option value="Zumba">Zumba</option>
-              </select>
-            </div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Timing Opted<span style={{color:'red'}}>*</span></label>
-            <div className="timeflex">
+            {/* <div className="mb-3">
+              <label className="form-label">
+                Sport/Game Opted<span style={{ color: "red" }}>*</span>
+              </label>
               <div className="input-group mb-3">
-                <select className="form-select" id="inputGroupSelect01" value={time} onChange={(e) => setTime(e.target.value)}>
-                  <option value="" hidden>Choose...</option>
-                  <option value="Morning">Morning</option>
-                  <option value="Afternoon">Afternoon</option>
-                  <option value="Evening">Evening</option>
-                  {/* <option value="8 to 9 am">8 to 9 am</option>
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={sport}
+                  onChange={(e) => setSport(e.target.value)}
+                >
+                  <option value="">Choose...</option>
+                  <option value="Cricket" >Cricket</option>
+                  <option value="Sketing">Skating</option>
+                  <option value="Zumba">Zumba</option>
+                </select>
+              </div>
+            </div> */}
+            <div className="mb-3">
+              <label className="form-label">
+                Timing Opted<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="timeflex">
+                <div className="input-group mb-3">
+                  <select
+                    className="form-select"
+                    id="inputGroupSelect01"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                  >
+                    <option value="" hidden>
+                      Choose...
+                    </option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                    {/* <option value="8 to 9 am">8 to 9 am</option>
                   <option value="9 to 10 am">9 to 10 am</option>
                   <option value="10 to 11 am">10 to 11 am</option>
                   <option value="11 to 12 am">11 to 12 am</option>
@@ -298,52 +403,92 @@ export default function RegisterCoaching({dbpath}) {
                   <option value="5 to 6 pm">5 to 6 pm</option>
                   <option value="6 to 7 pm">6 to 7 pm</option>
                   <option value="7 to 8 pm">7 to 8 pm</option> */}
-                  {/* <option value="8 to 9 pm">8 to 9 pm</option> */}
+                    {/* <option value="8 to 9 pm">8 to 9 pm</option> */}
+                  </select>
+                </div>
+              </div>
+            </div>{" "}
+            <div className="mb-3">
+              <label className="form-label">
+                Role<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="input-group mb-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={role}
+                  onChange={(e) => setrole(e.target.value)}
+                >
+                  <option value="" hidden>
+                    Choose...
+                  </option>
+                  <option value="All Rounder">All Rounder</option>
+                  <option value="Batsman">Batsman</option>
+                  <option value="Bowler ">Bowler</option>
                 </select>
               </div>
             </div>
-          </div>
-          
-          <div className="mb-3">
-            <label className="form-label">Select Coach<span style={{color:'red'}}>*</span></label>
-            <div className="input-group mb-3">
-              <select className="form-select" id="inputGroupSelect01" value={coachs} onChange={(e) => setCoachs(e.target.value)}>
-                <option value="">Choose...</option>
-                {coach.map((rest) => (
-                  <option value={rest.name}>{rest.name}</option>
-                ))}
-              </select>
+            <div className="mb-3">
+              <label className="form-label">
+                Select Coach<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="input-group mb-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={coachs}
+                  onChange={(e) => setCoachs(e.target.value)}
+                >
+                  <option value="">Choose...</option>
+                  {coach.map((rest) => (
+                    <option value={rest.name}>{rest.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Payment Status<span style={{color:'red'}}>*</span></label>
-            <div className="input-group mb-3">
-              <select className="form-select" id="inputGroupSelect01" value={feestatus} onChange={(e) => setfeestatus(e.target.value)}>
-                <option value="">Choose...</option>
-                <option value="Paid">Completed</option>
-                <option value="UnPaid">Incomplete</option>
-                {/* <option value="Under 15">Under 15</option> */}
-                {/* <option value="Under 13">Under 13</option> */}
-                
-              </select>
+            <div className="mb-3">
+              <label className="form-label">
+                Payment Status<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="input-group mb-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={feestatus}
+                  onChange={(e) => setfeestatus(e.target.value)}
+                >
+                  <option value="">Choose...</option>
+                  <option value="Paid">Completed</option>
+                  <option value="UnPaid">Incomplete</option>
+                  {/* <option value="Under 15">Under 15</option> */}
+                  {/* <option value="Under 13">Under 13</option> */}
+                </select>
+              </div>
             </div>
-          </div>
-          
-          <br />
-          <center>
-            <button type="button" className="btn btn-primary" onClick={onRegister}>
-              Submit
-            </button>
-            &nbsp;&nbsp;&nbsp;
-            <Link to="/dashboard"><button type="button" className="btn btn-primary">
-              Dashboard
-            </button></Link>
-          </center>
-        </form>
+            <br />
+            <center>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={onRegister}
+              >
+                Submit
+              </button>
+              &nbsp;&nbsp;&nbsp;
+              <Link to="/dashboard">
+                <button type="button" className="btn btn-primary">
+                  Dashboard
+                </button>
+              </Link>
+            </center>
+          </form>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
-      <br/><br/><br/><br/><br/>
-      </div>
-      
     </>
   );
 }

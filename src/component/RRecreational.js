@@ -315,10 +315,10 @@ export default function RRecreational({ dbpath }) {
     printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
     printWindow.document.write('<h1 style="text-align: center;">Recreational Remark</h1>');
     printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
-    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Timing</th><th>Present / Absent</th><th>Matches Played</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
+    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Timing</th><th>Present / Absent</th><th>Wicket</th><th>Run Score</th><th>Matches Played</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
 
     user.forEach(res => {
-      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.type2}</td><td>${res.timing}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
+      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.type2}</td><td>${res.timing}</td><td>${res.attendanceOption}</td><td>${res.Wicket}</td><td>${res.runscore}</td><td>${res.matchesPlayed}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
     });
 
     printWindow.document.write('</tbody></table>');
@@ -354,6 +354,8 @@ export default function RRecreational({ dbpath }) {
               <th scope="col">Type</th>
 
               <th scope="col">Present / Absent</th>
+              <th scope="col">Wicket</th>
+              <th scope="col">Run Score</th>
               <th scope="col">Matches Played</th>
               <th scope="col">Remark</th>
               <th scope="col">Date : Time</th>
@@ -368,6 +370,8 @@ export default function RRecreational({ dbpath }) {
                 <td>{res.type2}</td>
 
                 <td>{res.attendanceOption}</td>
+                <td>{res.Wicket}</td>
+                <td>{res.runscore}</td>
                 <td>{res.matchesPlayed}</td>
                 <td>{res.remark}</td>
                 <td>{res.timestamp}</td>
