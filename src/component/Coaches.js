@@ -260,7 +260,7 @@ const Coaches = () => {
           </div>
         </div>
       </div>
-      <PlayerSwipper/>
+      {/* <PlayerSwipper/> */}
     </CoachesContainer>
   )
 }

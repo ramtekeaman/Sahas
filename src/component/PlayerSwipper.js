@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import styled from 'styled-components';
 
 // Assuming playersData is the array of cards you provided
 
@@ -25,7 +26,7 @@ const playersData = [
     },
     {
       name: "Pavya and Siddhi",
-      imgSrc: "img/pavya_and_siddhi.jpg",
+      imgSrc: "./images/PavyaAndSiddhi.png",
       description: "Pavya and Siddhi's selection for the VCA U-19 women’s team is a true reflection of their unwavering dedication, exceptional talent, and relentless hard work. Their journey to this point has been paved with countless sacrifices, hours of intense practice, and an unyielding commitment to excellence. Their achievement serves as a beacon of inspiration for aspiring athletes everywhere, showcasing the power of resilience and determination in the pursuit of one's dreams. As they step onto this new stage in their athletic careers, we stand in awe of their accomplishments and offer our sincerest congratulations. May their success continue to fuel their passion and drive as they navigate the challenges and triumphs that lie ahead. We are proud to celebrate their achievements and eagerly anticipate the remarkable feats they will undoubtedly accomplish in the future. Here's to Pavya and Siddhi, two shining examples of perseverance and triumph in the world of sports."
     },
     {
@@ -81,19 +82,24 @@ const PlayerSwipper = () => {
     //     </SwiperSlide>
     //   ))}
     // </Swiper>
+    <SwiperContent className='container'>
     <Swiper
-      modules={[Navigation, 8, Autoplay]}
+      modules={[Navigation, Pagination, Autoplay]}
       grabCursor={true}
       navigation={true}
-      autoplay={{delay:'3000'}}
+      autoplay={{delay:'5000'}}
       pagination={true}
       breakpoints={{
+        0: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
         320: {
           slidesPerView: 1,
           spaceBetween: 10,
         },
         768: {
-          slidesPerView: 2,
+          slidesPerView: 1,
           spaceBetween: 20,
         },
         992: {
@@ -101,11 +107,10 @@ const PlayerSwipper = () => {
           spaceBetween: 10, // Reduce space between cards
         },
       }}
-      style={{ marginLeft: '80px' }}
     >
       {playersData.map((player, index) => (
         <SwiperSlide key={index}>
-          <div className="team-item position-relative" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{width:'70%' }}>
+          <div className="team-item position-relative cards" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{width:'70%' }}>
             <div className="position-relative overflow-hidden rounded">
               <img className="img-fluid w-100" src={player.imgSrc} alt={player.name} style={{ height: '340px',}} />
             </div>
@@ -121,7 +126,43 @@ const PlayerSwipper = () => {
         </SwiperSlide>
       ))}
     </Swiper>
+    </SwiperContent>
   );
 };
 
 export default PlayerSwipper;
+
+const SwiperContent = styled.div `
+  .swiper {
+    margin: 0 30px; /* Adjust margin for larger screens */
+  }
+
+  .swiper-horizontal {
+    margin: 0; /* Reset margin for horizontal alignment */
+    padding-left: 0;
+  }
+
+  .cards {
+    width: 90%;
+  }
+
+  .swiper-wrapper {
+    margin: 0; /* Reset margin for smaller screens */
+    width: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .swiper {
+      margin: 0; /* Reset margin for smaller screens */
+    }
+
+    .swiper-horizontal {
+      width: 100%; /* Adjust width for smaller screens */
+    }
+  }
+`;
