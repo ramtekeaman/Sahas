@@ -3,8 +3,16 @@ import img1 from './images/Bas-Bat.jpg';
 import backgroundImage from './images/ProductSec.jpg';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import 'aos/dist/aos.css'
+import AOS from 'aos'
+
 
 const Products = () => {
+  AOS.init({
+    duration: 650,
+    once: true
+  });
+  
     const [showPaymentForm, setShowPaymentForm] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [formData, setFormData] = useState({
@@ -14,7 +22,15 @@ const Products = () => {
         quantity:1,
     });
     const [finalPrice, setFinalPrice] = useState();
+    const [price, setPrice] = useState();
     const [quantity, setQuantity] = useState(1);
+    const [showFP, setShowFP] = useState(false)
+
+    const handleFinalPrice = (e) => {
+      setShowFP(true)
+      const quantity = e.target.value;
+      setFinalPrice(price * quantity)
+    }
 
     const products = [
         {
@@ -42,8 +58,9 @@ const Products = () => {
 
     const handlePayNowClick = (product) => {
         setSelectedProduct(product);
-        setFinalPrice(product.price);
+        setPrice(product.price);
         setShowPaymentForm(true);
+        setShowFP(false)
     };
 
     const handleInputChange = (e) => {
@@ -58,7 +75,8 @@ const Products = () => {
         setFormData({
             name: '',
             email: '',
-            address: ''
+            address: '',
+            quantity: '1'
         });
         setShowPaymentForm(false);
     };
@@ -96,6 +114,8 @@ const Products = () => {
                     <section
                         className="hero-wrap hero-wrap-2"
                         style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)' }}
+                        data-aos="fade-up"
+     data-aos-duration="2000"
                     >
                         <div className="overlay"></div>
                         <div className="overlay-2"></div>
@@ -126,13 +146,14 @@ const Products = () => {
                 <div className="container">
                     <div className="row">
                         <h2>Products</h2>
-                        <div className="cards">
+                        <div className="cards" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                             {products.map(renderProductCard)}
                         </div>
                     </div>
                     {showPaymentForm && selectedProduct && (
                         <PaymentForm>
-                            <div id="paymentModal" className="modalC">
+                            <div id="paymentModal" className="modalC"  data-aos="flip-up">
                                 <div className="modal-content">
                                     <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
                                     <div className="payment-form">
@@ -145,10 +166,11 @@ const Products = () => {
                                             <label>Address:</label>
                                             <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
                                             <label>Price:</label>
-                                            <input type="text" value={finalPrice} readOnly />
-                                            {/* <label>Quantity :</label>
-                                            <input type="number" name="quantity" id="quantity" value={formData.quantity} onChange={handleInputChange}/> */}
+                                            <input type="text" value={showFP ? finalPrice : price} readOnly />
+                                            <div className='quantity'><label htmlFor="quantity">Quantity :</label>
+                                            <input type="number" id='quantity' name='quantity' min={'1'} defaultValue={'1'} onChange={handleFinalPrice}/></div>
                                             <button type="submit" className="btn btn-primary">Submit Payment</button>
+
                                         </form>
                                     </div>
                                 </div>
@@ -403,7 +425,7 @@ const PaymentForm = styled.div `
   /* Modal content */
   .modal-content {
     background-color: #fefefe;
-    margin: 3% auto;
+    margin: 2% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 90%; /* Use percentage for responsiveness */
@@ -432,7 +454,7 @@ const PaymentForm = styled.div `
 
   .payment-form {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 0 10%;
   }
 
   .payment-form h2 {
@@ -471,6 +493,25 @@ const PaymentForm = styled.div `
     background-color: white;
     color: #fb5b21;
     border: 2px solid #fb5b21;
+  }
+
+  .quantity{
+    display: flex;
+    gap: 5px;
+    /* justify-content: center; */
+    align-items: center;
+    margin-bottom: 10px;
+
+
+    input{
+      width: 60px;
+      padding: 10px;
+      /* margin-bottom: 15px; */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      /* align-self: center; */
+    }
   }
 
   @media (max-width: 786) {

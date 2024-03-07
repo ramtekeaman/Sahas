@@ -213,7 +213,14 @@ import Coach1 from "./images/CoachesAndMentors/DBarde.jpg";
 import Coach2 from "./images/CoachesAndMentors/KSalve.jpg";
 import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
 
+import 'aos/dist/aos.css'
+import AOS from 'aos'
+
 const Coaches = () => {
+  AOS.init({
+    duration: 650,
+    once: true
+  });
   return (
     <CoachesContainer>
       <div className="container text-center py-5">
@@ -223,7 +230,7 @@ const Coaches = () => {
         </p>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           <div className="col">
-            <div className="card">
+            <div className="card" data-aos="zoom-in">
               <img src={Coach1} className="card-img-top" alt="Coach 1" />
               <div className="card-body">
                 <h5 className="card-title">DHANANJAY BARDE</h5>
@@ -232,7 +239,7 @@ const Coaches = () => {
             </div>
           </div>
           <div className="col">
-            <div className="card">
+            <div className="card" data-aos="zoom-in">
               <img src={Coach2} className="card-img-top" alt="Coach 2" />
               <div className="card-body">
                 <h5 className="card-title">KULDEEP SALVE</h5>
@@ -241,7 +248,7 @@ const Coaches = () => {
             </div>
           </div>
           <div className="col">
-            <div className="card">
+            <div className="card" data-aos="zoom-in">
               <img src={Coach3} className="card-img-top" alt="Coach 3" />
               <div className="card-body">
                 <h5 className="card-title">PRADEEP KUMAR YADAV</h5>

@@ -214,6 +214,7 @@ import RRecreational from './component/RRecreational';
 import Ccontact from './component/Ccontact';
 import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
+// import Test 
 
 import {  
   BrowserRouter as Router,
@@ -233,6 +234,8 @@ import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
 import Loader from './component/Loader';
 import styled from 'styled-components';
+import Slider from './component/Slider';
+import Test from './component/Test';
 
 
 function App() {
@@ -421,7 +424,7 @@ function App() {
           }>
           </Route>
           <Route exact path="/test" element={
-              <Loader />
+              <Slider />
           }>
           </Route>
 

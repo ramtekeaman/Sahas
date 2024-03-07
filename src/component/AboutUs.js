@@ -8,8 +8,15 @@ import img5 from './Gallery Images/gallery_grp.png'
 import mentor1 from './images/CoachesAndMentors/AChaurasia.jpg'
 import mentor2 from './images/CoachesAndMentors/STalmale.jpg'
 
+import 'aos/dist/aos.css'
+import AOS from 'aos'
 
 const AboutUs = () => {
+
+  AOS.init({
+    duration: 650,
+    once: true
+  });
 
     var settings = {
         dots: true,
@@ -28,11 +35,13 @@ const AboutUs = () => {
   return (
     <>
       <Abc>
-        <div id="aboutid">
+        <div id="aboutid" >
         {/* hitesh */}
           <section
             className="hero-wrap hero-wrap-2"
             style={{ backgroundImage: `url(${backgroundImage})` }}
+            data-aos="fade-up"
+     data-aos-duration="2000"
           >
             <div className="overlay"></div>
             <div className="overlay-2"></div>
@@ -62,7 +71,7 @@ const AboutUs = () => {
       <div>
       <div class="container-fluid p-5" style={{ boxShadow: "0px 1px 48px -8px rgba(0,0,0,0.27)" }}>
     <div class="row gx-5">
-        <div class="col-lg-7">
+        <div class="col-lg-7" data-aos="fade-right">
             <div class="mb-4">
                 <h5 class="text-primary text-uppercase">About Us</h5>
                 <h1 class="display-6 text-uppercase mb-0">Welcome to Sahas Cricket Club</h1>
@@ -96,7 +105,7 @@ const AboutUs = () => {
             </div>
         </div>
 
-        <div class="col-lg-5 mb-5 mb-lg-0">
+        <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-left">
             <div class="position-relative h-100">
                 <img class="position-absolute w-100 h-100 rounded img-fluid" src="img/club_img2.jpg" style={{ objectFit: "cover" }} />
             </div>
@@ -110,7 +119,8 @@ const AboutUs = () => {
         
 
 
-            <div style={{background: 'linear-gradient(90deg, rgb(255 255 255) 0%, rgb(168 126 111 / 39%) 35%, rgb(255 255 255 / 5%) 100%)'}}>
+            <div style={{background: 'linear-gradient(90deg, rgb(255 255 255) 0%, rgb(168 126 111 / 39%) 35%, rgb(255 255 255 / 5%) 100%)'}} data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
         <div className="container" id="history" style={{padding:'20px 10px', alignItems:'left'}}>
 
 
@@ -137,7 +147,7 @@ const AboutUs = () => {
 
         <Card>
         {/* <p>𝓣𝔂𝓹𝓮 𝓼𝓸𝓶𝓮𝓽𝓱𝓲𝓷𝓰 𝓽𝓸 𝓼𝓽𝓪𝓻𝓽</p> */}
-        <div className="card">
+        <div className="card" data-aos="zoom-in">
           <div className="card-info">
             <div className="card-avatar">
               <img src='img/mentor.png' alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
@@ -146,7 +156,7 @@ const AboutUs = () => {
             <div className="card-subtitle">Ex- Cricker & Entrepreneur</div>
           </div>
         </div>
-        <div className="card">
+        <div className="card" data-aos="zoom-in">
           <div className="card-info">
             <div className="card-avatar">
             <img src={mentor1} alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>
@@ -155,7 +165,7 @@ const AboutUs = () => {
             <div className="card-subtitle text-center">Ranji Player <br /> Owner Masterstroke sports</div>
           </div>
         </div>
-        <div className="card">
+        <div className="card" data-aos="zoom-in">
           <div className="card-info">
             <div className="card-avatar">
             <img src={mentor2} alt='' className="image-icon img-fluid" style={{width:'100%', height:'100%',}}/>

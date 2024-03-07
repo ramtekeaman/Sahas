@@ -129,6 +129,7 @@ export default function Home({ dbpath }) {
 
   const { about, setAbout, navi, setNavi, ids, setIds, handalaboutclick } =
     useContext(Navigate_Context);
+    
   const [initialRender, setInitialRender] = useState(true);
   useEffect(() => {
     // Check if it's not the initial render
@@ -240,7 +241,7 @@ export default function Home({ dbpath }) {
 
         {showPopUp && (
           <ModalContainer>
-            <div>
+            <div data-aos="zoom-in-up">
               <div className="imgContain">
                 <button onClick={handleClose}>Close</button>
                 <img src={img2} alt="popUp Img" />
@@ -251,75 +252,39 @@ export default function Home({ dbpath }) {
 
         {/* <!-- Carousel Start --> */}
         <MainCarousel>
-          <div class="container-fluid p-0 mb-5" id="default" data-aos="fade-down">
-            <div
-              id="header-carousel"
-              class="carousel slide "
-              data-bs-ride="carousel"
-              data-bs-interval="4000"
-              data-bs-pause="false"
-            >
-              <div class="carousel-inner">
-                {/* First Carousel Item */}
-                <div
-                  class="carousel-item active"
-                  style={{ background: "#696969" }}
-                >
-                  <img
-                    class="w-100 h-100"
-                    src="img/club_carosel1.png"
-                    alt="Image"
-                  />
-                </div>
-
-                {/* Second Carousel Item */}
-                <div
-                  class="carousel-item "
-                  style={{ objectFit: "cover", background: "#696969" }}
-                >
-                  <img
-                    class="w-100 h-100"
-                    src={slide1}
-                    alt="Image"
-                    style={{ maxHeight: "770px" }}
-                  />
-                </div>
-
-                {/* Third Carousel Item */}
-                <div
-                  class="carousel-item "
-                  style={{ objectFit: "cover", background: "#696969" }}
-                >
-                  <img
-                    class="w-100 h-100"
-                    src={slide2}
-                    alt="Image"
-                    style={{ maxHeight: "770px" }}
-                  />
-                </div>
-              </div>
-
-              {/* Carousel Caption - Content outside carousel-items */}
-              <div class="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
-                <div class="p-3" style={{ maxWidth: "900px" }}>
-                  <h1 className="display-2 text-white text-uppercase mb-md-4">
-                    <span className="typing-animation">
-                      Beyond Limits : {text}
-                    </span>
-                  </h1>
-                  <Link
-                    to={"/JoinUs"}
-                    class="btn btn-primary py-md-3 px-md-5 me-3"
-                  >
-                    Join Us
-                  </Link>
-                  <Link to={"/ContactUs"} class="btn btn-light py-md-3 px-md-5">
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            </div>
+        <div data-aos="fade-up" data-aos-duration="2000">
+        <div className="container-fluid p-0 mb-5" id="default" >
+      <div id="header-carousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="false">
+        <div className="carousel-inner">
+          {/* First Carousel Item */}
+          <div className="carousel-item active" style={{ background: "#696969" }}>
+            <img className="w-100 h-100" src="img/club_carosel1.png" alt="Image" />
           </div>
+
+          {/* Second Carousel Item */}
+          <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
+            <img className="w-100 h-100" src={slide1} alt="Image" style={{ maxHeight: "770px" }} />
+          </div>
+
+          {/* Third Carousel Item */}
+          <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
+            <img className="w-100 h-100" src={slide2} alt="Image" style={{ maxHeight: "770px" }} />
+          </div>
+        </div>
+
+        {/* Carousel Caption - Content outside carousel-items */}
+        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
+          <div className="p-3" style={{ maxWidth: "900px" }}>
+            <h1 className="display-2 text-white text-uppercase mb-md-4">
+              <span className="typing-animation">Beyond Limits : {text}</span>
+            </h1>
+            <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
+            <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
         </MainCarousel>
 
         <div
@@ -409,6 +374,7 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow1(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
                   <img
@@ -424,6 +390,8 @@ export default function Home({ dbpath }) {
                     background: "rgba(34, 36, 41, 0.96)",
                     width: "100%",
                   }}
+                  data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                 >
                   <h5 class="text-uppercase text-light">Disha Kasat</h5>
                   {show1 && (
@@ -434,6 +402,8 @@ export default function Home({ dbpath }) {
                         overflow: "auto",
                         scrollbarWidth: "none",
                       }}
+                      data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                     >
                       "Disha Kasat, a right-handed batter from Amravati,
                       Maharashtra, has etched her name in cricket's annals with
@@ -465,6 +435,7 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
                   <img class="img-fluid w-100" src="img/player1.jpg " alt="" />
@@ -472,10 +443,13 @@ export default function Home({ dbpath }) {
                 <div
                   class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
                   style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                  data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                 >
                   <h5 class="text-uppercase text-light">Lokesh Marghade</h5>
                   {show && (
-                    <p style={{ color: "#989898", fontSize: "12.5px" }}>
+                    <p style={{ color: "#989898", fontSize: "12.5px" }} data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                       "The Vidarbha captain, who was born with a twisted ankle,
                       has demonstrated consistency in every competition he
                       participates in recent days. In December 2021, Marghade
@@ -503,6 +477,7 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow2(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
                   <img
@@ -515,6 +490,8 @@ export default function Home({ dbpath }) {
                 <div
                   class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
                   style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                  data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                 >
                   <h5 class="text-uppercase text-light">Siddhi & AArohi</h5>
                   {show2 && (
@@ -525,7 +502,8 @@ export default function Home({ dbpath }) {
                         scrollbarWidth: "none",
                       }}
                     >
-                      <p style={{ color: "#989898", fontSize: "12.5px" }}>
+                      <p style={{ color: "#989898", fontSize: "12.5px" }} data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                         "Siddhi and Arohi, your achievements are truly
                         remarkable! Your hard work, dedication, and perseverance
                         have paid off, bringing immense pride to your family and
@@ -564,6 +542,7 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow3(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
                   <img
@@ -576,6 +555,8 @@ export default function Home({ dbpath }) {
                 <div
                   class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
                   style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                  data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                 >
                   <h5 class="text-uppercase text-light">Pavya and Siddhi</h5>
                   {show3 && (
@@ -593,6 +574,8 @@ export default function Home({ dbpath }) {
                           overflow: "auto",
                           scrollbarWidth: "none",
                         }}
+                        data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                       >
                         "Pavya and Siddhi's selection for the VCA U-19 women’s
                         team is a true reflection of their unwavering
@@ -631,9 +614,10 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow4(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
-                  <img class="img-fluid w-100" src="img/SanketK_player.jpg " alt="" />
+                  <img class="img-fluid w-100" src="img/SanketK_player.jpg " alt="" style={{ height: "340px" }}/>
                 </div>
                 <div
                   class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
@@ -643,12 +627,15 @@ export default function Home({ dbpath }) {
                   {show4 && (
                     <div
                       style={{
-                        minHeight: "272px",
+                        minHeight: "283px",
                         overflow: "auto",
                         scrollbarWidth: "none",
                       }}
+                      data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                     >
-                      <p style={{ color: "#989898", fontSize: "14px" }}>
+                      <p style={{ color: "#989898", fontSize: "12px" }} data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                         "Sanket khedkar played for Vidarbha cricket association for u-14 ,16,19 age group part of BCCI Central zone camp,  Currently Performance Analyst for Indian PD cricket team, And Freelance Analyst for Star sports in ICC cricket World Cup 2023, Ipl 2024 and T-20 world cup 2024."
                       </p>
                     </div>
@@ -669,6 +656,7 @@ export default function Home({ dbpath }) {
                 onMouseLeave={() => {
                   setShow5(false);
                 }}
+                data-aos="zoom-in"
               >
                 <div class="position-relative overflow-hidden rounded">
                   <img
@@ -681,6 +669,8 @@ export default function Home({ dbpath }) {
                 <div
                   class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
                   style={{ background: "rgba(34, 36, 41, 0.96)" }}
+                  data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                 >
                   <h5 class="text-uppercase text-light">Viraj kadbe</h5>
                   {show5 && (
@@ -690,8 +680,11 @@ export default function Home({ dbpath }) {
                         overflow: "auto",
                         scrollbarWidth: "none",
                       }}
+                      data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom"
                     >
-                      <p style={{ color: "#989898", fontSize: "14px" }}>
+                      <p style={{ color: "#989898", fontSize: "14px" }} data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
                         "Viraj Kadbe made history as the first player to represent Vidarbha in the Ranji Trophy and later debuted in the IPL, showcasing talent from the region on a national platform. His journey exemplifies the rise of cricket in Vidarbha, inspiring aspiring cricketers to aim for higher achievements in the sport."
                       </p>
                     </div>
@@ -969,9 +962,9 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                data-aos="fade-right"
+                
               >
-                <div className="card">
+                <div className="card" data-aos="zoom-in-up">
                   <div
                     className="card-image-container"
                     style={{
@@ -1006,9 +999,8 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered1(true)}
                 onMouseLeave={() => setIsHovered1(false)}
-                data-aos="fade-down"
               >
-                <div className="card">
+                <div className="card" data-aos="zoom-in-up">
                   <div
                     className="card-image-container"
                     style={{
@@ -1044,9 +1036,8 @@ export default function Home({ dbpath }) {
                 }}
                 onMouseEnter={() => setIsHovered2(true)}
                 onMouseLeave={() => setIsHovered2(false)}
-                data-aos="fade-left"
               >
-                <div className="card">
+                <div className="card" data-aos="zoom-in-up">
                   <div
                     className="card-image-container"
                     style={{
