@@ -215,6 +215,8 @@ import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
 
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import PlayerCard from './PlayerCard';
+import PlayerSwipper from './PlayerSwipper';
 
 const Coaches = () => {
   AOS.init({
@@ -258,6 +260,7 @@ const Coaches = () => {
           </div>
         </div>
       </div>
+      <PlayerSwipper/>
     </CoachesContainer>
   )
 }
