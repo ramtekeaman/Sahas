@@ -214,6 +214,7 @@ import RRecreational from './component/RRecreational';
 import Ccontact from './component/Ccontact';
 import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
+import Performance from './component/performance';
 // import Test 
 
 import {  
@@ -232,6 +233,9 @@ import Schedule from './component/Schedule';
 import Products from './component/Products';
 import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
+import Loader from './component/Loader';
+import styled from 'styled-components';
+
 
 
 function App() {
@@ -409,10 +413,10 @@ function App() {
               <Coaches />
           }>
           </Route>
-          <Route exact path="/test" element={
+          {/* <Route exact path="/test" element={
               <Slider />
           }>
-          </Route>
+          </Route> */}
 
         </Routes>
          <Footer /> 
