@@ -106,7 +106,8 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                             <div class="nav-link dropdown">
                                 <a class="btn  nav-link dropdown-toggle btn-outline-primary  d-lg-block" style={{width:'100px'}} data-bs-toggle="dropdown">Remark</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item"> Remark</a></Link>
+                                    <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  Record</a></Link>
+                                    <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quatraly Remark</a></Link>
                                     <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact us</a></Link>
                                     <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join us</a></Link>
                                 </div>

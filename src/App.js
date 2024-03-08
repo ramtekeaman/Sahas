@@ -231,6 +231,7 @@ import Schedule from './component/Schedule';
 import Products from './component/Products';
 import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
+import Performance from './component/performance';
 
 
 function App() {
@@ -291,6 +292,10 @@ function App() {
           }></Route> */}
           <Route exact path="/Remark" element={
             <Remark dbpath={dbpath} />
+          }></Route>
+{/* Qutraly Data */}
+<Route exact path="/Performance" element={
+            <Performance dbpath={dbpath} />
           }></Route>
 
           <Route exact path="/coaching" element={
