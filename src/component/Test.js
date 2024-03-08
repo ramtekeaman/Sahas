@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PlayerCard = () => {
+const Test = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const PlayerCard = () => {
   )
 }
 
-export default PlayerCard
+export default Test
