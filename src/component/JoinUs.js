@@ -2,9 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import ShowFooter_Context from './ShowFooter_Context';
 import styled from 'styled-components';
-
+import 'aos/dist/aos.css'
+import AOS from 'aos'
 
 const JoinUs = () => {
+  AOS.init({
+    duration: 650,
+    once: true
+  });
+  
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [mobile, setmobile] = useState('');
@@ -71,7 +77,7 @@ const JoinUs = () => {
     <div className="row justify-content-center">
 
       <div className="col-md-6">
-      <div className="container">
+      <div className="container" data-aos="fade-right">
       <h1 className="text-center mt-5 mb-4">Why to Join Sahas Cricket Club ?</h1>
       <br /><br />
       <div className="row">
@@ -94,7 +100,7 @@ const JoinUs = () => {
       </div>
     </div>
       </div>
-      <div className="col-md-6" >
+      <div className="col-md-6" data-aos="fade-left">
         <form onSubmit={handleSubmit} className="p-5 border rounded shadow-lg bg-light" style={{marginTop:'30px'}} >
           <h2 className="mb-4 text-center">Join Us</h2>
           <div className="mb-3">

@@ -15,8 +15,17 @@ import img11 from './Hero Gallery/sahas11.jpg'
 import img12 from './Hero Gallery/sahas12.jpg'
 
 import vid1 from './Videos/sahas_vid.mp4'
+import { Link } from 'react-router-dom'
+
+
+import 'aos/dist/aos.css'
+import AOS from 'aos'
 
 const Gallery = () => {
+    AOS.init({
+        duration: 650,
+        once: true
+      });
 
 
     const [selectedRadio, setSelectedRadio] = useState('check1');
@@ -36,6 +45,22 @@ const Gallery = () => {
 
   return (
     <Gallery_Container>
+    <div className='container' style={{height:'60px', margin:'0 1px',marginLeft:'auto',marginRight:'auto', display:'flex', alignItems:'start'}}>
+                <div className="col-md-9 ftco-animate" style={{display:'flex', position:'relative', alignItems:'start'}}>
+                  <div className="">
+                  <span className="" style={{display:'flex', background:'#f1f1f1', padding: '1px 20px 7px 20px', alignItems:'center'}}>
+                    <span className="mr-2">
+                      <Link to={'/'}>
+                        <span>Home <i className="fa fa-chevron-right"></i></span>
+                      </Link>
+                    </span>{" "}
+                    <span className='a'>
+                      Gallery <i className="fa fa-chevron-right"></i>
+                    </span>
+                  </span>
+                  </div>
+                </div>
+    </div>
 
 
 <div>
@@ -59,19 +84,22 @@ const Gallery = () => {
 
         <div className="photo-gallery">
             {['check1', 'check2'].includes(selectedRadio) && radioImageMap[selectedRadio].map((img, index) => (
-            <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }}>
+            <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }} data-aos="fade-up"
+     data-aos-duration="2000">
                 <img src={img} alt={`sahas${index + 1}`} />
             </div>
             ))}
 
             {radioImageMap[selectedRadio] === 'check3'  && radioImageMap[selectedRadio].map((vid, index) => (
-              <div className="pic" key={index} style={{boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray'}}>
+              <div className="pic" key={index} style={{boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray'}} data-aos="fade-up"
+     data-aos-duration="2000">
                 <video src={vid} alt={`sahas${index + 1}`} />
               </div>
             ))}
 
             {selectedRadio === 'check3' && radioVideoMap[selectedRadio].map((vid, index) => (
-  <div className="pic" key={index} style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px', border: '1px solid gray' }}>
+  <div className="pic" key={index} style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px', border: '1px solid gray' }} data-aos="fade-up"
+     data-aos-duration="2000">
   <video src={vid} alt={`sahas${index + 1}`} controls={true}  style={{width:'100%', height:'400px', objectFit:'contain'}}/>
   </div>
 ))}
@@ -148,7 +176,7 @@ export default Gallery;
 
 const Gallery_Container = styled.div `
 
-margin: 20px 0;
+margin: 0 0 40px 0;
 
 .photo-gallery {
     display: grid;

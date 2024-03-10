@@ -3,7 +3,15 @@ import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ShowFooter_Context from "./ShowFooter_Context";
+import 'aos/dist/aos.css'
+import AOS from 'aos'
+
 const ContactUs = () => {
+  AOS.init({
+    duration: 650,
+    once: true
+  });
+
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -94,7 +102,7 @@ const ContactUs = () => {
       <div className="row justify-content-center">
         <div className="col-md-6">
           <section>
-            <div className="container">
+            <div className="container" data-aos="fade-right">
               <h1 className="text-center">Contact Us</h1>
               <p className="text-center text-dark">
               Thank you for your interest in Sahas Cricket Club! Whether you're a budding cricketer seeking top-tier training or a seasoned enthusiast looking to hone your skills, we're here to support your cricketing journey every step of the way.
@@ -178,7 +186,7 @@ const ContactUs = () => {
         </div>
 
         <div className="col-md-6" style={{maxWidth:'700px', height:'500px'}}>
-          <div className="embed-responsive embed-responsive-16by9">
+          <div className="embed-responsive embed-responsive-16by9" data-aos="fade-left">
             <iframe
               title="Google Map"
               className="embed-responsive-item"

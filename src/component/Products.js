@@ -26,12 +26,6 @@ const Products = () => {
     const [quantity, setQuantity] = useState(1);
     const [showFP, setShowFP] = useState(false)
 
-    const handleFinalPrice = (e) => {
-      setShowFP(true)
-      const quantity = e.target.value;
-      setFinalPrice(price * quantity)
-    }
-
     const products = [
         {
             id: 1,
@@ -81,16 +75,26 @@ const Products = () => {
         setShowPaymentForm(false);
     };
 
-    const incrementQuantity = () => {
-        setQuantity(quantity + 1);
-        setFinalPrice(selectedProduct.price * formData.quantity);
+    const [count, setCount] = useState(1); // Initial count value
+    const decrement = () => {
+      if (count > 1) {
+        setCount(count - 1);
+        const fp = selectedProduct.price * (count-1);
+      console.log(fp);
+      setFinalPrice(fp)
+        setShowFP(true)
+        
+      }else(
+        setCount(1)
+      )
     };
 
-    const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-            setFinalPrice(selectedProduct.price * quantity);
-        }
+    const increment = () => {
+      setCount(count + 1);
+      const fp = selectedProduct.price * (count+1);
+      console.log(fp);
+      setFinalPrice(fp)
+      setShowFP(true)
     };
 
     const renderProductCard = (product) => (
@@ -167,8 +171,13 @@ const Products = () => {
                                             <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
                                             <label>Price:</label>
                                             <input type="text" value={showFP ? finalPrice : price} readOnly />
-                                            <div className='quantity'><label htmlFor="quantity">Quantity :</label>
-                                            <input type="number" id='quantity' name='quantity' min={'1'} defaultValue={'1'} onChange={handleFinalPrice}/></div>
+                                            <div className='card__wrapper'><label htmlFor="quantity">Quantity :</label>
+                                            <div className="card__counter">
+                                              <button className="card__btn" onClick={decrement}>-</button>
+                                              <div className="card__counter-score">{count}</div>
+                                              <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+                                            </div>
+                                            </div>  
                                             <button type="submit" className="btn btn-primary">Submit Payment</button>
 
                                         </form>
@@ -513,6 +522,50 @@ const PaymentForm = styled.div `
       /* align-self: center; */
     }
   }
+
+  .card__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  }
+
+  .card__counter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding: 5px;
+  background: #F7F7F7;
+  border-radius: 50px;
+  border: 1px solid #fb5b21;
+}
+
+  .card__counter-score, .card__btn {
+  font-weight: 700;
+  font-size: 22px;
+  color: #fb5b21;
+  /* color: var(--main-color); */
+  text-align: center;
+}
+
+.card__btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  color: #fb5b21;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__btn-plus {
+  background: var(--bg-color);
+} 
 
   @media (max-width: 786) {
     /* Adjust modal content width for smaller screens */

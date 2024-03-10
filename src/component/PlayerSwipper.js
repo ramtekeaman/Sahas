@@ -6,6 +6,9 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import styled from 'styled-components';
 
+import img13 from "./images/PavyaAndSiddhi.png";
+import 'aos/dist/aos.css'
+import AOS from 'aos'
 // Assuming playersData is the array of cards you provided
 
 const playersData = [
@@ -26,7 +29,7 @@ const playersData = [
     },
     {
       name: "Pavya and Siddhi",
-      imgSrc: "./images/PavyaAndSiddhi.png",
+      imgSrc: img13,
       description: "Pavya and Siddhi's selection for the VCA U-19 women’s team is a true reflection of their unwavering dedication, exceptional talent, and relentless hard work. Their journey to this point has been paved with countless sacrifices, hours of intense practice, and an unyielding commitment to excellence. Their achievement serves as a beacon of inspiration for aspiring athletes everywhere, showcasing the power of resilience and determination in the pursuit of one's dreams. As they step onto this new stage in their athletic careers, we stand in awe of their accomplishments and offer our sincerest congratulations. May their success continue to fuel their passion and drive as they navigate the challenges and triumphs that lie ahead. We are proud to celebrate their achievements and eagerly anticipate the remarkable feats they will undoubtedly accomplish in the future. Here's to Pavya and Siddhi, two shining examples of perseverance and triumph in the world of sports."
     },
     {
@@ -42,90 +45,83 @@ const playersData = [
     // Add more player objects as needed
   ];
 
+
 const PlayerSwipper = () => {
-  const [show, setShow] = useState(false);
+    AOS.init({
+        duration: 650,
+        once: true
+      });
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    // <Swiper
-    //   modules={[Navigation, Pagination, Autoplay]}
-    //   grabCursor={true}
-    //   navigation={true}
-    //   autoplay={{delay:'3000'}}
-    //   pagination={true}
-    //   breakpoints={{
-    //     320: {
-    //       slidesPerView: 1,
-    //       spaceBetween: 10,
-    //     },
-    //     768: {
-    //       slidesPerView: 2,
-    //       spaceBetween: 20,
-    //     },
-    //   }}
-    //   style={{ marginLeft: '80px' }}
-    // >
-    //   {playersData.map((player, index) => (
-    //     <SwiperSlide key={index}>
-    //       <div className="team-item position-relative" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
-    //         <div className="position-relative overflow-hidden rounded">
-    //           <img className="img-fluid w-100" src={player.imgSrc} alt={player.name} style={{ height: '340px' }} />
-    //         </div>
-    //         <div className="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info" style={{ background: 'rgba(34, 36, 41, 0.96)' }}>
-    //           <h5 className="text-uppercase text-light">{player.name}</h5>
-    //           {show && (
-    //             <p style={{ color: '#989898', fontSize: '12.5px' }}>
-    //               {player.description}
-    //             </p>
-    //           )}
-    //         </div>
-    //       </div>
-    //     </SwiperSlide>
-    //   ))}
-    // </Swiper>
-    <SwiperContent className='container'>
-    <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      grabCursor={true}
-      navigation={true}
-      autoplay={{delay:'5000'}}
-      pagination={true}
-      breakpoints={{
-        0: {
+    <SwiperContent className='container' data-aos="fade-up" data-aos-duration="2000">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        grabCursor={true}
+        navigation={true}
+        autoplay={{ delay: '6000' }}
+        pagination={true}
+        breakpoints={{
+          0: {
             slidesPerView: 1,
             spaceBetween: 0,
           },
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: 1,
-          spaceBetween: 20,
-        },
-        992: {
-          slidesPerView: 3, // Show 3 cards
-          spaceBetween: 10, // Reduce space between cards
-        },
-      }}
-    >
-      {playersData.map((player, index) => (
-        <SwiperSlide key={index}>
-          <div className="team-item position-relative cards" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} style={{width:'70%' }}>
-            <div className="position-relative overflow-hidden rounded">
-              <img className="img-fluid w-100" src={player.imgSrc} alt={player.name} style={{ height: '340px',}} />
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          992: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+        }}
+      >
+        {playersData.map((player, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="team-item position-relative cards"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              style={{ width: '70%' }}
+              data-aos="zoom-in"
+
+            >
+              <div className="position-relative overflow-hidden rounded">
+                <img
+                  className="img-fluid w-100"
+                  src={player.imgSrc}
+                  alt={player.name}
+                  style={{ height: '340px' }}
+                />
+              </div>
+              <div
+                className="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
+                style={{ background: 'rgba(34, 36, 41, 0.96)' }}
+              >
+                <h5 className="text-uppercase text-light">{player.name}</h5>
+                {hoveredIndex === index && (
+                    <div
+                      style={{
+                        height: "260px",
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                      }}
+                      data-aos="fade-up" data-aos-duration="1000"
+                    >
+                    <p style={{ color: '#989898', fontSize: '12.5px' }}>
+                        {player.description}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info" style={{ background: 'rgba(34, 36, 41, 0.96)' }}>
-              <h5 className="text-uppercase text-light">{player.name}</h5>
-              {show && (
-                <p style={{ color: '#989898', fontSize: '12.5px' }}>
-                  {player.description}
-                </p>
-              )}
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </SwiperContent>
   );
 };
@@ -143,7 +139,7 @@ const SwiperContent = styled.div `
   }
 
   .cards {
-    width: 90%;
+    width: 200px;
   }
 
   .swiper-wrapper {
@@ -163,6 +159,9 @@ const SwiperContent = styled.div `
 
     .swiper-horizontal {
       width: 100%; /* Adjust width for smaller screens */
+    }
+    .cards{
+        width: 250px;
     }
   }
 `;
