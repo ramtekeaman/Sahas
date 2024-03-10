@@ -17,6 +17,10 @@ export default function Coaching({ dbpath }) {
   });
   const [attendanceOptions, setAttendanceOptions] = useState({});
   const [matchesPlayed, setMatchesPlayed] = useState({});
+  const [Wicket, setWicket] = useState({});
+  const [runscore, setrunscore] = useState({});
+
+
 
   const loadUser = async (query) => {
     try{    //---new code---//
@@ -51,6 +55,17 @@ export default function Coaching({ dbpath }) {
         [field]: value,
       },
     }));
+    setWicket((prevWicket) => ({
+      ...prevWicket,
+      [rowId]: field === 'Wicket' ? parseInt(value) : prevWicket[rowId],
+    }));
+
+    setrunscore((prevrunscore) => ({
+      ...prevrunscore,
+      [rowId]: field === 'runscore' ? parseInt(value) : prevrunscore[rowId],
+    }));
+  
+  
 
     setMatchesPlayed((prevMatchesPlayed) => ({
       ...prevMatchesPlayed,
@@ -81,7 +96,11 @@ export default function Coaching({ dbpath }) {
 
     const dataToSend = {
       attendanceOptions: attendanceOptions,
+      Wicket: Wicket,
+      runscore:runscore,
+
       matchesPlayed: matchesPlayed,
+      
       remark: remarkText,
       users: user.map(res => ({
         id: res.id,
@@ -245,7 +264,11 @@ export default function Coaching({ dbpath }) {
               <th scope='col'>Timing</th>
               {/* <th scope='col'>Coach</th> */}
               <th scope='col'>Present / Absent</th>
+              <th scope='col'>Wicket</th>
+              <th scope='col'>Run Score</th>
+
               <th scope='col'>Matches Played</th>
+
               <th scope='col'>Remark</th>
             </tr>
           </thead>
@@ -293,6 +316,29 @@ export default function Coaching({ dbpath }) {
                   <input
                     type='number'
                     min={0}
+                    value={remarkText[res.id]?.Wicket || ''}
+                    style={{ width: '70px' }}
+                    onChange={(e) =>
+                      handleRemarkChange(res.id, 'Wicket', parseInt(e.target.value))
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type='number'
+                    min={0}
+                    value={remarkText[res.id]?.runscore || ''}
+                    style={{ width: '70px' }}
+                    onChange={(e) =>
+                      handleRemarkChange(res.id, 'runscore', parseInt(e.target.value))
+                    }
+                  />
+                </td>
+                {/* New Code Here */}
+                <td>
+                  <input
+                    type='number'
+                    min={0}
                     value={remarkText[res.id]?.matchesPlayed || ''}
                     style={{ width: '70px' }}
                     onChange={(e) =>
@@ -300,6 +346,7 @@ export default function Coaching({ dbpath }) {
                     }
                   />
                 </td>
+                {/* NEW Hai uper ka */}
                 <td>
                   <input
                     type='text'

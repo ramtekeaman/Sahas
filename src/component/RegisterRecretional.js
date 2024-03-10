@@ -76,6 +76,7 @@ export default function RegisterRecretional({dbpath}) {
   const [Gage, setGage] = useState('');
   const [vca, setvca] = useState('');
   const [validtill, setValidTill] = useState('');
+  const[role,setrole]=useState('');
 
 
   //new code AR
@@ -107,8 +108,8 @@ export default function RegisterRecretional({dbpath}) {
 } else if (vca.length === 0) {
   alert('VCA ID  has been left blank!'); 
   // New code
-  } else if (sport.length === 0) {
-      alert('Sports/Game has been left blank!');
+  } else if (role.length === 0) {
+      alert('Role has been left blank!');
     } else if (time.length === 0) {
       alert('Timing has been left blank!');
     } else {
@@ -127,6 +128,8 @@ export default function RegisterRecretional({dbpath}) {
 
       fData.append('clg', clg);
       fData.append('sport', sport);
+      fData.append('role', role);
+
       fData.append('timing', time);
       fData.append('joiningDate', joiningDate);
       fData.append('feestatus', feestatus);
@@ -218,17 +221,17 @@ export default function RegisterRecretional({dbpath}) {
             <label className="form-label">School/College (if any)</label>
             <input type="text" className="form-control" id="tclg" onChange={(e) => setClg(e.target.value)} />
           </div> */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label">Sport/Game Opted<span style={{color:'red'}}>*</span></label>
             <div className="input-group mb-3">
               <select className="form-select" id="inputGroupSelect01" value={sport} onChange={(e) => setSport(e.target.value)}>
                 <option value="">Choose...</option>
-                <option value="Badminton">Badminton</option>
-                <option value="Sketing">Skating</option>
-                <option value="Zumba">Zumba</option>
+                <option value="Cricket">Cricket</option>
+              
               </select>
             </div>
-          </div>
+          </div> */}
+          
           <div className="mb-3">
             <label className="form-label">Timing Opted<span style={{color:'red'}}>*</span></label>
             <div className="timeflex">
@@ -259,6 +262,26 @@ export default function RegisterRecretional({dbpath}) {
               </div>
             </div>
           </div>
+          <div className="mb-3">
+              <label className="form-label">
+                Role<span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="input-group mb-3">
+                <select
+                  className="form-select"
+                  id="inputGroupSelect01"
+                  value={role}
+                  onChange={(e) => setrole(e.target.value)}
+                >
+                  <option value="" hidden>
+                    Choose...
+                  </option>
+                  <option value="All Rounder">All Rounder</option>
+                  <option value="Batsman">Batsman</option>
+                  <option value="Bowler ">Bowler</option>
+                </select>
+              </div>
+            </div>
           <div className="mb-3">
             <label className="form-label">Payment Status<span style={{color:'red'}}>*</span></label>
             <div className="input-group mb-3">

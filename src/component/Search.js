@@ -160,99 +160,7 @@ export default function Search({dbpath}) {
       }
       
     };
-    // const onSearch = () => {
-
-    //   var todayDate = new Date().toISOString().slice(0, 10);
-    //   console.log(todayDate);
-    //   var nextWeekDate = nextWeekDateFunc(todayDate);
-    //   var query = ''; //new code;
-    //   //console.log(nextWeekDate);
-
-    //   if(Gage === "Under-19")   //new code;
-    //   {
-    //     query += `AND ageGroup = "${Gage}"`;
-    //   }   //new code
-      
-    //   function nextProcess(query){  //new code;
-    //     loadUser(query);
-    //   } //new code;
-
-    //   if(type1==='1')
-    //   {
-
-    //     //recreational
-    //     if(type2==='1')
-    //     {
-    //       query='select * from tregister where id ="'+filter1+'" AND id != 0;';
-    //       nextProcess(query);
-    //     }
-    //     else if(type2==='2')
-    //     {
-    //         query='select * from rregister where id ="'+filter1+'" AND id != 0;';
-    //         nextProcess(query);
-    //     }
-    //     else if(type2==='3')
-    //     {
-          
-    //     }
-    //     else
-    //     {
-    //       alert("Please select the proper action");
-    //     }
-    //   }
-    //   else if(type1==='2')
-    //   {
-    //     //coaching
-    //     if(type2==='1')
-    //     {
-    //       query='select * from tregister where name LIKE "%'+filter1+'%" AND id != 0;';
-    //       nextProcess(query);
-    //     }
-    //     else if(type2==='2')
-    //     {
-    //         query='select * from tregister where name LIKE "%'+filter1+'%" AND id != 0;';
-    //         nextProcess(query);
-    //     }
-    //     else if(type2==='3')
-    //     {
-        
-    //     }
-    //     else
-    //     {
-    //       alert("Please select the proper action");
-          
-    //     }
-    //   }
-    //   else if(type1==='3')
-    //   {
-    //     //coaching
-    //     if(type2==='1')
-    //     {
-    //       query='select * from tregister where mobile LIKE '+filter1+' AND id != 0;';
-    //       nextProcess(query);
-    //     }
-    //     else if(type2==='2')
-    //     {
-    //         query='select * from tregister where mobile LIKE '+filter1+' AND id != 0;';
-    //         nextProcess(query);
-    //     }
-    //     else if(type1==='3')
-    //     {
-        
-    //     }
-    //     else
-    //     {
-    //       alert("Please select the proper action");
-          
-    //     }
-    //   }
-      
-    //   else{
-    //     alert("Please select the proper action");
-    //   }
-
-    // }
-
+    
     function nextProcess(query)
     {
       /* alert(query); */
@@ -340,8 +248,8 @@ console.log(type1)
                 <th scope="col">Residential No.</th>
                 <th scope="col">Date of birth</th>
                 <th scope="col">Age Group</th>
-                <th scope="col">Sport</th>
-                <th scope="col">School/Clg</th>
+                <th scope="col">Role</th>
+                {/* <th scope="col">School/Clg</th> */}
                 <th scope="col">Timing</th>
                 <th scope="col">Joining</th>
                 <th scope="col">Valid Till</th>
@@ -362,8 +270,8 @@ console.log(type1)
                         <td>{res.rphno}</td>    
                         <td>{res.dob}</td>
                         <td>{res.Gage}</td>
-                        <td>{res.sport}</td>
-                        <td>{res.clg}</td>                        
+                        <td>{res.role}</td>
+                        {/* <td>{res.clg}</td>                         */}
                         <td>{res.timing}</td> 
                         <td>{res.joiningdate}</td>  
                         <td>{res.validtill}</td>   

@@ -214,6 +214,7 @@ import RRecreational from './component/RRecreational';
 import Ccontact from './component/Ccontact';
 import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
+import Performance from './component/performance';
 // import Test 
 
 import {  
@@ -234,8 +235,7 @@ import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
 import Loader from './component/Loader';
 import styled from 'styled-components';
-import Slider from './component/Slider';
-import Test from './component/Test';
+
 
 
 function App() {
@@ -308,6 +308,10 @@ function App() {
           }></Route> */}
           <Route exact path="/Remark" element={
             <Remark dbpath={dbpath} />
+          }></Route>
+{/* Qutraly Data */}
+<Route exact path="/Performance" element={
+            <Performance dbpath={dbpath} />
           }></Route>
 
           <Route exact path="/coaching" element={
@@ -409,10 +413,10 @@ function App() {
               <Coaches />
           }>
           </Route>
-          <Route exact path="/test" element={
+          {/* <Route exact path="/test" element={
               <Slider />
           }>
-          </Route>
+          </Route> */}
 
         </Routes>
          <Footer /> 

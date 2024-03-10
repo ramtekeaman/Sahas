@@ -68,7 +68,7 @@ export default function ViewCoaching({ dbpath }) {
                             <th scope="col">Residential Ph.No.</th>
                             <th scope="col">Date of birth</th>
                             <th scope="col">Age Group</th>
-                            <th scope="col">Sport</th>
+                            <th scope="col">Role</th>
                             <th scope="col">Timing</th>
                             <th scope="col">Joining</th>
                             <th scope="col">Valid Till</th>
@@ -89,8 +89,10 @@ export default function ViewCoaching({ dbpath }) {
                                 <td>{res.rphno}</td>
                                 <td>{res.dob}</td>
                                 <td>{res.Gage}</td>
+                                <td>{res.role}</td>
+
                                 
-                                <td>{res.sport}</td>
+                                {/* <td>{res.sport}</td> */}
                                 <td>{res.timing}</td>
                                 <td>{res.joiningdate}</td>
                                 <td>{res.validtill}</td>

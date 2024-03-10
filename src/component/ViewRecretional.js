@@ -68,8 +68,8 @@ export default function ViewRecretional({dbpath}) {
                   <th scope="col">Residential No.</th>
                   <th scope="col">DOB</th>
                   <th scope="col">Age Group</th>
-                  <th scope="col">College </th>
-                  <th scope="col">Sport</th>
+                  {/* <th scope="col">College </th> */}
+                  <th scope="col">Role</th>
                   <th scope="col">Timing</th>
                   <th scope="col">Joining Date</th>
                   <th scope="col">Valid Till</th>
@@ -91,8 +91,10 @@ export default function ViewRecretional({dbpath}) {
                         <td>{res.rphno}</td>    
                         <td>{res.dob}</td>
                         <td>{res.Gage}</td>
-                        <td>{res.clg}</td> 
-                        <td>{res.sport}</td>              
+                        {/* <td>{res.clg}</td>  */}
+                        <td>{res.role}</td> 
+
+                        {/* <td>{res.sport}</td>               */}
                         <td>{res.timing}</td> 
                         <td>{res.joiningdate}</td> 
                         <td>{res.validtill}</td> 
