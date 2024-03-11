@@ -3,72 +3,80 @@ import img1 from './images/Bas-Bat.jpg';
 import backgroundImage from './images/ProductSec.jpg';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import 'aos/dist/aos.css'
-import AOS from 'aos'
-
-
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 const Products = () => {
   AOS.init({
     duration: 650,
-    once: true
+    once: true,
   });
-  
-    const [showPaymentForm, setShowPaymentForm] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        address: '',
-        quantity:1,
-    });
-    const [finalPrice, setFinalPrice] = useState();
-    const [price, setPrice] = useState();
-    const [quantity, setQuantity] = useState(1);
-    const [showFP, setShowFP] = useState(false)
 
-    const products = [
-        {
-            id: 1,
-            name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VERY)",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-            price: 99.88,
-            imgSrc: img1,
-        },
-        {
-            id: 2,
-            name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-            price: 69,
-            imgSrc: img1
-        },
-        {
-            id: 3,
-            name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-            description: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-            price: 169,
-            imgSrc: img1
-        }
-    ];
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    address: '',
+    quantity: '',
+  });
+  const [finalPrice, setFinalPrice] = useState();
+  const [count, setCount] = useState(1);
 
-    const handlePayNowClick = (product) => {
-        setSelectedProduct(product);
-        setPrice(product.price);
-        setShowPaymentForm(true);
-        setShowFP(false)
-    };
+  const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState(1);
+  const [showFP, setShowFP] = useState(false);
+  const [paymentFormSubmitted, setPaymentFormSubmitted] = useState(false);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        // setFinalPrice(selectedProduct.price * formData.quantity);
-    };
+  const products = [
+    {
+      id: 1,
+      name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VARY)",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      price: 99.88,
+      imgSrc: img1,
+    },
+    {
+      id: 2,
+      name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      price: 69,
+      imgSrc: img1,
+    },
+    {
+      id: 3,
+      name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
+      description: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
+      price: 169,
+      imgSrc: img1,
+    },
+  ];
 
-    // Inside the handleSubmit function
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      // Send only the final price to productmail.php
+  const handlePayNowClick = (product) => {
+    setSelectedProduct(product);
+    setPrice(product.price);
+    setShowPaymentForm(true);
+    setShowFP(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (paymentFormSubmitted) {
+      console.log("Payment form already submitted. Skipping...");
+      return;
+    }
+
+    console.log("Submitting payment form...");
+
+    try {
+      setPaymentFormSubmitted(true);
+
       const response = await fetch("http://localhost/test/productmail.php", {
         method: "POST",
         headers: {
@@ -79,14 +87,12 @@ const Products = () => {
           email: formData.email,
           address: formData.address,
           quantity: formData.quantity,
-          finalprice: finalPrice, // Use finalPrice directly
+          finalprice: showFP ? finalPrice : finalPrice,
         }),
       });
-    
-      // Handle the response if needed
-      console.log(response);
-    
-      // Reset form data and close the payment form
+
+      console.log("Response from server:", response);
+
       setFormData({
         name: "",
         email: "",
@@ -94,128 +100,127 @@ const Products = () => {
         quantity: "1",
       });
       setShowPaymentForm(false);
-    };
-    
-    
+    } catch (error) {
+      console.error("Error submitting payment form:", error);
+    }
+  };
 
-    const [count, setCount] = useState(1); // Initial count value
-    const decrement = () => {
-      if (count > 1) {
-        setCount(count - 1);
-        const fp = selectedProduct.price * (count-1);
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
+      const fp = selectedProduct.price * (count - 1);
       console.log(fp);
-      setFinalPrice(fp)
-        setShowFP(true)
-        
-      }else(
-        setCount(1)
-      )
-    };
+      setFinalPrice(fp);
+      setShowFP(true);
+    } else {
+      setCount(1);
+    }
+  };
 
-    const increment = () => {
-      setCount(count + 1);
-      const fp = selectedProduct.price * (count+1);
-      console.log(fp);
-      setFinalPrice(fp)
-      setShowFP(true)
-    };
+  const increment = () => {
+    setCount(count + 1);
+    const fp = selectedProduct.price * (count + 1);
+    console.log(fp);
+    setFinalPrice(fp);
+    setShowFP(true);
+  };
 
-    const renderProductCard = (product) => (
-        <div className="card" key={product.id}>
-            <img src={product.imgSrc} alt="Product" />
-            <div>
-                <h1>{product.name}</h1>
-                <p className="product-description">{product.description}</p>
-                <div className="price">Rs.<span>{product.price}</span></div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
-                </div>
-            </div>
+  const renderProductCard = (product) => (
+    <div className="card" key={product.id}>
+      <img src={product.imgSrc} alt="Product" />
+      <div>
+        <h1>{product.name}</h1>
+        <p className="product-description">{product.description}</p>
+        <div className="price">Rs.<span>{product.price}</span></div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
         </div>
-    );
-// Aman Ramteke
-    return (
-        <>
-            <Abc>
-                <div id="aboutid">
-                    <section
-                        className="hero-wrap hero-wrap-2"
-                        style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)' }}
-                        data-aos="fade-up"
-     data-aos-duration="2000"
-                    >
-                        <div className="overlay"></div>
-                        <div className="overlay-2"></div>
-                        <div className="container">
-                            <div className="row no-gutters slider-text align-items-center justify-content-center">
-                                <div className="col-md-9 ftco-animate pb-5 text-center">
-                                    <p className="breadcrumbs">
-                                        <span className="mr-2">
-                                            <Link to={'/'}>
-                                                Home <i className="fa fa-chevron-right"></i>
-                                            </Link>
-                                        </span>{" "}
-                                        <span>
-                                            Product <i className="fa fa-chevron-right"></i>
-                                        </span>
-                                    </p>
-                                    <h1 className="mb-0 bread">Products</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <br />
-                    <br />
-                </div>
-            </Abc>
+      </div>
+    </div>
+  );
 
-            <ProductContainer>
-                <div className="container">
-                    <div className="row">
-                        <h2>Products</h2>
-                        <div className="cards" data-aos="fade-up"
-     data-aos-anchor-placement="center-bottom">
-                            {products.map(renderProductCard)}
-                        </div>
-                    </div>
-                    {showPaymentForm && selectedProduct && (
-                        <PaymentForm>
-                            <div id="paymentModal" className="modalC"  data-aos="flip-up">
-                                <div className="modal-content">
-                                    <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                                    <div className="payment-form">
-                                        <h2>Payment Form</h2>
-                                        <form id="paymentForm" onSubmit={handleSubmit}>
-                                            <label>Name:</label>
-                                            <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                                            <label>Email:</label>
-                                            <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                                            <label>Address:</label>
-                                            <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
-                                            <label>Price:</label>
-                                            <input type="text" value={showFP ? finalPrice : price} readOnly />
-                                            <div className='card__wrapper'><label htmlFor="quantity">Quantity :</label>
-                                            <div className="card__counter">
-                                              <button className="card__btn" onClick={decrement}>-</button>
-                                              <div className="card__counter-score">{count}</div>
-                                              <button className="card__btn card__btn-plus" onClick={increment}>+</button>
-                                            </div>
-                                            </div>  
-                                            <button type="submit" className="btn btn-primary">Submit Payment</button>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </PaymentForm>
-                    )}
+  return (
+    <>
+      <Abc>
+        <div id="aboutid">
+          <section
+            className="hero-wrap hero-wrap-2"
+            style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)' }}
+            data-aos="fade-up"
+            data-aos-duration="2000"
+          >
+            <div className="overlay"></div>
+            <div className="overlay-2"></div>
+            <div className="container">
+              <div className="row no-gutters slider-text align-items-center justify-content-center">
+                <div className="col-md-9 ftco-animate pb-5 text-center">
+                  <p className="breadcrumbs">
+                    <span className="mr-2">
+                      <Link to={'/'}>
+                        Home <i className="fa fa-chevron-right"></i>
+                      </Link>
+                    </span>{" "}
+                    <span>
+                      Product <i className="fa fa-chevron-right"></i>
+                    </span>
+                  </p>
+                  <h1 className="mb-0 bread">Products</h1>
                 </div>
-            </ProductContainer>
-        </>
-    );
+              </div>
+            </div>
+          </section>
+          <br />
+          <br />
+        </div>
+      </Abc>
+
+      <ProductContainer>
+        <div className="container">
+          <div className="row">
+            <h2>Products</h2>
+            <div className="cards" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+              {products.map(renderProductCard)}
+            </div>
+          </div>
+          {showPaymentForm && selectedProduct && (
+            <PaymentForm>
+              <div id="paymentModal" className="modalC" data-aos="flip-up">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                  <div className="payment-form">
+                    <h2>Payment Form</h2>
+                    <form id="paymentForm" onSubmit={handleSubmit}>
+                      <label>Name:</label>
+                      <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
+                      <label>Email:</label>
+                      <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
+                      <label>Address:</label>
+                      <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
+                      <label>Price:</label>
+                      <input type="text" value={showFP ? finalPrice : price} readOnly />
+                      <div className='card__wrapper'>
+                        <label htmlFor="quantity">Quantity :</label>
+                        <div className="card__counter">
+                          <button className="card__btn" onClick={decrement}>-</button>
+                          <div className="card__counter-score">{count}</div>
+                          <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+                        </div>
+                      </div>
+                      <button type="submit" className="btn btn-primary">Submit Payment</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </PaymentForm>
+          )}
+        </div>
+      </ProductContainer>
+    </>
+  );
 }
 
 export default Products;
+
 
 const ProductContainer  = styled.div`
 .container{
