@@ -47,19 +47,19 @@ const AboutUs = () => {
             <div className="overlay-2"></div>
             <div className="container">
               <div className="row no-gutters slider-text align-items-center justify-content-center">
-                <div className="col-md-9 ftco-animate pb-5 text-center">
-                  <p className="breadcrumbs">
-                    <span className="mr-2">
-                      <Link to={'/'}>
-                        Home <i className="fa fa-chevron-right"></i>
-                      </Link>
-                    </span>{" "}
-                    <span>
-                      About us <i className="fa fa-chevron-right"></i>
-                    </span>
-                  </p>
-                  <h1 className="mb-0 bread">About Us</h1>
-                </div>
+              <div className="col-md-9 ftco-animate pb-5 text-center">
+                                    <p className="breadcrumbs">
+                                        <span className="mr-2">
+                                            <Link to={'/'}>
+                                                Home <i className="fa fa-chevron-right"></i>
+                                            </Link>
+                                        </span>{" "}
+                                        <span>
+                                            About<i className="fa fa-chevron-right"></i>
+                                        </span>
+                                    </p>
+                                    <h1 className="mb-0 bread">About Us</h1>
+                                </div>
               </div>
             </div>
           </section>
@@ -119,8 +119,7 @@ const AboutUs = () => {
         
 
 
-            <div style={{background: 'linear-gradient(90deg, rgb(255 255 255) 0%, rgb(168 126 111 / 39%) 35%, rgb(255 255 255 / 5%) 100%)'}} data-aos="fade-up"
-     data-aos-anchor-placement="bottom-bottom">
+            <div style={{background: 'linear-gradient(90deg, rgb(255 255 255) 0%, rgb(168 126 111 / 39%) 35%, rgb(255 255 255 / 5%) 100%)'}} data-aos="fade-up" data-aos-duration="2000">
         <div className="container" id="history" style={{padding:'20px 10px', alignItems:'left'}}>
 
 

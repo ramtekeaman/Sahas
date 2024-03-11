@@ -359,9 +359,10 @@ export default function Home({ dbpath }) {
           <h1 class="display-5 text-uppercase mb-0">Top Player Glories</h1>
         </center>
 
-        <div class="container-fluid programe position-relative px-5 mt-5" style={{ marginBottom: "135px", display: "flex", justifyContent: "center" , flexDirection:'column'}} id="achievements">
+          {/* Player Carousel */}
+        <div class="container-fluid programe position-relative mt-5" style={{ marginBottom: "135px", display: "flex", justifyContent: "center" , flexDirection:'column'}} id="achievements">
           <PlayerSwipper/>
-    </div>
+        </div>
 
 
         {/* <div
@@ -826,7 +827,7 @@ export default function Home({ dbpath }) {
         <br></br>
         <br></br>
 
-        <PlayerSwipper/>
+        {/* <PlayerSwipper/> */}
         {/* <PlayerCarousel>
           <div className="carousel-container">
             <div id="playerCarousel" className="carousel slide" data-bs-ride="carousel">

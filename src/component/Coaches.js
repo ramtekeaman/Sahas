@@ -217,6 +217,7 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 import PlayerCard from './PlayerCard';
 import PlayerSwipper from './PlayerSwipper';
+import { Link } from 'react-router-dom';
 
 const Coaches = () => {
   AOS.init({
@@ -225,6 +226,24 @@ const Coaches = () => {
   });
   return (
     <CoachesContainer>
+      <div className='container' style={{height:'60px', margin:'0 1px',marginLeft:'auto',marginRight:'auto', display:'flex', alignItems:'start'}}>
+                      <div className="col-md-9 ftco-animate" style={{display:'flex', position:'relative', alignItems:'start'}}>
+                        <div className="">
+                        <span className="" style={{display:'flex', background:'#f1f1f1', padding: '1px 20px 7px 20px', alignItems:'center'}}>
+                          <span className="mr-2">
+                            <Link to={'/'}>
+                              <span>Home <i className="fa fa-chevron-right"></i></span>
+                            </Link>
+                          </span>{" "}
+                          <span className='a'>
+                            Trainers <i className="fa fa-chevron-right"></i>
+                          </span>
+                        </span>
+                        </div>
+                      </div>
+          </div>
+
+
       <div className="container text-center py-5">
         <h3>Meet Our Expert Coaches</h3>
         <p className="text-muted" style={{ fontWeight: '500' }}>
