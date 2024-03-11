@@ -54,7 +54,7 @@ const PlayerSwipper = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <SwiperContent className='container' data-aos="fade-up" data-aos-duration="2000">
+    <SwiperContent className='container' data-aos="fade-up" data-aos-duration="1000">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         grabCursor={true}
