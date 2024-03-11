@@ -59,6 +59,10 @@ export default function Footer({ dbpath }) {
         }
     }, [navi]);
 
+    const handleLinkClick = () => {
+        window.scrollTo(0, 0);
+    };
+
     return (
     <>
         <div class="container-fluid bg-dark text-secondary px-5 ">
@@ -89,12 +93,12 @@ export default function Footer({ dbpath }) {
                     <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
                         <h4 class="text-uppercase text-light mb-4">Quick Links</h4>
                         <div class="d-flex flex-column justify-content-start">
-                            <Link to={'/'} class="text-secondary mb-2"  ><i class="bi bi-arrow-right text-primary me-2"></i>Home</Link>
-                            <Link to={'/AboutUs'} class="text-secondary mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</Link>
-                            <Link to={'/ContactUs'} class="text-secondary mb-2"  ><i class="bi bi-arrow-right text-primary me-2"></i>Contact us</Link>
-                            <Link to={'/Gallery'} class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Gallery</Link>
+                            <Link to={'/'} onClick={handleLinkClick} class="text-secondary mb-2"  ><i class="bi bi-arrow-right text-primary me-2"></i>Home</Link>
+                            <Link to={'/AboutUs'} onClick={handleLinkClick} class="text-secondary mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</Link>
+                            <Link to={'/ContactUs'} onClick={handleLinkClick} class="text-secondary mb-2"  ><i class="bi bi-arrow-right text-primary me-2"></i>Contact us</Link>
+                            <Link to={'/Gallery'} onClick={handleLinkClick} class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Gallery</Link>
                             {/* <a class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a> */}
-                            <Link to={'/Schedule'} class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i>Schedule</Link>
+                            <Link to={'/Schedule'} onClick={handleLinkClick} class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i>Schedule</Link>
                         </div>
                     </div>
                     {/* Nice to see you  */}

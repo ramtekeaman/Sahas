@@ -69,17 +69,36 @@ const Products = () => {
       setPopUp(!popUp);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+      
+        // Send only the final price to productmail.php
+        const response = await fetch("http://localhost/test/productmail.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            name: formData.name,
+            email: formData.email,
+            address: formData.address,
+            quantity: formData.quantity,
+            finalprice: finalPrice, // Use finalPrice directly
+          }),
+        });
+      
+        // Handle the response if needed
+        console.log(response);
+      
+        // Reset form data and close the payment form
         setFormData({
-            name: '',
-            email: '',
-            address: '',
-            quantity: '1'
+          name: "",
+          email: "",
+          address: "",
+          quantity: "1",
         });
         setShowPaymentForm(false);
-    };
+      };
     
     
 
@@ -89,8 +108,8 @@ const Products = () => {
         setCount(count - 1);
         const fp = selectedProduct.price * (count-1);
       console.log(fp);
-      setFinalPrice(fp)
-        setShowFP(true)
+      setFinalPrice(fp);
+        setShowFP(true);
         
       }else(
         setCount(1)
@@ -101,8 +120,8 @@ const Products = () => {
       setCount(count + 1);
       const fp = selectedProduct.price * (count+1);
       console.log(fp);
-      setFinalPrice(fp)
-      setShowFP(true)
+      setFinalPrice(fp);
+      setShowFP(true);
     };
 
     const renderProductCard = (product) => (
@@ -182,7 +201,7 @@ const Products = () => {
                                             <div className='card__wrapper'><label htmlFor="quantity">Quantity :</label>
                                             <div className="card__counter">
                                               <button className="card__btn" onClick={decrement}>-</button>
-                                              <div className="card__counter-score">{count}</div>
+                                              <div className="card__counter-score" valu>{count}</div>
                                               <button className="card__btn card__btn-plus" onClick={increment}>+</button>
                                             </div>
                                             </div>  

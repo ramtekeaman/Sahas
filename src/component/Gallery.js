@@ -95,15 +95,16 @@ const Gallery = () => {
 
         <div className="photo-gallery">
             {['check1', 'check2'].includes(selectedRadio) && radioImageMap[selectedRadio].map((img, index) => (
-            <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }} data-aos="fade-up"
-     data-aos-duration="2000" onClick={() => handleImageClick(img)}>
-                <img src={img} alt={`sahas${index + 1}`} />
+            <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }} onClick={() => handleImageClick(img)}>
+                <div data-aos="zoom-in" data-aos-duration="1000">
+
+                <img src={img} alt={`sahas${index + 1}`}/>
+                </div>
             </div>
             ))}
 
             {radioImageMap[selectedRadio] === 'check3'  && radioImageMap[selectedRadio].map((vid, index) => (
-              <div className="pic" key={index} style={{boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray'}} data-aos="fade-up"
-     data-aos-duration="2000">
+              <div className="pic" key={index} style={{boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray'}}>
                 <video src={vid} alt={`sahas${index + 1}`} />
               </div>
             ))}
