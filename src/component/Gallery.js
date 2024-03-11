@@ -41,6 +41,17 @@ const Gallery = () => {
     const handleRadioChange = (event) => {
         setSelectedRadio(event.target.id);
       };
+
+
+      const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
     
 
   return (
@@ -85,7 +96,7 @@ const Gallery = () => {
         <div className="photo-gallery">
             {['check1', 'check2'].includes(selectedRadio) && radioImageMap[selectedRadio].map((img, index) => (
             <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }} data-aos="fade-up"
-     data-aos-duration="2000">
+     data-aos-duration="2000" onClick={() => handleImageClick(img)}>
                 <img src={img} alt={`sahas${index + 1}`} />
             </div>
             ))}
@@ -106,72 +117,36 @@ const Gallery = () => {
           </div>
         </div>
         </div>
-            {/* <div>
-                <input type="radio" name="photos" id="check1" defaultChecked />
-                <input type="radio" name="photos" id="check2" />
-                <input type="radio" name="photos" id="check3" />
-                <input type="radio" name="photos" id="check4" />
+            
 
-                <div className="container">
-                    <h1>OUR PHOTOS GALLERY</h1>
-
-                    <p>Step into the Sahas Cricket Club gallery and immerse yourself in a world where passion meets excellence. From our top-notch training facilities and personalized coaching sessions to the camaraderie of our vibrant community and empowerment of women in cricket, every image tells a story of dedication and skill. Witness the precision of our bowling machine and the transformative impact of personal coaching, all coming together to create a space where talents flourish and cricketing dreams are realized.</p>
-                    <br />
-
-                    <div className="top-content">
-                        <h3>Photos Gallery</h3>
-                        <label htmlFor="check1">AllPhotos1</label>
-                        <label htmlFor="check2">AllPhotos2</label>
-                        <label htmlFor="check4">AllPhotos4</label>
-                    </div>
-                    <div className="photo-gallery">
-                        <div className="pic">
-                            <img src={img1} alt="sahas1" />
-                        </div>
-                        <div className="pic">
-                            <img src={img2} alt="sahas3" />
-                        </div>
-                        <div className="pic">
-                            <img src={img3} alt="sahas2" />
-                        </div>
-
-                        <div className="pic">
-                            <img src={img4} alt="sahas5" />
-                        </div>
-                        <div className="pic">
-                            <img src={img5} alt="sahas4" />
-                        </div>
-                        <div className="pic">
-                            <img src={img6} alt="sahas6" />
-                        </div>
-
-                        <div className="pic">
-                            <img src={img7} alt="sahas7" />
-                        </div>
-                        <div className="pic">
-                            <img src={img8} alt="sahas8" />
-                        </div>
-                        <div className="pic">
-                            <img src={img9} alt="sahas9" />
-                        </div>
-
-                        <div className="pic">
-                            <img src={img10} alt="sahas10" />
-                        </div>
-                        <div className="pic">
-                            <img src={img11} alt="sahas11" />
-                        </div>
-                        <div className="pic">
-                            <img src={img12} alt="sahas12" />
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+        {selectedImage && (
+          <FullScreenImageModal onClick={handleCloseModal}>
+            <img src={selectedImage} alt="Full Screen" />
+          </FullScreenImageModal>
+        )}
     </Gallery_Container>
   )
 }
 
 export default Gallery;
+
+const FullScreenImageModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+`;
 
 
 const Gallery_Container = styled.div `

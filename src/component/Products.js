@@ -64,19 +64,11 @@ const Products = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (paymentFormSubmitted) {
-      console.log("Payment form already submitted. Skipping...");
-      return;
-    }
-
-    console.log("Submitting payment form...");
-
-    try {
-      setPaymentFormSubmitted(true);
-
+    // Inside the handleSubmit function
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      // Send only the final price to productmail.php
       const response = await fetch("http://localhost/test/productmail.php", {
         method: "POST",
         headers: {
@@ -87,12 +79,14 @@ const Products = () => {
           email: formData.email,
           address: formData.address,
           quantity: formData.quantity,
-          finalprice: showFP ? finalPrice : finalPrice,
+          finalprice: finalPrice, // Use finalPrice directly
         }),
       });
-
-      console.log("Response from server:", response);
-
+    
+      // Handle the response if needed
+      console.log(response);
+    
+      // Reset form data and close the payment form
       setFormData({
         name: "",
         email: "",
@@ -100,15 +94,15 @@ const Products = () => {
         quantity: "1",
       });
       setShowPaymentForm(false);
-    } catch (error) {
-      console.error("Error submitting payment form:", error);
-    }
-  };
+    };
+    
+    
 
-  const decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
-      const fp = selectedProduct.price * (count - 1);
+    const [count, setCount] = useState(1); // Initial count value
+    const decrement = () => {
+      if (count > 1) {
+        setCount(count - 1);
+        const fp = selectedProduct.price * (count-1);
       console.log(fp);
       setFinalPrice(fp);
       setShowFP(true);
@@ -174,49 +168,50 @@ const Products = () => {
         </div>
       </Abc>
 
-      <ProductContainer>
-        <div className="container">
-          <div className="row">
-            <h2>Products</h2>
-            <div className="cards" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-              {products.map(renderProductCard)}
-            </div>
-          </div>
-          {showPaymentForm && selectedProduct && (
-            <PaymentForm>
-              <div id="paymentModal" className="modalC" data-aos="flip-up">
-                <div className="modal-content">
-                  <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                  <div className="payment-form">
-                    <h2>Payment Form</h2>
-                    <form id="paymentForm" onSubmit={handleSubmit}>
-                      <label>Name:</label>
-                      <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                      <label>Email:</label>
-                      <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                      <label>Address:</label>
-                      <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
-                      <label>Price:</label>
-                      <input type="text" value={showFP ? finalPrice : price} readOnly />
-                      <div className='card__wrapper'>
-                        <label htmlFor="quantity">Quantity :</label>
-                        <div className="card__counter">
-                          <button className="card__btn" onClick={decrement}>-</button>
-                          <div className="card__counter-score">{count}</div>
-                          <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+            <ProductContainer>
+                <div className="container">
+                    <div className="row">
+                        <h2>Products</h2>
+                        <div className="cards" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
+                            {products.map(renderProductCard)}
                         </div>
-                      </div>
-                      <button type="submit" className="btn btn-primary">Submit Payment</button>
-                    </form>
-                  </div>
+                    </div>
+                    {showPaymentForm && selectedProduct && (
+                        <PaymentForm>
+                            <div id="paymentModal" className="modalC"  data-aos="flip-up">
+                                <div className="modal-content">
+                                    <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                                    <div className="payment-form">
+                                        <h2>Payment Form</h2>
+                                        <form id="paymentForm" onSubmit={handleSubmit}>
+                                            <label>Name:</label>
+                                            <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
+                                            <label>Email:</label>
+                                            <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
+                                            <label>Address:</label>
+                                            <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
+                                            <label>Price:</label>
+                                            <input type="text" value={showFP ? finalPrice : price} readOnly />
+                                            <div className='card__wrapper'><label htmlFor="quantity">Quantity :</label>
+                                            <div className="card__counter">
+                                              <button className="card__btn" onClick={decrement}>-</button>
+                                              <div className="card__counter-score">{count}</div>
+                                              <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+                                            </div>
+                                            </div>  
+                                            <button type="submit" className="btn btn-primary">Submit Payment</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </PaymentForm>
+                    )}
                 </div>
-              </div>
-            </PaymentForm>
-          )}
-        </div>
-      </ProductContainer>
-    </>
-  );
+            </ProductContainer>
+        </>
+    );
 }
 
 export default Products;
@@ -508,7 +503,7 @@ const PaymentForm = styled.div `
   .payment-form form input[type="email"],
   .payment-form form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 5px 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -610,4 +605,67 @@ const PaymentForm = styled.div `
       /* margin: 10px; */
     }
   }
+`;
+
+const PopUp = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+ .success {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #d1c1c1;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+
+  text-align: center;
+
+  position: fixed;
+  top: 10px;
+  right: 20%;
+  /* border: 2px solid #76cc76; */
+  @media only screen and (max-width: 768px) {
+    right: 10%;
+    }
+}
+
+.success__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-top: 6px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.success__icon path {
+  fill: #393A37;
+}
+
+.success__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #393A37;
+}
+
+.success__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.success__close path {
+  fill: #393A37;
+}
 `;

@@ -173,7 +173,7 @@ const JoinUs = () => {
 
     {/* updated code */}
     {popUp && <PopUp>
-        <div className="success">
+        <div className="success" data-aos="fade-down">
           <div className="success__icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -217,15 +217,15 @@ const PopUp = styled.div `
   justify-content: center;
 
 
- .success {
+  .success {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   width: 320px;
   padding: 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
-  background: #84D65A;
+  justify-content: center;
+  background: #d1c1c1;
   border-radius: 8px;
   box-shadow: 0px 0px 5px -3px #111;
 
@@ -234,7 +234,10 @@ const PopUp = styled.div `
   position: fixed;
   top: 10px;
   right: 20%;
-  border: 2px solid #76cc76;
+  /* border: 2px solid #76cc76; */
+  @media only screen and (max-width: 768px) {
+    right: 10%;
+    }
 }
 
 .success__icon {
