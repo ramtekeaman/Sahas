@@ -35,9 +35,9 @@ export default function Performance({ dbpath }) {
     let query = "";
   
     if (type1 === '1') {
-      query = 'select * from remark where id ="' + filter1 + '" AND id != 0;';
+      query = 'select * from remark where id ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else if (type1 === '2') {
-      query = 'select * from remark where name LIKE "%' + filter1 + '%" AND id != 0;';
+      query = 'select * from remark where name ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else {
       alert("Please select the proper action");
       return;
@@ -86,7 +86,7 @@ export default function Performance({ dbpath }) {
     <>
       <br />
       <br />
-      <p className="sp1">Search</p>
+      <p className="sp1">Quatraly Remark</p>
       <br />
       <form style={{ display: "flex" }}>
         <div className="mb-3" style={{ marginLeft: "27%", display: "flex" }}>

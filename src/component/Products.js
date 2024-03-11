@@ -7,6 +7,7 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 
 
+
 const Products = () => {
   AOS.init({
     duration: 650,
@@ -63,17 +64,39 @@ const Products = () => {
         // setFinalPrice(selectedProduct.price * formData.quantity);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-        setFormData({
-            name: '',
-            email: '',
-            address: '',
-            quantity: '1'
-        });
-        setShowPaymentForm(false);
+    // Inside the handleSubmit function
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      // Send only the final price to productmail.php
+      const response = await fetch("http://localhost/test/productmail.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          name: formData.name,
+          email: formData.email,
+          address: formData.address,
+          quantity: formData.quantity,
+          finalprice: finalPrice, // Use finalPrice directly
+        }),
+      });
+    
+      // Handle the response if needed
+      console.log(response);
+    
+      // Reset form data and close the payment form
+      setFormData({
+        name: "",
+        email: "",
+        address: "",
+        quantity: "1",
+      });
+      setShowPaymentForm(false);
     };
+    
+    
 
     const [count, setCount] = useState(1); // Initial count value
     const decrement = () => {
