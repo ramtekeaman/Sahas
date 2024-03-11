@@ -81,10 +81,6 @@ const Products = () => {
         });
         setShowPaymentForm(false);
     };
-    
-    
-
-    const [count, setCount] = useState(1); // Initial count value
     const decrement = () => {
       if (count > 1) {
         setCount(count - 1);
@@ -98,6 +94,7 @@ const Products = () => {
       )
     };
 
+    // const [popUp, setPopUp] = useState(false)
     const increment = () => {
       setCount(count + 1);
       const fp = selectedProduct.price * (count+1);
@@ -198,7 +195,7 @@ const Products = () => {
                 </div>
             </ProductContainer>
 
-            {popUp && <PopUp>
+            {popUp && <popUp>
         <div className="success" data-aos="fade-down">
           <div className="success__icon">
             <svg
@@ -231,7 +228,7 @@ const Products = () => {
             </svg>
           </div>
         </div>
-      </PopUp>}
+      </popUp>}
         </>
     );
 }
