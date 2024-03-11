@@ -243,8 +243,11 @@ export default function Home({ dbpath }) {
           <ModalContainer>
             <div data-aos="zoom-in-up">
               <div className="imgContain">
-                <button onClick={handleClose}>Close</button>
+              
+                <button onClick={handleClose}><i class="fa fa-times"></i>
+</button>
                 <img src={img2} alt="popUp Img" />
+
               </div>
             </div>
           </ModalContainer>
@@ -943,19 +946,21 @@ const ModalContainer = styled.div`
     }
     button {
       align-self: flex-end;
-      background-color: #d9534f;
+      /* background-color: #d9534f; */
       margin: 2px;
-      color: white;
+      /* color: white; */
       border: none;
       outline: none;
-      width: 50px;
+      /* width: 50px; */
       height: 30px;
       border-radius: 5px;
       align-items: right;
-    }
-    :hover {
-      color: #d9534f;
-      background-color: white;
+      opacity: 1;
+      :hover {
+        color: red;
+        /* color: #d9534f; */
+        /* background-color: white; */
+      }
     }
   }
 `;
