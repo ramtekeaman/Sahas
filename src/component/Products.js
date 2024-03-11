@@ -7,6 +7,7 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 
 
+
 const Products = () => {
   AOS.init({
     duration: 650,
@@ -78,8 +79,9 @@ const Products = () => {
             quantity: '1'
         });
         setShowPaymentForm(false);
-        handlepopup();
     };
+    
+    
 
     const [count, setCount] = useState(1); // Initial count value
     const decrement = () => {

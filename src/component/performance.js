@@ -35,9 +35,9 @@ export default function Performance({ dbpath }) {
     let query = "";
   
     if (type1 === '1') {
-      query = 'select * from remark where id ="' + filter1 + '" AND id != 0;';
+      query = 'select * from remark where id ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else if (type1 === '2') {
-      query = 'select * from remark where name LIKE "%' + filter1 + '%" AND id != 0;';
+      query = 'select * from remark where name ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else {
       alert("Please select the proper action");
       return;
@@ -63,14 +63,30 @@ export default function Performance({ dbpath }) {
     }
   };
   
-  const print = () => {
+  const handlePrint = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
+    printWindow.document.write('<h1 style="text-align: center;">Remark of the Student</h1>');
+    printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
+    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Match Played</th><th>Wicket</th><th>Run Score</th><th>Type</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
+
+    user.forEach(res => {
+      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.Wicket}</td><td>${res.runscore}</td><td>${res.type2}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
+    });
+
+    printWindow.document.write('</tbody></table>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
   };
+
   
   return (
     <>
       <br />
       <br />
-      <p className="sp1">Search</p>
+      <p className="sp1">Quatraly Remark</p>
       <br />
       <form style={{ display: "flex" }}>
         <div className="mb-3" style={{ marginLeft: "27%", display: "flex" }}>
@@ -112,7 +128,7 @@ export default function Performance({ dbpath }) {
             </button>
           </Link>
           &nbsp;&nbsp;&nbsp;
-          <button type="button" className="btn btn-primary" onClick={print}>
+          <button type="button" className="btn btn-primary" onClick={handlePrint}>
               Print
             </button>
 
@@ -127,10 +143,14 @@ export default function Performance({ dbpath }) {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Present / Absent</th>
+              <th>Status</th>
               <th>Matches Played</th>
+              <th>Wicket </th>
+              <th>Run Score</th>
               <th>Type</th>
               <th>Remark</th>
+              <th>Date : Time</th>
+
             </tr>
           </thead>
           <tbody>
@@ -141,8 +161,11 @@ export default function Performance({ dbpath }) {
                   <td>{res.name}</td>
                   <td>{res.attendanceOption}</td>
                   <td>{res.matchesPlayed}</td>
+                  <td>{res.Wicket}</td>
+                  <td>{res.runscore}</td>
                   <td>{res.type2}</td>
                   <td>{res.remark}</td>
+                  <td>{res.timestamp}</td>
                 </tr>
               ))
             ) : (
