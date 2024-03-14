@@ -53,7 +53,7 @@ export default function UpdateP({ dbpath, cart, setBtnstatus }) {
         <br />
         <br />
         <center>
-          <h5>All Products</h5>
+          <h1>All Products</h1>
           <br />
           <div style={{ display: 'flex', justifyContent: 'flex-start' , marginLeft:'70px' }}>
   <Link to="/addp" style={{ textDecoration: 'none' }}>

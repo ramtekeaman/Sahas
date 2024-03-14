@@ -76,7 +76,7 @@ export default function Uproduct({ dbpath }) {
             </div>
             <div className="mb-3">
               <label className="form-label" style={{ color: 'RGB(104 81 155)' }}>Updated price<span style={{ color: 'red' }}>*</span></label>
-              <input type="text" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} />
+              <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} />
             </div>
             <div className="mb-3">
               <label className="form-label" style={{ color: 'RGB(104 81 155)' }}>Updated image<span style={{ color: 'red' }}>*</span></label>
