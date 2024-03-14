@@ -9,7 +9,7 @@ import AOS from 'aos';
 const Products = () => {
   AOS.init({
     duration: 650,
-    once: true,
+    once: false,
   });
 
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -32,21 +32,21 @@ const Products = () => {
     {
       id: 1,
       name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VARY)",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 99.88,
       imgSrc: img1,
     },
     {
       id: 2,
       name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 69,
       imgSrc: img1,
     },
     {
       id: 3,
       name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-      description: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 169,
       imgSrc: img1,
     },
@@ -135,7 +135,7 @@ const Products = () => {
       <img src={product.imgSrc} alt="Product" />
       <div>
         <h1>{product.name}</h1>
-        <p className="product-description">{product.description}</p>
+        <p className="product-Description">{product.Description}</p>
         <div className="price">Rs.<span>{product.price}</span></div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
@@ -240,6 +240,7 @@ const ProductContainer  = styled.div`
 }
 img{
   width:100%;
+  max-height: 300px;
 }
 .cards{
   display:flex;
@@ -260,12 +261,14 @@ img{
   /* overflow: auto; */
 }
 .cards .card h1{
-  font-size:1.1rem;
+  font-size:1rem;
   margin:1rem 0;
 }
-.cards .card p{
-  display:none;
+
+.card p{
+  font-size: 0.8rem;
 }
+
 .cards .card button{
   margin:1rem 0;
   padding:.3rem .6rem;
@@ -457,7 +460,7 @@ const Abc = styled.div`
 const PaymentForm = styled.div `
 
 .payment-form {
-  width: 400px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -522,14 +525,15 @@ const PaymentForm = styled.div `
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #fb5b21;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  opacity: 1;
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  opacity: 0.7;
 }
 
 

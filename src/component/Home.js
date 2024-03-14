@@ -17,7 +17,7 @@ import bgimg from './images/bg-img.jpeg'
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import {Autoplay, Navigation } from 'swiper/modules';
+import {Autoplay, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 
 import { Link } from "react-router-dom";
 import Navigate_Context from "../Context/Navigate_Context";
@@ -27,8 +27,10 @@ import arrow from "./images/arrow.png";
 
 import slide1 from "./images/Slides/gallery_grp.png";
 import slide2 from "./images/Slides/gallery_grp1.png";
-import slide3 from "./images/Slides/club_carosel1.jpeg";
-import slide4 from "./images/Slides/womes_cricket.png";
+import slide3 from "./images/Slides/Stadium.jpeg";
+import slide4 from "./images/Slides/Slide_img.jpeg";
+import slide5 from "./images/Slides/Slide_img1.jpeg";
+import slide6 from "./images/Slides/test_slide.png";
 import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
@@ -316,10 +318,12 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
           </div> */}
 
           <div className="swiper-container" data-aos="fade-up" data-aos-duration="2000">
-    <Swiper navigation={true} loop={true} autoplay={{ delay: 5000, disableOnInteraction: false, }} modules={[Navigation, Autoplay]} className="mySwiper">
-      <SwiperSlide><img src="img/club_carosel1.png" alt="" className="swiper-image" /></SwiperSlide>
-      <SwiperSlide><img src={slide1} alt="" className="swiper-image" /></SwiperSlide>
-      <SwiperSlide><img src={slide2} alt="" className="swiper-image" /></SwiperSlide>
+    <Swiper navigation={true} loop={true} cssMode={true} mousewheel={true} keyboard={true} autoplay={{ delay: 5000, disableOnInteraction: false, }} modules={[Navigation, Autoplay, Keyboard, Mousewheel]} className="mySwiper">
+      {/* <SwiperSlide><img src="img/club_carosel1.png" alt="" className="swiper-image" /></SwiperSlide> */}
+      <SwiperSlide><img src={slide6} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide4} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide3} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide5} alt="" className="swiper-image" /></SwiperSlide>
       {/* Add other slides */}
     </Swiper>
     <div className="caption">
