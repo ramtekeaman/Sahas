@@ -235,8 +235,9 @@ import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
 import Loader from './component/Loader';
 import styled from 'styled-components';
-
-
+import UpdateP from './component/UpdateP';
+import Addp from './component/addp';
+import Uproduct from './component/uproduct';
 
 function App() {
 
@@ -300,12 +301,16 @@ function App() {
               <RegisterCoach dbpath={dbpath}/>
           }>
           </Route> 
+          <Route exact path="/uproduct" element={
+              <Uproduct dbpath={dbpath}/>
+          }>
+          </Route> 
           <Route exact path="/Attendances" element={
             <Attendances dbpath={dbpath} />
           }></Route>
-          {/* <Route exact path="/Attendance" element={
-            <Attendance dbpath={dbpath}/> // Corrected component usage
-          }></Route> */}
+          <Route exact path="/UpdateP" element={
+            <UpdateP dbpath={dbpath}/> // Corrected component usage
+          }></Route>
           <Route exact path="/Remark" element={
             <Remark dbpath={dbpath} />
           }></Route>
@@ -341,6 +346,9 @@ function App() {
 <Route exact path="/Jjoin" element={
             <Jjoin dbpath={dbpath} />
           }></Route>
+          <Route exact path="/addp" element={
+            <Addp dbpath={dbpath} />
+          }></Route>
 
 
 
@@ -369,6 +377,10 @@ function App() {
           <Route exact path="/Reports" element={
               <Reports dbpath={dbpath} />
           }></Route>
+
+
+
+          {/* Update Product */}
 
           <Route exact path="/Search" element={
               <Search dbpath={dbpath} />

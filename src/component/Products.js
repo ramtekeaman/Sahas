@@ -53,6 +53,7 @@ const Products = () => {
   ];
 
   const handlePayNowClick = (product) => {
+    console.log("product",product)
     setSelectedProduct(product);
     setPrice(product.price);
     setShowPaymentForm(true);
@@ -64,18 +65,14 @@ const Products = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if (paymentFormSubmitted) {
-      console.log("Payment form already submitted. Skipping...");
-      return;
-    }
 
-    console.log("Submitting payment form...");
+  const handleSubmit = async () => {
+  
+
 
     try {
-      setPaymentFormSubmitted(true);
+      // setPaymentFormSubmitted(true);
 
       const response = await fetch("http://localhost/test/productmail.php", {
         method: "POST",
@@ -86,8 +83,8 @@ const Products = () => {
           name: formData.name,
           email: formData.email,
           address: formData.address,
-          quantity: formData.quantity,
-          finalprice: showFP ? finalPrice : finalPrice,
+          count: count,
+          finalprice: showFP ? finalPrice : price,
         }),
       });
 
@@ -99,10 +96,18 @@ const Products = () => {
         address: "",
         quantity: "1",
       });
-      setShowPaymentForm(false);
+      // setShowPaymentForm(false);
     } catch (error) {
       console.error("Error submitting payment form:", error);
     }
+
+    
+    if (paymentFormSubmitted) {
+      console.log("Payment form already submitted. Skipping...");
+      return;
+    }
+
+    console.log("Payment form  submitted");
   };
 
   const decrement = () => {
@@ -184,34 +189,36 @@ const Products = () => {
           </div>
           {showPaymentForm && selectedProduct && (
             <PaymentForm>
-              <div id="paymentModal" className="modalC" data-aos="flip-up">
-                <div className="modal-content">
-                  <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                  <div className="payment-form">
-                    <h2>Payment Form</h2>
-                    <form id="paymentForm" onSubmit={handleSubmit}>
-                      <label>Name:</label>
-                      <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                      <label>Email:</label>
-                      <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                      <label>Address:</label>
-                      <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
-                      <label>Price:</label>
-                      <input type="text" value={showFP ? finalPrice : price} readOnly />
-                      <div className='card__wrapper'>
-                        <label htmlFor="quantity">Quantity :</label>
-                        <div className="card__counter">
-                          <button className="card__btn" onClick={decrement}>-</button>
-                          <div className="card__counter-score">{count}</div>
-                          <button className="card__btn card__btn-plus" onClick={increment}>+</button>
-                        </div>
+            <div id="paymentModal" className="modalC" data-aos="flip-up">
+              <div className="modal-content">
+                <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                <div className="payment-form">
+                  <h2>Payment Form</h2>
+                  {/* <form id="paymentForm" onSubmit={handleSubmit}> */}
+                  <div id="paymentForm">
+                    <label>Name:</label>
+                    <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
+                    <label>Email:</label>
+                    <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
+                    <label>Address:</label>
+                    <textarea name="address" id="address" defaultValue={formData.address || ""} onChange={handleInputChange} required></textarea>
+                    <label>Price:</label>
+                    <input type="text" value={showFP ? finalPrice : price} readOnly />
+                    <div className='card__wrapper'>
+                      <label htmlFor="quantity">Quantity :</label>
+                      <div className="card__counter">
+                        <button className="card__btn" onClick={decrement}>-</button>
+                        <div className="card__counter-score">{count}</div>
+                        <button className="card__btn card__btn-plus" onClick={increment}>+</button>
                       </div>
-                      <button type="submit" className="btn btn-primary">Submit Payment</button>
-                    </form>
-                  </div>
+                    </div>
+                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit Payment</button>
+                    </div>
                 </div>
               </div>
-            </PaymentForm>
+            </div>
+          </PaymentForm>
+          
           )}
         </div>
       </ProductContainer>
