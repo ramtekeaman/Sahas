@@ -49,7 +49,7 @@ const playersData = [
 const PlayerSwipper = () => {
     AOS.init({
         duration: 650,
-        once: true
+        once: false
       });
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -90,7 +90,7 @@ const PlayerSwipper = () => {
               data-aos="zoom-in"
 
             >
-              <div className="position-relative overflow-hidden rounded">
+              <div className="position-relative overflow-hidden rounded" style={{background: '#6d6d6d'}}>
                 <img
                   className="img-fluid w-100"
                   src={player.imgSrc}
@@ -110,7 +110,7 @@ const PlayerSwipper = () => {
                         overflow: "auto",
                         scrollbarWidth: "none",
                       }}
-                      data-aos="fade-up" data-aos-duration="1000"
+                      data-aos="fade-up"
                     >
                     <p style={{ color: '#989898', fontSize: '12.5px' }}>
                         {player.description}

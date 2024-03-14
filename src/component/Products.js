@@ -9,7 +9,7 @@ import AOS from 'aos';
 const Products = () => {
   AOS.init({
     duration: 650,
-    once: true,
+    once: false,
   });
 
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -32,21 +32,21 @@ const Products = () => {
     {
       id: 1,
       name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VARY)",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 99.88,
       imgSrc: img1,
     },
     {
       id: 2,
       name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 69,
       imgSrc: img1,
     },
     {
       id: 3,
       name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-      description: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
+      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
       price: 169,
       imgSrc: img1,
     },
@@ -135,7 +135,7 @@ const Products = () => {
       <img src={product.imgSrc} alt="Product" />
       <div>
         <h1>{product.name}</h1>
-        <p className="product-description">{product.description}</p>
+        <p className="product-Description">{product.Description}</p>
         <div className="price">Rs.<span>{product.price}</span></div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
@@ -189,36 +189,34 @@ const Products = () => {
           </div>
           {showPaymentForm && selectedProduct && (
             <PaymentForm>
-            <div id="paymentModal" className="modalC" data-aos="flip-up">
-              <div className="modal-content">
-                <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                <div className="payment-form">
-                  <h2>Payment Form</h2>
-                  {/* <form id="paymentForm" onSubmit={handleSubmit}> */}
-                  <div id="paymentForm">
-                    <label>Name:</label>
-                    <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                    <label>Email:</label>
-                    <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                    <label>Address:</label>
-                    <textarea name="address" id="address" defaultValue={formData.address || ""} onChange={handleInputChange} required></textarea>
-                    <label>Price:</label>
-                    <input type="text" value={showFP ? finalPrice : price} readOnly />
-                    <div className='card__wrapper'>
-                      <label htmlFor="quantity">Quantity :</label>
-                      <div className="card__counter">
-                        <button className="card__btn" onClick={decrement}>-</button>
-                        <div className="card__counter-score">{count}</div>
-                        <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+              <div id="paymentModal" className="modalC" data-aos="flip-up">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                  <div className="payment-form">
+                    <h2>Payment Form</h2>
+                    <form id="paymentForm" onSubmit={handleSubmit}>
+                      <label>Name:</label>
+                      <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
+                      <label>Email:</label>
+                      <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
+                      <label>Address:</label>
+                      <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
+                      <label>Price:</label>
+                      <input type="text" value={showFP ? finalPrice : price} readOnly />
+                      <div className='card__wrapper'>
+                        <label htmlFor="quantity">Quantity :</label>
+                        <div className="card__counter">
+                          <button className="card__btn" onClick={decrement}>-</button>
+                          <div className="card__counter-score">{count}</div>
+                          <button className="card__btn card__btn-plus" onClick={increment}>+</button>
+                        </div>
                       </div>
-                    </div>
-                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit Payment</button>
-                    </div>
+                      <button type="submit" className="btn btn-primary">Submit Payment</button>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
-          </PaymentForm>
-          
+            </PaymentForm>
           )}
         </div>
       </ProductContainer>
@@ -227,6 +225,7 @@ const Products = () => {
 }
 
 export default Products;
+
 
 
 const ProductContainer  = styled.div`
@@ -239,6 +238,7 @@ const ProductContainer  = styled.div`
 }
 img{
   width:100%;
+  max-height: 300px;
 }
 .cards{
   display:flex;
@@ -259,12 +259,14 @@ img{
   /* overflow: auto; */
 }
 .cards .card h1{
-  font-size:1.1rem;
+  font-size:1rem;
   margin:1rem 0;
 }
-.cards .card p{
-  display:none;
+
+.card p{
+  font-size: 0.8rem;
 }
+
 .cards .card button{
   margin:1rem 0;
   padding:.3rem .6rem;
@@ -454,6 +456,104 @@ const Abc = styled.div`
 `;
 
 const PaymentForm = styled.div `
+
+.payment-form {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.payment-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.payment-form input[type="text"],
+.payment-form input[type="email"],
+.payment-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.payment-form input[type="text"]:read-only {
+  background-color: #eee;
+}
+
+.card__wrapper {
+  margin-bottom: 10px;
+}
+
+.card__counter {
+  display: flex;
+  align-items: center;
+}
+
+.card__btn {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.card__btn:hover {
+  background-color: #e0e0e0;
+}
+
+.card__counter-score {
+  padding: 0 10px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #fb5b21;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* Modal container */
   .modalC {
     position: fixed;
@@ -498,7 +598,7 @@ const PaymentForm = styled.div `
 
   .payment-form {
     max-width: 400px;
-    margin: 0 10%;
+    /* margin: 0 10%; */
   }
 
   .payment-form h2 {
@@ -600,6 +700,8 @@ const PaymentForm = styled.div `
 
 .card__btn-plus {
   background: var(--bg-color);
+  
+  border: none;
 } 
 
   @media (max-width: 786) {
@@ -617,4 +719,58 @@ const PaymentForm = styled.div `
       /* margin: 10px; */
     }
   }
+`;
+
+const PopUp = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ .success {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #d1c1c1;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  right: 20%;
+  /* border: 2px solid #76cc76; */
+  @media only screen and (max-width: 768px) {
+    right: 10%;
+    }
+}
+.success__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-top: 6px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.success__icon path {
+  fill: #393A37;
+}
+.success__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #393A37;
+}
+.success__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.success__close path {
+  fill: #393A37;
+}
 `;

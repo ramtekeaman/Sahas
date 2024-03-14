@@ -15,7 +15,7 @@ const AboutUs = () => {
 
   AOS.init({
     duration: 650,
-    once: true
+    once: false
   });
 
     var settings = {

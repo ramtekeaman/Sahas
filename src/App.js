@@ -235,9 +235,8 @@ import Coaches from './component/Coaches';
 import PopUp_Context from './Context/PopUp_Context';
 import Loader from './component/Loader';
 import styled from 'styled-components';
-import UpdateP from './component/UpdateP';
-import Addp from './component/addp';
-import Uproduct from './component/uproduct';
+
+
 
 function App() {
 
@@ -425,10 +424,10 @@ function App() {
               <Coaches />
           }>
           </Route>
-          {/* <Route exact path="/test" element={
-              <Slider />
+          <Route exact path="/test" element={
+              <NotFound />
           }>
-          </Route> */}
+          </Route>
 
         </Routes>
          <Footer /> 

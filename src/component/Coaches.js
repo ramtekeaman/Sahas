@@ -222,7 +222,7 @@ import { Link } from 'react-router-dom';
 const Coaches = () => {
   AOS.init({
     duration: 650,
-    once: true
+    once: false
   });
   return (
     <CoachesContainer>

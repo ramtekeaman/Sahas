@@ -24,7 +24,7 @@ import AOS from 'aos'
 const Gallery = () => {
     AOS.init({
         duration: 650,
-        once: true
+        once: false
       });
 
 
