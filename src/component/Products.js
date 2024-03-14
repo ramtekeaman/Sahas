@@ -53,42 +53,67 @@ const Products = () => {
   ];
 
   const handlePayNowClick = (product) => {
+    console.log("product",product)
     setSelectedProduct(product);
     setPrice(product.price);
     setShowPaymentForm(true);
     setShowFP(false);
   };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        // setFinalPrice(selectedProduct.price * formData.quantity);
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const [popUp, setPopUp] = useState(false);
-    const handlepopup = () => {
-      setPopUp(!popUp);
+
+
+  const handleSubmit = async () => {
+  
+
+
+    try {
+      // setPaymentFormSubmitted(true);
+
+      const response = await fetch("http://localhost/test/productmail.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          name: formData.name,
+          email: formData.email,
+          address: formData.address,
+          count: count,
+          finalprice: showFP ? finalPrice : price,
+        }),
+      });
+
+      console.log("Response from server:", response);
+
+      setFormData({
+        name: "",
+        email: "",
+        address: "",
+        quantity: "1",
+      });
+      // setShowPaymentForm(false);
+    } catch (error) {
+      console.error("Error submitting payment form:", error);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-        setFormData({
-            name: '',
-            email: '',
-            address: '',
-            quantity: '1'
-        });
-        setShowPaymentForm(false);
-    };
     
-    
+    if (paymentFormSubmitted) {
+      console.log("Payment form already submitted. Skipping...");
+      return;
+    }
 
-    const [count, setCount] = useState(1); // Initial count value
-    const decrement = () => {
-      if (count > 1) {
-        setCount(count - 1);
-        const fp = selectedProduct.price * (count-1);
+    console.log("Payment form  submitted");
+  };
+
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
+      const fp = selectedProduct.price * (count - 1);
       console.log(fp);
       setFinalPrice(fp);
       setShowFP(true);
@@ -97,13 +122,13 @@ const Products = () => {
     }
   };
 
-    const increment = () => {
-      setCount(count + 1);
-      const fp = selectedProduct.price * (count+1);
-      console.log(fp);
-      setFinalPrice(fp)
-      setShowFP(true)
-    };
+  const increment = () => {
+    setCount(count + 1);
+    const fp = selectedProduct.price * (count + 1);
+    console.log(fp);
+    setFinalPrice(fp);
+    setShowFP(true);
+  };
 
   const renderProductCard = (product) => (
     <div className="card" key={product.id}>
@@ -154,88 +179,55 @@ const Products = () => {
         </div>
       </Abc>
 
-            <ProductContainer>
-                <div className="container">
-                    <div className="row">
-                        <h2>Products</h2>
-                        <div className="cards" data-aos="fade-up"
-     data-aos-anchor-placement="center-bottom">
-                            {products.map(renderProductCard)}
-                        </div>
+      <ProductContainer>
+        <div className="container">
+          <div className="row">
+            <h2>Products</h2>
+            <div className="cards" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+              {products.map(renderProductCard)}
+            </div>
+          </div>
+          {showPaymentForm && selectedProduct && (
+            <PaymentForm>
+            <div id="paymentModal" className="modalC" data-aos="flip-up">
+              <div className="modal-content">
+                <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                <div className="payment-form">
+                  <h2>Payment Form</h2>
+                  {/* <form id="paymentForm" onSubmit={handleSubmit}> */}
+                  <div id="paymentForm">
+                    <label>Name:</label>
+                    <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
+                    <label>Email:</label>
+                    <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
+                    <label>Address:</label>
+                    <textarea name="address" id="address" defaultValue={formData.address || ""} onChange={handleInputChange} required></textarea>
+                    <label>Price:</label>
+                    <input type="text" value={showFP ? finalPrice : price} readOnly />
+                    <div className='card__wrapper'>
+                      <label htmlFor="quantity">Quantity :</label>
+                      <div className="card__counter">
+                        <button className="card__btn" onClick={decrement}>-</button>
+                        <div className="card__counter-score">{count}</div>
+                        <button className="card__btn card_btn-plus" onClick={increment}>+</button>
+                      </div>
                     </div>
-                    {showPaymentForm && selectedProduct && (
-                        <PaymentForm>
-                            <div id="paymentModal" className="modalC"  data-aos="flip-up">
-                                <div className="modal-content">
-                                    <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                                    <div className="payment-form">
-                                        <h2>Payment Form</h2>
-                                        <form id="paymentForm" onSubmit={handleSubmit}>
-                                            <label>Name:</label>
-                                            <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                                            <label>Email:</label>
-                                            <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                                            <label>Address:</label>
-                                            <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
-                                            <label>Price:</label>
-                                            <input type="text" value={showFP ? finalPrice : price} readOnly />
-                                            <div className='card__wrapper'><label htmlFor="quantity">Quantity :</label>
-                                            <div className="card__counter">
-                                              <button className="card__btn" onClick={decrement}>-</button>
-                                              <div className="card__counter-score">{count}</div>
-                                              <button className="card__btn card__btn-plus" onClick={increment}>+</button>
-                                            </div>
-                                            </div>  
-                                            <button type="submit" className="btn btn-primary">Submit Payment</button>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </PaymentForm>
-                    )}
+                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit Payment</button>
+                    </div>
                 </div>
-            </ProductContainer>
-
-            {popUp && <PopUp>
-        <div className="success" data-aos="fade-down">
-          <div className="success__icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              viewBox="0 0 24 24"
-              height="24"
-              fill="none"
-            >
-              <path
-                fillRule="evenodd"
-                fill="#393a37"
-                d="m12 1c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11-4.925-11-11-11zm4.768 9.14c.0878-.1004.1546-.21726.1966-.34383.0419-.12657.0581-.26026.0477-.39319-.0105-.13293-.0475-.26242-.1087-.38085-.0613-.11844-.1456-.22342-.2481-.30879-.1024-.08536-.2209-.14938-.3484-.18828s-.2616-.0519-.3942-.03823c-.1327.01366-.2612.05372-.3782.1178-.1169.06409-.2198.15091-.3027.25537l-4.3 5.159-2.225-2.226c-.1886-.1822-.4412-.283-.7034-.2807s-.51301.1075-.69842.2929-.29058.4362-.29285.6984c-.00228.2622.09851.5148.28067.7034l3 3c.0983.0982.2159.1748.3454.2251.1295.0502.2681.0729.4069.0665.1387-.0063.2747-.0414.3991-.1032.1244-.0617.2347-.1487.3236-.2554z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <div className="success__title"><h6>Successfully Submitted, Thank You for Purchasing !!</h6>We Will Shortly Notify You on Mail..</div>
-          <div className="success__close" onClick={handlepopup}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              viewBox="0 0 20 20"
-              height="20"
-            >
-              <path
-                fill="#393a37"
-                d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
-              ></path>
-            </svg>
-          </div>
+              </div>
+            </div>
+          </PaymentForm>
+          
+          )}
         </div>
-      </PopUp>}
-        </>
-    );
+      </ProductContainer>
+    </>
+  );
 }
 
 export default Products;
+
 
 
 const ProductContainer  = styled.div`
@@ -463,6 +455,103 @@ const Abc = styled.div`
 `;
 
 const PaymentForm = styled.div `
+
+.payment-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.payment-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.payment-form input[type="text"],
+.payment-form input[type="email"],
+.payment-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.payment-form input[type="text"]:read-only {
+  background-color: #eee;
+}
+
+.card__wrapper {
+  margin-bottom: 10px;
+}
+
+.card__counter {
+  display: flex;
+  align-items: center;
+}
+
+.card__btn {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.card__btn:hover {
+  background-color: #e0e0e0;
+}
+
+.card__counter-score {
+  padding: 0 10px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* Modal container */
   .modalC {
     position: fixed;
@@ -507,7 +596,7 @@ const PaymentForm = styled.div `
 
   .payment-form {
     max-width: 400px;
-    margin: 0 10%;
+    /* margin: 0 10%; */
   }
 
   .payment-form h2 {
@@ -609,6 +698,8 @@ const PaymentForm = styled.div `
 
 .card__btn-plus {
   background: var(--bg-color);
+  
+  border: none;
 } 
 
   @media (max-width: 786) {
@@ -626,4 +717,58 @@ const PaymentForm = styled.div `
       /* margin: 10px; */
     }
   }
+`;
+
+const PopUp = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ .success {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #d1c1c1;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  right: 20%;
+  /* border: 2px solid #76cc76; */
+  @media only screen and (max-width: 768px) {
+    right: 10%;
+    }
+}
+.success__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-top: 6px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.success__icon path {
+  fill: #393A37;
+}
+.success__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #393A37;
+}
+.success__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.success__close path {
+  fill: #393A37;
+}
 `;

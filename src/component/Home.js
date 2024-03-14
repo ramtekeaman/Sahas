@@ -13,6 +13,12 @@ import img9 from "./Gallery Images/gallery_img13.png";
 import img10 from "./Gallery Images/gallery_img14.png";
 import img11 from "./Gallery Images/gallery_img15.png";
 import img13 from "./images/PavyaAndSiddhi.png";
+import bgimg from './images/bg-img.jpeg'
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import {Autoplay, Navigation } from 'swiper/modules';
+
 import { Link } from "react-router-dom";
 import Navigate_Context from "../Context/Navigate_Context";
 import 'aos/dist/aos.css'
@@ -26,6 +32,7 @@ import slide4 from "./images/Slides/womes_cricket.png";
 import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -92,7 +99,7 @@ export default function Home({ dbpath }) {
 
   AOS.init({
     duration: 650,
-    once: true
+    once: false
   });
 
   const [loader, setLoader] = useState(true)
@@ -199,7 +206,7 @@ export default function Home({ dbpath }) {
 
   const [text, setText] = useState("");
   const initialText = "J0oin Sahas Cricket Club!";
-  const typingSpeed = 100; // Adjust typing speed here
+  const typingSpeed = 200; // Adjust typing speed here
 
   useEffect(() => {
     let index = 0;
@@ -232,7 +239,20 @@ export default function Home({ dbpath }) {
     // return () => clearInterval(interval);
   }, []);
   
-  
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+};
+
+
+const [currentSlide1, setCurrentSlide1] = useState(0);
+  const slides = [slide1, slide2];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide1((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   return (
     <>
@@ -246,7 +266,13 @@ export default function Home({ dbpath }) {
               
                 <button onClick={handleClose}><i class="fa fa-times"></i>
 </button>
-                <img src={img2} alt="popUp Img" />
+                <div className="popup-content">
+                  <img src={img2} alt="popUp Img" />
+                  <div className="data-content">
+                    <h3>Join Us Sahas Cricket Club !</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus animi laborum quo quidem laboriosam mollitia repudiandae quae beatae, suscipit minus.</p>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -255,39 +281,59 @@ export default function Home({ dbpath }) {
 
         {/* <!-- Carousel Start --> */}
         <MainCarousel>
-        <div data-aos="fade-up" data-aos-duration="2000">
-        <div className="container-fluid p-0 mb-5" id="default" >
-      <div id="header-carousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="false">
-        <div className="carousel-inner">
-          {/* First Carousel Item */}
-          <div className="carousel-item active" style={{ background: "#696969" }}>
-            <img className="w-100 h-100" src="img/club_carosel1.png" alt="Image" />
+          {/* <div data-aos="fade-up" data-aos-duration="2000">
+          <div className="container-fluid p-0 mb-5" id="default" >
+        <div id="header-carousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="false">
+          <div className="carousel-inner">
+            
+            <div className="carousel-item active" style={{ background: "#696969" }}>
+              <img className="w-100 h-100" src="img/club_carosel1.png" alt="Image" />
+            </div>
+
+            
+            <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
+              <img className="w-100 h-100" src={slide1} alt="Image" style={{ maxHeight: "770px" }} />
+            </div>
+
+            
+            <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
+              <img className="w-100 h-100" src={slide2} alt="Image" style={{ maxHeight: "770px" }} />
+            </div>
           </div>
 
-          {/* Second Carousel Item */}
-          <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
-            <img className="w-100 h-100" src={slide1} alt="Image" style={{ maxHeight: "770px" }} />
-          </div>
-
-          {/* Third Carousel Item */}
-          <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
-            <img className="w-100 h-100" src={slide2} alt="Image" style={{ maxHeight: "770px" }} />
-          </div>
-        </div>
-
-        {/* Carousel Caption - Content outside carousel-items */}
-        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
-          <div className="p-3" style={{ maxWidth: "900px" }}>
-            <h1 className="display-2 text-white text-uppercase mb-md-4">
-              <span className="typing-animation">Beyond Limits : {text}</span>
-            </h1>
-            <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
-            <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
+          
+          <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
+            <div className="p-3" style={{ maxWidth: "900px" }}>
+              <h1 className="display-2 text-white text-uppercase mb-md-4">
+                <span className="typing-animation">Beyond Limits : {text}</span>
+              </h1>
+              <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
+              <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+          </div> */}
+
+          <div className="swiper-container" data-aos="fade-up" data-aos-duration="2000">
+    <Swiper navigation={true} loop={true} autoplay={{ delay: 5000, disableOnInteraction: false, }} modules={[Navigation, Autoplay]} className="mySwiper">
+      <SwiperSlide><img src="img/club_carosel1.png" alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide1} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide2} alt="" className="swiper-image" /></SwiperSlide>
+      {/* Add other slides */}
+    </Swiper>
+    <div className="caption">
+      <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
+        <div className="p-3" style={{ maxWidth: "900px" }}>
+          <h1 className="display-2 text-white text-uppercase mb-md-4">
+            <span className="typing-animation">Beyond Limits : {text}</span>
+          </h1>
+          <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
+          <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
         </div>
+      </div>
+    </div>
+  </div>
         </MainCarousel>
 
         <div
@@ -348,6 +394,7 @@ export default function Home({ dbpath }) {
               <Link
                 to={"/AboutUs"}
                 class="btn btn-primary py-md-3 px-md-5 me-3"
+                onClick={handleLinkClick}
               >
                 Learn More
               </Link>
@@ -823,7 +870,7 @@ export default function Home({ dbpath }) {
             </div>
           
           <div className="container" style={{display:'flex', justifyContent:'center', }}>
-                    <Link to={'/Gallery'}><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
           </div>
           </div>
         </Gallery_Container>
@@ -916,6 +963,7 @@ const Gallery_Container = styled.div`
 const Initiatives_section = styled.div`
   .card {
     margin: 0 20px;
+    box-shadow: 0 0 1rem gray;
   }
 `;
 
@@ -933,15 +981,35 @@ const ModalContainer = styled.div`
 
   padding: 0 1%;
 
+  .popup-content{
+    display: flex;
+    gap: 2px;
+    background-color: #222429;
+    text-align: center;
+    margin: 2px 2px ;
+    border-radius: 20px;
+ 
+  
+
+    h3{
+      color: white;
+    }
+    p{
+      color: white;
+    }
+  }
+
   .imgContain {
-    width: 100%;
+    width: 60vw;
     height: 500px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    
     img {
-      width: 100%;
+      width: 30vw;
       height: 100%;
+      object-fit: cover;
       border-radius: 10px;
     }
     button {
@@ -961,6 +1029,33 @@ const ModalContainer = styled.div`
         /* color: #d9534f; */
         /* background-color: white; */
       }
+    }
+  }
+
+  .data-content{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    justify-content: center;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .popup-content{
+      flex-direction: column;
+    }
+    .imgContain{
+      width: 80vw;
+      object-fit: cover;
+
+      img{
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+      }
+    }
+
+    .data-content{
+      padding: 7px 7px;
     }
   }
 `;
@@ -1199,6 +1294,16 @@ const Card = styled.div`
 `;
 
 const MainCarousel = styled.div`
+
+.carousel-caption{
+  background: none;
+}
+  .swiper-container {
+  position: relative;
+
+  height: 600px;
+  /* Add other styles as needed */
+}
   .carousel-item {
     width: 100%;
     height: auto; /* Set initial height to auto */
@@ -1207,6 +1312,28 @@ const MainCarousel = styled.div`
     height: 770px;
   }
 
+  .swiper-image {
+  width: 100vw;
+  min-height: 600px;
+  object-fit: cover;
+  filter: grayscale(20%);
+  filter: brightness(40%);
+}
+
+
+.caption {
+  position: absolute;
+  bottom: 50%;
+  z-index: 200;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 80%;
+  /* Add other styles as needed */
+}
+
   @media (max-width: 768px) {
     .carousel-item {
       height: 300px; /* Set height for smaller screens */
@@ -1214,7 +1341,59 @@ const MainCarousel = styled.div`
     .carousel-inner {
       height: 300px; /* Set height for smaller screens */
     }
+    .caption{
+      width: 85vw;
+      font-size: 1em;
+    }
+    .swiper-container{
+      height: 300px;
+    }
+    .swiper-image{
+      min-height: 300px;
+    }
   }
+
+  #app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 `;
 
 const PlayerCarousel = styled.div `
