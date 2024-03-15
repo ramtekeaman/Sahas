@@ -1,17 +1,9 @@
 import styled from 'styled-components';
-import img1 from './images/Bas-Bat.jpg';
-import backgroundImage from './images/ProductSec.jpg';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import 'aos/dist/aos.css';
-import AOS from 'aos';
+import { useState, useEffect } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
 
 const Products = () => {
-  AOS.init({
-    duration: 650,
-    once: false,
-  });
-
+  const [products, setProducts] = useState([]);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
@@ -20,40 +12,27 @@ const Products = () => {
     address: '',
     quantity: '',
   });
-  const [finalPrice, setFinalPrice] = useState();
+  const [finalPrice, setFinalPrice] = useState(0);
   const [count, setCount] = useState(1);
-
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(0);
   const [showFP, setShowFP] = useState(false);
   const [paymentFormSubmitted, setPaymentFormSubmitted] = useState(false);
 
-  const products = [
-    {
-      id: 1,
-      name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VARY)",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 99.88,
-      imgSrc: img1,
-    },
-    {
-      id: 2,
-      name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 69,
-      imgSrc: img1,
-    },
-    {
-      id: 3,
-      name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 169,
-      imgSrc: img1,
-    },
-  ];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const result = await axios.get('http://localhost/test/viewproduct.php');
+        setProducts(result.data.phpresult || []); // Ensure that result.data.phpresult is an array
+        console.log(result.data.phpresult);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const handlePayNowClick = (product) => {
-    console.log("product",product)
     setSelectedProduct(product);
     setPrice(product.price);
     setShowPaymentForm(true);
@@ -65,19 +44,13 @@ const Products = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-
-
-  const handleSubmit = async () => {
-  
-
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      // setPaymentFormSubmitted(true);
-
-      const response = await fetch("http://localhost/test/productmail.php", {
-        method: "POST",
+      const response = await fetch('http://localhost/test/productmail.php', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
           name: formData.name,
@@ -87,35 +60,25 @@ const Products = () => {
           finalprice: showFP ? finalPrice : price,
         }),
       });
-
-      console.log("Response from server:", response);
+      console.log('Response from server:', response);
 
       setFormData({
-        name: "",
-        email: "",
-        address: "",
-        quantity: "1",
+        name: '',
+        email: '',
+        address: '',
+        quantity: '1',
       });
-      // setShowPaymentForm(false);
     } catch (error) {
-      console.error("Error submitting payment form:", error);
+      console.error('Error submitting payment form:', error);
     }
-
-    
-    if (paymentFormSubmitted) {
-      console.log("Payment form already submitted. Skipping...");
-      return;
-    }
-
-    console.log("Payment form  submitted");
+    setPaymentFormSubmitted(true);
+    console.log('Payment form submitted');
   };
 
   const decrement = () => {
     if (count > 1) {
       setCount(count - 1);
-      const fp = selectedProduct.price * (count - 1);
-      console.log(fp);
-      setFinalPrice(fp);
+      setFinalPrice(selectedProduct.price * (count - 1));
       setShowFP(true);
     } else {
       setCount(1);
@@ -124,98 +87,54 @@ const Products = () => {
 
   const increment = () => {
     setCount(count + 1);
-    const fp = selectedProduct.price * (count + 1);
-    console.log(fp);
-    setFinalPrice(fp);
+    setFinalPrice(selectedProduct.price * (count + 1));
     setShowFP(true);
   };
 
-  const renderProductCard = (product) => (
-    <div className="card" key={product.id}>
-      <img src={product.imgSrc} alt="Product" />
-      <div>
-        <h1>{product.name}</h1>
-        <p className="product-Description">{product.Description}</p>
-        <div className="price">Rs.<span>{product.price}</span></div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <>
-      <Abc>
-        <div id="aboutid">
-          <section
-            className="hero-wrap hero-wrap-2"
-            style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)' }}
-            data-aos="fade-up"
-            data-aos-duration="2000"
-          >
-            <div className="overlay"></div>
-            <div className="overlay-2"></div>
-            <div className="container">
-              <div className="row no-gutters slider-text align-items-center justify-content-center">
-                <div className="col-md-9 ftco-animate pb-5 text-center">
-                  <p className="breadcrumbs">
-                    <span className="mr-2">
-                      <Link to={'/'}>
-                        Home <i className="fa fa-chevron-right"></i>
-                      </Link>
-                    </span>{" "}
-                    <span>
-                      Product <i className="fa fa-chevron-right"></i>
-                    </span>
-                  </p>
-                  <h1 className="mb-0 bread">Products</h1>
-                </div>
-              </div>
-            </div>
-          </section>
-          <br />
-          <br />
-        </div>
-      </Abc>
-
       <ProductContainer>
         <div className="container">
           <div className="row">
             <h2>Products</h2>
-            <div className="cards" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-              {products.map(renderProductCard)}
+            <div className="cards">
+              {products.map((product) => (
+                <div className="card" key={product.id}>
+                  <img src={`http://localhost/test/uploads/${product.Image}`} alt="Product" />
+                  <div>
+                    <h1>{product.name}</h1>
+                    <p className="product-Description">{product.Description}</p>
+                    <div className="price">Rs.<span>{product.price}</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <button className="buy-now" onClick={() => handlePayNowClick(product)}>Pay Now</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           {showPaymentForm && selectedProduct && (
             <PaymentForm>
-              <div id="paymentModal" className="modalC" data-aos="flip-up">
-                <div className="modal-content">
-                  <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
-                  <div className="payment-form">
-                    <h2>Payment Form</h2>
-                    <form id="paymentForm" onSubmit={handleSubmit}>
-                      <label>Name:</label>
-                      <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className='form-control' />
-                      <label>Email:</label>
-                      <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
-                      <label>Address:</label>
-                      <textarea name="address" id="address" value={formData.address} onChange={handleInputChange} required></textarea>
-                      <label>Price:</label>
-                      <input type="text" value={showFP ? finalPrice : price} readOnly />
-                      <div className='card__wrapper'>
-                        <label htmlFor="quantity">Quantity :</label>
-                        <div className="card__counter">
-                          <button className="card__btn" onClick={decrement}>-</button>
-                          <div className="card__counter-score">{count}</div>
-                          <button className="card__btn card__btn-plus" onClick={increment}>+</button>
-                        </div>
-                      </div>
-                      <button type="submit" className="btn btn-primary">Submit Payment</button>
-                    </form>
+              <h2>Payment Form</h2>
+              <form onSubmit={handleSubmit}>
+                <label>Name:</label>
+                <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+                <label>Email:</label>
+                <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                <label>Address:</label>
+                <textarea name="address" value={formData.address} onChange={handleInputChange} required></textarea>
+                <label>Price:</label>
+                <input type="text" value={showFP ? finalPrice : price} readOnly />
+                <div className='card__wrapper'>
+                  <label htmlFor="quantity">Quantity :</label>
+                  <div className="card__counter">
+                    <button className="card__btn" onClick={decrement}>-</button>
+                    <div className="card__counter-score">{count}</div>
+                    <button className="card__btn card__btn-plus" onClick={increment}>+</button>
                   </div>
                 </div>
-              </div>
+                <button type="submit">Submit Payment</button>
+              </form>
             </PaymentForm>
           )}
         </div>
@@ -532,245 +451,4 @@ const PaymentForm = styled.div `
 
 .btn:hover {
   opacity: 0.7;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* Modal container */
-  .modalC {
-    position: fixed;
-    z-index: 9000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-  }
-
-  /* Modal content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 2% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Use percentage for responsiveness */
-    max-width: 500px; /* Limit maximum width */
-    border-radius: 5px;
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Close button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .payment-form {
-    max-width: 400px;
-    /* margin: 0 10%; */
-  }
-
-  .payment-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .payment-form form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .payment-form form input[type="text"],
-  .payment-form form input[type="email"],
-  .payment-form form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-
-  .payment-form form button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #fb5b21;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-  }
-
-  .payment-form form button[type="submit"]:hover {
-    background-color: white;
-    color: #fb5b21;
-    border: 2px solid #fb5b21;
-  }
-
-  .quantity{
-    display: flex;
-    gap: 5px;
-    /* justify-content: center; */
-    align-items: center;
-    margin-bottom: 10px;
-
-
-    input{
-      width: 60px;
-      padding: 10px;
-      /* margin-bottom: 15px; */
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-      /* align-self: center; */
-    }
-  }
-
-  .card__wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  }
-
-  .card__counter {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-  padding: 5px;
-  background: #F7F7F7;
-  border-radius: 50px;
-  border: 1px solid #fb5b21;
-}
-
-  .card__counter-score, .card__btn {
-  font-weight: 700;
-  font-size: 22px;
-  color: #fb5b21;
-  /* color: var(--main-color); */
-  text-align: center;
-}
-
-.card__btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  color: #fb5b21;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card__btn-plus {
-  background: var(--bg-color);
-  
-  border: none;
-} 
-
-  @media (max-width: 786) {
-    /* Adjust modal content width for smaller screens */
-    .modal-content {
-      width: 90%;
-      margin: 60px 0px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    /* Further adjust modal content width for even smaller screens */
-    .modal-content {
-      width: 100%;
-      /* margin: 10px; */
-    }
-  }
-`;
-
-const PopUp = styled.div `
-  display: flex;
-  align-items: center;
-  justify-content: center;
- .success {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  width: 320px;
-  padding: 12px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background: #d1c1c1;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px -3px #111;
-  text-align: center;
-  position: fixed;
-  top: 10px;
-  right: 20%;
-  /* border: 2px solid #76cc76; */
-  @media only screen and (max-width: 768px) {
-    right: 10%;
-    }
-}
-.success__icon {
-  width: 20px;
-  height: 20px;
-  transform: translateY(-2px);
-  margin-top: 6px;
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-}
-.success__icon path {
-  fill: #393A37;
-}
-.success__title {
-  font-weight: 500;
-  font-size: 14px;
-  color: #393A37;
-}
-.success__close {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-.success__close path {
-  fill: #393A37;
-}
-`;
+}`;
