@@ -6,6 +6,9 @@ import { useState } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Products = () => {
   AOS.init({
     duration: 650,
@@ -106,8 +109,14 @@ const Products = () => {
       console.log("Payment form already submitted. Skipping...");
       return;
     }
+    if(formData.name  === "" || formData.email === "" || formData.address === ""){
+      handleClick1();
+    }else{
+      handleClick();
+      console.log("Payment form  submitted");
+    }
 
-    console.log("Payment form  submitted");
+    
   };
 
   const decrement = () => {
@@ -130,8 +139,35 @@ const Products = () => {
     setShowFP(true);
   };
 
+  const handleClick = () => {
+    toast('Submitted Successfully !!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+  const handleClick1 = () => {
+    toast.warn('Fill all the Required Fields !', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      });
+  };
+
   const renderProductCard = (product) => (
-    <div className="card" key={product.id}>
+    <div className="card" key={product.id} data-aos="fade-up" data-aos-anchor-placement="center-bottom">
       <img src={product.imgSrc} alt="Product" />
       <div>
         <h1>{product.name}</h1>
@@ -183,7 +219,7 @@ const Products = () => {
         <div className="container">
           <div className="row">
             <h2>Products</h2>
-            <div className="cards" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+            <div className="cards">
               {products.map(renderProductCard)}
             </div>
           </div>
@@ -222,6 +258,19 @@ const Products = () => {
           )}
         </div>
       </ProductContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </>
   );
 }

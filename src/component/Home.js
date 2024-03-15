@@ -264,18 +264,18 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
         {showPopUp && (
           <ModalContainer>
             <div data-aos="zoom-in-up">
-              <div className="imgContain">
-              
-                <button onClick={handleClose}><i class="fa fa-times"></i>
-</button>
-                <div className="popup-content">
-                  <img src={img2} alt="popUp Img" />
-                  <div className="data-content">
-                    <h3>Join Us Sahas Cricket Club !</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus animi laborum quo quidem laboriosam mollitia repudiandae quae beatae, suscipit minus.</p>
+            <div className="popup-content">
+              <div class="card">
+                  <div className="image_co">
+                    <img src={slide3}  alt="popup Img" />
                   </div>
-                </div>
-
+                  <button className="cross-icon" onClick={handleClose}><i class="fas fa-times"></i></button>
+                  {/* <div class="textBox">
+                    <p class="text head">Ethereum</p>
+                    <span>Cryptocurrency</span>
+                    <p class="text price">1.654,34€</p>
+                  </div> */}
+              </div>
               </div>
             </div>
           </ModalContainer>
@@ -974,7 +974,7 @@ const Initiatives_section = styled.div`
 const ModalContainer = styled.div`
   position: fixed;
   left: 0;
-  top: 0;
+  bottom: 0;
   z-index: 9999;
   width: 100%;
   height: 100vh;
@@ -986,82 +986,112 @@ const ModalContainer = styled.div`
   padding: 0 1%;
 
   .popup-content{
-    display: flex;
-    gap: 2px;
-    background-color: #222429;
-    text-align: center;
-    margin: 2px 2px ;
+    width: 100vw;
+    height: 100vh;
+    z-index: 300;
+    position: relative;
+  }
+
+  .card {
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    z-index: 301;
+  width: 500px;
+  height: 285px;
+  background: #313131;
+  border-radius: 20px;
+  ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  filter: blur(20%);
+  transition: 0.2s ease-in-out;
+}
+.image_co{
+  width: 500px;
+  height: 285px;
+  border-radius: 20px;
+  
+  
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: 0.2s ease-in-out;
     border-radius: 20px;
- 
-  
 
-    h3{
-      color: white;
-    }
-    p{
-      color: white;
+  }
+}
+
+
+.textBox {
+  opacity: 0;
+  gap: 15px;
+  transition: 0.2s ease-in-out;
+  z-index: 3;
+}
+
+.textBox > .text {
+  font-weight: bold;
+}
+
+.textBox > .head {
+  font-size: 20px;
+}
+
+.textBox > .price {
+  font-size: 17px;
+}
+
+.textBox > span {
+  font-size: 12px;
+  color: lightgrey;
+}
+
+.card:hover > .textBox {
+  opacity: 1;
+}
+
+.card:hover > .image_co {
+  /* height: 65%; */
+  /* filter: blur(7px); */
+  /* animation: anim 3s infinite; */
+}
+
+.cross-icon{
+  border: none;
+  outline: none;
+  color: transparent;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  top: -30px;
+  right: 2px;
+
+  i{
+    font-size: 20px;
+    color: black;
+  }:hover{
+    color: red;
+  }
+}
+
+
+.card:hover {
+  /* transform: scale(1.04); */
+}
+
+@media screen and (max-width: 768px) {
+    .card{
+      width: 98vw;
+      height: 200px;
     }
   }
 
-  .imgContain {
-    width: 60vw;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    
-    img {
-      width: 30vw;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    button {
-      align-self: flex-end;
-      /* background-color: #d9534f; */
-      margin: 2px;
-      /* color: white; */
-      border: none;
-      outline: none;
-      /* width: 50px; */
-      height: 30px;
-      border-radius: 5px;
-      align-items: right;
-      opacity: 1;
-      :hover {
-        color: red;
-        /* color: #d9534f; */
-        /* background-color: white; */
-      }
-    }
-  }
-
-  .data-content{
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
-    justify-content: center;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .popup-content{
-      flex-direction: column;
-    }
-    .imgContain{
-      width: 80vw;
-      object-fit: cover;
-
-      img{
-        width: 100%;
-        max-height: 200px;
-        object-fit: cover;
-      }
-    }
-
-    .data-content{
-      padding: 7px 7px;
-    }
-  }
 `;
 
 const Slide_show = styled.div`
@@ -1350,10 +1380,10 @@ const MainCarousel = styled.div`
       font-size: 1em;
     }
     .swiper-container{
-      height: 300px;
+      height: 250px;
     }
     .swiper-image{
-      min-height: 300px;
+      min-height: 250px;
     }
   }
 
