@@ -2,19 +2,21 @@ import styled from 'styled-components';
 import img1 from './images/Bas-Bat.jpg';
 import backgroundImage from './images/ProductSec.jpg';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
+import axios from 'axios'; // Import axios for making HTTP requests
+
 
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Products = () => {
-  AOS.init({
-    duration: 650,
-    once: false,
-  });
-
+    AOS.init({
+      duration: 650,
+      once: false,
+    });
+  const [products, setProducts] = useState([]);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [formData, setFormData] = useState({
@@ -23,40 +25,27 @@ const Products = () => {
     address: '',
     quantity: '',
   });
-  const [finalPrice, setFinalPrice] = useState();
+  const [finalPrice, setFinalPrice] = useState(0);
   const [count, setCount] = useState(1);
-
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(0);
   const [showFP, setShowFP] = useState(false);
   const [paymentFormSubmitted, setPaymentFormSubmitted] = useState(false);
 
-  const products = [
-    {
-      id: 1,
-      name: "SS SOFT PRO PLAYERS SCOOP BAT WITH FIBER TAPE (SCOOP DESIGN MAY VARY)",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 99.88,
-      imgSrc: img1,
-    },
-    {
-      id: 2,
-      name: "SS Plastic Cricket Bat with Light Tennis Ball 1 to 8",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 69,
-      imgSrc: img1,
-    },
-    {
-      id: 3,
-      name: "SS Soft Pro Premium Scoop Kashmir willow Cricket Bat – SH",
-      Description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis itaque hic ipsam.",
-      price: 169,
-      imgSrc: img1,
-    },
-  ];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const result = await axios.get('http://localhost/test/viewproduct.php');
+        setProducts(result.data.phpresult || []); // Ensure that result.data.phpresult is an array
+        console.log(result.data.phpresult);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const handlePayNowClick = (product) => {
-    console.log("product",product)
     setSelectedProduct(product);
     setPrice(product.price);
     setShowPaymentForm(true);
@@ -68,19 +57,13 @@ const Products = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-
-
-  const handleSubmit = async () => {
-  
-
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      // setPaymentFormSubmitted(true);
-
-      const response = await fetch("http://localhost/test/productmail.php", {
-        method: "POST",
+      const response = await fetch('http://localhost/test/productmail.php', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
           name: formData.name,
@@ -90,41 +73,32 @@ const Products = () => {
           finalprice: showFP ? finalPrice : price,
         }),
       });
-
-      console.log("Response from server:", response);
+      console.log('Response from server:', response);
 
       setFormData({
-        name: "",
-        email: "",
-        address: "",
-        quantity: "1",
+        name: '',
+        email: '',
+        address: '',
+        quantity: '1',
       });
-      // setShowPaymentForm(false);
     } catch (error) {
-      console.error("Error submitting payment form:", error);
+      console.error('Error submitting payment form:', error);
     }
 
-    
-    if (paymentFormSubmitted) {
-      console.log("Payment form already submitted. Skipping...");
-      return;
-    }
     if(formData.name  === "" || formData.email === "" || formData.address === ""){
       handleClick1();
     }else{
       handleClick();
       console.log("Payment form  submitted");
     }
-
-    
+    setPaymentFormSubmitted(true);
+    console.log('Payment form submitted');
   };
 
   const decrement = () => {
     if (count > 1) {
       setCount(count - 1);
-      const fp = selectedProduct.price * (count - 1);
-      console.log(fp);
-      setFinalPrice(fp);
+      setFinalPrice(selectedProduct.price * (count - 1));
       setShowFP(true);
     } else {
       setCount(1);
@@ -133,9 +107,7 @@ const Products = () => {
 
   const increment = () => {
     setCount(count + 1);
-    const fp = selectedProduct.price * (count + 1);
-    console.log(fp);
-    setFinalPrice(fp);
+    setFinalPrice(selectedProduct.price * (count + 1));
     setShowFP(true);
   };
 
@@ -166,23 +138,9 @@ const Products = () => {
       });
   };
 
-  const renderProductCard = (product) => (
-    <div className="card" key={product.id} data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-      <img src={product.imgSrc} alt="Product" />
-      <div>
-        <h1>{product.name}</h1>
-        <p className="product-Description">{product.Description}</p>
-        <div className="price">Rs.<span>{product.price}</span></div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button className="buy-now" onClick={() => handlePayNowClick(product)} style={{ width: '90px', borderRadius: '7px', height: '50px', display: 'flex', justifyContent: 'clear', alignItems: 'center' }}>Pay Now</button>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <>
-      <Abc>
+    <Abc>
         <div id="aboutid">
           <section
             className="hero-wrap hero-wrap-2"
@@ -214,13 +172,24 @@ const Products = () => {
           <br />
         </div>
       </Abc>
-
       <ProductContainer>
         <div className="container">
           <div className="row">
             <h2>Products</h2>
             <div className="cards">
-              {products.map(renderProductCard)}
+              {products.map((product) => (
+                <div className="card" key={product.id} data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+                  <img src={`http://localhost/test/uploads/${product.Image}`} alt="Product" />
+                  <div>
+                    <h1>{product.name}</h1>
+                    <p className="product-Description">{product.Description}</p>
+                    <div className="price">Rs.<span>{product.price}</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <button className="buy-now" onClick={() => handlePayNowClick(product)}>Buy Now</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           {showPaymentForm && selectedProduct && (
@@ -254,7 +223,6 @@ const Products = () => {
               </div>
             </div>
           </PaymentForm>
-          
           )}
         </div>
       </ProductContainer>
@@ -287,9 +255,11 @@ const ProductContainer  = styled.div`
   background:#e2e8f0;
   
 }
-img{
+.card{
+  img{
   width:100%;
-  max-height: 300px;
+  max-height: 350px;
+}
 }
 .cards{
   display:flex;
@@ -320,7 +290,8 @@ img{
 
 .cards .card button{
   margin:1rem 0;
-  padding:.3rem .6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
   border:0;
   background:#c53030;
   color:white;
@@ -331,7 +302,7 @@ img{
 
 .cards .card img:hover{
   transition:.3s;
-  transform: scale(1.1);
+  transform: scale(1.04);
   transition-timing-function:ease-in-out;
 }
 
@@ -770,58 +741,4 @@ const PaymentForm = styled.div `
       /* margin: 10px; */
     }
   }
-`;
-
-const PopUp = styled.div `
-  display: flex;
-  align-items: center;
-  justify-content: center;
- .success {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  width: 320px;
-  padding: 12px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background: #d1c1c1;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px -3px #111;
-  text-align: center;
-  position: fixed;
-  top: 10px;
-  right: 20%;
-  /* border: 2px solid #76cc76; */
-  @media only screen and (max-width: 768px) {
-    right: 10%;
-    }
-}
-.success__icon {
-  width: 20px;
-  height: 20px;
-  transform: translateY(-2px);
-  margin-top: 6px;
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-}
-.success__icon path {
-  fill: #393A37;
-}
-.success__title {
-  font-weight: 500;
-  font-size: 14px;
-  color: #393A37;
-}
-.success__close {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-.success__close path {
-  fill: #393A37;
-}
 `;

@@ -91,6 +91,9 @@ export default function Dashboard({dbpath,setBtnstatus}) {
 
                         <div class="" >
                         <Link className="nav-link" to="/Coaching" ><button type="button" class="btn btn-outline-primary">Attendances</button></Link>
+                        <div class="" >
+                        <Link className="nav-link" to="/UpdateP" ><button type="button" class="btn btn-outline-primary">Product Upd</button></Link>
+                        </div>
                         </div>
 
                         <div class="Ar">
@@ -113,6 +116,7 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                                 </div>
                             </div>
                         </div>
+                        
                         
                         <div class="" >
                             <button type="nav-item button" style={{marginLeft:'20px', marginTop:'5px'}} class="btn btn-outline-primary" onClick={onLogout}>Logout</button>
