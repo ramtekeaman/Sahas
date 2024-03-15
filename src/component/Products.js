@@ -258,7 +258,9 @@ const ProductContainer  = styled.div`
 .card{
   img{
   width:100%;
-  max-height: 350px;
+  // max-height: 200px;
+  // min-height:200px;
+height:200px;
 }
 }
 .cards{
@@ -266,7 +268,6 @@ const ProductContainer  = styled.div`
   width:100%;
   flex-wrap:wrap;
   justify-content:space-evenly;
- 
   font-family:sans-serif;
 }
 .cards .card{
