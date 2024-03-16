@@ -88,6 +88,7 @@ const Products = () => {
     if(formData.name  === "" || formData.email === "" || formData.address === ""){
       handleClick1();
     }else{
+      setShowPaymentForm(false);
       handleClick();
       console.log("Payment form  submitted");
     }
@@ -619,6 +620,9 @@ const PaymentForm = styled.div `
     float: right;
     font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    top: 1px;
+    right: 15px;
   }
 
   .close:hover,
@@ -742,6 +746,9 @@ const PaymentForm = styled.div `
       width: 90%;
       margin: 60px 0px;
     }
+    .close {
+    right: 4px;
+  }
   }
 
   @media (max-width: 400px) {
@@ -750,5 +757,8 @@ const PaymentForm = styled.div `
       width: 100%;
       /* margin: 10px; */
     }
+    .close {
+    right: 1px;
+  }
   }
 `;
