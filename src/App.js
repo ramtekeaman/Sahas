@@ -215,6 +215,7 @@ import Ccontact from './component/Ccontact';
 import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
 import Performance from './component/performance';
+import PPerformance from './component/pperformance';
 // import Test 
 
 import {  
@@ -303,6 +304,10 @@ function App() {
           
           <Route exact path="/RegisterCoach" element={
               <RegisterCoach dbpath={dbpath}/>
+          }>
+          </Route> 
+          <Route exact path="/pperformance" element={
+              <PPerformance dbpath={dbpath}/>
           }>
           </Route> 
           <Route exact path="/uproduct" element={

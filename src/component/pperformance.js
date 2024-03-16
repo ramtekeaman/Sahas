@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-export default function Performance({ dbpath }) {
+export default function PPerformance({ dbpath }) {
   const [user, setUser] = useState([]);
   const [type1, setType1] = useState("");
   const [filter1, setFilter1] = useState("");
@@ -35,9 +35,9 @@ export default function Performance({ dbpath }) {
     let query = "";
   
     if (type1 === '1') {
-      query = 'select * from remark where id ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 3 MONTH);';
+      query = 'select * from remark where id ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else if (type1 === '2') {
-      query = 'select * from remark where name ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 3 MONTH);';
+      query = 'select * from remark where name ="' + filter1 + '" AND timestamp >= DATE_SUB(NOW(), INTERVAL 6 MONTH);';
     } else {
       alert("Please select the proper action");
       return;
