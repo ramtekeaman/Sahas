@@ -999,7 +999,7 @@ const ModalContainer = styled.div`
     z-index: 301;
   width: 500px;
   height: 285px;
-  background: #313131;
+  background: transparent;
   border-radius: 20px;
   ;
   display: flex;
@@ -1014,6 +1014,9 @@ const ModalContainer = styled.div`
   width: 500px;
   height: 285px;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   
   img {
@@ -1022,6 +1025,7 @@ const ModalContainer = styled.div`
     position: absolute;
     transition: 0.2s ease-in-out;
     border-radius: 20px;
+    border: 2px solid white;
 
   }
 }
@@ -1090,6 +1094,25 @@ const ModalContainer = styled.div`
       width: 98vw;
       height: 200px;
     }
+
+  .image_co{
+  width: 90vw;
+  height: 285px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: 0.2s ease-in-out;
+    border-radius: 20px;
+
+  }
+}
   }
 
 `;
