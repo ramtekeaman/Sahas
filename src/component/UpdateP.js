@@ -75,6 +75,13 @@ export default function UpdateP({ dbpath, cart, setBtnstatus }) {
     </button>
   </Link>
   </div>
+  <div className="ar" style={{marginLeft:'50px'}}>
+  <Link to="/Dashboard" style={{ textDecoration: "none" }}>
+    <button type="button" className="btn btn-primary">
+    Dashboard 
+    </button>
+  </Link>
+  </div>
   <br />
   <br /><br />
 </div>
