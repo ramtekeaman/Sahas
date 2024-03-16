@@ -284,10 +284,19 @@ height:200px;
   font-size:1rem;
   margin:1rem 0;
 }
-
-.card p{
+.card p {
   font-size: 0.8rem;
+  max-height: 3.6rem; /* Approximately 3 lines of text with 0.8rem font size and 1.2 line-height */
+  overflow: hidden;
+  white-space: normal; /* Allow wrapping within the container */
+  line-height: 1.2; /* Adjust line height according to your font size */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit the number of lines to 3 */
+  -webkit-box-orient: vertical;
 }
+
+
 
 .cards .card button{
   margin:1rem 0;
