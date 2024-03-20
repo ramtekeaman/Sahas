@@ -35,6 +35,7 @@ import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Event_Btn from "./Event_Btn";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -794,6 +795,10 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
             </div>
           </div>
         </Initiatives_section>
+
+        <div style={{position:'fixed', top:'45%', left:'0.1%'}}>
+          <Event_Btn/>
+        </div>
 
         <div
           class="container mb-5 text-left"

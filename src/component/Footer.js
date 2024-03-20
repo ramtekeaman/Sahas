@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigate_Context from '../Context/Navigate_Context';
 
 export default function Footer({ dbpath }) {
+    const [submitDisable, setSubmitDissable] = useState(false);
     const [input, setInput] = useState({
         email: "",
     });
@@ -12,6 +13,7 @@ export default function Footer({ dbpath }) {
         event.preventDefault();
 
         try {
+            setSubmitDissable(true)
             const response = await axios.post('http://localhost/test/mail.php', {
                 email: input.email,
             }, {
@@ -34,6 +36,7 @@ export default function Footer({ dbpath }) {
         setInput({
             email: "",
         });
+        setSubmitDissable(false);
     };
 
     const { handalaboutclick, setAbout, navi, setIds } = useContext(Navigate_Context);
@@ -131,13 +134,14 @@ export default function Footer({ dbpath }) {
                     <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <input
-                        type="text"
+                        type="email"
                         className="form-control border-white p-3"
                         placeholder="Your Email"
                         value={input.email}
                         onChange={(e) => setInput({ email: e.target.value })}
                     />
-                    <button type="submit" className="btn btn-dark">Submit</button>
+                    <button type="submit" className="btn btn-dark" disabled={submitDisable}
+                    style={submitDisable ?{opacity:"0.7"}:{opacity:'1'}}>{!submitDisable ? 'Submit !' : 'Submitting...'}</button>
                 </div>
             </form>
                 </div>

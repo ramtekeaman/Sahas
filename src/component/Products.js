@@ -18,6 +18,8 @@ const Products = () => {
       duration: 650,
       once: false,
     });
+
+    const [submitDisable, setSubmitDissable] = useState(false);
   const [products, setProducts] = useState([]);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -65,6 +67,7 @@ const Products = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmitDissable(true);
       const response = await fetch('http://localhost/test/productmail.php', {
         method: 'POST',
         headers: {
@@ -93,12 +96,15 @@ const Products = () => {
     if(formData.name  === "" || formData.email === "" || formData.address === ""){
       handleClick1();
     }else{
+      setSubmitDissable(true);
       setShowPaymentForm(false);
       handleClick();
       console.log("Payment form  submitted");
+      setSubmitDissable(false);
     }
     setPaymentFormSubmitted(true);
     console.log('Payment form submitted');
+    setSubmitDissable(false);
   };
 
   const decrement = () => {
@@ -228,7 +234,9 @@ const Products = () => {
                         <button className="card__btn card_btn-plus" onClick={increment}>+</button>
                       </div>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit Payment</button>
+                    <button type="submit" className="btn btn-primary" disabled={submitDisable} onClick={handleSubmit}
+                    style={submitDisable ?{opacity:"0.7"}:{opacity:'1'}}
+                    >{!submitDisable ? 'Submit Payment' : 'Submitting...'}</button>
                     </div>
                 </div>
               </div>
