@@ -11,6 +11,8 @@ import axios from 'axios'; // Import axios for making HTTP requests
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import img from './images/error-message.png'
+
 const Products = () => {
     AOS.init({
       duration: 650,
@@ -31,6 +33,8 @@ const Products = () => {
   const [showFP, setShowFP] = useState(false);
   const [paymentFormSubmitted, setPaymentFormSubmitted] = useState(false);
 
+  const [showError, setShowError] = useState(false);
+
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -39,6 +43,7 @@ const Products = () => {
         console.log(result.data.phpresult);
       } catch (error) {
         console.error('Error loading products:', error);
+        setShowError(true);
       }
     };
 
@@ -175,7 +180,7 @@ const Products = () => {
       </Abc>
       <ProductContainer>
         <div className="container">
-          <div className="row">
+          {!showError && <div className="row">
             <h2>Products</h2>
             <div className="cards">
               {products.map((product) => (
@@ -192,7 +197,12 @@ const Products = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div>}
+
+              {showError && <div style={{width:'100%', height:'200px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', gap:'10px'}}>
+                  <img src={img} alt="" style={{width:'60px', height:'60px'}}/>
+                  <center><h4 style={{color:'#d86271'}}>Sorry, No Product Available !</h4></center>
+              </div>}
           {showPaymentForm && selectedProduct && (
             <PaymentForm>
             <div id="paymentModal" className="modalC" data-aos="flip-up">
