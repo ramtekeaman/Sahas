@@ -131,7 +131,7 @@ export default function Footer({ dbpath }) {
                     <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <input
-                        type="text"
+                        type="email"
                         className="form-control border-white p-3"
                         placeholder="Your Email"
                         value={input.email}
