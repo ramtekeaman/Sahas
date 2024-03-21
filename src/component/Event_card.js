@@ -42,6 +42,7 @@ export default Event_card
 const EventCard = styled.div `
  .event-card-list {
 	margin-top: 4em;
+    padding-left: 0;
 }
 
 .event-card-list li {

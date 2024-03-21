@@ -429,6 +429,7 @@ const Event_Content = styled.div `
 .event-card-list {
     margin-top: 4em;
     display: flex;
+    padding-left: 0;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
