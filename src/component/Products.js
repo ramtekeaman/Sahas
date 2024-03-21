@@ -156,7 +156,7 @@ const Products = () => {
         <div id="aboutid">
           <section
             className="hero-wrap hero-wrap-2"
-            style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)' }}
+            style={{ backgroundImage: `url(${backgroundImage})`, filter: 'brightness(80%)',}}
             data-aos="fade-up"
             data-aos-duration="2000"
           >

@@ -701,7 +701,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img5}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
@@ -737,7 +737,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img3}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
@@ -774,7 +774,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img12}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
