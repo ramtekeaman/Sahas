@@ -55,18 +55,20 @@ const EventCard = styled.div `
 	width: 600px;
 	border-radius: 0.3em;
     box-shadow: 2px 7px 10px -5px rgba(0,0,0,0.41);
+    padding-bottom: 5px;
+    border: 1px solid gray;
 }
 
 .event-card img {
 	width: 240px;
-	height: 200px;
-
+	height: auto;
 	object-fit: cover;
 }
 
 .event-card .name {
-	font-size: 2.3em;
-	font-weight: 400;
+    font-family: "Poppins", sans-serif;
+	font-size: 2.5rem;
+	/* font-weight: 400; */
 }
 
 .event-card .name a {
@@ -81,7 +83,7 @@ const EventCard = styled.div `
 }
 
 .event-card .location {
-	font-size: 1em;
+	font-size: 0.9em;
 	color: #757575;
 }
 
@@ -93,8 +95,10 @@ const EventCard = styled.div `
 
 .event-card .desc {
 	margin-bottom: 0.2em;
-	font-size: 1.16em;
+	font-size: 1em;
 	padding-left: 0.1em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
 }
 
 .event-card .date-ribbon {

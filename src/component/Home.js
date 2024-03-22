@@ -1456,6 +1456,27 @@ body {
   object-fit: cover;
 }
 
+.swiper-backface-hidden .swiper-slide{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.swiper-button-prev, div.swiper-button-next{
+  color: white;
+  font-weight: bolder;
+  /* background-color: white; */
+}
+
+div.swiper-button-next:after{
+  font-size: 30px;
+}
+
+div.swiper-button-prev:after {
+  font-size: 30px;
+}
+
 `;
 
 const PlayerCarousel = styled.div `
