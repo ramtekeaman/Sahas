@@ -18,6 +18,7 @@ const ContactUs = () => {
     message: "",
   });
 
+  const [submitDisable, setSubmitDissable] = useState(false);
   const [popUp, setPopUp] = useState(false);
 
   const handleInput = (event) => {
@@ -65,8 +66,8 @@ const ContactUs = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-
     try {
+      setSubmitDissable(true);
       const response = await axios.post('http://localhost/test/contact.php', {
         name: input.name,
         email: input.email,
@@ -81,12 +82,15 @@ const ContactUs = () => {
       
 
       if (response.data.includes('Thank You')) {
+        setSubmitDissable(false);
         handlepopup();
         // alert('Thank You for Contacting with Us!');
       } else {
+        setSubmitDissable(false);
         alert('Failed to submit message. Please try again.');
       }
     } catch (error) {
+      setSubmitDissable(false);
       console.error('Failed to submit message. Please try again.');
     }
   
@@ -144,9 +148,9 @@ const ContactUs = () => {
                   ></textarea>
                 </div>
                 <div className="d-grid mb-3">
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
+                  <button type="submit" className="btn btn-primary" disabled={submitDisable} onClick={handleSubmit}
+                    style={submitDisable ?{opacity:"0.7"}:{opacity:'1'}}
+                    >{!submitDisable ? 'Submit' : 'Submitting...'}</button>
                 </div>
               </form>
               <p className="text-center mt-3 text-dark">
