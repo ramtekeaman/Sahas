@@ -78,7 +78,7 @@ export default function Coaching({ dbpath }) {
     let isValid = true;
 
     user.forEach((res) => {
-      if (!attendanceOptions[res.id] || !matchesPlayed[res.id] || matchesPlayed[res.id] <= 0) {
+      if (!attendanceOptions[res.id] ) {
         errors[res.id] = 'Please fill in the detail';
         isValid = false;
       }
@@ -315,7 +315,7 @@ export default function Coaching({ dbpath }) {
                 <td>
                   <input
                     type='number'
-                    min={0}
+                    min={-1}
                     value={remarkText[res.id]?.Wicket || ''}
                     style={{ width: '70px' }}
                     onChange={(e) =>
