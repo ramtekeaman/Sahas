@@ -218,6 +218,8 @@ import Performance from './component/performance';
 import PPerformance from './component/pperformance';
 import Ugallery from './component/Ugallery';
 import Updategallery from './component/updategallery';
+import Event_Btn from './component/Event_Btn';
+
 // import Test 
 
 import {  
@@ -242,6 +244,8 @@ import styled from 'styled-components';
 import UpdateP from './component/UpdateP';
 import Uproduct from './component/uproduct';
 import Addp from './component/addp';
+import Events from './component/Events';
+import Agallery from './component/agallery';
 
 
 

@@ -59,7 +59,7 @@ export default function Updategallery({ dbpath }) {
               <select className="form-select" value={type} onChange={(e) => setType(e.target.value)}>
                 <option value="" hidden>Choose...</option>
                 <option value="Photos">Photos</option>
-                <option value="NewsPaper">NewsPaper Photos</option>
+                {/* <option value="NewsPaper">NewsPaper Photos</option> */}
                 <option value="Videos">Videos</option>
               </select>
             </div>
