@@ -78,6 +78,9 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/GenerateReciept" ><button type="button" class="btn btn-outline-primary">Genrate Receipt</button></Link>
+                       <div className="br">
+                       <Link className="nav-link" to="/aevent" ><button type="button" class="btn btn-outline-primary">Event Update</button></Link>
+                       </div>
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/Reports" ><button type="button" class="btn btn-outline-primary">Reports</button></Link>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import './CSS/ur.css'
-export default function Ugallery({ dbpath, cart, setBtnstatus }) {
+import './CSS/dr.css'
+export default function Aevent({ dbpath, cart, setBtnstatus }) {
   const [product, setproduct] = useState([]);
   const [qrid, setQrid] = useState("");
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function Ugallery({ dbpath, cart, setBtnstatus }) {
   const loadproduct = async () => {
     try {
       // const result = await axios.get(`${dbpath}viewproduct.php`);
-      const result = await axios.get(dbpath + "viewgallery.php");
+      const result = await axios.get(dbpath + "viewevent.php");
 
       setproduct(result.data.phpresult || []); // Ensure that result.data.phpresult is an array
       console.log(result.data.phpresult);
@@ -35,7 +35,7 @@ export default function Ugallery({ dbpath, cart, setBtnstatus }) {
 
     if (shouldDelete) {
       try {
-        await axios.post(`${dbpath}deletegallery.php`, { id });
+        await axios.post(`${dbpath}deleteevent.php`, { id });
         // Reload contacts after deletion
         loadproduct();
       } catch (error) {
@@ -56,22 +56,22 @@ export default function Ugallery({ dbpath, cart, setBtnstatus }) {
           <h1>Gallery</h1>
           <br />
           <div style={{ display: 'flex', justifyContent: 'flex-start' , marginLeft:'70px' }}>
-  <Link to="/agallery" style={{ textDecoration: 'none' }}>
+  <Link to="/adevent" style={{ textDecoration: 'none' }}>
     <button type="button" className="btn-primary btn">
-      Add New Picture / Video{' '}
+      Add New Event {' '}
       <span
         role="img"
         aria-label="product"
         style={{ color: 'green', display: 'inline-block' }}
       >
-        🖼️
+        
       </span>
     </button>
   </Link>
   <div className="ar" style={{marginLeft:'50px'}}>
-  <Link to="/updategallery" style={{ textDecoration: "none" }}>
+  <Link to="/updateevent" style={{ textDecoration: "none" }}>
     <button type="button" className="btn btn-primary">
-       Update Picture / Video 📷 
+       Update Event 
     </button>
   </Link>
   </div>
@@ -94,7 +94,10 @@ export default function Ugallery({ dbpath, cart, setBtnstatus }) {
               <thead>
                 <tr className="c1">
                   <th scope="col">ID</th>
-                  <th scope="col">Type</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date</th>
                 
                   <th scope="col">Image / Video</th>
                   <th scope="col">Delete</th>
@@ -105,14 +108,17 @@ export default function Ugallery({ dbpath, cart, setBtnstatus }) {
                 {product.map((res) => (
                   <tr key={res.id}>
                     <td>{res.id}</td>
-                    <td>{res.Type}</td>
+                    <td>{res.name}</td>
+                    <td>{res.Description}</td>
+                    <td>{res.location}</td>
+                    <td>{res.date}</td>
 
 
 
                     <td>
                     <a
                           href={
-                            "http://localhost/test/ugallery/" + res.Image
+                            "http://localhost/test/event/" + res.Image
                           }
                         >
                         <u>view</u>

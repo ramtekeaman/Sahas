@@ -246,8 +246,9 @@ import Uproduct from './component/uproduct';
 import Addp from './component/addp';
 import Events from './component/Events';
 import Agallery from './component/agallery';
-
-
+import Aevent from './component/aevent';
+import Adevent from './component/adevent';
+import Updateevent from './component/updateevent';
 
 
 function App() {
@@ -307,6 +308,23 @@ function App() {
               <RegisterRecretional dbpath={dbpath}/>
           }>
           </Route> 
+
+          <Route exact path="/aevent" element={
+              <Aevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/updateevent" element={
+              <Updateevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/adevent" element={
+              <Adevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+
           <Route exact path="/updategallery" element={
               <Updategallery dbpath={dbpath}/>
           }>
