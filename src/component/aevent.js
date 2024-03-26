@@ -99,7 +99,7 @@ export default function Aevent({ dbpath, cart, setBtnstatus }) {
                   <th scope="col">Location</th>
                   <th scope="col">Date</th>
                 
-                  <th scope="col">Image / Video</th>
+                  <th scope="col">Image </th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
