@@ -17,6 +17,7 @@ const JoinUs = () => {
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
 
+    const [submitDisable, setSubmitDissable] = useState(false);
     const [popUp, setPopUp] = useState(false);
     const handlepopup = () => {
       setPopUp(!popUp);
@@ -26,6 +27,7 @@ const JoinUs = () => {
       event.preventDefault();
   
       try {
+        setSubmitDissable(true);
         const response = await axios.post('http://localhost/test/joinus.php', {
             name: name,
           email: email,
@@ -44,6 +46,7 @@ const JoinUs = () => {
   
         if (response.data.includes('Thank You')) {
           // Reset form fields after successful submission
+        setSubmitDissable(false);
           handlepopup();
 
           setName('');
@@ -52,9 +55,11 @@ const JoinUs = () => {
           setAge('');
           setGender('');
         } else {
+        setSubmitDissable(false);
           alert('Failed to submit . Please try again.');
         }
       } catch (error) {
+        setSubmitDissable(false);
         console.error('Failed to submit . Please try again.');
       }
     
@@ -165,7 +170,9 @@ const JoinUs = () => {
             </select>
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+                  <button type="submit" className="btn btn-primary" disabled={submitDisable} onClick={handleSubmit}
+                    style={submitDisable ?{opacity:"0.7"}:{opacity:'1'}}
+                    >{!submitDisable ? 'Submit' : 'Submitting...'}</button>
           </div>
         </form>
       </div>

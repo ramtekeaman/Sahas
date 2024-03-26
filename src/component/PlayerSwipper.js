@@ -164,4 +164,24 @@ const SwiperContent = styled.div `
         width: 250px;
     }
   }
+
+  .swiper-backface-hidden .swiper-slide{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.swiper-button-prev, div.swiper-button-next{
+  color: white;
+  background-color: #555;
+}
+
+div.swiper-button-next:after{
+  font-size: 20px;
+}
+
+div.swiper-button-prev:after {
+  font-size: 20px;
+}
 `;

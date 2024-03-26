@@ -35,6 +35,7 @@ import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Event_Btn from "./Event_Btn";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -283,39 +284,6 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
 
         {/* <!-- Carousel Start --> */}
         <MainCarousel>
-          {/* <div data-aos="fade-up" data-aos-duration="2000">
-          <div className="container-fluid p-0 mb-5" id="default" >
-        <div id="header-carousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="false">
-          <div className="carousel-inner">
-            
-            <div className="carousel-item active" style={{ background: "#696969" }}>
-              <img className="w-100 h-100" src="img/club_carosel1.png" alt="Image" />
-            </div>
-
-            
-            <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
-              <img className="w-100 h-100" src={slide1} alt="Image" style={{ maxHeight: "770px" }} />
-            </div>
-
-            
-            <div className="carousel-item" style={{ objectFit: "cover", background: "#696969" }}>
-              <img className="w-100 h-100" src={slide2} alt="Image" style={{ maxHeight: "770px" }} />
-            </div>
-          </div>
-
-          
-          <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
-            <div className="p-3" style={{ maxWidth: "900px" }}>
-              <h1 className="display-2 text-white text-uppercase mb-md-4">
-                <span className="typing-animation">Beyond Limits : {text}</span>
-              </h1>
-              <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
-              <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-          </div> */}
 
           <div className="swiper-container" data-aos="fade-up" data-aos-duration="2000">
     <Swiper navigation={true} loop={true} cssMode={true} mousewheel={true} keyboard={true} autoplay={{ delay: 5000, disableOnInteraction: false, }} modules={[Navigation, Autoplay, Keyboard, Mousewheel]} className="mySwiper">
@@ -418,249 +386,6 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
           <PlayerSwipper/>
         </div>
 
-
-        {/* <div
-          class="container-fluid programe position-relative px-5 mt-5"
-          style={{
-            marginBottom: "135px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-          id="achievements"
-        >
-          <div
-            class="row g-5 gb-5"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              class="col-lg-4 col-md-6"
-              style={{ width: "20rem", height: "22rem" }}
-            >
-              <div
-                class="team-item position-relative"
-                style={{ transition: "0.2s ease-in-out" }}
-                onMouseEnter={() => {
-                  setShow1(true);
-                }}
-                onMouseLeave={() => {
-                  setShow1(false);
-                }}
-              >
-                <div class="position-relative overflow-hidden rounded">
-                  <img
-                    class="img-fluid w-100"
-                    src="/img/disha_player2 (2).png"
-                    alt=""
-                    style={{ height: "340px" }}
-                  />
-                </div>
-                <div
-                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
-                  style={{
-                    background: "rgba(34, 36, 41, 0.96)",
-                    width: "100%",
-                  }}
-                >
-                  <h5 class="text-uppercase text-light">Disha Kasat</h5>
-                  {show1 && (
-                    <p
-                      style={{
-                        maxHeight: "244px",
-                        width: "100%",
-                        overflow: "auto",
-                        scrollbarWidth: "none",
-                      }}
-                    >
-                      "Disha Kasat, a right-handed batter from Amravati,
-                      Maharashtra, has etched her name in cricket's annals with
-                      her remarkable consistency. Her journey is a testament to
-                      perseverance and talent, highlighted by two impressive
-                      half-centuries for India A Women in the Senior Women's One
-                      Day Challenger Trophy 2021. Disha's century for Vidarbha
-                      Women in Visakhapatnam was not only a display of skill but
-                      also a match-winning performance. Selected for the Central
-                      Zone team in the Senior Women Inter-Zonal T20 and by the
-                      Royal Challengers Bangalore in the WPL, Disha's rise is a
-                      testament to her potential. She symbolizes the power of
-                      dedication and hard work in achieving one's dreams."
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6"
-              style={{ width: "20rem", height: "22rem" }}
-            >
-              <div
-                class="team-item position-relative"
-                style={{ transition: "0.2s ease-in-out" }}
-                onMouseEnter={() => {
-                  setShow(true);
-                }}
-                onMouseLeave={() => {
-                  setShow(false);
-                }}
-              >
-                <div class="position-relative overflow-hidden rounded">
-                  <img class="img-fluid w-100" src="img/player1.jpg " alt="" />
-                </div>
-                <div
-                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
-                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
-                >
-                  <h5 class="text-uppercase text-light">Lokesh Marghade</h5>
-                  {show && (
-                    <p style={{ color: "#989898", fontSize: "12.5px" }}>
-                      "The Vidarbha captain, who was born with a twisted ankle,
-                      has demonstrated consistency in every competition he
-                      participates in recent days. In December 2021, Marghade
-                      also led the Challenger Trophy in runs scored. He had
-                      played four games in Chandigarh and scored 169 runs,
-                      including two fifties. "I think the advice I'm getting
-                      from my elders at Sahas Cricket Club is really beneficial
-                      to me. "My goal is to improve myself so that I can make a
-                      strong return to the Indian team," he stated."
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6"
-              style={{ width: "20rem", height: "22rem" }}
-            >
-              <div
-                class="team-item position-relative"
-                style={{ transition: "0.2s ease-in-out" }}
-                onMouseEnter={() => {
-                  setShow2(true);
-                }}
-                onMouseLeave={() => {
-                  setShow2(false);
-                }}
-              >
-                <div class="position-relative overflow-hidden rounded">
-                  <img
-                    class="img-fluid w-100"
-                    src="/img/SiddhiAndAroohi.png"
-                    alt=""
-                    style={{ height: "340px" }}
-                  />
-                </div>
-                <div
-                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
-                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
-                >
-                  <h5 class="text-uppercase text-light">Siddhi & AArohi</h5>
-                  {show2 && (
-                    <div
-                      style={{
-                        maxHeight: "260px",
-                        overflow: "auto",
-                        scrollbarWidth: "none",
-                      }}
-                    >
-                      <p style={{ color: "#989898", fontSize: "12.5px" }}>
-                        "Siddhi and Arohi, your achievements are truly
-                        remarkable! Your hard work, dedication, and perseverance
-                        have paid off, bringing immense pride to your family and
-                        community. It's been a privilege to witness your growth
-                        and progress, fueled by countless hours of practice and
-                        determination. Your humility and respect towards your
-                        coaches, the game, and the learning process are
-                        admirable qualities that set you apart as not only
-                        exceptional athletes but also as admirable individuals.
-                        Earning a spot in the U-19 women’s camp organized by
-                        @bcciofficial.in @bcci.women is a testament to your
-                        talent and commitment. As you continue on your journey,
-                        we extend our heartfelt wishes for success and good
-                        fortune. May you continue to push yourselves to new
-                        heights and achieve your dreams, including representing
-                        at the national level."
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6"
-              style={{ width: "20rem", height: "22rem" }}
-            >
-              <div
-                class="team-item position-relative"
-                style={{ transition: "0.2s ease-in-out" }}
-                onMouseEnter={() => {
-                  setShow3(true);
-                }}
-                onMouseLeave={() => {
-                  setShow3(false);
-                }}
-              >
-                <div class="position-relative overflow-hidden rounded">
-                  <img
-                    class="img-fluid w-100"
-                    src={img13}
-                    alt=""
-                    style={{ height: "340px" }}
-                  />
-                </div>
-                <div
-                  class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4 show_info"
-                  style={{ background: "rgba(34, 36, 41, 0.96)" }}
-                >
-                  <h5 class="text-uppercase text-light">Pavya and Siddhi</h5>
-                  {show3 && (
-                    <div
-                      style={{
-                        maxHeight: "260px",
-                        overflow: "auto",
-                        scrollbarWidth: "none",
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: "#989898",
-                          fontSize: "12.5px",
-                          overflow: "auto",
-                          scrollbarWidth: "none",
-                        }}
-                      >
-                        "Pavya and Siddhi's selection for the VCA U-19 women’s
-                        team is a true reflection of their unwavering
-                        dedication, exceptional talent, and relentless hard
-                        work. Their journey to this point has been paved with
-                        countless sacrifices, hours of intense practice, and an
-                        unyielding commitment to excellence. Their achievement
-                        serves as a beacon of inspiration for aspiring athletes
-                        everywhere, showcasing the power of resilience and
-                        determination in the pursuit of one's dreams. As they
-                        step onto this new stage in their athletic careers, we
-                        stand in awe of their accomplishments and offer our
-                        sincerest congratulations. May their success continue to
-                        fuel their passion and drive as they navigate the
-                        challenges and triumphs that lie ahead. We are proud to
-                        celebrate their achievements and eagerly anticipate the
-                        remarkable feats they will undoubtedly accomplish in the
-                        future. Here's to Pavya and Siddhi, two shining examples
-                        of perseverance and triumph in the world of sports."
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <Initiatives_section
           style={{
             boxShadow: "0px 1px 48px -8px rgba(0,0,0,0.27)",
@@ -700,7 +425,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img5}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
@@ -736,7 +461,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img3}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
@@ -773,7 +498,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       src={img12}
                       alt=""
                       className="image-icon img-fluid rounded-top"
-                      style={{ width: "95%", height: "300px" }}
+                      style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
                   <div className="card-body" style={{ minHeight: "250px" }}>
@@ -794,6 +519,10 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
             </div>
           </div>
         </Initiatives_section>
+
+        <div style={{position:'fixed', top:'45%', left:'0.1%', zIndex:'99'}}>
+          <Event_Btn/>
+        </div>
 
         <div
           class="container mb-5 text-left"
@@ -1449,6 +1178,27 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.swiper-backface-hidden .swiper-slide{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.swiper-button-prev, div.swiper-button-next{
+  color: white;
+  font-weight: bolder;
+  /* background-color: white; */
+}
+
+div.swiper-button-next:after{
+  font-size: 30px;
+}
+
+div.swiper-button-prev:after {
+  font-size: 30px;
 }
 
 `;

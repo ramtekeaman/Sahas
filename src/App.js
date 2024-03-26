@@ -242,7 +242,7 @@ import styled from 'styled-components';
 import UpdateP from './component/UpdateP';
 import Uproduct from './component/uproduct';
 import Addp from './component/addp';
-import Agallery from './component/agallery';
+
 
 
 
@@ -447,6 +447,11 @@ function App() {
           
           <Route exact path="/Coaches" element={
               <Coaches />
+          }>
+          </Route>
+          
+          <Route exact path="/Events" element={
+              <Events />
           }>
           </Route>
           {/* <Route exact path="/test" element={
