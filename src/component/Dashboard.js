@@ -81,6 +81,9 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/Reports" ><button type="button" class="btn btn-outline-primary">Reports</button></Link>
+                        <div class="" >
+                        <Link className="nav-link" to="/Ugallery" ><button type="button" class="btn btn-outline-primary">Gallery</button></Link>
+                        </div>
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/Search" ><button type="button" class="btn btn-outline-primary">Search</button></Link>
@@ -100,8 +103,8 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {/* <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  Record</a></Link>
                                     <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quatraly Remark</a></Link> */}
-                                    <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact us</a></Link>
-                                    <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join us</a></Link>
+                                    <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact</a></Link>
+                                    <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join </a></Link>
                                 </div>
                             </div>
                         </div>

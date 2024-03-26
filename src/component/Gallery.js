@@ -1,18 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import img1 from './Hero Gallery/sahas1.jpg'
-import img2 from './Hero Gallery/sahas2.jpg'
-import img3 from './Hero Gallery/sahas3.jpg'
-import img4 from './Hero Gallery/sahas4.jpg'
-import img5 from './Hero Gallery/sahas5.jpg'
-import img6 from './Hero Gallery/sahas6.jpg'
-import img7 from './Hero Gallery/sahas7.jpg'
-import img8 from './Hero Gallery/sahas8.jpg'
-import img9 from './Hero Gallery/sahas9.jpg'
-import img10 from './Hero Gallery/sahas10.jpg'
-import img11 from './Hero Gallery/sahas11.jpg'
-import img12 from './Hero Gallery/sahas12.jpg'
+
 
 import vid1 from './Videos/sahas_vid.mp4'
 import { Link } from 'react-router-dom'
@@ -20,22 +9,21 @@ import { Link } from 'react-router-dom'
 
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import axios from 'axios'
 
 const Gallery = () => {
     AOS.init({
         duration: 650,
         once: false
       });
-
+const [data, setData] = useState([])
 
     const [selectedRadio, setSelectedRadio] = useState('check1');
     const radioImageMap = {
-      check1: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12],
-      check2: [img5, img7, img9],
-      check3: [vid1, img1, img3, img4]
+      
     };
     const radioVideoMap = {
-      check3: [vid1, vid1, vid1, vid1]
+   
     };
 
     const handleRadioChange = (event) => {
@@ -52,7 +40,18 @@ const Gallery = () => {
   const handleCloseModal = () => {
     setSelectedImage(null);
   };
-    
+   
+  
+  useEffect(()=> {
+    axios.get("http://localhost/test/viewgallery.php")
+    .then((res)=> {
+      setData(res.data.phpresult)
+      console.log("backend data", res.data.phpresult)
+    })
+    .catch((err)=> {
+      console.log(err.message)
+    })
+  },[])
 
   return (
     <Gallery_Container>
@@ -89,32 +88,44 @@ const Gallery = () => {
           <h3>Photos Gallery</h3>
 
                 <label htmlFor="check1" className={selectedRadio === 'check1' ? 'active' : ''}>All Photos</label>
-                <label htmlFor="check2" className={selectedRadio === 'check2' ? 'active' : ''}>Newspaper Highlights</label>
+                {/* <label htmlFor="check2" className={selectedRadio === 'check2' ? 'active' : ''}>Newspaper Highlights</label> */}
                 <label htmlFor="check3" className={selectedRadio === 'check3' ? 'active' : ''}>Videos</label>
         </div>
 
         <div className="photo-gallery">
-            {['check1', 'check2'].includes(selectedRadio) && radioImageMap[selectedRadio].map((img, index) => (
-            <div className="pic" key={index} style={{ boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray' }} onClick={() => handleImageClick(img)}>
-                <div data-aos="zoom-in" data-aos-duration="1000">
+        {selectedRadio === 'check1' && data.map((item, index) => (
+  <div key={index} className="pic" style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px', border: '1px solid gray' }} data-aos="fade-up" data-aos-duration="2000">
+  {item.Image.endsWith('.mp4') ? (
+    <video src={`http://localhost/test/ugallery/${item.Image}`} alt={`sahas${index + 1}`} controls style={{ width: '100%', height: '400px', objectFit: 'contain' }} />
+  ) : (
+    <img src={`http://localhost/test/ugallery/${item.Image}`} alt={`sahas${index + 1}`} style={{ width: '100%', height: '400px', objectFit: 'contain', borderRadius: '7px' }} />
+  )}
+</div>
+))}
+{/* 
+{selectedRadio === 'check2' && data.map((item, index) => (
+  <div className="pic" key={index} style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px' }} onClick={() => handleImageClick(`http://localhost/test/ugallery/${item.Image}`)}>
+    <div data-aos="zoom-in" data-aos-duration="1000">
+      {item.Image.endsWith('.jpg') && <img src={`http://localhost/test/ugallery/${item.Image}`} alt={item.Image} style={{ borderRadius: '7px' }} />}
+    </div>
+  </div>
+))} */}
 
-                <img src={img} alt={`sahas${index + 1}`}/>
-                </div>
-            </div>
-            ))}
 
-            {radioImageMap[selectedRadio] === 'check3'  && radioImageMap[selectedRadio].map((vid, index) => (
-              <div className="pic" key={index} style={{boxShadow:' -11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius:'7px', border:'1px solid gray'}}>
-                <video src={vid} alt={`sahas${index + 1}`} />
-              </div>
-            ))}
-
-            {selectedRadio === 'check3' && radioVideoMap[selectedRadio].map((vid, index) => (
-  <div className="pic" key={index} style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px', border: '1px solid gray' }} data-aos="fade-up"
-     data-aos-duration="2000">
-  <video src={vid} alt={`sahas${index + 1}`} controls={true}  style={{width:'100%', height:'400px', objectFit:'contain'}}/>
+{selectedRadio === 'check3' && data.map((item, index) => (
+  <div key={index} className="pic" style={{ boxShadow: '-11px 14px 11px -9px rgba(0,0,0,0.29)', borderRadius: '7px', marginTop: '-90' }} data-aos="fade-up" data-aos-duration="2000">
+    {item.Image.endsWith('.mp4') && (
+      <video src={`http://localhost/test/ugallery/${item.Image}`} alt={`sahas${index + 1}`} controls style={{ width: '100%', height: '400px', objectFit: 'contain', borderRadius: '7px' }} />
+    )}
   </div>
 ))}
+
+
+
+
+
+
+
           </div>
         </div>
         </div>

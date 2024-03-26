@@ -216,6 +216,8 @@ import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
 import Performance from './component/performance';
 import PPerformance from './component/pperformance';
+import Ugallery from './component/Ugallery';
+import Updategallery from './component/updategallery';
 // import Test 
 
 import {  
@@ -240,7 +242,7 @@ import styled from 'styled-components';
 import UpdateP from './component/UpdateP';
 import Uproduct from './component/uproduct';
 import Addp from './component/addp';
-
+import Agallery from './component/agallery';
 
 
 
@@ -299,6 +301,19 @@ function App() {
           </Route> 
           <Route exact path="/RegisterRecretional" element={
               <RegisterRecretional dbpath={dbpath}/>
+          }>
+          </Route> 
+          <Route exact path="/updategallery" element={
+              <Updategallery dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/Ugallery" element={
+              <Ugallery dbpath={dbpath}/>
+          }>
+          </Route> 
+          <Route exact path="/agallery" element={
+              <Agallery dbpath={dbpath}/>
           }>
           </Route> 
           
