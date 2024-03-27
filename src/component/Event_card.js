@@ -1,17 +1,59 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import AOS from 'aos';
 import axios from 'axios'; // Import axios for making HTTP requests
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const Event_card = ({event}) => {
     AOS.init({
         duration: 650,
         once: false,
       });
+	  
+	  const[modalShow, setModalShow] = useState(false);
+
+function MyVerticallyCenteredModal(props) {
   return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {event.title}
+		  <div style={{fontSize:'10px', color:'gray'}}>
+			<p>{event.address}</p>
+		  </div>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+	  	<img src={event.pic} alt={event.title} style={{ width: '100%', maxHeight:'300px' }} />
+        <h4>Description:</h4>
+        <p>{event.desc}</p>
+        <h4>Date:</h4>
+        <p>{event.date}</p>
+        {event.address && (
+          <>
+            <h4>Address:</h4>
+            <p>{event.address}</p>
+          </>
+        )}
+      </Modal.Body>
+      {/* <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer> */}
+    </Modal>
+  );
+}
+
+
+  return (
+	<>
     <EventCard>
-    <div className="event-card" data-aos="fade-up">
+    <div className="event-card" data-aos="fade-up"  onClick={() => setModalShow(true)}>
         <div className="event-card-content">
           <img src={event.pic} alt={event.title} />
           <div className="event-details">
@@ -32,6 +74,13 @@ const Event_card = ({event}) => {
         </div>
       </div>
       </EventCard>
+
+	  <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+		event={event}
+      />
+	</>
   )
 }
 
@@ -158,5 +207,10 @@ const EventCard = styled.div `
     justify-content: center;
     align-items: center;
     gap: 10px;
+	/* padding-bottom: 10px; */
+}
+
+.event-details{
+	padding-bottom: 10px;
 }
 `;

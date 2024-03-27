@@ -451,7 +451,8 @@ const Event_Content = styled.div `
 
 .event-card img {
     width: 250px; /* Adjusted width */
-    height: 180px; /* Changed height to auto for aspect ratio */
+    /* height: auto; Changed height to auto for aspect ratio */
+    min-height: 190px;
     object-fit: cover;
 }
 
