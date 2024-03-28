@@ -78,9 +78,15 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/GenerateReciept" ><button type="button" class="btn btn-outline-primary">Genrate Receipt</button></Link>
+                       <div className="br">
+                       <Link className="nav-link" to="/aevent" ><button type="button" class="btn btn-outline-primary">Event Update</button></Link>
+                       </div>
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/Reports" ><button type="button" class="btn btn-outline-primary">Reports</button></Link>
+                        <div class="" >
+                        <Link className="nav-link" to="/Ugallery" ><button type="button" class="btn btn-outline-primary">Gallery</button></Link>
+                        </div>
                         </div>
                         <div class="" >
                         <Link className="nav-link" to="/Search" ><button type="button" class="btn btn-outline-primary">Search</button></Link>
@@ -100,8 +106,8 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                                 <div class="dropdown-menu rounded-0 m-0">
                                     {/* <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  Record</a></Link>
                                     <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quatraly Remark</a></Link> */}
-                                    <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact us</a></Link>
-                                    <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join us</a></Link>
+                                    <Link  to="/Ccontact"><a href="blog.html" class="dropdown-item">Contact</a></Link>
+                                    <Link  to="/Jjoin"><a href="detail.html" class="dropdown-item">Join </a></Link>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +127,7 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                                 <a class="btn  nav-link dropdown-toggle btn-outline-primary  d-lg-block" style={{width:'100px'}} data-bs-toggle="dropdown">Remark</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  All Remark</a></Link>
-                                    <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quatraly Remark</a></Link>
+                                    <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quarterly Remark</a></Link>
                                     <Link  to="/pperformance"><a href="blog.html" class="dropdown-item">6 Month Remark</a></Link>
                            
                                 </div>

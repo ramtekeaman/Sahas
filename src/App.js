@@ -216,6 +216,10 @@ import Jjoin from './component/Jjoin';
 import 'react-toastify/dist/ReactToastify.css';
 import Performance from './component/performance';
 import PPerformance from './component/pperformance';
+import Ugallery from './component/Ugallery';
+import Updategallery from './component/updategallery';
+import Event_Btn from './component/Event_Btn';
+
 // import Test 
 
 import {  
@@ -241,8 +245,11 @@ import UpdateP from './component/UpdateP';
 import Uproduct from './component/uproduct';
 import Addp from './component/addp';
 import Events from './component/Events';
-
-
+import Agallery from './component/agallery';
+import Aevent from './component/aevent';
+import Adevent from './component/adevent';
+import Updateevent from './component/updateevent';
+import Testy from './component/text2';
 
 
 function App() {
@@ -300,6 +307,36 @@ function App() {
           </Route> 
           <Route exact path="/RegisterRecretional" element={
               <RegisterRecretional dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/aevent" element={
+              <Aevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/updateevent" element={
+              <Updateevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/adevent" element={
+              <Adevent dbpath={dbpath}/>
+          }>
+          </Route> 
+
+
+          <Route exact path="/updategallery" element={
+              <Updategallery dbpath={dbpath}/>
+          }>
+          </Route> 
+
+          <Route exact path="/Ugallery" element={
+              <Ugallery dbpath={dbpath}/>
+          }>
+          </Route> 
+          <Route exact path="/agallery" element={
+              <Agallery dbpath={dbpath}/>
           }>
           </Route> 
           
@@ -440,10 +477,10 @@ function App() {
               <Events />
           }>
           </Route>
-          {/* <Route exact path="/test" element={
-              <test />
+          <Route exact path="/test" element={
+              <Testy/>
           }>
-          </Route> */}
+          </Route>
 
         </Routes>
          <Footer /> 

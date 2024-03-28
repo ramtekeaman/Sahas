@@ -4,12 +4,14 @@ import AOS from 'aos';
 import axios from 'axios'; // Import axios for making HTTP requests
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { SlLocationPin } from "react-icons/sl";
 
-const Event_card = ({event}) => {
+const Event_card = ({product}) => {
     AOS.init({
         duration: 650,
         once: false,
       });
+	  console.log(product);
 	  
 	  const[modalShow, setModalShow] = useState(false);
 
@@ -23,22 +25,28 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {event.title}
-		  <div style={{fontSize:'10px', color:'gray'}}>
-			<p>{event.address}</p>
+			<h2>{product.name}</h2>
+		  <div style={{display:'flex',justifyContent:'start', alignItems:'center', fontSize:'14px', color:'#323130', backgroundColor:'rgba(25, 57, 138, .1)', borderRadius:'4px', padding:'8px', fontWeight:'450',}}>
+			<p style={{marginBottom:'0px', display:'flex', justifyContent:'start', alignItems:'center', gap:'2px',}}>
+				<SlLocationPin
+					style={{
+					color: 'black',
+					}}
+				/>
+			{product.location}</p>
 		  </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-	  	<img src={event.pic} alt={event.title} style={{ width: '100%', maxHeight:'300px' }} />
-        <h4>Description:</h4>
-        <p>{event.desc}</p>
+	  	<img src={`http://localhost/test/event/${product.Image}`} alt={product.title} style={{ width: '100%', maxHeight:'300px', borderRadius:'5px', objectFit:'cover' }} />
+        <h4 style={{marginTop:'20px'}}>Description:</h4>
+        <p>{product.Description}</p>
         <h4>Date:</h4>
-        <p>{event.date}</p>
-        {event.address && (
+        <p>{product.date}</p>
+        {product.address && (
           <>
             <h4>Address:</h4>
-            <p>{event.address}</p>
+            <p>{product.address}</p>
           </>
         )}
       </Modal.Body>
@@ -53,32 +61,30 @@ function MyVerticallyCenteredModal(props) {
   return (
 	<>
     <EventCard>
-    <div className="event-card" data-aos="fade-up"  onClick={() => setModalShow(true)}>
-        <div className="event-card-content">
-          <img src={event.pic} alt={event.title} />
-          <div className="event-details">
-            <h1 className="name">{event.title}</h1>
-            <h3 className="date">{event.date}</h3>
-            <p className="desc">{event.desc}</p>
-            {event.address && (
-              <div className="location">
-              <i class="fas fa-map-marker-alt fa-2x me-2"></i>
-                {event.address}
-              </div>
-            )}
-          </div>
-          <div className="date-ribbon">
-            <h2>{event.month}</h2>
-            <h1>{event.day}</h1>
-          </div>
-        </div>
-      </div>
+    				<Card>
+                      <div class="card" 
+                        
+                        data-aos="fade-up"
+                        data-aos-anchor-placement="center-bottom" style={{
+                        backgroundImage: `url(http://localhost/test/event/${product.Image})`
+
+                        }}
+                        >
+                        <div class="background-div">
+                        </div>
+                        <p class="heading">{product.name}</p>
+                        <p class="para">{product.Description}</p>
+						<span className='add'>{product.address}</span>
+						<div class="overlay"></div>
+                        <button class="card-btn" onClick={() => setModalShow(true)}>Click</button>
+                      </div>
+                    </Card>
       </EventCard>
 
 	  <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-		event={event}
+		product={product}
       />
 	</>
   )
@@ -213,4 +219,154 @@ const EventCard = styled.div `
 .event-details{
 	padding-bottom: 10px;
 }
+`;
+
+
+const Card = styled.div   `
+.card {
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  position: relative;
+  width: 600px;
+  height: 250px;
+  max-width: 70vw;
+  border-radius: 10px;
+  display: flex;
+  padding: 10px 30px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0px;
+}
+
+.para {
+  text-align: center;
+  color: #ffffff;
+  opacity: 0.7;
+  /* line-height: 1.4; */
+  overflow: hidden;
+  white-space: normal; /* Allow wrapping within the container */
+  line-height: 1.2; /* Adjust line height according to your font size */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit the number of lines to 3 */
+  -webkit-box-orient: vertical;
+  z-index: 1;
+  max-width: 70%;
+}
+.add {
+  text-align: center;
+  color: #ffffff;
+  line-height: 1.2;
+  opacity: 0.5;
+  z-index: 1;
+  max-width: 70%;
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.background-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Set background size and position */
+  background-size: cover;
+  background-position: center;
+
+  /* Set opacity */
+  opacity: 0.7; /* You can adjust the opacity value from 0 to 1 */
+}
+
+.card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card .card-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-weight: 600;
+  padding: 10px 20px;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+  opacity: 0;
+  scale: 0;
+  transform-origin: 0 0;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover .card-btn {
+  opacity: 1;
+  scale: 1;
+}
+
+.card .card-btn:hover {
+  box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card .card-btn:active {
+  scale: 0.95;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .overlay::after {
+  transform: translate(-50%, -50%) scale(2);
+}
+
+@media (max-width: 786) {
+    .card{
+      max-width: 60vw;
+    }
+  }
+
 `;

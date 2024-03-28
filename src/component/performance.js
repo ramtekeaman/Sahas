@@ -86,7 +86,7 @@ export default function Performance({ dbpath }) {
     <>
       <br />
       <br />
-      <p className="sp1">Quatraly Remark</p>
+      <p className="sp1">Quarterly Remark</p>
       <br />
       <form style={{ display: "flex" }}>
         <div className="mb-3" style={{ marginLeft: "27%", display: "flex" }}>

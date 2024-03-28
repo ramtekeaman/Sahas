@@ -326,6 +326,19 @@ export default function RRecreational({ dbpath }) {
     printWindow.document.close();
     printWindow.print();
   };
+  const onDelete = async (id) => {
+    try {
+        const confirmDelete = window.confirm('Do you want to delete the data?');
+
+        if (confirmDelete) {
+            // Perform the deletion logic using axios.delete instead of axios.post
+            await axios.delete(dbpath + `deleteremark.php?id=${id}`);
+            loadUser(); // Load the user data again after successful deletion
+        }
+    } catch (error) {
+        console.error('Error deleting data:', error);
+    }
+};  
 
   return (
     <>
@@ -359,6 +372,7 @@ export default function RRecreational({ dbpath }) {
               <th scope="col">Matches Played</th>
               <th scope="col">Remark</th>
               <th scope="col">Date : Time</th>
+              <th scope="col">Delete</th>
 
             </tr>
           </thead>
@@ -375,7 +389,10 @@ export default function RRecreational({ dbpath }) {
                 <td>{res.matchesPlayed}</td>
                 <td>{res.remark}</td>
                 <td>{res.timestamp}</td>
-
+                <td><button className='btn btn' onClick={() => onDelete(res.id)}>
+                                <i className="fas fa-trash-alt"></i> 
+                            </button>
+                        </td>             
               </tr>
             ))}
           </tbody>
