@@ -249,6 +249,7 @@ import Agallery from './component/agallery';
 import Aevent from './component/aevent';
 import Adevent from './component/adevent';
 import Updateevent from './component/updateevent';
+import Testy from './component/text2';
 
 
 function App() {
@@ -477,10 +478,10 @@ function App() {
               <Events />
           }>
           </Route>
-          {/* <Route exact path="/test" element={
-              <test />
+          <Route exact path="/test" element={
+              <Testy/>
           }>
-          </Route> */}
+          </Route>
 
         </Routes>
          <Footer /> 

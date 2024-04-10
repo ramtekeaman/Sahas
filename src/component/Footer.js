@@ -104,6 +104,7 @@ export default function Footer({ dbpath }) {
                             <Link to={'/Gallery'} onClick={handleLinkClick} class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Gallery</Link>
                             {/* <a class="text-secondary mb-2" ><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a> */}
                             <Link to={'/Schedule'} onClick={handleLinkClick} class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i>Schedule</Link>
+                            <Link to={'/Products'} onClick={handleLinkClick} class="text-secondary" ><i class="bi bi-arrow-right text-primary me-2"></i>Products</Link>
                         </div>
                     </div>
                     {/* Nice to see you  */}

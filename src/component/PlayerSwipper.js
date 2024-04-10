@@ -39,7 +39,7 @@ const playersData = [
     },
     {
       name: "Viraj Kadbe",
-      imgSrc: "/img/VijayK_player.jpg",
+      imgSrc: "/img/VijayK_player.png",
       description: "Viraj Kadbe made history as the first player to represent Vidarbha in the Ranji Trophy and later debuted in the IPL, showcasing talent from the region on a national platform. His journey exemplifies the rise of cricket in Vidarbha, inspiring aspiring cricketers to aim for higher achievements in the sport."
     },
     // Add more player objects as needed

@@ -676,6 +676,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import img from "./images/error-message.png";
 
+
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Event_card from "./Event_card";
+
+
 const Products = () => {
   AOS.init({
     duration: 650,
@@ -742,6 +748,7 @@ const Products = () => {
     });
   };
 
+
   return (
     <>
       <Abc>
@@ -783,15 +790,23 @@ const Products = () => {
         <div className="container">
           {!showError && (
             <div className="row">
-              <h1 style={{ textAlign: "center" }}>EVENTS</h1>
+            <div style={{ display: "flex", justifyContent: "start" }}>
+            <GalleryHead style={{ width: "380px" }}>
+              <h1 class="display-5  mb-0">
+                Upcomming <span style={{ color: "#fb5b21" }}>Events</span>
+              </h1>
+              <div style={{color:'transparent'}}>Events</div>
+            </GalleryHead>
+          </div>
 
               <div className="cards">
-                {products.map((product) => (
+                {/* {products.map((product) => (
                   <div
                     className="card"
                     key={product.id}
                     data-aos="fade-up"
                     data-aos-anchor-placement="center-bottom"
+                    
                   >
                     <img
                       src={`http://localhost/test/event/${product.Image}`}
@@ -818,6 +833,10 @@ const Products = () => {
                       ></div>
                     </div>
                   </div>
+                ))} */}
+                
+                {products.map((product) => (
+                    <Event_card key={product.id} product={product} />
                 ))}
               </div>
             </div>
@@ -843,22 +862,8 @@ const Products = () => {
               </center>
             </div>
           )}
-          {showPaymentForm && selectedProduct && <PaymentForm></PaymentForm>}
         </div>
       </ProductContainer>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
     </>
   );
 };
@@ -888,14 +893,15 @@ const ProductContainer = styled.div`
     font-family: sans-serif;
   }
   .cards .card {
-    width: 30%;
+    /* width: 30%; */
     padding: 1rem;
+    /* 
     min-width: 280px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 5px 0px;
     background: white;
-    margin: 1rem auto;
     /* resize: horizontal; */
     /* overflow: auto; */
+    margin: 1rem auto;
   }
   .cards .card h1 {
     font-size: 1rem;
@@ -914,21 +920,18 @@ const ProductContainer = styled.div`
   }
 
   .cards .card button {
-    margin: 1rem 0;
+    /* margin: 1rem 0;
     padding: 0.3rem 0.6rem;
     border-radius: 5px;
     border: 0;
     background: #c53030;
-    color: white;
-  }
-  .cards card:last-child {
-    order: 3;
+    color: white; */
   }
 
   .cards .card img:hover {
-    transition: 0.3s;
+    /* transition: 0.3s;
     transform: scale(1.04);
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; */
   }
 `;
 
@@ -1350,6 +1353,161 @@ const PaymentForm = styled.div`
     }
     .close {
       right: 1px;
+    }
+  }
+`;
+
+const Card = styled.div   `
+.card {
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  position: relative;
+  width: 600px;
+  height: 250px;
+  max-width: 70vw;
+  border-radius: 10px;
+  display: flex;
+  padding: 10px 30px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0px;
+}
+
+.para {
+  text-align: center;
+  color: #ffffff;
+  opacity: 0.7;
+  /* line-height: 1.4; */
+  overflow: hidden;
+  white-space: normal; /* Allow wrapping within the container */
+  line-height: 1.2; /* Adjust line height according to your font size */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit the number of lines to 3 */
+  -webkit-box-orient: vertical;
+  z-index: 1;
+  max-width: 70%;
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.background-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Set background size and position */
+  background-size: cover;
+  background-position: center;
+
+  /* Set opacity */
+  opacity: 0.7; /* You can adjust the opacity value from 0 to 1 */
+}
+
+.card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card .card-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-weight: 600;
+  padding: 10px 20px;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+  opacity: 0;
+  scale: 0;
+  transform-origin: 0 0;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover .card-btn {
+  opacity: 1;
+  scale: 1;
+}
+
+.card .card-btn:hover {
+  box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card .card-btn:active {
+  scale: 0.95;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .overlay::after {
+  transform: translate(-50%, -50%) scale(2);
+}
+
+@media (max-width: 786) {
+    .card{
+      max-width: 60vw;
+    }
+  }
+
+`;
+
+const GalleryHead = styled.div`
+  div {
+    width: 130px;
+    background: #fb5b21;
+    height: 3px;
+    margin-left: 16vw;
+  }
+  @media screen and (max-width: 768px) {
+    div {
+      width: 32vw; /* Adjust width for smaller screens */
     }
   }
 `;

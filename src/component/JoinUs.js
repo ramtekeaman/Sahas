@@ -55,7 +55,7 @@ const JoinUs = () => {
           setAge('');
           setGender('');
         } else {
-        setSubmitDissable(false);
+        // setSubmitDissable(false);
           alert('Failed to submit . Please try again.');
         }
       } catch (error) {
