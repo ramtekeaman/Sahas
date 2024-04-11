@@ -190,7 +190,7 @@ const Coaches1 = () => {
         <div className="row gy-4 gy-lg-0 gx-xxl-5" style={{justifyContent:'center'}}>
           {/* Individual team member cards */}
           {teamMembers.map((member, index) => (
-            <div key={index} className="col-12 col-md-6 col-lg-3" style={{ marginBottom: '20px' }}>
+            <div key={index} className="col-12 col-md-6 col-lg-3" style={{ marginBottom: '20px', maxWidth:'70%' }}>
               <div className="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
                 <div className="card-body p-0 shadow-sm position-relative">
                   <figure className="m-0 p-0">
