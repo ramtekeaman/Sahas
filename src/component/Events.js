@@ -795,7 +795,6 @@ const Products = () => {
               <h1 class="display-5  mb-0">
                 Upcomming <span style={{ color: "#fb5b21" }}>Events</span>
               </h1>
-              <div style={{color:'transparent'}}>Events</div>
             </GalleryHead>
           </div>
 
@@ -857,7 +856,7 @@ const Products = () => {
               <img src={img} alt="" style={{ width: "60px", height: "60px" }} />
               <center>
                 <h4 style={{ color: "#d86271" }}>
-                  Sorry, No Product Available !
+                  Sorry, No Upcomming Events Available !
                 </h4>
               </center>
             </div>

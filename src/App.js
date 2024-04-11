@@ -250,6 +250,8 @@ import Aevent from './component/aevent';
 import Adevent from './component/adevent';
 import Updateevent from './component/updateevent';
 import Testy from './component/text2';
+import Error from './component/Error';
+import Coaches1 from './component/Coaches1';
 
 
 function App() {
@@ -469,7 +471,7 @@ function App() {
           </Route>
           
           <Route exact path="/Coaches" element={
-              <Coaches />
+              <Coaches1 />
           }>
           </Route>
           
@@ -479,6 +481,10 @@ function App() {
           </Route>
           <Route exact path="/test" element={
               <Testy/>
+          }>
+          </Route>
+          <Route exact path="/*" element={
+              <Error/>
           }>
           </Route>
 
