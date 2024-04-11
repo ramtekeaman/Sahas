@@ -175,6 +175,8 @@ const SwiperContent = styled.div `
 div.swiper-button-prev, div.swiper-button-next{
   color: white;
   background-color: #555;
+  border-radius: 50%;
+  padding: 0 22px;
 }
 
 div.swiper-button-next:after{

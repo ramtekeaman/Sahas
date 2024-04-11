@@ -271,11 +271,12 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                     <img src={slide3}  alt="popup Img" />
                   </div>
                   <button className="cross-icon" onClick={handleClose}><i class="fas fa-times"></i></button>
-                  {/* <div class="textBox">
-                    <p class="text head">Ethereum</p>
-                    <span>Cryptocurrency</span>
-                    <p class="text price">1.654,34€</p>
-                  </div> */}
+                  <div class="textBox" style={{display:'flex', justifyContent:'center',flexDirection:'column'}}>
+                    <p class="text head" style={{textAlign:'center'}}>Welsome, to the Sahas Cricket Club !!</p>
+                    <p style={{textAlign:'center'}}>Our Products out there, Buy Now..</p>
+                    <Link to={'/Products'}><button class="text price" style={{width:'100%',textAlign:'center', outline:"none", border:"none", display:'flex', justifyContent:'center'}}>Show Now</button>
+</Link>
+                  </div>
               </div>
               </div>
             </div>
@@ -723,8 +724,9 @@ const ModalContainer = styled.div`
 
   .card {
     position: absolute;
-    left: 1%;
-    bottom: 1%;
+top: 30%;
+left: 50%;
+transform: translate(-50%);
     z-index: 301;
   width: 500px;
   height: 285px;
@@ -755,14 +757,15 @@ const ModalContainer = styled.div`
     transition: 0.2s ease-in-out;
     border-radius: 20px;
     border: 2px solid white;
-
+    filter: brightness(80%);
   }
 }
 
 
 .textBox {
-  opacity: 0;
-  gap: 15px;
+  opacity: 1;
+  position: absolute;
+  /* gap: 15px; */
   transition: 0.2s ease-in-out;
   z-index: 3;
 }
@@ -772,11 +775,16 @@ const ModalContainer = styled.div`
 }
 
 .textBox > .head {
-  font-size: 20px;
+  font-size: 40px;
 }
 
-.textBox > .price {
+.head{
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.price {
   font-size: 17px;
+  font-weight: bold;
 }
 
 .textBox > span {
@@ -784,9 +792,9 @@ const ModalContainer = styled.div`
   color: lightgrey;
 }
 
-.card:hover > .textBox {
+/* .card:hover > .textBox {
   opacity: 1;
-}
+} */
 
 .card:hover > .image_co {
   /* height: 65%; */

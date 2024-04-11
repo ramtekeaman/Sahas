@@ -61,10 +61,10 @@ const Coaches1 = () => {
           ]
         },
         {
-          name: "PRADEEP KUMAR YADAV",
+          name: "PRADEEPKUMAR YADAV",
           imageSrc: Coach3,
           role: "Cricket Coach and Sports Fitness Instructor",
-          experience: "14 years in coaching, ICCA certified coach, former Maharashtra player",
+          experience: "14 years in coaching, ICCA certified coach, former player",
           bio: "Pradeep Kumar Yadav is an experienced cricket coach and sports fitness instructor based in Nagpur. With 14 years of coaching experience and ICCA certification, he has a strong background in player development.",
           players: [
             {
@@ -219,7 +219,8 @@ const Coaches1 = () => {
           {/* <Modal.Header closeButton>
             <Modal.Title>{selectedMember && selectedMember.name}</Modal.Title>
           </Modal.Header> */}
-          <Modal.Body>
+          <Modal.Body style={{position:'relative',}}>
+            <span className="close" onClick={ handleCloseModal} style={{position:'absolute',top:'5px', right:'7px', fontSize:'30px', cursor:'pointer', color:'white', backgroundColor:'rgb(180 73 73)', display:'flex', justifyContent:'center', alignItems:'center', height:'30px', alignSelf:'center', borderRadius:'10px', padding:'0 3px 5px 3px',}}>&times;</span>
             <div className="row">
               <div className="col-md-4 text-center mb-3 mb-md-0"> {/* Image column */}
                 <img
