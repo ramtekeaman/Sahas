@@ -28,18 +28,7 @@ const Coaches1 = () => {
           role: "Batting Coach and Fielding Coach",
           experience: "EX- VCA PLAYER (VCA ACADEMY)",
           bio: "Passionate about coaching young talents, expert in developing batting techniques, and known for improving fielding skills with a wealth of experience from VCA Academy.",
-          players: [
-            {
-              name: "Rahul Sharma",
-              represent: 'VCA U-14',
-              position: "Batsman"
-            },
-            {
-              name: "Amit Patel",
-              represent: 'VCA U-14',
-              position: "All-rounder"
-            }
-          ]
+          
         },
         {
           name: "KULDEEP SALVE",
@@ -47,18 +36,7 @@ const Coaches1 = () => {
           role: "Batting Coach and Fielding Coach",
           experience: "EX- VCA PLAYER (OMAN A TEAM)",
           bio: "Specializes in developing batting techniques, renowned for improving fielding skills, and brings extensive experience from Oman A Team.",
-          players: [
-            {
-              name: "Ankit Singh",
-              represent: 'VCA U-14',
-              position: "Batsman"
-            },
-            {
-              name: "Rajesh Kumar",
-              represent: 'VCA U-14',
-              position: "Wicketkeeper"
-            }
-          ]
+          
         },
         {
           name: "PRADEEPKUMAR YADAV",
@@ -105,23 +83,7 @@ const Coaches1 = () => {
           role: "Batting Coach and Fielding Coach",
           experience: "BCCI Level A qualified, Vca Affiliated coach (Level O qualified), Got certification in Biomechanics (Exercise science) and More than 5 years of coaching experience",
           bio: "Parikshit Upadhyay is a highly qualified cricket coach with certifications from BCCI (Level A) and VCA (Level O) affiliations. He holds specialized training in Biomechanics (Exercise Science) and brings over 5 years of extensive coaching experience. Parikshit is dedicated to nurturing young talent and helping players develop advanced skills both on and off the field.",
-          players: [
-            {
-              name: "Nikhil Deshmukh",
-              represent: 'VCA U-14',
-              position: "Bowler"
-            },
-            {
-              name: "Vivek Sharma",
-              represent: 'VCA U-14',
-              position: "Batsman"
-            },
-            {
-              name: "Rohan Singh",
-              represent: 'VCA U-14',
-              position: "All-rounder"
-            }
-          ]
+          
         }
       ];
       

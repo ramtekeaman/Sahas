@@ -272,7 +272,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                   </div>
                   <button className="cross-icon" onClick={handleClose}><i class="fas fa-times"></i></button>
                   <div class="textBox" style={{display:'flex', justifyContent:'center',flexDirection:'column'}}>
-                    <p class="text head" style={{textAlign:'center'}}>Welsome, to the Sahas Cricket Club !!</p>
+                    <p class="text head" style={{textAlign:'center'}}>Welcome, to the Sahas Cricket Club !!</p>
                     <p style={{textAlign:'center'}}>Our Products out there, Buy Now..</p>
                     <Link to={'/Products'}><button class="text price" style={{width:'100%',textAlign:'center', outline:"none", border:"none", display:'flex', justifyContent:'center'}}>Show Now</button>
 </Link>
@@ -829,8 +829,12 @@ transform: translate(-50%);
 @media screen and (max-width: 768px) {
     .card{
       width: 98vw;
-      height: 200px;
+      height: max-content;
     }
+
+    textBox > .head {
+  font-size: 30px;
+}
 
   .image_co{
   width: 90vw;
