@@ -102,6 +102,7 @@ const Products = () => {
     }else{
       setSubmitDissable(true);
       setShowPaymentForm(false);
+      setCount(1);
       handleClick();
       console.log("Payment form  submitted");
       setSubmitDissable(false);
@@ -153,6 +154,11 @@ const Products = () => {
       transition: Bounce,
       });
   };
+
+  const handleCloseModal = () => {
+      setShowPaymentForm(false)
+      setCount(1)
+  }
 
   return (
     <>
@@ -207,7 +213,7 @@ const Products = () => {
             <PaymentForm>
             <div id="paymentModal" className="modalC" data-aos="flip-up">
               <div className="modal-content">
-                <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                <span className="close" onClick={handleCloseModal}>&times;</span>
                 <div className="payment-form">
                   <h2>Payment Form</h2>
                   {/* <form id="paymentForm" onSubmit={handleSubmit}> */}
@@ -630,7 +636,7 @@ const PaymentForm = styled.div `
 
     max-height: 100vh;
     overflow: scroll;
-    /* scrollbar-width: none; */
+    scrollbar-width: none;
   }
 
   /* Close button */

@@ -61,7 +61,7 @@ useEffect(()=> {
                     <div class="col-lg-7 px-5 text-start">
                         <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                             <i class="fa fa-envelope text-primary me-2"></i>
-                            <h6 class="mb-0">sahascricketclub@gmail.com</h6>
+                            <h6 class="mb-0">kmt161272@gmail.com</h6>
                         </div>
                         <div class="h-100 d-inline-flex align-items-center py-2">
                             <div className='row justify-content-center '>

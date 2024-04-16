@@ -207,23 +207,50 @@ export default function Home({ dbpath }) {
     return () => clearInterval(interval);
   }, [currentOffset, atEndOfList]); // Include atEndOfList in the dependency array
 
-  const [text, setText] = useState("");
-  const initialText = "J0oin Sahas Cricket Club!";
-  const typingSpeed = 200; // Adjust typing speed here
+  const images = [
+    { src: img1, caption: "I'm so happy today!" },
+    { src: img2, caption: "I see those nugs." },
+    { src: img3, caption: "I love you so much!" },
+    { src: img4, caption: "I'm the baby of the house!" },
+    { src: img5, caption: "Are you gunna throw the ball?" },
+    { src: img6, caption: "C'mon friend!" },
+    { src: img7, caption: "A rose for mommy!" },
+    { src: img8, caption: "You gunna finish that?" },
+    { src: img9, caption: "We can't afford a cat!" },
+    { src: img10, caption: "Dis my fren!" },
+    { src: img11, caption: "Dis my fren!" },
+    { src: img12, caption: "This is another caption." },
+    // Add more image objects as needed...
+  ];
+console.log('images', images);
+
+  const text = "Join Sahas Cricket Club!";
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < initialText.length) {
-        setText((prevText) => prevText + initialText.charAt(index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, typingSpeed);
+      let charIndex = 0;
+      const typingEffect = () => {
+          if (charIndex <= text.length) {
+              setDisplayText(text.slice(0, charIndex));
+              charIndex++;
+              setTimeout(typingEffect, 200); // Typing speed (100ms delay)
+          } else {
+              // setIsTyping(false);
+                charIndex = 0;
+                setDisplayText(''); // Clear the display text
+                setTimeout(typingEffect, 100); 
+          }
+      };
 
-    return () => clearInterval(timer);
-  }, []);
+      typingEffect(); // Start typing effect
+
+      return () => {
+          // Clean up if component unmounts
+          clearTimeout(typingEffect);
+      };
+  }, [text]); // Re-run effect when 'text' prop changes
+
 
   const [modalOpen, setModalOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -256,6 +283,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
     }, 4000);
     return () => clearInterval(interval);
   }, [slides.length]);
+  
 
   return (
     <>
@@ -299,7 +327,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
       <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
         <div className="p-3" style={{ maxWidth: "900px" }}>
           <h1 className="display-2 text-white text-uppercase mb-md-4">
-            <span className="typing-animation">Beyond Limits : {text}</span>
+            <span className={isTyping ? 'typing' : ''}>Beyond Limits : {displayText}</span>
           </h1>
           <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
           <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
@@ -526,86 +554,48 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
         </div>
 
         <div
-          class="container mb-5 text-left"
+          class="container mb-2 text-left"
           style={{ marginTop: "10px" }}
           id="gallery"
         >
           <br />
           <br />
           {/* <h5 class="text-primary text-uppercase">Class Schedule</h5> */}
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent:'space-between', alignItems:'center'}}>
             <GalleryHead style={{ width: "250px" }}>
               <h1 class="display-5  mb-0">
                 Our <span style={{ color: "#fb5b21" }}>Gallery</span>
               </h1>
-              <div></div>
+              <div className="stroke"></div>
             </GalleryHead>
+            <div className="" style={{display:'flex', justifyContent:'center', }}>
+                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+          </div>
           </div>
         </div>
 
         <Gallery_Container>
           <div>
-            <div className="grid-container">
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-1" src={img1} alt="" />
-                {/* <p>"I'm so happy today!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-2" src={img2} alt="" />
-                {/* <p>"I see those nugs."</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-3" src={img3} alt="" />
-                {/* <p>"I love you so much!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-4" src={img4} alt="" />
-                {/* <p>"I'm the baby of the house!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-5" src={img5} alt="" />
-                {/* <p>"Are you gunna throw the ball?"</p> */}
-              </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-6" src={img6} alt="" />
-                  {/* <p>"C'mon friend!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-7" src={img7} alt="" />
-                  {/* <p>"A rose for mommy!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-8" src={img8} alt="" />
-                  {/* <p>"You gunna finish that?"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-9" src={img9} alt="" />
-                  {/* <p>"We can't afford a cat!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-10" src={img11} alt="" />
-                  {/* <p>"Dis my fren!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-10" src={img12} alt="" />
-                  {/* <p>"Dis my fren!"</p> */}
-                </div>
-            </div>
-          
-          <div className="container" style={{display:'flex', justifyContent:'center', }}>
-                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+             <div>
+             <div className="grid-container">
+        {images.map((image, index) => (
+          <div key={index} data-aos="fade-up">
+            <img className={`grid-item grid-item-${index + 1}`} src={image.src} alt={`Image ${index + 1}`} />
+            {/* <p>{image.caption}</p> */}
           </div>
+        ))}
+      {/* </div> */}
+                
+              </div>
+      {/* Uncomment the following section to add a link/button */}
+      {/* <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
+        <button className="btn btn-primary" style={{ margin: '20px 0' }}>View More</button>
+      </div> */}
+    </div>
+          
+          {/* <div className="container" style={{display:'flex', justifyContent:'center', }}>
+                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+          </div> */}
           </div>
         </Gallery_Container>
         <br></br>
@@ -1036,13 +1026,13 @@ const Slide_show = styled.div`
 `;
 
 const GalleryHead = styled.div`
-  div {
+  .stroke {
     width: 200px;
     background: #fb5b21;
     height: 3px;
   }
   @media screen and (max-width: 768px) {
-    div {
+    .stroke {
       width: 32vw; /* Adjust width for smaller screens */
     }
   }
