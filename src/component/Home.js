@@ -8,7 +8,7 @@ import img3 from "./images/womes_cricket.png";
 import img12 from "./images/pd_student.png";
 import img6 from "./Gallery Images/player1.jpg";
 import img7 from "./Gallery Images/gallery_img123.png";
-import img8 from "./Gallery Images/gallery_img12.png";
+import img8 from "../component/images/Slides/indoor.jpg";
 import img9 from "./Gallery Images/gallery_img13.png";
 import img10 from "./Gallery Images/gallery_img14.png";
 import img11 from "./Gallery Images/gallery_img15.png";
@@ -209,18 +209,18 @@ export default function Home({ dbpath }) {
   }, [currentOffset, atEndOfList]); // Include atEndOfList in the dependency array
 
   const images = [
-    { src: img1, caption: "I'm so happy today!" },
-    { src: img2, caption: "I see those nugs." },
-    { src: img3, caption: "I love you so much!" },
-    { src: img4, caption: "I'm the baby of the house!" },
-    { src: img5, caption: "Are you gunna throw the ball?" },
-    { src: img6, caption: "C'mon friend!" },
-    { src: img7, caption: "A rose for mommy!" },
-    { src: img8, caption: "You gunna finish that?" },
+    { src: slide6, caption: "C-Division Winning team" },
+    { src: img1, caption: "*Don't Need a Caption*" },
+    { src: img2, caption: "Hello'w Team !!" },
+    { src: img8, caption: "Indoor facilities of ICC" },
+    { src: img3, caption: "Talented Womens !" },
+    { src: img5, caption: "'Vidharbha' Team" },
+    { src: img6, caption: "Our Captain Lokesh Margade" },
+    { src: img7, caption: "Support 'Specially Abled' Team" },
     { src: img9, caption: "We can't afford a cat!" },
-    { src: img10, caption: "Dis my fren!" },
-    { src: img11, caption: "Dis my fren!" },
-    { src: img12, caption: "This is another caption." },
+    { src: img10, caption: "Get Padded Up" },
+    { src: img11, caption: "Talented Youngsters" },
+    { src: img12, caption: "Support 'Specially Abled' Team" },
     // Add more image objects as needed...
   ];
 console.log('images', images);
@@ -458,7 +458,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">Men's Cricket Team</h5>
                     <p className="card-text">
                       Our men's cricket team is a powerhouse of talent and
@@ -494,7 +494,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">Women's Cricket Team</h5>
                     <p className="card-text">
                       {" "}
@@ -525,13 +525,13 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                     }}
                   >
                     <img
-                      src={img12}
+                      src={img7}
                       alt=""
                       className="image-icon img-fluid rounded-top"
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">
                       Support Physically Disabled Student
                     </h5>
@@ -582,7 +582,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
         {images.map((image, index) => (
           <div key={index} data-aos="fade-up">
             <img className={`grid-item grid-item-${index + 1}`} src={image.src} alt={`Image ${index + 1}`} />
-            {/* <p>{image.caption}</p> */}
+            <p>{image.caption}</p>
           </div>
         ))}
       {/* </div> */}

@@ -35,8 +35,12 @@ const Gallery = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showError, setShowError] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
+    setShowError(false);
+
     axios
       .get("http://localhost/test/viewgallery.php")
       .then((res) => {
@@ -45,7 +49,7 @@ const Gallery = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        
+        setShowError(true);
       })
       .finally(() => {
         // Set isLoading back to false after the request is completed (success or failure)
@@ -150,11 +154,15 @@ const Gallery = () => {
             </label>
           </div>
 
-          <div className="photo-gallery">
-
           {isLoading && <Loader >
             <div class="loader"></div>
           </Loader>}
+
+          {showError && <div style={{display:'flex', justifyContent:'center', width:'100%'}}>
+            <b style={{color:'#d86271', textAlign:'center'}}>Error Occurred! No Images To Show.</b>
+          </div>}
+
+          <div className="photo-gallery">
 
             {selectedRadio === "check1" &&
               data.map((item, index) => (
