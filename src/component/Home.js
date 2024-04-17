@@ -25,12 +25,13 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 import arrow from "./images/arrow.png";
 
-import slide1 from "./images/Slides/gallery_grp.png";
-import slide2 from "./images/Slides/gallery_grp1.png";
+import slide1 from "./images/Slides/caro4.jpg";
+import slide2 from "./images/Slides/caro3.webp";
 import slide3 from "./images/Slides/Stadium.jpeg";
-import slide4 from "./images/Slides/Slide_img.jpeg";
+import slide7 from "./images/Slides/caro2.webp";
+import slide4 from "./images/Slides/caro1.webp";
 import slide5 from "./images/Slides/Slide_img1.jpeg";
-import slide6 from "./images/Slides/test_slide.png";
+import slide6 from "./images/Slides/caro4.png";
 import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
@@ -319,7 +320,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
       {/* <SwiperSlide><img src="img/club_carosel1.png" alt="" className="swiper-image" /></SwiperSlide> */}
       <SwiperSlide><img src={slide6} alt="" className="swiper-image" /></SwiperSlide>
       <SwiperSlide><img src={slide4} alt="" className="swiper-image" /></SwiperSlide>
-      <SwiperSlide><img src={slide3} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide1} alt="" className="swiper-image" style={{objectFit:'cover', maxHeight:'50%'}}/></SwiperSlide>
       <SwiperSlide><img src={slide5} alt="" className="swiper-image" /></SwiperSlide>
       {/* Add other slides */}
     </Swiper>

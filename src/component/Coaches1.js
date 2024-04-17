@@ -30,14 +30,34 @@ const Coaches1 = () => {
           bio: "Passionate about coaching young talents, expert in developing batting techniques, and known for improving fielding skills with a wealth of experience from VCA Academy.",
           
         },
-        {
-          name: "KULDEEP SALVE",
-          imageSrc: Coach2,
-          role: "Batting Coach and Fielding Coach",
-          experience: "EX- VCA PLAYER (OMAN A TEAM)",
-          bio: "Specializes in developing batting techniques, renowned for improving fielding skills, and brings extensive experience from Oman A Team.",
-          
-        },
+       { name: "Kuldeep Salve",
+       imageSrc: Coach2,
+  role: "Batsman All Rounder (Top Order) and Right Arm Medium Pacer",
+  internationalExperience: [
+    {
+      team: "Oman 'A' National Team",
+      year: 2020,
+      format: "One Day",
+      against: "Jersey",
+      role: "Batsman All Rounder"
+    },
+    {
+      team: "Al-Turki NMC (Oman First Class Premier League)",
+      period: "12th Dec 2018 to 26th Nov 2020",
+      role: "Top-order and Middle-order Batsman, Right Arm Medium Pacer"
+    }
+  ],
+  experience: [
+    "Represented Vidarbha Ranji Trophy Camp Probables in 2013-14",
+    "Represented Vidarbha C.K Nayadu Probables in 2014-15 & 2015-16",
+    "Represented Vidarbha Inter University Nationals in 2013-14",
+    "Represented Vidarbha Under-19 Cooch Behar Trophy in 2012-13",
+    "Represented Vidarbha Under-19 56th National Games DSO in 2011-12",
+    "Represented Vidarbha Under-16 Vijay Merchant Trophy BCCI in 2008-09 and 2009-10",
+    "Represented Vidarbha Under-15 Polly Umrigar Trophy BCCI in 2007-08"
+  ],
+  bio: "Kuldeep Salve is a talented cricketer known for his skills as a top-order batsman and right-arm medium pacer. He has represented Oman 'A' National Team in international cricket and played in the Oman First Class Premier League. Kuldeep has also showcased his abilities in various age group competitions representing Vidarbha State in India.",
+},
         {
           name: "PRADEEPKUMAR YADAV",
           imageSrc: Coach3,
@@ -83,8 +103,15 @@ const Coaches1 = () => {
           role: "Batting Coach and Fielding Coach",
           experience: "BCCI Level A qualified, Vca Affiliated coach (Level O qualified), Got certification in Biomechanics (Exercise science) and More than 5 years of coaching experience",
           bio: "Parikshit Upadhyay is a highly qualified cricket coach with certifications from BCCI (Level A) and VCA (Level O) affiliations. He holds specialized training in Biomechanics (Exercise Science) and brings over 5 years of extensive coaching experience. Parikshit is dedicated to nurturing young talent and helping players develop advanced skills both on and off the field.",
+        },
+        {
+          name: "Arun Suresh Mishra",
+          imageSrc: Coach4,
+          role: "Head Coach",
+          experience: "BCCI Level A qualified, Vca Affiliated coach (Level O qualified), Got certification in Biomechanics (Exercise science) and More than 5 years of coaching experience",
+          bio: "Parikshit Upadhyay is a highly qualified cricket coach with certifications from BCCI (Level A) and VCA (Level O) affiliations. He holds specialized training in Biomechanics (Exercise Science) and brings over 5 years of extensive coaching experience. Parikshit is dedicated to nurturing young talent and helping players develop advanced skills both on and off the field.",
           
-        }
+        },
       ];
       
       
