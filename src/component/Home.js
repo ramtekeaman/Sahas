@@ -8,7 +8,7 @@ import img3 from "./images/womes_cricket.png";
 import img12 from "./images/pd_student.png";
 import img6 from "./Gallery Images/player1.jpg";
 import img7 from "./Gallery Images/gallery_img123.png";
-import img8 from "./Gallery Images/gallery_img12.png";
+import img8 from "../component/images/Slides/indoor.jpg";
 import img9 from "./Gallery Images/gallery_img13.png";
 import img10 from "./Gallery Images/gallery_img14.png";
 import img11 from "./Gallery Images/gallery_img15.png";
@@ -25,12 +25,13 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 import arrow from "./images/arrow.png";
 
-import slide1 from "./images/Slides/gallery_grp.png";
-import slide2 from "./images/Slides/gallery_grp1.png";
+import slide1 from "./images/Slides/caro4.jpg";
+import slide2 from "./images/Slides/caro3.webp";
 import slide3 from "./images/Slides/Stadium.jpeg";
-import slide4 from "./images/Slides/Slide_img.jpeg";
+import slide7 from "./images/Slides/caro2.webp";
+import slide4 from "./images/Slides/caro1.webp";
 import slide5 from "./images/Slides/Slide_img1.jpeg";
-import slide6 from "./images/Slides/test_slide.png";
+import slide6 from "./images/Slides/caro4.png";
 import PlayerCard from "./PlayerCard";
 import PopUp_Context from "../Context/PopUp_Context";
 import PlayerSwipper from "./PlayerSwipper";
@@ -207,23 +208,50 @@ export default function Home({ dbpath }) {
     return () => clearInterval(interval);
   }, [currentOffset, atEndOfList]); // Include atEndOfList in the dependency array
 
-  const [text, setText] = useState("");
-  const initialText = "J0oin Sahas Cricket Club!";
-  const typingSpeed = 200; // Adjust typing speed here
+  const images = [
+    { src: slide6, caption: "C-Division Winning team" },
+    { src: img1, caption: "*Don't Need a Caption*" },
+    { src: img2, caption: "Hello'w Team !!" },
+    { src: img8, caption: "Indoor facilities of ICC" },
+    { src: img3, caption: "Talented Womens !" },
+    { src: img5, caption: "'Vidharbha' Team" },
+    { src: img6, caption: "Our Captain Lokesh Margade" },
+    { src: img7, caption: "Support 'Specially Abled' Team" },
+    { src: img9, caption: "We can't afford a cat!" },
+    { src: img10, caption: "Get Padded Up" },
+    { src: img11, caption: "Talented Youngsters" },
+    { src: img12, caption: "Support 'Specially Abled' Team" },
+    // Add more image objects as needed...
+  ];
+console.log('images', images);
+
+  const text = "Join Sahas Cricket Club!";
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < initialText.length) {
-        setText((prevText) => prevText + initialText.charAt(index));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, typingSpeed);
+      let charIndex = 0;
+      const typingEffect = () => {
+          if (charIndex <= text.length) {
+              setDisplayText(text.slice(0, charIndex));
+              charIndex++;
+              setTimeout(typingEffect, 200); // Typing speed (100ms delay)
+          } else {
+              // setIsTyping(false);
+                charIndex = 0;
+                setDisplayText(''); // Clear the display text
+                setTimeout(typingEffect, 100); 
+          }
+      };
 
-    return () => clearInterval(timer);
-  }, []);
+      typingEffect(); // Start typing effect
+
+      return () => {
+          // Clean up if component unmounts
+          clearTimeout(typingEffect);
+      };
+  }, [text]); // Re-run effect when 'text' prop changes
+
 
   const [modalOpen, setModalOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -256,6 +284,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
     }, 4000);
     return () => clearInterval(interval);
   }, [slides.length]);
+  
 
   return (
     <>
@@ -271,11 +300,12 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                     <img src={slide3}  alt="popup Img" />
                   </div>
                   <button className="cross-icon" onClick={handleClose}><i class="fas fa-times"></i></button>
-                  {/* <div class="textBox">
-                    <p class="text head">Ethereum</p>
-                    <span>Cryptocurrency</span>
-                    <p class="text price">1.654,34€</p>
-                  </div> */}
+                  <div class="textBox" style={{display:'flex', justifyContent:'center',flexDirection:'column'}}>
+                    <p class="text head" style={{textAlign:'center'}}>Welcome, to the Sahas Cricket Club !!</p>
+                    <p style={{textAlign:'center'}}>Our Products out there, Buy Now..</p>
+                    <Link to={'/Products'}><button class="text price" style={{width:'100%',textAlign:'center', outline:"none", border:"none", display:'flex', justifyContent:'center'}}>Show Now</button>
+</Link>
+                  </div>
               </div>
               </div>
             </div>
@@ -290,7 +320,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
       {/* <SwiperSlide><img src="img/club_carosel1.png" alt="" className="swiper-image" /></SwiperSlide> */}
       <SwiperSlide><img src={slide6} alt="" className="swiper-image" /></SwiperSlide>
       <SwiperSlide><img src={slide4} alt="" className="swiper-image" /></SwiperSlide>
-      <SwiperSlide><img src={slide3} alt="" className="swiper-image" /></SwiperSlide>
+      <SwiperSlide><img src={slide1} alt="" className="swiper-image" style={{objectFit:'cover', maxHeight:'50%'}}/></SwiperSlide>
       <SwiperSlide><img src={slide5} alt="" className="swiper-image" /></SwiperSlide>
       {/* Add other slides */}
     </Swiper>
@@ -298,7 +328,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
       <div className="carousel-caption d-flex flex-column align-items-center justify-content-center p-5">
         <div className="p-3" style={{ maxWidth: "900px" }}>
           <h1 className="display-2 text-white text-uppercase mb-md-4">
-            <span className="typing-animation">Beyond Limits : {text}</span>
+            <span className={isTyping ? 'typing' : ''}>Beyond Limits : {displayText}</span>
           </h1>
           <Link to={"/JoinUs"} className="btn btn-primary py-md-3 px-md-5 me-3">Join Us</Link>
           <Link to={"/ContactUs"} className="btn btn-light py-md-3 px-md-5">Contact Us</Link>
@@ -428,7 +458,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">Men's Cricket Team</h5>
                     <p className="card-text">
                       Our men's cricket team is a powerhouse of talent and
@@ -464,7 +494,7 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">Women's Cricket Team</h5>
                     <p className="card-text">
                       {" "}
@@ -495,13 +525,13 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
                     }}
                   >
                     <img
-                      src={img12}
+                      src={img7}
                       alt=""
                       className="image-icon img-fluid rounded-top"
                       style={{ width: "95%", height: "300px", objectFit:'cover' }}
                     />
                   </div>
-                  <div className="card-body" style={{ minHeight: "250px" }}>
+                  <div className="card-body" style={{ minHeight: "250px" ,height:'250px', maxHeight: '250px', overflow:'hidden'}}>
                     <h5 className="card-title">
                       Support Physically Disabled Student
                     </h5>
@@ -525,86 +555,48 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
         </div>
 
         <div
-          class="container mb-5 text-left"
+          class="container mb-2 text-left"
           style={{ marginTop: "10px" }}
           id="gallery"
         >
           <br />
           <br />
           {/* <h5 class="text-primary text-uppercase">Class Schedule</h5> */}
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent:'space-between', alignItems:'center'}}>
             <GalleryHead style={{ width: "250px" }}>
               <h1 class="display-5  mb-0">
                 Our <span style={{ color: "#fb5b21" }}>Gallery</span>
               </h1>
-              <div></div>
+              <div className="stroke"></div>
             </GalleryHead>
+            <div className="" style={{display:'flex', justifyContent:'center', }}>
+                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+          </div>
           </div>
         </div>
 
         <Gallery_Container>
           <div>
-            <div className="grid-container">
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-1" src={img1} alt="" />
-                {/* <p>"I'm so happy today!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-2" src={img2} alt="" />
-                {/* <p>"I see those nugs."</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-3" src={img3} alt="" />
-                {/* <p>"I love you so much!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-4" src={img4} alt="" />
-                {/* <p>"I'm the baby of the house!"</p> */}
-              </div>
-              <div data-aos="fade-up"
-     data-aos-duration="2000">
-                <img className="grid-item grid-item-5" src={img5} alt="" />
-                {/* <p>"Are you gunna throw the ball?"</p> */}
-              </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-6" src={img6} alt="" />
-                  {/* <p>"C'mon friend!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-7" src={img7} alt="" />
-                  {/* <p>"A rose for mommy!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-8" src={img8} alt="" />
-                  {/* <p>"You gunna finish that?"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-9" src={img9} alt="" />
-                  {/* <p>"We can't afford a cat!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-10" src={img11} alt="" />
-                  {/* <p>"Dis my fren!"</p> */}
-                </div>
-                <div data-aos="fade-up"
-     data-aos-duration="2000">
-                  <img className="grid-item grid-item-10" src={img12} alt="" />
-                  {/* <p>"Dis my fren!"</p> */}
-                </div>
-            </div>
-          
-          <div className="container" style={{display:'flex', justifyContent:'center', }}>
-                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+             <div>
+             <div className="grid-container">
+        {images.map((image, index) => (
+          <div key={index} data-aos="fade-up">
+            <img className={`grid-item grid-item-${index + 1}`} src={image.src} alt={`Image ${index + 1}`} />
+            <p>{image.caption}</p>
           </div>
+        ))}
+      {/* </div> */}
+                
+              </div>
+      {/* Uncomment the following section to add a link/button */}
+      {/* <div className="container" style={{ display: 'flex', justifyContent: 'center' }}>
+        <button className="btn btn-primary" style={{ margin: '20px 0' }}>View More</button>
+      </div> */}
+    </div>
+          
+          {/* <div className="container" style={{display:'flex', justifyContent:'center', }}>
+                    <Link to={'/Gallery'} onClick={handleLinkClick} ><button className="btn btn-primary" style={{margin:'20px 0'}}>View More</button></Link>
+          </div> */}
           </div>
         </Gallery_Container>
         <br></br>
@@ -723,8 +715,9 @@ const ModalContainer = styled.div`
 
   .card {
     position: absolute;
-    left: 1%;
-    bottom: 1%;
+top: 30%;
+left: 50%;
+transform: translate(-50%);
     z-index: 301;
   width: 500px;
   height: 285px;
@@ -755,14 +748,15 @@ const ModalContainer = styled.div`
     transition: 0.2s ease-in-out;
     border-radius: 20px;
     border: 2px solid white;
-
+    filter: brightness(80%);
   }
 }
 
 
 .textBox {
-  opacity: 0;
-  gap: 15px;
+  opacity: 1;
+  position: absolute;
+  /* gap: 15px; */
   transition: 0.2s ease-in-out;
   z-index: 3;
 }
@@ -772,11 +766,16 @@ const ModalContainer = styled.div`
 }
 
 .textBox > .head {
-  font-size: 20px;
+  font-size: 40px;
 }
 
-.textBox > .price {
+.head{
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.price {
   font-size: 17px;
+  font-weight: bold;
 }
 
 .textBox > span {
@@ -784,9 +783,9 @@ const ModalContainer = styled.div`
   color: lightgrey;
 }
 
-.card:hover > .textBox {
+/* .card:hover > .textBox {
   opacity: 1;
-}
+} */
 
 .card:hover > .image_co {
   /* height: 65%; */
@@ -821,8 +820,12 @@ const ModalContainer = styled.div`
 @media screen and (max-width: 768px) {
     .card{
       width: 98vw;
-      height: 200px;
+      height: max-content;
     }
+
+    textBox > .head {
+  font-size: 30px;
+}
 
   .image_co{
   width: 90vw;
@@ -1024,13 +1027,13 @@ const Slide_show = styled.div`
 `;
 
 const GalleryHead = styled.div`
-  div {
+  .stroke {
     width: 200px;
     background: #fb5b21;
     height: 3px;
   }
   @media screen and (max-width: 768px) {
-    div {
+    .stroke {
       width: 32vw; /* Adjust width for smaller screens */
     }
   }

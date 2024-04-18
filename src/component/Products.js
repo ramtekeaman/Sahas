@@ -12,6 +12,7 @@ import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import img from './images/error-message.png'
+import ProductCard from './ProductCard';
 
 const Products = () => {
     AOS.init({
@@ -32,6 +33,7 @@ const Products = () => {
   const [finalPrice, setFinalPrice] = useState(0);
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(0);
+  const [name, setName] = useState();
   const [showFP, setShowFP] = useState(false);
   const [paymentFormSubmitted, setPaymentFormSubmitted] = useState(false);
 
@@ -55,8 +57,10 @@ const Products = () => {
   const handlePayNowClick = (product) => {
     setSelectedProduct(product);
     setPrice(product.price);
+    setName(product.name)
     setShowPaymentForm(true);
     setShowFP(false);
+    console.log("sasas",product);
   };
 
   const handleInputChange = (e) => {
@@ -98,6 +102,7 @@ const Products = () => {
     }else{
       setSubmitDissable(true);
       setShowPaymentForm(false);
+      setCount(1);
       handleClick();
       console.log("Payment form  submitted");
       setSubmitDissable(false);
@@ -150,6 +155,11 @@ const Products = () => {
       });
   };
 
+  const handleCloseModal = () => {
+      setShowPaymentForm(false)
+      setCount(1)
+  }
+
   return (
     <>
     <Abc>
@@ -190,17 +200,7 @@ const Products = () => {
             <h2>Products</h2>
             <div className="cards">
               {products.map((product) => (
-                <div className="card" key={product.id} data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-                  <img src={`http://localhost/test/uploads/${product.Image}`} alt="Product" />
-                  <div>
-                    <h1>{product.name}</h1>
-                    <p className="product-Description">{product.Description}</p>
-                    <div className="price">Rs.<span>{product.price}</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <button className="buy-now" onClick={() => handlePayNowClick(product)}>Buy Now</button>
-                    </div>
-                  </div>
-                </div>
+                <ProductCard product={product} handlePayNowClick={handlePayNowClick}/>
               ))}
             </div>
           </div>}
@@ -213,7 +213,7 @@ const Products = () => {
             <PaymentForm>
             <div id="paymentModal" className="modalC" data-aos="flip-up">
               <div className="modal-content">
-                <span className="close" onClick={() => setShowPaymentForm(false)}>&times;</span>
+                <span className="close" onClick={handleCloseModal}>&times;</span>
                 <div className="payment-form">
                   <h2>Payment Form</h2>
                   {/* <form id="paymentForm" onSubmit={handleSubmit}> */}
@@ -224,6 +224,8 @@ const Products = () => {
                     <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required />
                     <label>Address:</label>
                     <textarea name="address" id="address" defaultValue={formData.address || ""} onChange={handleInputChange} required></textarea>
+                    <label>Product Name:</label>
+                    <input type="text" value={name} readOnly />
                     <label>Price:</label>
                     <input type="text" value={showFP ? finalPrice : price} readOnly />
                     <div className='card__wrapper'>
@@ -354,7 +356,7 @@ const Abc = styled.div`
     }
   }
   .hero-wrap.hero-wrap-2 {
-    height: 500px;
+    height: 300px;
     position: relative;
     background-position: center center !important;
   }
@@ -368,7 +370,8 @@ const Abc = styled.div`
     opacity: 0.3;
   }
   .hero-wrap.hero-wrap-2 .slider-text {
-    height: 500px;
+    height: 300px;
+    text-shadow: 2px 2px 4px #000000;
   }
   .hero-wrap .overlay {
     z-index: -1;
@@ -630,6 +633,10 @@ const PaymentForm = styled.div `
 
     display: flex;
     justify-content: center;
+
+    max-height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
   }
 
   /* Close button */

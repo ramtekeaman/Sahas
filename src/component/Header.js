@@ -61,13 +61,15 @@ useEffect(()=> {
                     <div class="col-lg-7 px-5 text-start">
                         <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                             <i class="fa fa-envelope text-primary me-2"></i>
-                            <h6 class="mb-0">sahascricketclub@gmail.com</h6>
+                            <h6 class="mb-0">kmt161272@gmail.com</h6>
                         </div>
                         <div class="h-100 d-inline-flex align-items-center py-2">
+                            <div className='row justify-content-center '>
                             <a href="tel:8451968111" target='_blank' style={{display:'flex', alignItems:'center'}}>
                             <i class="fa fa-phone-alt text-primary me-2"></i>
-                            <h6 class="mb-0"> +91 8451968111</h6>
+                            <h6 class="mb-0"> +91 9689693693</h6>
                             </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5 px-5 text-end">
@@ -101,7 +103,7 @@ useEffect(()=> {
                         <div class="navbar-nav mr-auto py-0">
                             <NavLink to={'/'} className={`nav-item nav-link `} activeClassName="active" >Home</NavLink>
                             <NavLink to={'/AboutUs'} className={`nav-item nav-link `} activeClassName="active" >About</NavLink>
-                            <NavLink to={'/Coaches'} className="nav-item nav-link" activeClassName="active">Trainers</NavLink>
+                            <NavLink to={'/Coaches'} className="nav-item nav-link" activeClassName="active">Coaches</NavLink>
                             <NavLink to={'/Gallery'} className={`nav-item nav-link `} activeClassName="active" >Gallery</NavLink>
                             <NavLink to={'/ContactUs'} className="nav-item nav-link" activeClassName="active" >Contact</NavLink>
                             <NavLink to={'/Products'} className="nav-item nav-link" activeClassName="active" >Products</NavLink>

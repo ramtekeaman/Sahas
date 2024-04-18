@@ -7,6 +7,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import styled from 'styled-components';
 
 import img13 from "./images/PavyaAndSiddhi.png";
+import img14 from "./images/prachi.jpg";
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 // Assuming playersData is the array of cards you provided
@@ -23,9 +24,9 @@ const playersData = [
       description: "The Vidarbha captain, who was born with a twisted ankle, has demonstrated consistency in every competition he participates in recent days. In December 2021, Marghade also led the Challenger Trophy in runs scored. He had played four games in Chandigarh and scored 169 runs, including two fifties. 'I think the advice I'm getting from my elders at Sahas Cricket Club is really beneficial to me. 'My goal is to improve myself so that I can make a strong return to the Indian team,' he stated."
     },
     {
-      name: "Siddhi & Aarohi",
-      imgSrc: "/img/SiddhiAndAroohi.png",
-      description: "Siddhi and Arohi, your achievements are truly remarkable! Your hard work, dedication, and perseverance have paid off, bringing immense pride to your family and community. It's been a privilege to witness your growth and progress, fueled by countless hours of practice and determination. Your humility and respect towards your coaches, the game, and the learning process are admirable qualities that set you apart as not only exceptional athletes but also as admirable individuals. Earning a spot in the U-19 women’s camp organized by @bcciofficial.in @bcci.women is a testament to your talent and commitment. As you continue on your journey, we extend our heartfelt wishes for success and good fortune. May you continue to push yourselves to new heights and achieve your dreams, including representing at the national level."
+      name: "Prachi Puri",
+      imgSrc: img14,
+      description: "Prachi Puri, your accomplishments are truly inspiring! Your unwavering dedication, hard work, and perseverance have brought immense pride to your family and community. It has been an honor to witness your journey and growth, fueled by countless hours of practice and determination. Your respect and humility towards the game, coaches, and the learning process are exemplary qualities that distinguish you not only as an outstanding athlete but also as an admirable individual. Your selection for the VCA Women U-16 and U-19 T-20, U-19 One Day, and U-23 T-20 teams is a testament to your exceptional talent and commitment. As you progress on this remarkable path, I extend my heartfelt wishes for continued success and good fortune. May you reach new heights and fulfill your dreams, including representing at the national level."
     },
     {
       name: "Pavya and Siddhi",
@@ -175,6 +176,8 @@ const SwiperContent = styled.div `
 div.swiper-button-prev, div.swiper-button-next{
   color: white;
   background-color: #555;
+  border-radius: 50%;
+  padding: 0 22px;
 }
 
 div.swiper-button-next:after{

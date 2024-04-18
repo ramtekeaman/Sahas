@@ -250,7 +250,6 @@ import Aevent from './component/aevent';
 import Adevent from './component/adevent';
 import Updateevent from './component/updateevent';
 import Testy from './component/text2';
-import Rmonth from './component/Rmonth';
 
 
 function App() {
@@ -277,7 +276,7 @@ function App() {
   useEffect(() => {
     const popupTimer = setTimeout(() => {
       setShowPopUp(true);
-    }, 8000);
+    }, 20000);
   
     return () => clearTimeout(popupTimer);
   }, []);
@@ -475,7 +474,7 @@ function App() {
           </Route>
           
           <Route exact path="/Coaches" element={
-              <Coaches />
+              <Coaches1 />
           }>
           </Route>
           
@@ -485,6 +484,10 @@ function App() {
           </Route>
           <Route exact path="/test" element={
               <Testy/>
+          }>
+          </Route>
+          <Route exact path="/*" element={
+              <Error/>
           }>
           </Route>
 
