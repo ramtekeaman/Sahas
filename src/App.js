@@ -250,6 +250,7 @@ import Aevent from './component/aevent';
 import Adevent from './component/adevent';
 import Updateevent from './component/updateevent';
 import Testy from './component/text2';
+import Rmonth from './component/Rmonth';
 
 
 function App() {
@@ -361,6 +362,10 @@ function App() {
           }></Route>
           <Route exact path="/Remark" element={
             <Remark dbpath={dbpath} />
+          }></Route>
+
+<Route exact path="/Rmonth" element={
+            <Rmonth dbpath={dbpath} />
           }></Route>
 {/* Qutraly Data */}
 <Route exact path="/Performance" element={

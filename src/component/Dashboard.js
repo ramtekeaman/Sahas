@@ -126,10 +126,12 @@ export default function Dashboard({dbpath,setBtnstatus}) {
                             <div class="nav-link dropdown">
                                 <a class="btn  nav-link dropdown-toggle btn-outline-primary  d-lg-block" style={{width:'100px'}} data-bs-toggle="dropdown">Remark</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  All Remark</a></Link>
+
+                                    <Link  to="/Rmonth"><a href="testimonial.html" class="dropdown-item">  Monthly Remark</a></Link>
                                     <Link  to="/performance"><a href="testimonial.html" class="dropdown-item"> Quarterly Remark</a></Link>
                                     <Link  to="/pperformance"><a href="blog.html" class="dropdown-item">6 Month Remark</a></Link>
-                           
+                                    <Link  to="/Rcoaching"><a href="testimonial.html" class="dropdown-item">  All Remark</a></Link>
+
                                 </div>
                             </div>
                         </div>
