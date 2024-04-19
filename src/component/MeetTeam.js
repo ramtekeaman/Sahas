@@ -7,13 +7,13 @@ import img14 from "./images/prachi.jpg";
 const MeetTeam = () => {
     const teamData = [
         {
-          imageUrl: img13,
+          imageUrl: img14,
           name: ' Kuldeep talmale',
           role: 'Owner Sahas Cricket Club',
           description: 'Define the product vision and strategy and conduct user research to understand the needs of the target market.',
         },
         {
-          imageUrl: img14,
+          imageUrl: img13,
           name: 'Arun Mishra',
           role: 'Head Coach and Physical Education (PE) Coach',
           description: 'Analyze financial statements to assess a company\'s financial performance and develop financial models for future performance.',
@@ -48,7 +48,7 @@ const MeetTeam = () => {
     <div class="responsive-container-block outer-container">
   <div class="responsive-container-block inner-container">
     <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-4 wk-ipadp-4 headings-container">
-      <p class="text-blk heading-text">
+      <p class="text-blk heading-text  text-black display-5 text-uppercase mb-0">
         Meet our Team
       </p>
       <p class="text-blk sub-heading-text">
@@ -270,6 +270,11 @@ const Teams = styled.div `
     padding-left: 0px;
   }
 
+  .card{
+    max-height: 360px;
+    /* overflow: hidden; */
+  }
+
   .position {
     margin-top: 0px;
     margin-right: 0px;
@@ -286,7 +291,7 @@ const Teams = styled.div `
     min-width: 100%;
     height: 250px;
     min-height: 230px;
-    max-height: 230px;
+    max-height: 280px;
   }
 }
 
@@ -332,6 +337,7 @@ const Teams = styled.div `
     margin-right: 0px;
     margin-bottom: 0px;
     margin-left: 0px;
+    gap: 30px;
   }
 
   .card {

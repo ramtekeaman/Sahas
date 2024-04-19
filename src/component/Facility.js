@@ -16,7 +16,8 @@ const Facility = () => {
         <div class="column">
           <div class="card">
             <div class="icon">
-              <i class="fa-solid fa-user"></i>
+              {/* <i class="fa-solid fa-user"></i> */}
+              <i class="fas fa-baseball-ball cricket-ball" style={{color:'white', fontSize:'20px'}}></i>
               
             </div>
             <h3>Bowling machines</h3>
