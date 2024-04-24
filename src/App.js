@@ -250,6 +250,9 @@ import Aevent from './component/aevent';
 import Adevent from './component/adevent';
 import Updateevent from './component/updateevent';
 import Testy from './component/text2';
+import Error from './component/Error';
+import Coaches1 from './component/Coaches1';
+import Rmonth from './component/Rmonth';
 
 
 function App() {
@@ -310,6 +313,10 @@ function App() {
               <RegisterRecretional dbpath={dbpath}/>
           }>
           </Route> 
+          <Route exact path="/Rmonth" element={
+              <Rmonth dbpath={dbpath}/>
+          }>
+          </Route> 
 
           <Route exact path="/aevent" element={
               <Aevent dbpath={dbpath}/>
@@ -361,10 +368,6 @@ function App() {
           }></Route>
           <Route exact path="/Remark" element={
             <Remark dbpath={dbpath} />
-          }></Route>
-
-<Route exact path="/Rmonth" element={
-            <Rmonth dbpath={dbpath} />
           }></Route>
 {/* Qutraly Data */}
 <Route exact path="/Performance" element={
