@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import './CSS/m.css';
 
 export default function Rmonth({ dbpath }) {
   const [user, setUser] = useState([]);
@@ -50,36 +51,55 @@ export default function Rmonth({ dbpath }) {
   };
 
   const handlePrint = () => {
-    // Printing logic remains the same as before
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('</head><body style="font-family: Arial, sans-serif;">');
+    printWindow.document.write('<h1 style="text-align: center;">Remark of the Student</h1>');
+    printWindow.document.write('<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;" border="1">');
+    printWindow.document.write('<thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Match Played</th><th>Wicket</th><th>Run Score</th><th>Type</th><th>Remark</th><th>Date : Time</th></tr></thead><tbody>');
+
+    user.forEach(res => {
+      printWindow.document.write(`<tr style="border: 1px solid #ddd; padding: 8px; text-align: left;"><td>${res.id}</td><td>${res.name}</td><td>${res.attendanceOption}</td><td>${res.matchesPlayed}</td><td>${res.Wicket}</td><td>${res.runscore}</td><td>${res.type2}</td><td>${res.remark}</td><td>${res.timestamp}</td></tr>`);
+    });
+
+    printWindow.document.write('</tbody></table>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
   };
+
+  
 
   return (
     <>
-      <br />
-      <br />
+     
       <p className="sp1">Monthly Remark</p>
       <br />
       <form style={{ display: "flex" }}>
-        <div className="mb-3" style={{ marginLeft: "27%", display: "flex" }}>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            dateFormat="MM/dd/yyyy"
-            placeholderText="Start Date"
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            dateFormat="MM/dd/yyyy"
-            placeholderText="End Date"
-          />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by Name or ID"
-          />
-        </div>
+      <div className="mb-3 date-picker-container">
+  <DatePicker
+    selected={startDate}
+    onChange={(date) => setStartDate(date)}
+    dateFormat="MM/dd/yyyy"
+    placeholderText="Start Date"
+    className="date-picker"
+  /> 
+  <DatePicker
+    selected={endDate}
+    onChange={(date) => setEndDate(date)}
+    dateFormat="MM/dd/yyyy"
+    placeholderText="End Date"
+    className="date-picker"
+  />
+  <input
+    type="text"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    placeholder="Search by Name or ID"
+    className="search-input"
+  />
+</div>
+
         <br />
         <br />
         <center>
