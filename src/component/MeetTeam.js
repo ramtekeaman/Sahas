@@ -289,7 +289,7 @@ const Teams = styled.div `
   .card-img {
     width: 100%;
     min-width: 100%;
-    height: 250px;
+    height: 320px;
     min-height: 230px;
     max-height: 280px;
   }

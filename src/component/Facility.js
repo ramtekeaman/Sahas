@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ico1 from './images/ball.png'
+import ico1 from './images/throw.png'
 
 const Facility = () => {
   return (
@@ -15,45 +15,39 @@ const Facility = () => {
         {/* <!-- Column One --> */}
         <div class="column">
           <div class="card">
-            <div class="icon">
-              {/* <i class="fa-solid fa-user"></i> */}
-              <i class="fas fa-baseball-ball cricket-ball" style={{color:'white', fontSize:'20px'}}></i>
-              
+          <div class="">
+              {/* <i class="fa-solid fa-shield-halved"></i> */}
+              <img className='icon' src={ico1} alt="" />
             </div>
             <h3>Bowling machines</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-              asperiores natus ad molestiae aliquid explicabo. Iste eaque quo et
-              commodi.
+              Bowling machines redefine cricket training with precise simulations, replicating top bowlers' deliveries. They offer controlled   practice environments, improving batting skills and confidence against various bowling styles.
             </p>
           </div>
         </div>
         {/* <!-- Column Two --> */}
         <div class="column">
           <div class="card">
-            <div class="icon">
+            <div class="">
               {/* <i class="fa-solid fa-shield-halved"></i> */}
-              <img src={ico1} alt="" />
+              <img className='icon' src={ico1} alt="" />
             </div>
             <h3> Indoor Facility</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-              asperiores natus ad molestiae aliquid explicabo. Iste eaque quo et
-              commodi.
+            Indoor training facilities revolutionize sports practice, providing controlled environments for athletes to refine skills regardless of weather. These facilities offer year-round training opportunities with optimal conditions for performance improvement.
             </p>
           </div>
         </div>
         {/* <!-- Column Three --> */}
         <div class="column">
           <div class="card">
-            <div class="icon">
-              <i class="fa-solid fa-headset"></i>
+          <div class="">
+              {/* <i class="fa-solid fa-shield-halved"></i> */}
+              <img className='icon' src={ico1} alt="" />
             </div>
-            <h3>Awesome  Turfs</h3>
+            <h3>Premium Turfs</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-              asperiores natus ad molestiae aliquid explicabo. Iste eaque quo et
-              commodi.
+            Premium turfs redefine playing surfaces with cutting-edge technology, offering ideal conditions for sports enthusiasts. These turfs enhance performance and enjoyment, providing year-round playing opportunities regardless of weather conditions.
             </p>
           </div>
         </div>
@@ -92,6 +86,7 @@ const FacilitySec = styled.div `
 }
 .card {
   padding: 3.1em 1.25em;
+  height: 100%;
   text-align: center;
   background: linear-gradient(0deg, #397ef6 10px, transparent 10px);
   background-repeat: no-repeat;
@@ -106,13 +101,12 @@ const FacilitySec = styled.div `
   height: 2em;
   width: 2em;
   margin: auto;
-  background-color: #fb5b21;
   display: grid;
   place-items: center;
-  border-radius: 50%;
   color: #ffffff;
+  transition: transform 0.5s ease-in-out; /* Transition on transform property */
 }
-.icon:before {
+/* .icon:before {
   position: absolute;
   content: "";
   height: 1.5em;
@@ -120,7 +114,7 @@ const FacilitySec = styled.div `
   border: 0.12em solid #fb5b21;
   border-radius: 50%;
   transition: 0.5s;
-}
+} */
 .card h3 {
   font-size: 1.3em;
   margin: 1em 0 1.4em 0;
@@ -136,9 +130,8 @@ const FacilitySec = styled.div `
   background-position: 0;
 }
 
-.card:hover .icon:before {
-  height: 2.25em;
-  width: 2.25em;
+.card:hover .icon {
+  transform: scale(1.3); 
 }
 @media screen and (min-width: 768px) {
   section {
