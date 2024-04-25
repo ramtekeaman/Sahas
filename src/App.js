@@ -252,6 +252,7 @@ import Updateevent from './component/updateevent';
 import Testy from './component/text2';
 import Error from './component/Error';
 import Coaches1 from './component/Coaches1';
+import Rmonth from './component/Rmonth';
 
 
 function App() {
@@ -310,6 +311,10 @@ function App() {
           </Route> 
           <Route exact path="/RegisterRecretional" element={
               <RegisterRecretional dbpath={dbpath}/>
+          }>
+          </Route> 
+          <Route exact path="/Rmonth" element={
+              <Rmonth dbpath={dbpath}/>
           }>
           </Route> 
 
