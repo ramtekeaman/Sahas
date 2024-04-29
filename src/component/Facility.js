@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import ico1 from './images/throw.png'
+import ico2 from './images/cricket.png'
+import ico3 from './images/ground.png'
 
 const Facility = () => {
   return (
@@ -30,7 +32,7 @@ const Facility = () => {
           <div class="card">
             <div class="">
               {/* <i class="fa-solid fa-shield-halved"></i> */}
-              <img className='icon' src={ico1} alt="" />
+              <img className='icon' src={ico2} alt="" />
             </div>
             <h3> Indoor Facility</h3>
             <p>
@@ -43,7 +45,7 @@ const Facility = () => {
           <div class="card">
           <div class="">
               {/* <i class="fa-solid fa-shield-halved"></i> */}
-              <img className='icon' src={ico1} alt="" />
+              <img className='icon' src={ico3} alt="" />
             </div>
             <h3>Premium Turfs</h3>
             <p>

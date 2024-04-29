@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import img13 from "./images/CoachesAndMentors/arun.png";
-import img14 from "./images/prachi.jpg";
+import img14 from "./images/CoachesAndMentors/Talmale_sir.jpg";
 
 const MeetTeam = () => {
     const teamData = [
