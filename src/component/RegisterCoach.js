@@ -97,7 +97,7 @@ export default function RegisterCoach({dbpath}) {
   };
 
   return (
-    <>z
+    <>
     <div className='main_div' style={{backgroundColor:'#222429'}}>
       <br />
       <br />

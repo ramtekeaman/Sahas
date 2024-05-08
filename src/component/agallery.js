@@ -15,7 +15,7 @@ export default function Agallery({dbpath, qrid}) {
 
     setImgstatus('1');
     files = document.getElementById("fileup").files;
-    let fileReader =  FileReader();
+    let fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
 
     fileReader.onload = (event) => {
@@ -72,7 +72,7 @@ const[type,settype]=useState("");
 
       setid1(document.getElementById("trno").value);  
       const url = dbpath+'gallery.php';
-      let fData =  FormData();
+      let fData = new FormData();
       fData.append('id', id);
       fData.append('type', type);
       fData.append('image',files[0]);
