@@ -266,7 +266,7 @@ function App() {
   const{showPopUp, setShowPopUp} = useContext(PopUp_Context);
 
   const{showFooter, setShowFooter} = useContext(ShowFooter_Context);
-  console.log(showFooter);
+  // console.log(showFooter);
   
   useEffect(() => {
     const loaderTimer = setTimeout(() => {

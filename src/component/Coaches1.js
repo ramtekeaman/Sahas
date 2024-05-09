@@ -201,7 +201,7 @@ const Coaches1 = () => {
     },
   ];
 
-  console.log(teamMembers);
+  // console.log(teamMembers);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);

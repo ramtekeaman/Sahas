@@ -61,7 +61,7 @@ const Products = () => {
     setName(product.name)
     setShowPaymentForm(true);
     setShowFP(false);
-    console.log("sasas",product);
+    // console.log("sasas",product);
   };
 
   const handleInputChange = (e) => {

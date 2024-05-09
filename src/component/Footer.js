@@ -11,9 +11,10 @@ export default function Footer({ dbpath }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
 
         try {
-            setSubmitDissable(true)
+            input.email === '' ? setSubmitDissable(false) : setSubmitDissable(true)
             const response = await axios.post('http://localhost/test/mail.php', {
                 email: input.email,
             }, {

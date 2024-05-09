@@ -74,7 +74,7 @@ export default function RegisterCoach({dbpath, setBtnstatus}) {
 
   const handleSendOtp = () => {
     var email = document.getElementById('InputUsername').value;
-    if(email === 'omaltphone@gmail.com' || email === 'amanar.royalswebtech@gmail.com' || email === 'hr.royalswebtechpvtltd@gmail.com' || email === 'prajyoturkude@gmail.com'|| email === 'ramtekeaman2002@gmail.com' || email === 'hiteshwadhankar12@gmail.com' )
+    if(email === 'prajyoturkude@gmail.com'|| email === 'hiteshwadhankar12@gmail.com' || email === 'kmt161272@gmail.com')
     {
       setEmail(email);
       const generatedOtp = sendOtpEmail(email);

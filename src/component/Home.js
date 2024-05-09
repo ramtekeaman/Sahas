@@ -226,7 +226,7 @@ export default function Home({ dbpath }) {
     { src: img12, caption: "Support 'Specially Abled' Team" },
     // Add more image objects as needed...
   ];
-console.log('images', images);
+// console.log('images', images);
 
   const text = "Join Sahas Cricket Club!";
   const [displayText, setDisplayText] = useState('');
