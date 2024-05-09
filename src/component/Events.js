@@ -666,7 +666,7 @@ import styled from "styled-components";
 import img1 from "./images/Bas-Bat.jpg";
 import backgroundImage from "./images/bg-img.jpeg";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import axios from "axios"; // Import axios for making HTTP requests
@@ -680,6 +680,7 @@ import img from "./images/error-message.png";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Event_card from "./Event_card";
+import { AdminContext } from "../Context/AdminContext";
 
 
 const Products = () => {
@@ -747,6 +748,12 @@ const Products = () => {
       transition: Bounce,
     });
   };
+
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
 
 
   return (

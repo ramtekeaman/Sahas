@@ -39,6 +39,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Event_Btn from "./Event_Btn";
 import MeetTeam from "./MeetTeam";
 import Facility from "./Facility";
+import { AdminContext } from "../Context/AdminContext";
 
 // import { createPortal } from "react-dom";
 // import { Modal } from "./components/Modal";
@@ -287,6 +288,11 @@ const [currentSlide1, setCurrentSlide1] = useState(0);
     return () => clearInterval(interval);
   }, [slides.length]);
   
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
 
   return (
     <>

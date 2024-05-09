@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import vid1 from "./Videos/sahas_vid.mp4";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import axios from "axios";
+import { AdminContext } from "../Context/AdminContext";
 
 const Gallery = () => {
   AOS.init({
@@ -56,6 +57,12 @@ const Gallery = () => {
         setIsLoading(false);
       });
   }, []);
+
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
 
   return (
     <Gallery_Container>

@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { AdminContext } from '../Context/AdminContext';
 
 const Error = () => {
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
+
   return (
     <div>
 <section class="py-3 py-md-5 d-flex justify-content-center align-items-center" style={{minHeight:'500px'}}>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
+import { AdminContext } from '../Context/AdminContext';
 
 const Schedule = () => {
     const [currentDay, setCurrentDay] = useState(new Date().getDay());
@@ -12,6 +13,11 @@ const Schedule = () => {
         { day: 'Friday', openingTime: '9:00 AM', closingTime: '5:00 AM' },
         { day: 'Saturday', openingTime: '10:00 AM', closingTime: '5:00 AM' }
       ];
+
+      const{setIsAdmin} = useContext(AdminContext);
+      useEffect(()=>{
+        setIsAdmin(false)
+      },[])
   return (
     <Schedule_Container>
         <div className="schedule-container">

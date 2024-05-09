@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import img1 from './images/Bas-Bat.jpg';
 import backgroundImage from './images/ProductSec.jpg';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import axios from 'axios'; // Import axios for making HTTP requests
@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import img from './images/error-message.png'
 import ProductCard from './ProductCard';
+import { AdminContext } from '../Context/AdminContext';
 
 const Products = () => {
     AOS.init({
@@ -159,6 +160,12 @@ const Products = () => {
       setShowPaymentForm(false)
       setCount(1)
   }
+
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
 
   return (
     <>

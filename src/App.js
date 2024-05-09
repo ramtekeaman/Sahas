@@ -284,6 +284,8 @@ function App() {
     return () => clearTimeout(popupTimer);
   }, []);
 
+  const [isAdmin, setIsAdmin] = useState("false");
+
   return (
     <>   
     {loader && <Loader/>} 
@@ -292,12 +294,12 @@ function App() {
       <Router>
         {/* <Header btnStatus={btnStatus} /> */}
   
-        <Header btnStatus={btnStatus} />
+        <Header btnStatus={btnStatus} isAdmin={isAdmin}/>
 
         <Routes>
           <Route exact path="/" element={
               <>
-                <Home dbpath={dbpath} />
+                <Home dbpath={dbpath} setIsAdmin={setIsAdmin} />
               </>
           }>
           </Route>
@@ -448,40 +450,40 @@ function App() {
               <GenerateReciept dbpath={dbpath} />
           }></Route>
           
-          <Route exact path="/ContactUs" element={
+          <Route exact path="/ContactUs" setIsAdmin={setIsAdmin} element={
               <ContactUs/>
           }>
           </Route>
-          <Route exact path="/JoinUs" element={
+          <Route exact path="/JoinUs" setIsAdmin={setIsAdmin} element={
               <Joinus/>
           }>
           </Route>
 
-          <Route exact path="/Gallery" element={
+          <Route exact path="/Gallery" setIsAdmin={setIsAdmin} element={
               <Gallery />
           }>
           </Route>
           
-          <Route exact path="/AboutUs" element={
+          <Route exact path="/AboutUs" setIsAdmin={setIsAdmin} element={
               <AboutUs />
           }>
           </Route>
-          <Route exact path="/Schedule" element={
+          <Route exact path="/Schedule" setIsAdmin={setIsAdmin} element={
               <Schedule />
           }>
           </Route>
           
-          <Route exact path="/Products" element={
+          <Route exact path="/Products" setIsAdmin={setIsAdmin} element={
               <Products />
           }>
           </Route>
           
-          <Route exact path="/Coaches" element={
+          <Route exact path="/Coaches" setIsAdmin={setIsAdmin} element={
               <Coaches1 />
           }>
           </Route>
           
-          <Route exact path="/Events" element={
+          <Route exact path="/Events" setIsAdmin={setIsAdmin} element={
               <Events />
           }>
           </Route>

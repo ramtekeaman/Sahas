@@ -4,12 +4,14 @@ import {Link, NavLink, useNavigate} from "react-router-dom";
 
 import logo from "./images/Sahas_logo-removebg-preview.png"
 import Navigate_Context from '../Context/Navigate_Context';
+import { AdminContext } from '../Context/AdminContext';
 
 
 
 export default function Header({dbpath, btnStatus}) {    
   const navigate = useNavigate()
     const{handalaboutclick, setAbout, about,navi, navabout,ids, setIds} = useContext(Navigate_Context);
+    const{isAdmin} = useContext(AdminContext);
 
     const doabout = () => {
         handalaboutclick();
@@ -94,21 +96,22 @@ useEffect(()=> {
                 </div>
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0 px-lg-5">
                     <a href="index.html" class="navbar-brand d-block d-lg-none">
-                        <Link to="/" class="m-0 display-4 text-primary text-uppercase"><img src={logo} width='80px' style={{marginTop:'-10px', marginLeft:'10px'}}></img></Link>
+                        <Link to="/" class="m-0 display-4 text-primary text-uppercase"><img src={logo} width='80px' style={{marginTop:'-10px', marginLeft:'10px', margin:'1px 0'}}></img></Link>
                     </a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
+                        {!isAdmin ? <div class="navbar-nav mr-auto py-0">
                             <NavLink to={'/'} className={`nav-item nav-link `} activeClassName="active" >Home</NavLink>
                             <NavLink to={'/AboutUs'} className={`nav-item nav-link `} activeClassName="active" >About</NavLink>
                             <NavLink to={'/Coaches'} className="nav-item nav-link" activeClassName="active">Coaches</NavLink>
                             <NavLink to={'/Gallery'} className={`nav-item nav-link `} activeClassName="active" >Gallery</NavLink>
                             <NavLink to={'/ContactUs'} className="nav-item nav-link" activeClassName="active" >Contact</NavLink>
                             <NavLink to={'/Products'} className="nav-item nav-link" activeClassName="active" >Products</NavLink>
-                        </div>
-                        <div style={{display:'flex', gap:'10px'}}>
+                        </div> : <div className='navbar-nav mr-auto py-0 px-0' style={{display:'flex', width:'100%', justifyContent: 'start', alignItems:'center',}}><NavLink className='nav-item nav-link' style={{color:'white', fontSize: '25px', letterSpacing: '1px', padding:'30px 0'}}>Welcome to Admin Panel</NavLink></div>}
+
+                        <div style={{display:'flex', gap:'10px', }}>
                             
                         
                         </div>

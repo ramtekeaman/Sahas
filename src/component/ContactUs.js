@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ShowFooter_Context from "./ShowFooter_Context";
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import { AdminContext } from "../Context/AdminContext";
 
 const ContactUs = () => {
   AOS.init({
@@ -100,6 +101,12 @@ const ContactUs = () => {
       message: "",
     });
   };
+
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
 
   return (
     <div className="container-fluid bg-white text-white py-5">

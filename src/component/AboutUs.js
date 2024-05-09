@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import mentor2 from './images/CoachesAndMentors/STalmale.jpg'
 
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import { AdminContext } from "../Context/AdminContext";
 
 const AboutUs = () => {
 
@@ -31,6 +32,11 @@ const AboutUs = () => {
         // You can add more styles here as needed
       };
 
+      
+      const{setIsAdmin} = useContext(AdminContext);
+      useEffect(()=>{
+        setIsAdmin(false)
+      },[])
 
   return (
     <>

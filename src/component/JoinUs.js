@@ -4,6 +4,7 @@ import ShowFooter_Context from './ShowFooter_Context';
 import styled from 'styled-components';
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import { AdminContext } from '../Context/AdminContext';
 
 const JoinUs = () => {
   AOS.init({
@@ -76,6 +77,10 @@ const JoinUs = () => {
     }, [setShowFooter]); // Make sure to include setShowFooter in the dependencies array
   
   
+    const{setIsAdmin} = useContext(AdminContext);
+    useEffect(()=>{
+      setIsAdmin(false)
+    },[])
 
   return (
     <div className="container" style={{marginTop:'20px', marginBottom: '20px'}}>

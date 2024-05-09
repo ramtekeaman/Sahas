@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Coach1 from "./images/CoachesAndMentors/DBarde.jpg";
 import Coach2 from "./images/CoachesAndMentors/KSalve.jpg";
 import Coach3 from "./images/CoachesAndMentors/PYadav.jpg";
@@ -16,6 +16,7 @@ import AOS from "aos";
 
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { AdminContext } from "../Context/AdminContext";
 
 const Coaches1 = () => {
   AOS.init({
@@ -214,6 +215,14 @@ const Coaches1 = () => {
     setShowModal(false);
     setSelectedMember(null);
   };
+
+  
+  const{setIsAdmin} = useContext(AdminContext);
+  useEffect(()=>{
+    setIsAdmin(false)
+  },[])
+
+
   return (
     <div>
       {/* <Abc>
