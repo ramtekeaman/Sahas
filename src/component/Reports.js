@@ -236,7 +236,7 @@ export default function Reports({dbpath}) {
 
     
             <thead>
-                <tr>
+                <tr style={{fontSize:'14px'}}>
                 {/* <th scope="col">ID</th> */}
                 <th scope="col">VCA ID</th>
                 <th scope="col">Name</th>

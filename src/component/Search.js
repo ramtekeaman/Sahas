@@ -260,7 +260,7 @@ console.log(type1)
             <tbody> 
                 {user.map((res)=>
                 
-                    <tr>
+                    <tr style={{fontSize:'14px'}}>
                         <td>{res.id}</td>
                         <td>{res.vca}</td>
                         <td>{res.name}</td>
